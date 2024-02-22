@@ -9,6 +9,8 @@
 
 [lsp-zero](https://lsp-zero.netlify.app/v3.x/)
 
+[nvim-lspconfig-server\_configurations](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md)
+
 ### Keymap
 
 *lsp-zero*
