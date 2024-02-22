@@ -20,6 +20,8 @@ Plug('nvim-telescope/telescope.nvim') -- fuzzy finder
 Plug('https://github.com/jose-elias-alvarez/null-ls.nvim')
 Plug('https://github.com/MunifTanjim/prettier.nvim') -- prettier formatter
 Plug('https://github.com/voldikss/vim-floaterm') -- floating window
+Plug('https://github.com/windwp/nvim-autopairs') -- autopair
+Plug('https://github.com/folke/which-key.nvim') -- tooltips of keybindings
 
 vim.call('plug#end')
 
@@ -195,4 +197,7 @@ prettier.setup({
 -- floaterm setup
 
 vim.keymap.set('n', '<C-g>', '<Cmd>:FloatermNew lazygit<CR>')
+
+-- nvim-autopairs setup
+require('nvim-autopairs').setup({})
 
