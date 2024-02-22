@@ -14,7 +14,7 @@ Plug('https://github.com/hrsh7th/nvim-cmp') -- Completion engine
 Plug('hrsh7th/cmp-nvim-lsp')
 Plug('L3MON4D3/LuaSnip')
 Plug('https://github.com/neovim/nvim-lspconfig') -- LSP configs
-Plug('https://github.com/nvim-tree/nvim-tree.lua') -- file browser
+Plug('https://github.com/nvim-tree/nvim-tree.lua', {['on']= 'NvimTreeToggle' }) -- file browser
 Plug('nvim-lua/plenary.nvim')
 Plug('nvim-telescope/telescope.nvim') -- fuzzy finder
 Plug('https://github.com/jose-elias-alvarez/null-ls.nvim')
@@ -22,6 +22,8 @@ Plug('https://github.com/MunifTanjim/prettier.nvim') -- prettier formatter
 Plug('https://github.com/voldikss/vim-floaterm') -- floating window
 Plug('https://github.com/windwp/nvim-autopairs') -- autopair
 Plug('https://github.com/folke/which-key.nvim') -- tooltips of keybindings
+Plug('https://github.com/nvimdev/dashboard-nvim') -- custom banner
+Plug('https://github.com/nvim-tree/nvim-web-devicons')
 
 vim.call('plug#end')
 
@@ -201,3 +203,36 @@ vim.keymap.set('n', '<C-g>', '<Cmd>:FloatermNew lazygit<CR>')
 -- nvim-autopairs setup
 require('nvim-autopairs').setup({})
 
+-- dashboard setup
+local db = require('dashboard')
+ db.setup({
+    theme = 'hyper',
+    config = {
+      week_header = {
+       enable = true,
+      },
+      shortcut = {
+        { desc = '󰊳 Update', group = '@property', action = 'Lazy update', key = 'u' },
+        {
+          icon = ' ',
+          icon_hl = '@variable',
+          desc = 'Files',
+          group = 'Label',
+          action = 'Telescope find_files',
+          key = 'f',
+        },
+        {
+          desc = ' Apps',
+          group = 'DiagnosticHint',
+          action = 'Telescope app',
+          key = 'a',
+        },
+        {
+          desc = ' dotfiles',
+          group = 'Number',
+          action = 'Telescope dotfiles',
+          key = 'd',
+        },
+      },
+    },
+  })
