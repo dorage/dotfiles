@@ -11,7 +11,7 @@
 
 ### structure
 
-'''text
+`
 
 .
 +-- .config
@@ -22,7 +22,7 @@
 +-- .hammerspoon
 +-- .zshrc
 
-'''
+`
 
 ### TODO
 
