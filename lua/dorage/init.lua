@@ -14,7 +14,7 @@ Plug('https://github.com/hrsh7th/nvim-cmp') -- Completion engine
 Plug('hrsh7th/cmp-nvim-lsp')
 Plug('L3MON4D3/LuaSnip')
 Plug('https://github.com/neovim/nvim-lspconfig') -- LSP configs
-Plug('https://github.com/nvim-tree/nvim-tree.lua', {['on']= 'NvimTreeToggle' }) -- file browser
+Plug('https://github.com/nvim-tree/nvim-tree.lua') -- file browser
 Plug('nvim-lua/plenary.nvim')
 Plug('nvim-telescope/telescope.nvim') -- fuzzy finder
 Plug('https://github.com/jose-elias-alvarez/null-ls.nvim')
@@ -26,6 +26,8 @@ Plug('https://github.com/nvimdev/dashboard-nvim') -- custom banner
 Plug('https://github.com/nvim-tree/nvim-web-devicons')
 
 vim.call('plug#end')
+
+-- theme setup
 
 vim.cmd('syntax on')
 vim.g.termguicolors = true
@@ -128,6 +130,12 @@ nvim_tree.setup({
     dotfiles = true,
   },
 })
+vim.cmd([[
+    :hi      NvimTreeExecFile    guifg=#ffa0a0
+    :hi      NvimTreeSpecialFile guifg=#ff80ff gui=underline
+    :hi      NvimTreeSymlink     guifg=Yellow  gui=italic
+    :hi link NvimTreeImageFile   Title
+]])
 
 vim.keymap.set('n', '<C-b>', '<Cmd>:NvimTreeToggle<CR>', {silent = true})
 
