@@ -11,10 +11,11 @@
 
 ### structure
 
-'''
+'''text
 
 .
 +-- .config
+
 |   +-- nvim
 |   +-- alacritty
 |   +-- karabiner 
