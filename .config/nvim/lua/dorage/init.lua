@@ -24,6 +24,7 @@ Plug('https://github.com/windwp/nvim-autopairs') -- autopair
 Plug('https://github.com/folke/which-key.nvim') -- tooltips of keybindings
 Plug('https://github.com/nvimdev/dashboard-nvim') -- custom banner
 Plug('https://github.com/nvim-tree/nvim-web-devicons')
+Plug('https://github.com/mg979/vim-visual-multi') -- mulit cursor
 
 vim.call('plug#end')
 
@@ -130,6 +131,13 @@ nvim_tree.setup({
   filters = {
     -- dotfiles = true,
   },
+	actions = {
+		change_dir = {
+			enable = false,
+			global = false,
+			restrict_above_cwd = false,
+		}
+	}
 })
 vim.cmd([[
     :hi      NvimTreeExecFile    guifg=#ffa0a0
@@ -138,7 +146,7 @@ vim.cmd([[
     :hi link NvimTreeImageFile   Title
 ]])
 
-vim.keymap.set('n', '<C-D-b>', '<Cmd>:NvimTreeToggle<CR>', {silent = true})
+vim.keymap.set('n', '<C-b>', '<Cmd>:NvimTreeToggle<CR>', {silent = true})
 
 -- telescope setup
 local builtin = require('telescope.builtin')
@@ -207,7 +215,7 @@ prettier.setup({
 
 -- floaterm setup
 
-vim.keymap.set('n', '<C-D-g>', '<Cmd>:FloatermNew lazygit<CR>')
+vim.keymap.set('n', '<C-g>', '<Cmd>:FloatermNew lazygit<CR>')
 
 -- nvim-autopairs setup
 require('nvim-autopairs').setup({})

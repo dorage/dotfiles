@@ -5,6 +5,7 @@
 		"mv:alacritty": "rsync -avh --delete .config/alacritty/ ~/.config/alacritty",
 		"mv:hammerspoon": "rsync -avh --delete .hammerspoon/ ~/.hammerspoon",
 		"mv:zshrc": "rsync -avh --delete .zshrc ~/.zshrc",
-		"mv:tmux": "rsync -avh --delete .tmux.conf ~/.tmux.conf"
+		"mv:tmux": "rsync -avh --delete .tmux.conf ~/.tmux.conf",
+		"mv:zellij": "rsync -avh --delete .config/zellij/ ~/.config/zellij"
   }
 }
