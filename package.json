@@ -1,6 +1,9 @@
 {
   "name": "dev-env",
   "scripts": {
-		"mv:nvim": "rsync -avh --delete .config/nvim ~/.config/nvim"
+		"mv:nvim": "rsync -avh --delete .config/nvim ~/.config/nvim",
+		"mv:alacritty": "rsync -avh --delete .config/alacritty ~/.config/alacritty",
+		"mv:hammerspoon": "rsync -avh --delete .hammerspoon ~/.hammerspoon",
+		"mv:zshrc": "rsync -avh --delete .zshrc ~/.zshrc"
   }
 }
