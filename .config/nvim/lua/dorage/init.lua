@@ -122,12 +122,13 @@ nvim_tree.setup({
   },
   view = {
     width = 30,
+		relativenumber = true
   },
   renderer = {
     group_empty = true,
   },
   filters = {
-    dotfiles = true,
+    -- dotfiles = true,
   },
 })
 vim.cmd([[
@@ -137,7 +138,7 @@ vim.cmd([[
     :hi link NvimTreeImageFile   Title
 ]])
 
-vim.keymap.set('n', '<C-b>', '<Cmd>:NvimTreeToggle<CR>', {silent = true})
+vim.keymap.set('n', '<C-D-b>', '<Cmd>:NvimTreeToggle<CR>', {silent = true})
 
 -- telescope setup
 local builtin = require('telescope.builtin')
@@ -206,7 +207,7 @@ prettier.setup({
 
 -- floaterm setup
 
-vim.keymap.set('n', '<C-g>', '<Cmd>:FloatermNew lazygit<CR>')
+vim.keymap.set('n', '<C-D-g>', '<Cmd>:FloatermNew lazygit<CR>')
 
 -- nvim-autopairs setup
 require('nvim-autopairs').setup({})
