@@ -26,6 +26,8 @@ Plug('https://github.com/nvimdev/dashboard-nvim') -- custom banner
 Plug('https://github.com/nvim-tree/nvim-web-devicons')
 Plug('https://github.com/mg979/vim-visual-multi') -- mulit cursor
 Plug('https://github.com/andweeb/presence.nvim') -- discord presence
+Plug('https://github.com/nvim-treesitter/nvim-treesitter') -- nvim treesitter
+Plug('https://github.com/mattn/emmet-vim') -- emmet nvim
 
 vim.call('plug#end')
 
@@ -72,6 +74,17 @@ lspconfig.rust_analyzer.setup({})
 
 local lua_opts = lsp_zero.nvim_lua_ls()
 lspconfig.lua_ls.setup(lua_opts)
+
+-- [ treesitter setup ]
+
+require('nvim-treesitter').setup({
+	ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "javascript", "typescript", "tsx", "json", "python", "regex", "rust", "sql" },
+	sync_install = true,
+	auto_install = true,
+	highlight = {
+		enable = true,
+	},
+})
 
 -- nvim-comp setup
 
@@ -299,3 +312,6 @@ require("presence").setup({
     workspace_text      = "Private Workspace!",            -- Format string rendered when in a git repository (either string or function(project_name: string|nil, filename: string): string)
     line_number_text    = "Working!",        -- Format string rendered when `enable_line_number` is set to true (either string or function(line_number: number, line_count: number): string)
 })
+
+-- [ emmet-vim setup ]
+
