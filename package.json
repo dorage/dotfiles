@@ -6,6 +6,7 @@
 		"mv:hammerspoon": "rsync -avh --delete .hammerspoon/ ~/.hammerspoon",
 		"mv:zshrc": "rsync -avh --delete .zshrc ~/.zshrc",
 		"mv:tmux": "rsync -avh --delete .tmux.conf ~/.tmux.conf",
-		"mv:zellij": "rsync -avh --delete .config/zellij/ ~/.config/zellij"
+		"mv:zellij": "rsync -avh --delete .config/zellij/ ~/.config/zellij",
+		"backup:karabiner": "rsync -avh --delete ~/.config/karabiner/ .config/karabiner"
   }
 }

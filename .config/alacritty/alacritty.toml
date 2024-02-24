@@ -20,7 +20,9 @@ bold_italic = { style = "Bold Italic" }
 hide_when_typing = true
 
 [keyboard]
-# bindings = [
+bindings = [
+	{ key = "D", mods = "Control", action = "ReceiveChar" },
+]
 #  { key = "PageUp",   mods = "Shift",         mode = "~Alt",        action = "ReceiveChar" },
 #  { key = "PageDown", mods = "Shift",         mode = "~Alt",        action = "ReceiveChar" },
 #  { key = "Home",     mods = "Shift",         mode = "~Alt",        action = "ReceiveChar" },

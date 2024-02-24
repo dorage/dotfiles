@@ -1,3 +1,10 @@
+
+# ignore ctrl+D
+set -o ignoreeof
+
+# zellij startup
+eval "$(zellij setup --generate-auto-start zsh)"
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -116,6 +123,3 @@ typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-
-# zellij setup
-eval "$(zellij setup --generate-auto-start zsh)"

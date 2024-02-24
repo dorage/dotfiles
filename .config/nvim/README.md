@@ -35,5 +35,5 @@
 
 | Keycode | Description |
 |---|---|
-| Ctrl + CMD + b | open nvim-tree |
-| Ctrl + CMD + g | open lazygit |
+| Ctrl + b | open nvim-tree |
+| Ctrl + g | open lazygit |
