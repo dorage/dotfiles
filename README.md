@@ -8,6 +8,7 @@
 | karabiner | |
 | hammerspoon | |
 | alacritty | |
+| zellij | |
 
 ### structure
 
@@ -18,6 +19,7 @@
 |   +-- nvim
 |   +-- alacritty
 |   +-- karabiner 
+|   +-- zellij
 +-- .hammerspoon
 +-- .zshrc
 
