@@ -29,6 +29,8 @@ Plug('https://github.com/andweeb/presence.nvim') -- discord presence
 Plug('https://github.com/nvim-treesitter/nvim-treesitter') -- nvim treesitter
 Plug('https://github.com/mattn/emmet-vim') -- emmet nvim
 Plug('https://github.com/gen740/SmoothCursor.nvim') -- cursor animation
+Plug('https://github.com/itchyny/lightline.vim') -- lightline
+Plug('https://github.com/folke/tokyonight.nvim') -- theme
 
 vim.call('plug#end')
 
@@ -47,10 +49,16 @@ end, { silent = true, noremap = true})
 
 vim.cmd('syntax on')
 vim.g.termguicolors = true
-vim.g.colorscheme = 'maia'
-vim.g.sonokai_better_performance = 1
-vim.g.lightline = "{'colorscheme': 'sonokai'}"
+-- vim.cmd[[colorscheme tokyonight-moon]]
+vim.cmd[[let g:lightline = {'colorscheme': 'tokyonight'}]]
 vim.call('background#enable')
+
+-- require('tokyonight').setup({
+-- 	style = {
+-- 		comments = {
+-- 		}
+-- 	}
+-- })
 
 -- lsp-zero setup
 
@@ -323,7 +331,7 @@ require("presence").setup({
 require('smoothcursor').setup({
 	type = "default",           -- Cursor movement calculation method, choose "default", "exp" (exponential) or "matrix".
 
-	cursor = "🚀",              -- Cursor shape (requires Nerd Font). Disabled in fancy mode.
+	cursor = "🥵",              -- Cursor shape (requires Nerd Font). Disabled in fancy mode.
 	texthl = "SmoothCursor",   -- Highlight group. Default is { bg = nil, fg = "#FFD400" }. Disabled in fancy mode.
 	linehl = nil,              -- Highlights the line under the cursor, similar to 'cursorline'. "CursorLine" is recommended. Disabled in fancy mode.
 
