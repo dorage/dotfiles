@@ -12,6 +12,9 @@ Plug('tribela/vim-transparent') -- set background opacity
 Plug('https://github.com/VonHeikemen/lsp-zero.nvim') -- LSP zero configuration
 Plug('https://github.com/hrsh7th/nvim-cmp') -- Completion engine
 Plug('hrsh7th/cmp-nvim-lsp')
+Plug('hrsh7th/cmp-buffer')
+Plug('hrsh7th/cmp-path')
+Plug('hrsh7th/cmp-cmdline')
 Plug('L3MON4D3/LuaSnip')
 Plug('https://github.com/neovim/nvim-lspconfig') -- LSP configs
 Plug('https://github.com/nvim-tree/nvim-tree.lua') -- file browser
@@ -31,6 +34,14 @@ Plug('https://github.com/mattn/emmet-vim') -- emmet nvim
 Plug('https://github.com/gen740/SmoothCursor.nvim') -- cursor animation
 Plug('https://github.com/itchyny/lightline.vim') -- lightline
 Plug('https://github.com/folke/tokyonight.nvim') -- theme
+Plug('https://github.com/williamboman/mason.nvim') -- mason, LSP manager
+Plug('https://github.com/williamboman/mason-lspconfig.nvim') -- mason-lspconfig
+Plug('https://github.com/MunifTanjim/nui.nvim') -- dbee deps
+Plug('https://github.com/kndndrj/nvim-dbee', {
+	['do'] = function ()
+		require('dbee').install()
+	end
+}) -- db client
 
 vim.call('plug#end')
 
@@ -66,23 +77,55 @@ local lsp_zero = require('lsp-zero')
 lsp_zero.on_attach(function(client, bufnr)
 	lsp_zero.default_keymaps({buffer = bufnr})
 end)
-lsp_zero.setup_servers({'tsserver', 'rust_analyzer'})
+-- lsp_zero.setup_servers({'tsserver', 'rust_analyzer'})
+
+-- [ mason setup ]
+
+require('mason').setup({
+	ensure_installed = {
+		'rust_analyzer',
+		'lua_ls',
+		'astro',
+		'html',
+		'jedi_language_server',
+		'json',
+		'biome',
+		'cssls',
+		'tailwindcss',
+		'taplo',
+		'vuels',
+		'yamlls',
+		'deno',
+		'emmet_ls',
+		'marksman',
+		'sqls',
+	},
+	handlers = {
+		lsp_zero.default_setup,
+	},
+})
+
+require('mason-lspconfig').setup({
+	handlers = {
+		lsp_zero.default_setup,
+	}
+})
 
 -- nvim-lspconfig setup
 
-local lspconfig = require('lspconfig')
-lspconfig.tsserver.setup({
-	single_file_support=false,
-	on_init = function(client)
-		-- disable formatting capabilities
-		client.server_capabilities.documentFormattingProvider = false
-		client.server_capabilities.documentFormattingRangeProvider = false
-	end,
-})
-lspconfig.rust_analyzer.setup({})
+-- local lspconfig = require('lspconfig')
+-- lspconfig.tsserver.setup({
+-- 	single_file_support=false,
+-- 	on_init = function(client)
+-- 		-- disable formatting capabilities
+-- 		client.server_capabilities.documentFormattingProvider = false
+-- 		client.server_capabilities.documentFormattingRangeProvider = false
+-- 	end,
+-- })
+-- lspconfig.rust_analyzer.setup({})
 
-local lua_opts = lsp_zero.nvim_lua_ls()
-lspconfig.lua_ls.setup(lua_opts)
+-- local lua_opts = lsp_zero.nvim_lua_ls()
+-- lspconfig.lua_ls.setup(lua_opts)
 
 -- [ treesitter setup ]
 
@@ -104,7 +147,9 @@ local cmp_action = lsp_zero.cmp_action()
 
 cmp.setup({
 	source = {
-		{name = 'nvim_lsp'}
+		{name = 'path'},
+		{name = 'nvim_lsp'},
+		{name = 'buffer'},
 	},
 	mapping = cmp.mapping.preset.insert({
 		-- Enable "Super Tab"
@@ -352,3 +397,7 @@ require('smoothcursor').setup({
 	-- `nil` = disabled
 	show_last_positions = nil,
 })
+
+-- [ dbee setup ]
+
+require('dbee').setup()
