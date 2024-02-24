@@ -43,6 +43,8 @@ Plug('https://github.com/kndndrj/nvim-dbee', {
 	end
 }) -- db client
 Plug('https://github.com/romgrk/barbar.nvim') -- tabline plugin
+Plug('https://github.com/Exafunction/codeium.nvim') -- alternative copilot
+Plug('https://github.com/onsails/lspkind.nvim') -- vscode style completion
 
 vim.call('plug#end')
 
@@ -145,12 +147,14 @@ require('nvim-treesitter.configs').setup({
 
 local cmp = require('cmp')
 local cmp_action = lsp_zero.cmp_action()
+local lspkind = require('lspkind')
 
 cmp.setup({
 	source = {
 		{name = 'path'},
 		{name = 'nvim_lsp'},
 		{name = 'buffer'},
+		{name = 'codeium'},
 	},
 	mapping = cmp.mapping.preset.insert({
 		-- Enable "Super Tab"
@@ -188,6 +192,19 @@ cmp.setup({
 		completion = cmp.config.window.bordered(),
 		documentation = cmp.config.window.bordered(),
 	},
+	formatting = {
+		formatting = {
+			format = lspkind.cmp_format({
+				mode = 'symbol',
+				maxwidth = 50,
+				ellipsis_char = '...',
+				show_labelDetails = true,
+				symbol_map = {
+					Codeium = "🤖",
+				}
+			}),
+		}
+	}
 })
 
 -- nvim-tree setup
@@ -448,3 +465,7 @@ map('n', '<Space>bw', '<Cmd>BufferOrderByWindowNumber<CR>', opts)
 -- Other:
 -- :BarbarEnable - enables barbar (enabled by default)
 -- :BarbarDisable - very bad command, should never be used
+
+-- [ codeium setup ]
+
+require('codeium').setup({})
