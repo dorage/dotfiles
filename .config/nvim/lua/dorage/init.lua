@@ -45,6 +45,7 @@ Plug('https://github.com/kndndrj/nvim-dbee', {
 Plug('https://github.com/romgrk/barbar.nvim') -- tabline plugin
 Plug('https://github.com/Exafunction/codeium.nvim') -- alternative copilot
 Plug('https://github.com/onsails/lspkind.nvim') -- vscode style completion
+Plug('https://github.com/jakewvincent/mkdnflow.nvim') -- markdown editor
 
 vim.call('plug#end')
 
@@ -155,6 +156,7 @@ cmp.setup({
 		{name = 'nvim_lsp'},
 		{name = 'buffer'},
 		{name = 'codeium'},
+		{name = 'mkdnflow'},
 	},
 	mapping = cmp.mapping.preset.insert({
 		-- Enable "Super Tab"
@@ -469,3 +471,13 @@ map('n', '<Space>bw', '<Cmd>BufferOrderByWindowNumber<CR>', opts)
 -- [ codeium setup ]
 
 require('codeium').setup({})
+
+-- [ mkdnflow setup ]
+require('mkdnflow').setup({
+    -- links = {
+    --     transform_explicit = function(text)
+    --         -- Make lowercase, remove spaces, and reverse the string
+    --         return string.lower(text:gsub(' ', ''))
+    --     end
+    -- }
+})
