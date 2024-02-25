@@ -26,18 +26,31 @@ layout {
 // If you'd like to override the default keybindings completely, be sure to change "keybinds" to "keybinds clear-defaults=true"
 themes {
     // gruvbox-dark
-    default {
-        fg 213 196 161
-        bg 40 40 40
-        black 60 56 54
-        red 204 36 29
-        green 152 151 26
-        yellow 215 153 33
-        blue 69 133 136
-        magenta 177 98 134
-        cyan 104 157 106
-        white 251 241 199
-        orange 214 93 14
+//    default {
+//        fg 213 196 161
+//        bg 40 40 40
+//        black 60 56 54
+//        red 204 36 29
+//        green 152 151 26
+//        yellow 215 153 33
+//        blue 69 133 136
+//        magenta 177 98 134
+//        cyan 104 157 106
+//        white 251 241 199
+//        orange 214 93 14
+//    }
+    blade-runner {
+        bg "#1a1a1a" // Dark Gray
+        fg "#2bbff4" // Neon Blue
+        red "#ff355e" // Neon Pink
+        green "#00ff00" // Neon Green
+        blue "#00d9e3" // Electric Blue
+        yellow "#ffe600" // Neon Yellow
+        magenta "#ff00ff" // Neon Purple
+        orange "#ff8c0d" // Cyber Orange
+        cyan "#00e5e5" // Cyan
+        black "#000000" // Black
+        white "#ffffff" // White
     }
 }
 // If you'd like to override the default keybindings completely, be sure to change "keybinds" to "keybinds clear-defaults=true"
