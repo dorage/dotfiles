@@ -46,6 +46,10 @@ Plug('https://github.com/romgrk/barbar.nvim') -- tabline plugin
 Plug('https://github.com/Exafunction/codeium.nvim') -- alternative copilot
 Plug('https://github.com/onsails/lspkind.nvim') -- vscode style completion
 Plug('https://github.com/jakewvincent/mkdnflow.nvim') -- markdown editor
+Plug('https://github.com/preservim/vim-indent-guides') -- indent guide
+Plug('https://github.com/ray-x/aurora') -- color scheme
+Plug('https://github.com/bluz71/vim-moonfly-colors') -- color scheme
+Plug('https://github.com/navarasu/onedark.nvim') -- color scheme
 
 vim.call('plug#end')
 
@@ -64,9 +68,28 @@ end, { silent = true, noremap = true})
 
 vim.cmd('syntax on')
 vim.g.termguicolors = true
--- vim.cmd[[colorscheme tokyonight-moon]]
-vim.cmd[[let g:lightline = {'colorscheme': 'tokyonight'}]]
+vim.cmd [[colorscheme moonfly]]
+vim.cmd [[let g:lightline = {'colorscheme': 'moonfly'}]]
 vim.call('background#enable')
+vim.cmd [[highlight LineNr guifg=#FFFFFF]]
+vim.cmd [[hi LineNrAbove guifg=#16FF00]]
+vim.cmd [[hi LineNrBelow guifg=#16FF00]]
+vim.g.moonflyCursorColor = true
+vim.g.moonflyItalics = true
+vim.g.moonflyNormalFloat = true
+vim.g.moonflyTerminalColors = true
+vim.g.moonflyTransparent = true
+local custom_highlight = vim.api.nvim_create_augroup("CustomHighlight", {})
+vim.api.nvim_create_autocmd("ColorScheme", {
+  pattern = "moonfly",
+  callback = function()
+    vim.api.nvim_set_hl(0, "Function", { fg = "#74b2ff", bold = true })
+  end,
+  group = custom_highlight,
+})
+local winhighlight = {
+  winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel",
+}
 
 -- require('tokyonight').setup({
 -- 	style = {
@@ -160,28 +183,32 @@ cmp.setup({
 	},
 	mapping = cmp.mapping.preset.insert({
 		-- Enable "Super Tab"
-		['<Tab>'] = cmp_action.luasnip_supertab(),
-		['<S-Tab>'] = cmp_action.luasnip_shift_supertab(),
+		-- ['<Tab>'] = cmp_action.luasnip_supertab(),
+		-- ['<S-Tab>'] = cmp_action.luasnip_shift_supertab(),
 
-
-		['<C-y>'] = cmp.mapping.confirm({select = false}),
+		-- ['<C-y>'] = cmp.mapping.confirm({select = false}),
+		-- ['<C-e>'] = cmp.mapping.abort(),
+		-- ['<Up>'] = cmp.mapping.select_prev_item({behavior = 'select'}),
+		-- ['<Down>'] = cmp.mapping.select_next_item({behavior = 'select'}),
+		-- ['<C-p>'] = cmp.mapping(function()
+		-- 	if cmp.visible() then
+		-- 		cmp.select_prev_item({behavior = 'insert'})
+		-- 	else
+		-- 		cmp.complete()
+		-- 	end
+		-- end),
+		-- ['<C-n>'] = cmp.mapping(function()
+		-- 	if cmp.visible() then
+		-- 		cmp.select_next_item({behavior = 'insert'})
+		-- 	else
+		-- 		cmp.complete()
+		-- 	end
+		-- end),
+		['<C-b>'] = cmp.mapping.scroll_docs(-4),
+		['<C-f>'] = cmp.mapping.scroll_docs(4),
+		['<C-Space>'] = cmp.mapping.complete(),
 		['<C-e>'] = cmp.mapping.abort(),
-		['<Up>'] = cmp.mapping.select_prev_item({behavior = 'select'}),
-		['<Down>'] = cmp.mapping.select_next_item({behavior = 'select'}),
-		['<C-p>'] = cmp.mapping(function()
-			if cmp.visible() then
-				cmp.select_prev_item({behavior = 'insert'})
-			else
-				cmp.complete()
-			end
-		end),
-		['<C-n>'] = cmp.mapping(function()
-			if cmp.visible() then
-				cmp.select_next_item({behavior = 'insert'})
-			else
-				cmp.complete()
-			end
-		end),
+		['<CR>'] = cmp.mapping.confirm({ select = true })
 	}),
 	completion = {
 	},
@@ -191,13 +218,13 @@ cmp.setup({
 		end
 	},
 	window = {
-		completion = cmp.config.window.bordered(),
-		documentation = cmp.config.window.bordered(),
+    completion = cmp.config.window.bordered(winhighlight),
+    documentation = cmp.config.window.bordered(winhighlight),
 	},
 	formatting = {
 		formatting = {
 			format = lspkind.cmp_format({
-				mode = 'symbol',
+				mode = 'symbol_text',
 				maxwidth = 50,
 				ellipsis_char = '...',
 				show_labelDetails = true,
@@ -396,7 +423,7 @@ require("presence").setup({
 require('smoothcursor').setup({
 	type = "default",           -- Cursor movement calculation method, choose "default", "exp" (exponential) or "matrix".
 
-	cursor = "🥵",              -- Cursor shape (requires Nerd Font). Disabled in fancy mode.
+	cursor = "🍕",              -- Cursor shape (requires Nerd Font). Disabled in fancy modee.
 	texthl = "SmoothCursor",   -- Highlight group. Default is { bg = nil, fg = "#FFD400" }. Disabled in fancy mode.
 	linehl = nil,              -- Highlights the line under the cursor, similar to 'cursorline'. "CursorLine" is recommended. Disabled in fancy mode.
 
@@ -481,3 +508,4 @@ require('mkdnflow').setup({
     --     end
     -- }
 })
+
