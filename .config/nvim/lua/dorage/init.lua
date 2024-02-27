@@ -72,9 +72,9 @@ vim.g.termguicolors = true
 vim.cmd [[colorscheme moonfly]]
 vim.cmd [[let g:lightline = {'colorscheme': 'moonfly'}]]
 vim.call('background#enable')
-vim.cmd [[highlight LineNr guifg=#FFFFFF]]
-vim.cmd [[hi LineNrAbove guifg=#16FF00]]
-vim.cmd [[hi LineNrBelow guifg=#16FF00]]
+vim.cmd [[highlight LineNr guifg=#16FF00]]
+vim.cmd [[hi LineNrAbove guifg=#AAAAAA]]
+vim.cmd [[hi LineNrBelow guifg=#AAAAAA]]
 vim.g.moonflyCursorColor = true
 vim.g.moonflyItalics = true
 vim.g.moonflyNormalFloat = true
