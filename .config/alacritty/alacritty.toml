@@ -1,4 +1,4 @@
-live_config_reload = true
+
 
 [env]
 TERM = "xterm-256color"
@@ -127,35 +127,72 @@ bindings = [
 #index = 17
 #color = '#c53b53'
 
-# argonaut theme
-# Default colors
-[colors.primary]
-background = '#292C3E'
-foreground = '#EBEBEB'
+# # argonaut theme
+# # Default colors
+# [colors.primary]
+# background = '#292C3E'
+# foreground = '#EBEBEB'
 
-# Cursor colors
-[colors.cursor]
-text = '#EBEBEB'
-cursor = '#FF261E'
+# # Cursor colors
+# [colors.cursor]
+# text = '#EBEBEB'
+# cursor = '#FF261E'
 
-# Normal colors
-[colors.normal]
-black   = '#0d0d0d'
-red     = '#FF301B'
-green   = '#A0E521'
-yellow  = '#FFC620'
-blue    = '#1BA6FA'
-magenta = '#8763B8'
-cyan    = '#21DEEF'
-white   = '#EBEBEB'
+# # Normal colors
+# [colors.normal]
+# black   = '#0d0d0d'
+# red     = '#FF301B'
+# green   = '#A0E521'
+# yellow  = '#FFC620'
+# blue    = '#1BA6FA'
+# magenta = '#8763B8'
+# cyan    = '#21DEEF'
+# white   = '#EBEBEB'
 
-# Bright colors
+# # Bright colors
+# [colors.bright]
+# black   = '#6D7070'
+# red     = '#FF4352'
+# green   = '#B8E466'
+# yellow  = '#FFD750'
+# blue    = '#1BA6FA'
+# magenta = '#A578EA'
+# cyan    = '#73FBF1'
+# white   = '#FEFEF8'
+
+# moonfly theme
+[colors]
+draw_bold_text_with_bright_colors = true
+
 [colors.bright]
-black   = '#6D7070'
-red     = '#FF4352'
-green   = '#B8E466'
-yellow  = '#FFD750'
-blue    = '#1BA6FA'
-magenta = '#A578EA'
-cyan    = '#73FBF1'
-white   = '#FEFEF8'
+black = "#949494"
+blue = "#74b2ff"
+cyan = "#85dc85"
+green = "#36c692"
+magenta = "#ae81ff"
+red = "#ff5189"
+white = "#e4e4e4"
+yellow = "#c2c292"
+
+[colors.cursor]
+cursor = "#ffffff"
+text = "#080808"
+
+[colors.normal]
+black = "#323437"
+blue = "#80a0ff"
+cyan = "#79dac8"
+green = "#8cc85f"
+magenta = "#cf87e8"
+red = "#ff5454"
+white = "#c6c6c6"
+yellow = "#e3c78a"
+
+[colors.primary]
+background = "#080808"
+bright_foreground = "#eeeeee"
+foreground = "#bdbdbd"
+
+[colors.selection]
+background = "#b2ceee"
+text = "#080808"

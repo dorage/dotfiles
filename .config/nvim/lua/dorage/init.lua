@@ -29,7 +29,7 @@ Plug('https://github.com/nvimdev/dashboard-nvim') -- custom banner
 Plug('https://github.com/nvim-tree/nvim-web-devicons')
 Plug('https://github.com/mg979/vim-visual-multi') -- mulit cursor
 Plug('https://github.com/andweeb/presence.nvim') -- discord presence
-Plug('https://github.com/nvim-treesitter/nvim-treesitter') -- nvim treesitter
+Plug('https://github.com/nvim-treesitter/nvim-treesitter', {['do'] = 'TSUpdate'}) -- nvim treesitter
 Plug('https://github.com/mattn/emmet-vim') -- emmet nvim
 Plug('https://github.com/gen740/SmoothCursor.nvim') -- cursor animation
 Plug('https://github.com/itchyny/lightline.vim') -- lightline
@@ -50,6 +50,7 @@ Plug('https://github.com/preservim/vim-indent-guides') -- indent guide
 Plug('https://github.com/ray-x/aurora') -- color scheme
 Plug('https://github.com/bluz71/vim-moonfly-colors') -- color scheme
 Plug('https://github.com/navarasu/onedark.nvim') -- color scheme
+Plug('https://github.com/catppuccin/nvim', {['as']= 'catppuccin'}) -- catppuccin
 
 vim.call('plug#end')
 
@@ -90,6 +91,12 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 local winhighlight = {
   winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel",
 }
+
+-- require('onedark').setup({
+-- 	style = 'dark',
+-- 	transparent = true,
+-- })
+-- require('onedark').load()
 
 -- require('tokyonight').setup({
 -- 	style = {
