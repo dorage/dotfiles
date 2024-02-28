@@ -17,15 +17,6 @@ nnoremap <leader>y "+y
 vnoremap <leader>y "+y
 nnoremap <leader>Y "+y$
 
-:lua require('dorage')
-
-" [ indent guides ]
-let g:indent_guides_enable_on_vim_startup = 1
-" let g:indent_guides_auto_colors = 0
-let g:indent_guides_guide_size = 1
-let g:indent_guides_start_level = 2
-hi IndentGuidesOdd  guibg=#666666   ctermbg=3
-hi IndentGuidesEven guibg=#999999 ctermbg=4
-
-
+" :lua require('dorage')
+:lua require('dorage.lazy')
 

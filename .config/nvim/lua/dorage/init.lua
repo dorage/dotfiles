@@ -1,4 +1,3 @@
-local vim = vim
 local Plug = vim.fn['plug#']
 
 vim.call('plug#begin')
@@ -15,7 +14,7 @@ Plug('hrsh7th/cmp-nvim-lsp')
 Plug('hrsh7th/cmp-buffer')
 Plug('hrsh7th/cmp-path')
 Plug('hrsh7th/cmp-cmdline')
-Plug('L3MON4D3/LuaSnip')
+Plug('L3MON4D3/LuaSnip', {['do'] = 'make install_jsregexp'})
 Plug('https://github.com/neovim/nvim-lspconfig') -- LSP configs
 Plug('https://github.com/nvim-tree/nvim-tree.lua') -- file browser
 Plug('nvim-lua/plenary.nvim')
@@ -29,7 +28,7 @@ Plug('https://github.com/nvimdev/dashboard-nvim') -- custom banner
 Plug('https://github.com/nvim-tree/nvim-web-devicons')
 Plug('https://github.com/mg979/vim-visual-multi') -- mulit cursor
 Plug('https://github.com/andweeb/presence.nvim') -- discord presence
-Plug('https://github.com/nvim-treesitter/nvim-treesitter', {['do'] = 'TSUpdate'}) -- nvim treesitter
+Plug('https://github.com/nvim-treesitter/nvim-treesitter', {['do'] = ':TSUpdate'}) -- nvim treesitter
 Plug('https://github.com/mattn/emmet-vim') -- emmet nvim
 Plug('https://github.com/gen740/SmoothCursor.nvim') -- cursor animation
 Plug('https://github.com/itchyny/lightline.vim') -- lightline
@@ -165,8 +164,18 @@ require('mason-lspconfig').setup({
 
 require('nvim-treesitter').setup({
 	ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "javascript", "typescript", "tsx", "json", "python", "regex", "rust", "sql" },
+	indent = {enable = true},
 	sync_install = true,
 	auto_install = true,
+	incremental_selection = {
+		enable = true,
+		keymaps = {
+			init_selection = "<C-space>",
+			node_incremental = "C-space",
+			scope_incremental = false,
+			node_decremental = "<bs>"
+		}
+	},
 })
 require('nvim-treesitter.configs').setup({
 	highlight = {
