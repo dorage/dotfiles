@@ -13,21 +13,8 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup(
 	{
-		{import = "dorage.plugins"},
-		{import = "dorage.plugins.lsp"},
-		{import = "dorage.plugins.themes"},
-	}	
+		{ import = "dorage.plugins" },
+		{ import = "dorage.plugins.lsp" },
+		{ import = "dorage.plugins.themes" },
+	}
 )
-
--- {
--- 		install = {
--- 			colorscheme = { "moonfly" },
--- 		},
--- 		checker = {
--- 			enabled = true,
--- 			notify = false,
--- 		},
--- 		change_detection = {
--- 			notify = true,
--- 		},
--- 	}

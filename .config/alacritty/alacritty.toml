@@ -175,7 +175,7 @@ white = "#e4e4e4"
 yellow = "#c2c292"
 
 [colors.cursor]
-cursor = "#ffffff"
+cursor = "#F72798"
 text = "#080808"
 
 [colors.normal]
@@ -194,5 +194,5 @@ bright_foreground = "#eeeeee"
 foreground = "#bdbdbd"
 
 [colors.selection]
-background = "#b2ceee"
+background = "#ffffff"
 text = "#080808"

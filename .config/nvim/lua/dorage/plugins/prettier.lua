@@ -1,6 +1,6 @@
 return {
 	'MunifTanjim/prettier.nvim',
-	depedencies = {
+	dependencies = {
 		"nvimtools/none-ls.nvim",
 	},
 	config = function ()
