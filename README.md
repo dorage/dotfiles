@@ -140,3 +140,18 @@
 | o | SwitchToMode Session |
 | q | Quit |
 
+### Telekasten
+
+| Keycode | Description |
+|---|---|
+| \ + z | Telekasten panel |
+| \ + zf | Telekasten find_notes |
+| \ + zg | Telekasten search_notes |
+| \ + zd | Telekasten goto_today |
+| \ + zz | Telekasten follow_link |
+| \ + zn | Telekasten new_note |
+| \ + zc | Telekasten show_calendar |
+| \ + zb | Telekasten show_backlinks |
+| \ + zI | Telekasten insert_img_link |
+| [[ | Telekasten insert_link |
+
