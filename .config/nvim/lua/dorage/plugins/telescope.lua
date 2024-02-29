@@ -4,8 +4,14 @@ return {
 		-- telescope setup
 		local telescope = require('telescope')
 		telescope.setup({
+			defaults = {
+			 file_ignore_patterns = {
+				 "node_modules", "build", "dist", "yarn.lock", ".git"
+			 },
+			},
 			pickers = {
 				find_files = {
+					hidden = true
 				}
 			},
 		})
