@@ -20,16 +20,6 @@ return {
 			-- setup lightline
 			vim.cmd([[let g:lightline = {'colorscheme': 'moonfly'}]])
 
-			-- setup line number
-			vim.cmd([[highlight LineNr guifg=#16FF00]])
-			vim.cmd([[hi LineNrAbove guifg=#AAAAAA]])
-			vim.cmd([[hi LineNrBelow guifg=#AAAAAA]])
-
-			-- setup current line highlight
-			vim.opt.cursorline = true
-			vim.cmd([[hi CursorLine   guifg=#E3FCBF]])
-			vim.cmd([[hi CursorColumn guifg=#E3FCBF]])
-
 			-- config moonfly theme
 			vim.g.moonflyCursorColor = true
 			vim.g.moonflyItalics = true
@@ -51,6 +41,16 @@ return {
 			-- 	group = custom_highlight,
 			-- })
 
+			-- setup line number
+			vim.cmd([[highlight LineNr guifg=#16FF00]])
+			vim.cmd([[hi LineNrAbove guifg=#AAAAAA]])
+			vim.cmd([[hi LineNrBelow guifg=#AAAAAA]])
+
+			-- setup current line highlight
+			vim.opt.cursorline = true
+			-- vim.cmd([[hi CursorLine   guifg=#E3FCBF]])
+			-- vim.cmd([[hi CursorColumn guifg=#E3FCBF]])
+			--
 			-- setup color highlighter
 			require('colorizer').setup()
 		end

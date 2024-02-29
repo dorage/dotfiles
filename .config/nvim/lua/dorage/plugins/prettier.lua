@@ -56,7 +56,7 @@ return {
 				"yaml",
 			},
 			cli_options = {
-			config_precedence = "prefer-file",
+				config_precedence = "prefer-file",
 			},
 		})
 	end

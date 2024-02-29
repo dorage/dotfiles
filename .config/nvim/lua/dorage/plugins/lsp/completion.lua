@@ -14,6 +14,7 @@ return {
     config = function()
 			local cmp = require('cmp')
 			local lsp_zero = require('lsp-zero')
+			local luasnip = require('luasnip')
 			local cmp_action = lsp_zero.cmp_action()
 			local lspkind = require('lspkind')
 
@@ -23,12 +24,18 @@ return {
 
 			cmp.setup({
 				sources = cmp.config.sources({
+					{name = 'luasnip'},
 					{name = 'path'},
 					{name = 'nvim_lsp'},
 					{name = 'buffer'},
 					{name = 'codeium'},
 					{name = 'mkdnflow'},
 				}),
+				snippet = {
+					expand = function(args)
+						luasnip.lsp_expand(args.body) -- For 'luasnip' users
+					end
+				},
 				mapping = cmp.mapping.preset.insert({
 					-- Enable "Super Tab"
 					['<Tab>'] = cmp_action.luasnip_supertab(),
