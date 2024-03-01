@@ -1,4 +1,4 @@
-# dorage-dev-env
+# dorage-dev
 
 
 ## applications
@@ -54,7 +54,6 @@
 |---|---|
 | Ctrl + b | open nvim-tree |
 | Ctrl + g | open lazygit |
-| Ctrl + d | unlock zellij |
 
 *tabline*
 
@@ -100,8 +99,7 @@
 | Up | cmp.mapping.select_prev_item({behavior = select}) |
 | Down | cmp.mapping.select_next_item({behavior = select}) |
 
-*telescope*
-
+**Telescope**
 
 | Keycode | Description |
 |---|---|
@@ -109,6 +107,41 @@
 | \ + fg | builtin.live_grep |
 | \ + fb | builtin.buffers |
 | \ + fh | builtin.help_tags |
+
+**Telekasten**
+
+| Keycode | Description |
+|---|---|
+| \ + z | Telekasten panel |
+| \ + zf | Telekasten find_notes |
+| \ + zg | Telekasten search_notes |
+| \ + zz | Telekasten follow_link |
+| \ + zn | Telekasten new_note |
+| \ + zb | Telekasten show_backlinks |
+| \ + zl | Telekasten insert_link |
+
+**Markdown Preview**
+
+| Keycode | Description      |
+| ------- | ---------------- |
+| \ + zp  | Markdown Preview |
+
+**Mkdnflow**
+
+| Keycode | Description      |
+| ------- | ---------------- |
+| \ + z] | MkdnNextHeading |
+| \ + z[ | MkdnPrevHeading |
+| \ + z+ | MkdnIncreaseHeading |
+| \ + z- | MkdnDecreaseHeading |
+| \ + zt | MkdnToggleToDo |
+| \ + z; | MkdnTableNextCell |
+| \ + z, | MkdnTablePrevCell |
+| \ + zo | MkdnTableNewRowBelow |
+| \ + zO | MkdnTableNewRowAbove |
+| \ + za | MkdnTableNewColAfter |
+| \ + zi | MkdnTableNewColBefore |
+
 
 ### Zellij
 
@@ -139,19 +172,3 @@
 | s | SwitchToMode Scroll |
 | o | SwitchToMode Session |
 | q | Quit |
-
-### Telekasten
-
-| Keycode | Description |
-|---|---|
-| \ + z | Telekasten panel |
-| \ + zf | Telekasten find_notes |
-| \ + zg | Telekasten search_notes |
-| \ + zd | Telekasten goto_today |
-| \ + zz | Telekasten follow_link |
-| \ + zn | Telekasten new_note |
-| \ + zc | Telekasten show_calendar |
-| \ + zb | Telekasten show_backlinks |
-| \ + zI | Telekasten insert_img_link |
-| [[ | Telekasten insert_link |
-
