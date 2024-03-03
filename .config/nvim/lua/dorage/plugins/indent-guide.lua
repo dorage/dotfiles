@@ -1,11 +1,31 @@
 return {
-	'preservim/vim-indent-guides',
-	config = function()
-		vim.cmd([[let g:indent_guides_enable_on_vim_startup = 1]])
-		vim.cmd([[let g:indent_guides_auto_colors = 0]])
-		vim.cmd([[let g:indent_guides_guide_size = 1]])
-		vim.cmd([[let g:indent_guides_start_level = 2]])
-		vim.cmd([[hi IndentGuidesOdd  guibg=#666666   ctermbg=3]])
-		vim.cmd([[hi IndentGuidesEven guibg=#999999 ctermbg=4]])
-	end
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		main = "ibl",
+		dependencies = {
+				"nvim-treesitter/nvim-treesitter",
+		},
+		config = function()
+			require('ibl').setup()
+		end
+	},
+	{
+		"briangwaltney/paren-hint.nvim",
+		lazy = false,
+		dependencies = {
+				"nvim-treesitter/nvim-treesitter",
+		},
+		config = function()
+				require("paren-hint").setup({
+						-- Include the opening paren in the ghost text
+						include_paren = true,
+
+						-- Show ghost text when cursor is anywhere on the line that includes the close paren rather just when the cursor is on the close paren
+						anywhere_on_line = true,
+
+						-- show the ghost text when the opening paren is on the same line as the close paren
+						show_same_line_opening = false,
+				})
+		end
+	}
 }
