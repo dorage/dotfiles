@@ -8,7 +8,9 @@ return {
 	config = function ()
 		require('nvim-treesitter.configs').setup({
 			ensure_installed = {
+				"astro",
 				"c",
+				"css",
 				"lua",
 				"vim",
 				"vimdoc",
