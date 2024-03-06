@@ -16,7 +16,6 @@ return {
 			-- refer to the configuration section below
 		}
 	},
-	'mattn/emmet-vim', -- emmet
 	{'mg979/vim-visual-multi', branch = 'master' }, -- multiline curosr
 	"nvimtools/none-ls.nvim",
 }

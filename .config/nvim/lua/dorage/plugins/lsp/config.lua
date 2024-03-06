@@ -48,6 +48,7 @@ return {
 			})
 
       require('mason-lspconfig').setup({
+				automatic_installation = true,
 				ensure_installed = {
 					'rust_analyzer',
 					'lua_ls',
@@ -61,7 +62,6 @@ return {
 					'taplo',
 					'vuels',
 					'yamlls',
-					'emmet_ls',
 					'marksman',
 					'sqlls',
 				},
