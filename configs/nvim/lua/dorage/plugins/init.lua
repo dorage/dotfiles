@@ -17,5 +17,4 @@ return {
 		}
 	},
 	{'mg979/vim-visual-multi', branch = 'master' }, -- multiline curosr
-	"nvimtools/none-ls.nvim",
 }
