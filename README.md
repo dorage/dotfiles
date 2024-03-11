@@ -30,7 +30,28 @@
 
 ### Neovim
 
-*lsp-zero*
+`configs`
+
+
+| Keycode | Description |
+| --- | --- |
+| \w    | <cmd>w<cr><esc> - save    |
+| \y    | "+y - copy to clipboard   |
+| \p    | "+p - paste from clipboard    |
+
+`vim-visual-multi`
+
+| Keycode | Description |
+| --- | --- |
+| Ctrl + n    | select words (Ctrl + d in VSCode)    |
+| Ctrl + up-arrow/down-arrow    | create cursor vertically | 
+| n / N    | get next/previous occurrence |
+| \[ / \]    | select next/previous cursor |
+| q    | skup current and get next occurrence |
+| Q    | remove current cursor/selection |
+| i, a, I, A | start insert mode |
+
+`lsp-zero`
 
 | Keycode | Description |
 |---|---|
@@ -48,8 +69,7 @@
 | [d | Move to the previous diagnostic in the current buffer. |
 | ]d | Move to the next diagnostic. |
 
-*treesitter - incremental selection*
-
+`treesitter - incremental selection`
 
 | Keycode | Description |
 | --- | --- |
@@ -58,14 +78,14 @@
 | gn; |  node_incremental   |
 | gn, |  node_decremental   |
 
-*panel*
+`panel`
 
 | Keycode | Description |
 |---|---|
 | \ab | open nvim-tree |
 | \ag | open lazygit |
 
-*tabline*
+`tabline`
 
 | Keycode | Description |
 |---|---|
@@ -98,7 +118,7 @@
 | Space + bl | BufferOrderByLanguage |
 | Space + bw | BufferOrderByWindowNumber |
 
-*completion*
+`completion`
 
 | Keycode | Description |
 |---|---|
@@ -109,7 +129,7 @@
 | Up | cmp.mapping.select_prev_item({behavior = select}) |
 | Down | cmp.mapping.select_next_item({behavior = select}) |
 
-**Telescope**
+`Telescope`
 
 | Keycode | Description |
 |---|---|
@@ -118,7 +138,7 @@
 | \ + fb | builtin.buffers |
 | \ + fh | builtin.help_tags |
 
-**Telekasten**
+`Telekasten`
 
 | Keycode | Description |
 |---|---|
@@ -130,13 +150,13 @@
 | \ + zb | Telekasten show_backlinks |
 | \ + zl | Telekasten insert_link |
 
-**Markdown Preview**
+`Markdown Preview`
 
 | Keycode | Description      |
 | ------- | ---------------- |
 | \ + zp  | Markdown Preview |
 
-**Mkdnflow**
+`Mkdnflow`
 
 | Keycode | Description      |
 | ------- | ---------------- |
