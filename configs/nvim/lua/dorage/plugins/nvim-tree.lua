@@ -42,6 +42,6 @@ return {
 				:hi link NvimTreeImageFile   Title
 		]])
 
-		vim.keymap.set('n', '<C-b>', '<Cmd>:NvimTreeToggle<CR>', {silent = true})
+		vim.keymap.set('n', '<leader>ab', '<Cmd>:NvimTreeToggle<CR>', {silent = true})
 	end
 }

@@ -3,12 +3,12 @@
 
 ## applications
  
-| | |
+| name | installation |
 | --- | --- |
-| karabiner | |
-| hammerspoon | |
-| alacritty | |
-| zellij | |
+| karabiner | https://karabiner-elements.pqrs.org |
+| hammerspoon | https://www.hammerspoon.org |
+| alacritty | https://alacritty.org/config-alacritty.html |
+| zellij | https://zellij.dev |
 
 ## structure
 
@@ -41,19 +41,29 @@
 | go | Jumps to the definition of the type of the symbol under the cursor. |
 | gr | Lists all the references to the symbol under the cursor in the quickfix window. |
 | gs | Displays signature information about the symbol under the cursor in a floating window. |
-| \<F2> | Renames all references to the symbol under the cursor. |
-| \<F3> | Format code in current buffer. |
-| \<F4> | Selects a code action available at the current cursor position. |
+| <F2> | Renames all references to the symbol under the cursor. |
+| <F3> | Format code in current buffer. |
+| <F4> | Selects a code action available at the current cursor position. |
 | gl | Show diagnostics in a floating window. |
 | [d | Move to the previous diagnostic in the current buffer. |
 | ]d | Move to the next diagnostic. |
+
+*treesitter - incremental selection*
+
+
+| Keycode | Description |
+| --- | --- |
+| gnn |  init_selection    |
+| gnm |  scope_incrementa  |
+| gn; |  node_incremental   |
+| gn, |  node_decremental   |
 
 *panel*
 
 | Keycode | Description |
 |---|---|
-| Ctrl + b | open nvim-tree |
-| Ctrl + g | open lazygit |
+| \ab | open nvim-tree |
+| \ag | open lazygit |
 
 *tabline*
 
