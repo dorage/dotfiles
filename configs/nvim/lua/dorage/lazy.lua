@@ -14,6 +14,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup(
 	{
 		{ import = "dorage.plugins" },
+		{ import = "dorage.plugins.editor" },
 		{ import = "dorage.plugins.lsp" },
 		{ import = "dorage.plugins.themes" },
 	}

@@ -1,4 +1,6 @@
 return {
+	{ "folke/neodev.nvim", opts = {}, config = true },
+	-- LSP config helper
   {
     'VonHeikemen/lsp-zero.nvim',
     branch = 'v3.x',
@@ -10,6 +12,7 @@ return {
       vim.g.lsp_zero_extend_lspconfig = 0
     end,
   },
+	-- LSP installation manager
   {
     'williamboman/mason.nvim',
     lazy = false,
@@ -18,7 +21,7 @@ return {
 	{ 
 		"williamboman/mason-lspconfig.nvim"
 	},
-	-- LSP
+	-- LSP config
   {
     'neovim/nvim-lspconfig',
     cmd = {'LspInfo', 'LspInstall', 'LspStart'},

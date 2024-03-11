@@ -1,4 +1,11 @@
 return {
+	{
+		'Exafunction/codeium.nvim',
+		event = 'BufEnter',
+		config = function ()
+			require('codeium').setup({})
+		end
+	},
   {
     'hrsh7th/nvim-cmp',
     event = 'InsertEnter',
@@ -10,6 +17,7 @@ return {
 			{'hrsh7th/cmp-cmdline'},
       {'l3mon4d3/luasnip'}, -- snippet
 			{'onsails/lspkind.nvim'}, -- vscode style compeletion
+			{'Exafunction/codeium.nvim'} -- ai autocompletion
     },
     config = function()
 			local cmp = require('cmp')
