@@ -1,0 +1,1 @@
+require('dorage.configs.shortcuts')

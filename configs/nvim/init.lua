@@ -12,13 +12,5 @@ vim.cmd([[ :set mouse=a ]])
 vim.cmd([[ :set encoding=utf-8 ]])
 vim.cmd([[ :set fileencodings=utf-8,cp949 ]])
 
-vim.cmd([[ nnoremap <leader>p "+p ]])
-vim.cmd([[ vnoremap <leader>p "+p ]])
-vim.cmd([[ nnoremap <leader>P "+P ]])
-vim.cmd([[ vnoremap <leader>P "+P ]])
-vim.cmd([[ nnoremap <leader>y "+y ]])
-vim.cmd([[ vnoremap <leader>y "+y ]])
-vim.cmd([[ nnoremap <leader>Y "+y$ ]])
-
-
 require('dorage.lazy')
+require('dorage.configs')
