@@ -78,8 +78,9 @@ return {
 					tsserver = function ()
 						require('lspconfig').tsserver.setup({
 							root_dir = function()
-								return lsp_zero.dir.find_first({'pnpm-workspace.yaml', '.git', 'package.json'})
-							end
+								return lsp_zero.dir.find_first({'tsconfig.json', 'package.json'})
+							end,
+							single_file_support = true
 						})
 					end
         }
