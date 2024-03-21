@@ -1,4 +1,4 @@
-# dorage-dev
+#r dorage-dev
 
 
 ## applications
@@ -110,13 +110,6 @@
 | Alt + p | BufferPin |
 | Close buffer |
 | Alt + c | BufferClose |
-| Magic buffer-picking mode |
-| Ctrl + p | BufferPick |
-| Sort automatically by... |
-| Space + bb | BufferOrderByBufferNumber |
-| Space + bd | BufferOrderByDirectory |
-| Space + bl | BufferOrderByLanguage |
-| Space + bw | BufferOrderByWindowNumber |
 
 `completion`
 
