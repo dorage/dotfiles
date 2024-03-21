@@ -117,10 +117,8 @@
 |---|---|
 | Tab | cmp_action.luasnip_supertab() |
 | Shift + Tab | cmp_action.luasnip_shift_supertab() |
-| Ctrl + y | cmp.mapping.confirm({select = false}) |
-| Ctrl + e | cmp.mapping.abort() |
-| Up | cmp.mapping.select_prev_item({behavior = select}) |
-| Down | cmp.mapping.select_next_item({behavior = select}) |
+| Esc | cmp.mapping.abort() |
+| Esc | cmp.mapping.confirm({ select = true }), |
 
 `Telescope`
 
@@ -128,7 +126,8 @@
 |---|---|
 | \ + ff | builtin.find_files |
 | \ + fg | builtin.live_grep |
-| \ + fb | builtin.buffers |
+| \ + fbb | builtin.buffers |
+| \ + fbf | builtin.current_buffer_fuzzy_find |
 | \ + fh | builtin.help_tags |
 
 `Telekasten`
