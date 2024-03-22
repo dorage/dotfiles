@@ -1,42 +1,64 @@
 return {
-'nvimdev/dashboard-nvim',
-config = function()
-	local db = require('dashboard')
-	 db.setup({
-			theme = 'hyper',
+	"nvimdev/dashboard-nvim",
+	event = "VimEnter",
+	config = function()
+		local db = require("dashboard")
+
+		local header = {
+			"",
+			"",
+			"",
+			"",
+			"",
+			"88888888888888888888888888888888888888888888888888888888888888888888888",
+			"88.._|      | `-.  | `.  -_-_ _-_  _-  _- -_ -  .'|   |.'|     |  _..88",
+			"88   `-.._  |    |`!  |`.  -_ -__ -_ _- _-_-  .'  |.;'   |   _.!-'|  88",
+			"88      | `-!._  |  `;!  ;. _______________ ,'| .-' |   _!.i'     |  88",
+			"88..__  |     |`-!._ | `.| |_______________||.\"'|  _!.;'   |     _|..88",
+			"88   |``\"..__ |    |`\";.| i|_|MMMMMMMMMMM|_|'| _!-|   |   _|..-|'    88",
+			"88   |      |``--..|_ | `;!|l|MMoMMMMoMMM|1|.'j   |_..!-'|     |     88",
+			"88   |      |    |   |`-,!_|_|MMMMP'YMMMM|_||.!-;'  |    |     |     88",
+			"88___|______|____!.,.!,.!,!|d|MMMo * loMM|p|,!,.!.,.!..__|_____|_____88",
+			"88      |     |    |  |  | |_|MMMMb,dMMMM|_|| |   |   |    |      |  88",
+			"88      |     |    |..!-;'i|r|MPYMoMMMMoM|r| |`-..|   |    |      |  88",
+			"88      |    _!.-j'  | _!,\"|_|M<>MMMMoMMM|_||!._|  `i-!.._ |      |  88",
+			"88     _!.-'|    | _.\"|  !;|1|MbdMMoMMMMM|l|`.| `-._|    |``-.._  |  88",
+			"88..-i'     |  _.''|  !-| !|_|MMMoMMMMoMM|_|.|`-. | ``._ |     |``\"..88",
+			'88   |      |.|    |.|  !| |u|MoMMMMoMMMM|n||`. |`!   | `".    |     88',
+			"88   |  _.-'  |  .'  |.' |/|_|MMMMoMMMMoM|_|! |`!  `,.|    |-._|     88",
+			"88  _!\"'|     !.'|  .'| .'|[@]MMMMMMMMMMM[@] \\|  `. | `._  |   `-._  88",
+			"88-'    |   .'   |.|  |/| /                 \\|`.  |`!    |.|      |`-88",
+			"88      |_.'|   .' | .' |/                   \\  \\ |  `.  | `._-Lee|  88",
+			"88     .'   | .'   |/|  /                     \\ |`!   |`.|    `.  |  88",
+			"88  _.'     !'|   .' | /                       \\|  `  |  `.    |`.|  88",
+			"88 vanishing point 888888888888888888888888888888888888888888888(FL)888",
+			"",
+			"",
+			"",
+			"",
+			"",
+		}
+
+		db.setup({
+			theme = "hyper",
 			config = {
-				week_header = {
-				 enable = true,
-				},
+				header = header,
 				shortcut = {
-					{ 
-						desc = '󰊳 Update',
-						group = '@property',
-						action = 'Lazy update',
-						key = 'u',
-					},
+					{ desc = "💫 Update", group = "@property", action = "Lazy update", key = "u" },
 					{
-						icon = ' ',
-						icon_hl = '@variable',
-						desc = 'Files',
-						group = 'Label',
-						action = 'Telescope find_files',
-						key = 'f',
+						icon = "📑 ",
+						icon_hl = "@variable",
+						desc = "Files",
+						group = "Label",
+						action = "Telescope find_files",
+						key = "f",
 					},
-					{
-						desc = ' Apps',
-						group = 'DiagnosticHint',
-						action = 'Telescope app',
-						key = 'a',
-					},
-					{
-						desc = ' dotfiles',
-						group = 'Number',
-						action = 'Telescope dotfiles',
-						key = 'd',
-					},
+				},
+				projects = {
+					enable = true,
+					limit = 8,
 				},
 			},
 		})
-end
+	end,
 }
