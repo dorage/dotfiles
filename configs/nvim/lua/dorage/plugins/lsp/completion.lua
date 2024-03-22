@@ -18,9 +18,9 @@ return {
 			{ "hrsh7th/cmp-buffer" },
 			{ "hrsh7th/cmp-path" },
 			{ "hrsh7th/cmp-cmdline" },
-			{ "l3mon4d3/luasnip" }, -- snippet
+			{ "l3mon4d3/luasnip" },      -- snippet
 			{ "saadparwaiz1/cmp_luasnip" }, -- snippet
-			{ "onsails/lspkind.nvim" }, -- vscode style compeletion
+			{ "onsails/lspkind.nvim" },  -- vscode style compeletion
 			{ "Exafunction/codeium.nvim" }, -- ai autocompletion
 		},
 		config = function()
@@ -50,15 +50,33 @@ return {
 				},
 				mapping = cmp.mapping.preset.insert({
 					-- Enable "Super Tab"
-					["<Tab>"] = cmp_action.luasnip_supertab(),
-					["<S-Tab>"] = cmp_action.luasnip_shift_supertab(),
+					-- ["<Tab>"] = cmp_action.luasnip_supertab(),
+					-- ["<S-Tab>"] = cmp_action.luasnip_shift_supertab(),
+					["<Tab>"] = cmp.mapping(function(fallback)
+						if luasnip.expand_or_jumpable() then
+							luasnip.expand_or_jump()
+						elseif cmp.visible() then
+							cmp.select_next_item()
+						else
+							fallback()
+						end
+					end, { "i", "s" }),
+					["<S-Tab>"] = cmp.mapping(function()
+						if luasnip.jumpable(-1) then
+							luasnip.jump(-1)
+						elseif cmp.visible() then
+							cmp.select_prev_item()
+						else
+							fallback()
+						end
+					end, { "i", "s" }),
 
 					-- ["<C-y>"] = cmp.mapping.confirm({ select = false }),
 					-- ["<C-e>"] = cmp.mapping.abort(),
 					-- ['<Up>'] = cmp.mapping.select_prev_item({behavior = 'select'}),
 					-- ['<Down>'] = cmp.mapping.select_next_item({behavior = 'select'}),
 					["<CR>"] = cmp.mapping.confirm({ select = true }),
-					["<Esc>"] = cmp.mapping.abort(),
+					-- ["<Esc>"] = cmp.mapping.abort(),
 				}),
 				window = {
 					completion = cmp.config.window.bordered(winhighlight),
