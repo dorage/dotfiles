@@ -69,6 +69,17 @@
 | [d | Move to the previous diagnostic in the current buffer. |
 | ]d | Move to the next diagnostic. |
 
+`typescript-tools`
+
+| Keycode | Description |
+| --- | --- |
+| gd | <cmd>TSToolsGoToSourceDefinition<cr> |
+| \ + tr | <cmd>TSToolsRenameFile<cr> |
+| \ + toa | <cmd>TSToolsOrganizeImports<cr> |
+| \ + tos | <cmd>TSToolsSortImports<cr> |
+| \ + tod | <cmd>TSToolsRemoveUnusedImports<cr> |
+| \ + tf | <cmd>TSToolsFileReferences<cr> |
+
 `treesitter - incremental selection`
 
 | Keycode | Description |
@@ -129,6 +140,8 @@
 | \ + fbb | builtin.buffers |
 | \ + fbf | builtin.current_buffer_fuzzy_find |
 | \ + fh | builtin.help_tags |
+| \ + fld | builtin.lsp_defintions |
+| \ + flr | builtin.lsp_references |
 
 `Telekasten`
 
