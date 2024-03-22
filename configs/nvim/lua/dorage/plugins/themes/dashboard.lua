@@ -53,5 +53,7 @@ return {
 				},
 			},
 		})
+
+		vim.keymap.set("n", "<leader>ad", "<Cmd>Dashboard<CR>")
 	end,
 }
