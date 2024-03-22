@@ -72,8 +72,8 @@ return {
 				}),
 			})
 
-			require("dorage.plugins.snippets.all")
-			require("dorage.plugins.snippets.tsserver")
+			require("dorage.plugins.snippets.ftypes.all")
+			require("dorage.plugins.snippets.ftypes.tsserver")
 
 			vim.keymap.set({ "i", "s" }, "<leader>;", "<Plug>luasnip-next-choice", {})
 			vim.keymap.set({ "i", "s" }, "<leader>,", "<Plug>luasnip-prev-choice", {})

@@ -26,8 +26,33 @@ local parse = require("luasnip.util.parser").parse_snippet
 local ms = ls.multi_snippet
 local k = require("luasnip.nodes.key_indexer").new_key
 
-ls.add_snippets("typescriptreact", {
-	s("vl", { t("let "), i(1, "id"), t(" = "), i(2, "value"), t(";") }),
-	s("vc", { t("const "), i(1, "id"), t(" = "), i(2, "value"), t(";") }),
-	s("fe", { t("( "), i(1), t(" ) => {"), i(2), t("}") }),
-})
+local identifier = "identifier"
+
+local es6 = {
+	-- export
+	s("jse", { t("export "), i(1, "value") }),
+	-- export default
+	s("jsed", { t("export default "), i(1, "value") }),
+	-- let variable
+	s("jsvl", { t("let "), i(1, "name"), t(" = "), i(2, "value"), t(";") }),
+	-- const variable
+	s("jsvc", { t("const "), i(1, "name"), t(" = "), i(2, "value"), t(";") }),
+	-- arrow function
+	s("jsfa", { t("( "), i(1, "name"), t(" ) => {"), i(2, "body"), t("}") }),
+	-- normal function
+	s("jsfs", { t("function "), i(1, "name"), t("( "), i(1, "name"), t(" ) => {"), i(2), t("}") }),
+	-- try-catch statement
+	s("jsst", { t("try {"), i(1), t("} catch(err){"), i(2), t("}") }),
+	-- if statement
+	s("jsif", { t() }),
+	-- switch statement
+	-- case statement
+	-- default statement
+	-- for..idx statement
+	-- for..of statement
+	-- console.log
+	-- console.error
+	-- console.debug
+}
+
+ls.add_snippets("typescriptreact", es6)
