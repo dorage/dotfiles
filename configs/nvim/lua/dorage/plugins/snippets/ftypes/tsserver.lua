@@ -42,17 +42,47 @@ local es6 = {
 	-- normal function
 	s("jsfs", { t("function "), i(1, "name"), t("( "), i(1, "name"), t(" ) => {"), i(2), t("}") }),
 	-- try-catch statement
-	s("jsst", { t("try {"), i(1), t("} catch(err){"), i(2), t("}") }),
-	-- if statement
-	s("jsif", { t() }),
-	-- switch statement
-	-- case statement
+	s("jsty", { t("try {"), i(1), t("} catch(err){"), i(2), t("}") }),
 	-- default statement
-	-- for..idx statement
-	-- for..of statement
-	-- console.log
-	-- console.error
-	-- console.debug
+	s("jstyd", { t("try {"), i(1), t("} catch(err){"), i(2), t("}") }),
+	-- if statement
+	s("jsif", { t("if ("), i(1, "cond"), t(") {"), i(2, "body"), t("}") }),
+	-- else if statement
+	s("jsifef", { t("else if ("), i(1, "cond"), t(") {"), i(2, "body"), t("}") }),
+	-- else statement
+	s("jsifel", { t("else {"), i(1, "body"), t("}") }),
+	-- switch statement
+	s("jssw", { t("switch ("), i(1, "var"), t(") {"), i(2, "body"), t("}") }),
+	-- case statement
+	s("jsswc", { t("case "), i(1, "valut"), t(" :"), i(2, "body") }),
+	-- default statement
+	s("jsswd", { t("default :"), i(2, "body") }),
+	-- break statement
+	s("jsbr", { t("break;") }),
+	-- continue statement
+	s("jscn", { t("continue;") }),
+	-- -- for..idx statement
+	-- s("jsfr", { t("for(let"), i(2, "body") }),
+	-- -- for..of statement
+	-- s("jsfo", { t("for(const "), i(1, "body") }),
+	-- -- forEach ff
+	-- s("jsfo", { t("default :"), i(2, "body") }),
+	-- -- map ff
+	-- s("jsfo", { t("default :"), i(2, "body") }),
+	-- -- filter ff
+	-- s("jsfo", { t("default :"), i(2, "body") }),
+	-- -- every ff
+	-- s("jsfo", { t("default :"), i(2, "body") }),
+	-- -- some ff
+	-- s("jsfo", { t("default :"), i(2, "body") }),
+	-- -- reduce ff
+	-- s("jsfo", { t("default :"), i(2, "body") }),
+	-- -- console.log
+	-- -- console.error
+	-- -- console.debug
 }
 
+ls.add_snippets("javascript", es6)
+ls.add_snippets("javascriptreact", es6)
+ls.add_snippets("typescript", es6)
 ls.add_snippets("typescriptreact", es6)
