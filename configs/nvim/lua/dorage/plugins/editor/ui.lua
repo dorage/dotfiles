@@ -103,14 +103,18 @@ return {
 			vim.keymap.set("n", "<leader>ag", "<Cmd>:FloatermNew lazygit<CR>")
 		end,
 	},
+	{ "nvim-telescope/telescope-ui-select.nvim" },
 	-- fuzzy finder
 	{
 		"nvim-telescope/telescope.nvim",
+		dependencies = {
+			"nvim-telescope/telescope-ui-select.nvim",
+		},
 		config = function()
 			-- telescope setup
-			local telescope = require("telescope")
-			telescope.setup({
+			require("telescope").setup({
 				defaults = {
+					theme = "cursor",
 					file_ignore_patterns = {
 						"node_modules",
 						"build",
@@ -122,6 +126,11 @@ return {
 				pickers = {
 					find_files = {
 						hidden = true,
+					},
+				},
+				extensios = {
+					["ui-select"] = {
+						require("telescope.themes").get_dropdown({}),
 					},
 				},
 			})
@@ -139,6 +148,9 @@ return {
 			vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "help tags" })
 			vim.keymap.set("n", "<leader>fld", builtin.lsp_definitions, { desc = "lsp definitions" })
 			vim.keymap.set("n", "<leader>flr", builtin.lsp_references, { desc = "lsp references" })
+
+			-- load extension
+			require("telescope").load_extension("ui-select")
 		end,
 	},
 	-- markdown
