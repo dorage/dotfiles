@@ -75,13 +75,20 @@ return {
 			require("dorage.plugins.snippets.ftypes.all")
 			require("dorage.plugins.snippets.ftypes.tsserver")
 
-			vim.keymap.set(
-				{ "i", "s" },
-				"<leader>l,",
-				"<Plug>luasnip-prev-choice",
-				{ desc = "Previous luasnip choice" }
-			)
-			vim.keymap.set({ "i", "s" }, "<leader>l.", "<Plug>luasnip-next-choice", { desc = "Next luasnip choice" })
+			vim.keymap.set({ "i", "s" }, "<leader>p", function()
+				if ls.choice_active() then
+					ls.change_choice(-1)
+				else
+					print("No choice active")
+				end
+			end, { desc = "Previous luasnip choice" })
+			vim.keymap.set({ "i", "s" }, "<leader>n", function()
+				if ls.choice_active() then
+					ls.change_choice(1)
+				else
+					print("No choice active")
+				end
+			end, { desc = "Next luasnip choice" })
 			vim.keymap.set(
 				{ "n", "i", "s" },
 				"<leader>fc",

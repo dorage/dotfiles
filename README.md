@@ -39,6 +39,13 @@
 | \y    | "+y - copy to clipboard   |
 | \p    | "+p - paste from clipboard    |
 
+`luasnip`
+
+| Keycode | Description |
+| --- | --- |
+| \ + n | choice next |
+| \ + p | choice prev |
+| \ + fc | luasnip.select_choice |
 
 `lsp-zero`
 
