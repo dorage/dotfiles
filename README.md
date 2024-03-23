@@ -142,6 +142,8 @@
 | \ + fh | builtin.help_tags |
 | \ + fld | builtin.lsp_defintions |
 | \ + flr | builtin.lsp_references |
+| \ + fk | builtin.keymaps |
+| \ + fc | luasnip.select_choice |
 
 `Telekasten`
 

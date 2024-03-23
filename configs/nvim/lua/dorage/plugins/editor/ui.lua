@@ -130,7 +130,7 @@ return {
 				},
 				extensios = {
 					["ui-select"] = {
-						require("telescope.themes").get_dropdown({}),
+						-- require("telescope.themes").get_dropdown({}),
 					},
 				},
 			})
@@ -148,6 +148,7 @@ return {
 			vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "help tags" })
 			vim.keymap.set("n", "<leader>fld", builtin.lsp_definitions, { desc = "lsp definitions" })
 			vim.keymap.set("n", "<leader>flr", builtin.lsp_references, { desc = "lsp references" })
+			vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "keymaps" })
 
 			-- load extension
 			require("telescope").load_extension("ui-select")

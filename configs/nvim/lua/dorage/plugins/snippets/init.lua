@@ -38,7 +38,7 @@ return {
 				enable_autosnippets = true,
 			})
 
-			ls.add_snippets("all", {
+			ls.add_snippets("lua", {
 				s("luasnip-import", {
 					t({
 						'local ls = require("luasnip")',
@@ -75,16 +75,26 @@ return {
 			require("dorage.plugins.snippets.ftypes.all")
 			require("dorage.plugins.snippets.ftypes.tsserver")
 
-			vim.keymap.set({ "i", "s" }, "<leader>;", "<Plug>luasnip-next-choice", {})
-			vim.keymap.set({ "i", "s" }, "<leader>,", "<Plug>luasnip-prev-choice", {})
-			vim.keymap.set({ "i", "s" }, "<C-k>", function()
-				if ls.expand_or_jumpable() then
-					ls.expand_or_jump()
-				end
-			end, { silent = true })
-			vim.keymap.set("n", "<leader>as", function()
-				require("luasnip.loaders").edit_snippet_files()
-			end, { desc = "Snippet search" })
+			vim.keymap.set(
+				{ "i", "s" },
+				"<leader>l,",
+				"<Plug>luasnip-prev-choice",
+				{ desc = "Previous luasnip choice" }
+			)
+			vim.keymap.set({ "i", "s" }, "<leader>l.", "<Plug>luasnip-next-choice", { desc = "Next luasnip choice" })
+			vim.keymap.set(
+				{ "n", "i", "s" },
+				"<leader>fc",
+				function()
+					if ls.choice_active() then
+						require("luasnip.extras.select_choice")()
+					else
+						print("No choice active")
+					end
+				end,
+				-- "<cmd>lua require('luasnip.extras.select_choice')()<cr>",
+				{ desc = "luasnip choice" }
+			)
 		end,
 	},
 }
