@@ -39,17 +39,6 @@
 | \y    | "+y - copy to clipboard   |
 | \p    | "+p - paste from clipboard    |
 
-`vim-visual-multi`
-
-| Keycode | Description |
-| --- | --- |
-| Ctrl + n    | select words (Ctrl + d in VSCode)    |
-| Ctrl + up-arrow/down-arrow    | create cursor vertically | 
-| n / N    | get next/previous occurrence |
-| \[ / \]    | select next/previous cursor |
-| q    | skup current and get next occurrence |
-| Q    | remove current cursor/selection |
-| i, a, I, A | start insert mode |
 
 `lsp-zero`
 
