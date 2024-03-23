@@ -1,5 +1,5 @@
 return {
-	{ "folke/neodev.nvim", opts = {}, config = true },
+	{ "folke/neodev.nvim", opts = {} },
 	-- LSP config helper
 	{
 		"VonHeikemen/lsp-zero.nvim",
@@ -27,6 +27,7 @@ return {
 		cmd = { "LspInfo", "LspInstall", "LspStart" },
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
+			{ "folke/neodev.nvim" },
 			{ "hrsh7th/cmp-nvim-lsp" },
 			{ "williamboman/mason-lspconfig.nvim" },
 		},
