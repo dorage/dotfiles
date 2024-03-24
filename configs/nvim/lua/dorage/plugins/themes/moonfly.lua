@@ -1,24 +1,25 @@
 return {
-		'bluz71/vim-moonfly-colors', -- color scheme
+	{
+		"tribela/vim-transparent", -- remove background color on vim
+	},
+	{
+		"norcalli/nvim-colorizer.lua", -- high-performance color highlighter
+	},
+	{
+		"bluz71/vim-moonfly-colors", -- color scheme
 		name = "moonfly",
 		dependencies = {
-			'tribela/vim-transparent', -- remove background color on vim 
-			'norcalli/nvim-colorizer.lua', -- high-performance color highlighter
-			'https://github.com/itchyny/lightline.vim', -- status line
+			"tribela/vim-transparent", -- remove background color on vim
+			"norcalli/nvim-colorizer.lua", -- high-performance color highlighter
 		},
 		lazy = false,
 		priority = 100,
-		config = function ()
-			vim.opt.termguicolors = true
-
+		config = function()
 			-- setup moonfly
 			vim.cmd([[colorscheme moonfly]])
 
 			-- setup transparent bg
-			vim.call('background#enable')
-
-			-- setup lightline
-			vim.cmd([[let g:lightline = {'colorscheme': 'moonfly'}]])
+			vim.call("background#enable")
 
 			-- config moonfly theme
 			vim.g.moonflyCursorColor = true
@@ -30,7 +31,15 @@ return {
 			vim.g.moonflyUnderlineMatchParen = true
 			vim.g.moonflyVirtualTextColor = true
 			vim.g.moonflyWinSeparator = 2
-			vim.opt.fillchars = { horiz = '━', horizup = '┻', horizdown = '┳', vert = '┃', vertleft = '┫', vertright = '┣', verthoriz = '╋', }
+			vim.opt.fillchars = {
+				horiz = "━",
+				horizup = "┻",
+				horizdown = "┳",
+				vert = "┃",
+				vertleft = "┫",
+				vertright = "┣",
+				verthoriz = "╋",
+			}
 
 			-- local custom_highlight = vim.api.nvim_create_augroup("CustomHighlight", {})
 			-- vim.api.nvim_create_autocmd("ColorScheme", {
@@ -52,6 +61,7 @@ return {
 			-- vim.cmd([[hi CursorColumn guifg=#E3FCBF]])
 			--
 			-- setup color highlighter
-			require('colorizer').setup()
-		end
+			require("colorizer").setup()
+		end,
+	},
 }
