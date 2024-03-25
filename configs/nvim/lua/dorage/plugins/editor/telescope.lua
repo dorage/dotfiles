@@ -28,26 +28,32 @@ return {
 					["ui-select"] = {
 						-- require("telescope.themes").get_dropdown({}),
 					},
+					file_browser = {
+						hijack_netrw = true,
+					},
 				},
 			})
+
+			-- load extension
+			require("telescope").load_extension("ui-select")
+			require("telescope").load_extension("file_browser")
 
 			local builtin = require("telescope.builtin")
 			vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "find files" })
 			vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "live grep" })
-			vim.keymap.set("n", "<leader>fbb", builtin.buffers, { desc = "buffers" })
+			vim.keymap.set("n", "<leader>fw", builtin.buffers, { desc = "buffers" })
+			vim.keymap.set("n", "<leader>fe", builtin.current_buffer_fuzzy_find, { desc = "current buffer fuzzy find" })
+			vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "help tags" })
+			vim.keymap.set("n", "<leader>fl", builtin.lsp_definitions, { desc = "lsp definitions" })
+			vim.keymap.set("n", "<leader>fr", builtin.lsp_references, { desc = "lsp references" })
+			vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "keymaps" })
+			vim.keymap.set("n", "<leader>fb", "<Cmd>Telescope file_browser<CR>", { desc = "file browser" })
 			vim.keymap.set(
 				"n",
-				"<leader>fbf",
-				builtin.current_buffer_fuzzy_find,
-				{ desc = "current buffer fuzzy find" }
+				"<leader>fv",
+				"<Cmd>Telescope file_browser path=%:p:h select_buffer=true<CR>",
+				{ desc = "file browser" }
 			)
-			vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "help tags" })
-			vim.keymap.set("n", "<leader>fld", builtin.lsp_definitions, { desc = "lsp definitions" })
-			vim.keymap.set("n", "<leader>flr", builtin.lsp_references, { desc = "lsp references" })
-			vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "keymaps" })
-
-			-- load extension
-			require("telescope").load_extension("ui-select")
 		end,
 	},
 	-- markdown
@@ -70,5 +76,9 @@ return {
 			vim.keymap.set("n", "<leader>zb", "<cmd>Telekasten show_backlinks<CR>")
 			vim.keymap.set("n", "<leader>zl", "<cmd>Telekasten insert_link<CR>")
 		end,
+	},
+	{
+		"nvim-telescope/telescope-file-browser.nvim",
+		dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
 	},
 }
