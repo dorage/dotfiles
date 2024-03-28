@@ -25,9 +25,10 @@ local types = require("luasnip.util.types")
 local parse = require("luasnip.util.parser").parse_snippet
 local ms = ls.multi_snippet
 local k = require("luasnip.nodes.key_indexer").new_key
+local fmtopt = { delimiters = "<>" }
 
 ls.add_snippets("all", {
-	s("ternary", {
+	s({ name = "ternary", trig = "ter" }, {
 		-- equivalent to "${1:cond} ? ${2:then} : ${3:else}"
 		i(1, "cond"),
 		t(" ? "),

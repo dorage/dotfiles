@@ -28,10 +28,42 @@ local k = require("luasnip.nodes.key_indexer").new_key
 local fmtopt = { delimiters = "<>" }
 
 local es6 = {
+	-- async
+	s({ name = "async statement", trig = "as" }, { t("async") }),
+	-- await
+	s({ name = "await statement", trig = "aw" }, { t("await") }),
+	-- import
+	s(
+		{ name = "import statement", trig = "im" },
+		fmt(
+			[[
+	import <> from '<>';
+	]],
+			{
+				c(2, {
+					fmt(
+						[[
+					{<>}
+					]],
+						{ i(1) },
+						fmtopt
+					),
+				}),
+				i(1),
+			},
+			fmtopt
+		)
+	),
 	-- export
 	s(
-		{ name = "export statement", trig = "export" },
-		{ c(1, { sn(1, { t("export "), i(1) }), sn(1, { t("export default "), i(1) }) }) }
+		{ name = "export statement", trig = "ex" },
+		fmt(
+			[[
+	<> <>
+	]],
+			{ c(1, { t("export"), t("export default") }), i(2) },
+			fmtopt
+		)
 	),
 	-- variable
 	s(
@@ -60,11 +92,23 @@ local es6 = {
 		},
 		fmt(
 			[[
-	(<>) =>> {
-		<>
-	}
+	(<>) =>> <>
 	]],
-			{ i(1), i(2) },
+			{
+				i(1),
+				c(2, {
+					fmt(
+						[[
+				{
+					<>
+				}
+				]],
+						{ i(1) },
+						fmtopt
+					),
+					i(1),
+				}),
+			},
 			fmtopt
 		)
 	),
@@ -104,7 +148,7 @@ local es6 = {
 	),
 	-- default statement
 	s(
-		{ name = "default statement", trig = "default" },
+		{ name = "try-default statement", trig = "tryd" },
 		fmt(
 			[[
 	default {
@@ -132,7 +176,7 @@ local es6 = {
 	s(
 		{
 			name = "else if statement",
-			trig = "elif",
+			trig = "ifi",
 		},
 		fmt(
 			[[
@@ -146,7 +190,7 @@ local es6 = {
 	),
 	-- else statement
 	s(
-		{ name = "else statement", trig = "else" },
+		{ name = "else statement", trig = "ife" },
 		fmt(
 			[[
 	else {
@@ -159,7 +203,7 @@ local es6 = {
 	),
 	-- switch statement
 	s(
-		{ name = "switch statement", trig = "switch" },
+		{ name = "switch statement", trig = "sw" },
 		fmt(
 			[[
 	switch(<>) {
@@ -177,7 +221,7 @@ local es6 = {
 	),
 	-- case statement
 	s(
-		{ name = "case statement", trig = "case" },
+		{ name = "switch-case statement", trig = "swc" },
 		fmt(
 			[[
 	case <>:
@@ -197,7 +241,7 @@ local es6 = {
 	),
 	-- default statement
 	s(
-		{ name = "default statement", trig = "default" },
+		{ name = "switch-default statement", trig = "swd" },
 		fmt(
 			[[
 	default:
@@ -208,9 +252,9 @@ local es6 = {
 		)
 	),
 	-- break statement
-	s({ name = "break statement", trig = "break" }, { t("break;") }),
+	s({ name = "break statement", trig = "br" }, { t("break;") }),
 	-- continue statement
-	s({ name = "continue statement", trig = "continue" }, { t("continue;") }),
+	s({ name = "continue statement", trig = "cn" }, { t("continue;") }),
 	-- -- for..idx statement
 	-- postfix(
 	-- 	".for",
