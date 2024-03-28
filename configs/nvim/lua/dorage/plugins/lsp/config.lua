@@ -85,49 +85,49 @@ return {
 							},
 						})
 					end,
-					-- tsserver = function()
-					-- 	require("lspconfig").tsserver.setup({
-					-- 		single_file_support = true,
-					-- 		on_attach = function(client, bufnr)
-					-- 			vim.keymap.set(
-					-- 				"n",
-					-- 				"gd",
-					-- 				"<cmd>TSToolsGoToSourceDefinition<cr>",
-					-- 				{ buffer = bufnr, desc = "TS Go to source definition" }
-					-- 			)
-					-- 			vim.keymap.set(
-					-- 				"n",
-					-- 				"<leader>tr",
-					-- 				"<cmd>TSToolsRenameFile<cr>",
-					-- 				{ buffer = bufnr, desc = "TS Rename file" }
-					-- 			)
-					-- 			vim.keymap.set(
-					-- 				"n",
-					-- 				"<leader>toa",
-					-- 				"<cmd>TSToolsOrganizeImports<cr>",
-					-- 				{ buffer = bufnr, desc = "TS Sort and Remove unused imports" }
-					-- 			)
-					-- 			vim.keymap.set(
-					-- 				"n",
-					-- 				"<leader>tos",
-					-- 				"<cmd>TSToolsSortImports<cr>",
-					-- 				{ buffer = bufnr, desc = "TS Sort imports" }
-					-- 			)
-					-- 			vim.keymap.set(
-					-- 				"n",
-					-- 				"<leader>tod",
-					-- 				"<cmd>TSToolsRemoveUnusedImports<cr>",
-					-- 				{ buffer = bufnr, desc = "TS Remove unused imports" }
-					-- 			)
-					-- 			vim.keymap.set(
-					-- 				"n",
-					-- 				"<leader>tf",
-					-- 				"<cmd>TSToolsFileReferences<cr>",
-					-- 				{ buffer = bufnr, desc = "TS Remove unused imports" }
-					-- 			)
-					-- 		end,
-					-- 	})
-					-- end,
+					tsserver = function()
+						require("lspconfig").tsserver.setup({
+							single_file_support = true,
+							on_attach = function(client, bufnr)
+								vim.keymap.set(
+									"n",
+									"gd",
+									"<cmd>TSToolsGoToSourceDefinition<cr>",
+									{ buffer = bufnr, desc = "TS Go to source definition" }
+								)
+								vim.keymap.set(
+									"n",
+									"<leader>tr",
+									"<cmd>TSToolsRenameFile<cr>",
+									{ buffer = bufnr, desc = "TS Rename file" }
+								)
+								vim.keymap.set(
+									"n",
+									"<leader>toa",
+									"<cmd>TSToolsOrganizeImports<cr>",
+									{ buffer = bufnr, desc = "TS Sort and Remove unused imports" }
+								)
+								vim.keymap.set(
+									"n",
+									"<leader>tos",
+									"<cmd>TSToolsSortImports<cr>",
+									{ buffer = bufnr, desc = "TS Sort imports" }
+								)
+								vim.keymap.set(
+									"n",
+									"<leader>tod",
+									"<cmd>TSToolsRemoveUnusedImports<cr>",
+									{ buffer = bufnr, desc = "TS Remove unused imports" }
+								)
+								vim.keymap.set(
+									"n",
+									"<leader>tf",
+									"<cmd>TSToolsFileReferences<cr>",
+									{ buffer = bufnr, desc = "TS Remove unused imports" }
+								)
+							end,
+						})
+					end,
 				},
 			})
 		end,
