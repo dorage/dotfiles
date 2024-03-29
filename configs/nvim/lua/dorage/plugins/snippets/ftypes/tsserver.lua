@@ -28,10 +28,25 @@ local k = require("luasnip.nodes.key_indexer").new_key
 local fmtopt = { delimiters = "<>" }
 
 local es6 = {
+	s(
+		{ name = "return ~", trig = "re" },
+		fmt(
+			[[
+	return <>;
+	]],
+			{
+				d(1, function()
+					local reg = string.gsub(vim.fn.getreg(0), "[\n\r]", "")
+					return sn(nil, { i(1, reg) })
+				end),
+			},
+			fmtopt
+		)
+	),
 	-- async
-	s({ name = "async statement", trig = "as" }, { t("async") }),
+	s({ name = "async ~", trig = "as" }, { t("async") }),
 	-- await
-	s({ name = "await statement", trig = "aw" }, { t("await") }),
+	s({ name = "await ~", trig = "aw" }, { t("await") }),
 	-- import
 	s(
 		{ name = "import statement", trig = "im" },
