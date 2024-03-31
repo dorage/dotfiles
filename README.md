@@ -1,5 +1,4 @@
-#r dorage-dev
-
+# dorage-dev
 
 ## applications
  
@@ -15,11 +14,15 @@
 ```
 
 .
-+-- .config
-|   +-- nvim
++-- config
 |   +-- alacritty
 |   +-- karabiner 
+|   +-- nvim
+|   +-- ranger
 |   +-- zellij
++-- deps
+|   +-- Brewfile
++-- keyboards
 +-- .hammerspoon
 +-- .zshrc
 
