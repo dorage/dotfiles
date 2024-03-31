@@ -2,6 +2,7 @@
   "name": "dev-env",
   "scripts": {
 		"mv:nvim": "rsync -avh --delete configs/nvim/ ~/.config/nvim",
+		"mv:ranger": "rsync -avh --delete configs/ranger/ ~/.config/ranger",
 		"mv:alacritty": "rsync -avh --delete configs/alacritty/ ~/.config/alacritty",
 		"mv:hammerspoon": "rsync -avh --delete .hammerspoon/ ~/.hammerspoon",
 		"mv:zshrc": "rsync -avh --delete .zshrc ~/.zshrc",
