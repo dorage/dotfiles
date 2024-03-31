@@ -3,3 +3,10 @@
 # Added by cargo
 
 /target
+
+# lua
+
+/luarocks
+/lua
+/lua_modules
+/.luarocks
