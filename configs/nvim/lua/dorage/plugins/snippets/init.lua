@@ -68,12 +68,14 @@ return {
 						'local parse = require("luasnip.util.parser").parse_snippet',
 						"local ms = ls.multi_snippet",
 						'local k = require("luasnip.nodes.key_indexer").new_key',
+						'local fmtopt = { delimiters = "<>" }',
 					}),
 				}),
 			})
 
 			require("dorage.plugins.snippets.ftypes.all")
 			require("dorage.plugins.snippets.ftypes.tsserver")
+			require("dorage.plugins.snippets.ftypes.markdown")
 
 			vim.keymap.set({ "i", "s" }, "<leader>p", function()
 				if ls.choice_active() then
