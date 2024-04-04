@@ -121,6 +121,8 @@ local markdown = {
 	),
 	-- horizontal rule
 	s({ name = "horizontal rule", trig = "hr" }, { t("---") }),
+	-- break a line
+	s({ name = "break a line", trig = "br" }, { t("<br/>") }),
 	-- links
 	postfix(
 		{ name = "link postfix", trig = ".ln", match_pattern = "[^ ]+$" },

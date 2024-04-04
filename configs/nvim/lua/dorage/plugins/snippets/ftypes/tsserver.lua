@@ -28,6 +28,12 @@ local k = require("luasnip.nodes.key_indexer").new_key
 local fmtopt = { delimiters = "<>" }
 
 local es6 = {
+	-- javascript types
+	s({ name = "string type", trig = "str" }, { t("string") }),
+	s({ name = "number type", trig = "num" }, { t("number") }),
+	s({ name = "boolean type", trig = "boo" }, { t("boolean") }),
+	s({ name = "object type", trig = "obj" }, { t("object") }),
+	-- return statement
 	s(
 		{ name = "return ~", trig = "re" },
 		fmt(
@@ -310,25 +316,34 @@ local es6 = {
 			fmtopt
 		)
 	),
-	-- forEach ff
-	postfix(".forEach", fmt([[.forEach((<>)=>>{<>})]], { c(1, { t("e"), t("e, i"), t("e, i, arr") }), i(2) }, fmtopt)),
-	-- map ff
-	postfix(".map", fmt([[.map((<>)=>>{return <>})]], { c(1, { t("e"), t("e, i"), t("e, i, arr") }), i(2) }, fmtopt)),
-	-- filter ff
+	-- forEach highorder function
 	postfix(
-		".filter",
-		fmt([[.filter((<>)=>>{return <>})]], { c(1, { t("e"), t("e, i"), t("e, i, arr") }), i(2) }, fmtopt)
+		{ name = ".forEach", trig = ".hfe" },
+		fmt([[.forEach((<>)=>>{<>})]], { c(1, { t("e"), t("e, i"), t("e, i, arr") }), i(2) }, fmtopt)
 	),
-	-- every ff
+	-- map highorder function
 	postfix(
-		".every",
-		fmt([[.every((<>)=>>{return <>})]], { c(1, { t("e"), t("e, i"), t("e, i, arr") }), i(2) }, fmtopt)
+		{ name = ".map", trig = ".hma" },
+		fmt([[.map((<>)=>>{return <>})]], { c(1, { t("e"), t("e, i"), t("e, i, arr") }), i(2) }, fmtopt)
 	),
-	-- some ff
-	postfix(".some", fmt([[.some((<>)=>>{return <>})]], { c(1, { t("e"), t("e, i"), t("e, i, arr") }), i(2) }, fmtopt)),
-	-- reduce ff
+	-- filter highorder function
 	postfix(
-		".reduce",
+		{ name = ".filter", trig = ".hfi" },
+		fmt([[.hfi((<>)=>>{return <>})]], { c(1, { t("e"), t("e, i"), t("e, i, arr") }), i(2) }, fmtopt)
+	),
+	-- every highorder function
+	postfix(
+		{ name = ".every", trig = ".hev" },
+		fmt([[.hev((<>)=>>{return <>})]], { c(1, { t("e"), t("e, i"), t("e, i, arr") }), i(2) }, fmtopt)
+	),
+	-- some highorder function
+	postfix(
+		{ name = ".some", trig = ".hso" },
+		fmt([[.some((<>)=>>{return <>})]], { c(1, { t("e"), t("e, i"), t("e, i, arr") }), i(2) }, fmtopt)
+	),
+	-- reduce highorder function
+	postfix(
+		{ name = ".reduce", trig = ".hre" },
 		fmt(
 			[[.reduce((<>)=>>{return <>}, <>)]],
 			{ c(3, { t("a, c"), t("a, c, i"), t("a, c, i, arr") }), i(2), i(1) },
@@ -336,7 +351,38 @@ local es6 = {
 		)
 	),
 	-- sort
-	postfix(".sort", fmt(".sort((a, b)=>>{return <>})", { i(1) }, fmtopt)),
+	postfix({ name = ".sort", trig = ".hso" }, fmt(".sort((a, b)=>>{return <>})", { i(1) }, fmtopt)),
+	-- JSON
+	s(
+		{ name = "JSON.stringify", trig = "fjss" },
+		fmt(
+			[[
+	JSON.stringify(<>)
+	]],
+			{
+				d(1, function()
+					local reg = string.gsub(vim.fn.getreg(0), "[\n\r]", "")
+					return sn(nil, { i(1, reg) })
+				end),
+			},
+			fmtopt
+		)
+	),
+	s(
+		{ name = "JSON.parse", trig = "fjsp" },
+		fmt(
+			[[
+	JSON.parse(<>)
+	]],
+			{
+				d(1, function()
+					local reg = string.gsub(vim.fn.getreg(0), "[\n\r]", "")
+					return sn(nil, { i(1, reg) })
+				end),
+			},
+			fmtopt
+		)
+	),
 	-- console.log
 	s(
 		{ name = "console.log", trig = "log" },
@@ -387,13 +433,46 @@ local es6 = {
 	),
 }
 
+local typescript = {
+	-- extends
+	s({ name = "typescript extends", trig = "ext" }, { t(" extends "), i(1) }),
+	-- interface
+	s(
+		{ name = "typescript interface", trig = "int" },
+		fmt(
+			[[
+		interface <><>{
+			<>
+		}
+		]],
+			{
+				i(1, "Name"),
+				c(2, { t(""), sn(1, { t(" extends "), i(1, "Parent") }) }),
+				i(2),
+			},
+			fmtopt
+		)
+	),
+	-- type
+	s(
+		{ name = "typescript type", trig = "typ" },
+		fmt(
+			[[
+			type <> = <>
+			]],
+			{ i(1, "Name"), i(2) },
+			fmtopt
+		)
+	),
+}
+
 local react = {
 	s({ name = "react component", trig = "rec" }, {
 		fmt(
 			[[
 		import React from "react";
 
-		export interface <a>Props{
+		export interface <>Props{
 			<a>
 		}
 
@@ -414,3 +493,4 @@ ls.add_snippets("typescript", es6)
 ls.add_snippets("javascriptreact", es6)
 ls.add_snippets("typescriptreact", es6)
 ls.add_snippets("typescriptreact", react)
+ls.add_snippets("typescriptreact", typescript)
