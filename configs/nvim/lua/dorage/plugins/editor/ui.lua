@@ -108,7 +108,7 @@ return {
 	{
 		"https://github.com/voldikss/vim-floaterm",
 		config = function()
-			vim.keymap.set("n", "<leader>ag", "<Cmd>:FloatermNew lazygit<CR>")
+			vim.keymap.set("n", "<leader>ag", "<Cmd>:FloatermNew --width=0.9 --height=0.9 lazygit<CR>")
 		end,
 	},
 	-- show shortcut hints
