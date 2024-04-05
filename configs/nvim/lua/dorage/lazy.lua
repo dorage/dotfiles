@@ -17,4 +17,5 @@ require("lazy").setup({
 	{ import = "dorage.plugins.lsp" },
 	{ import = "dorage.plugins.themes" },
 	{ import = "dorage.plugins.snippets" },
+	{ import = "dorage.plugins.git" },
 })
