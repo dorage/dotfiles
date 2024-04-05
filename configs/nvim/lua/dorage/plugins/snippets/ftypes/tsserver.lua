@@ -62,13 +62,16 @@ local es6 = {
 	]],
 			{
 				c(2, {
-					fmt(
-						[[
+					i(1),
+					{
+						fmt(
+							[[
 					{<>}
 					]],
-						{ i(1) },
-						fmtopt
-					),
+							{ i(1) },
+							fmtopt
+						),
+					},
 				}),
 				i(1),
 			},
@@ -319,39 +322,81 @@ local es6 = {
 	-- forEach highorder function
 	postfix(
 		{ name = ".forEach", trig = ".hfe" },
-		fmt([[.forEach((<>)=>>{<>})]], { c(1, { t("e"), t("e, i"), t("e, i, arr") }), i(2) }, fmtopt)
+		fmt([[<>.forEach((<>)=>>{<>})]], {
+			f(function(_, parent)
+				return parent.snippet.env.POSTFIX_MATCH
+			end, {}),
+			c(1, { t("e"), t("e, i"), t("e, i, arr") }),
+			i(2),
+		}, fmtopt)
 	),
 	-- map highorder function
 	postfix(
 		{ name = ".map", trig = ".hma" },
-		fmt([[.map((<>)=>>{return <>})]], { c(1, { t("e"), t("e, i"), t("e, i, arr") }), i(2) }, fmtopt)
+		fmt([[<>.map((<>)=>>{return <>})]], {
+			f(function(_, parent)
+				return parent.snippet.env.POSTFIX_MATCH
+			end, {}),
+			c(1, { t("e"), t("e, i"), t("e, i, arr") }),
+			i(2),
+		}, fmtopt)
 	),
 	-- filter highorder function
 	postfix(
 		{ name = ".filter", trig = ".hfi" },
-		fmt([[.hfi((<>)=>>{return <>})]], { c(1, { t("e"), t("e, i"), t("e, i, arr") }), i(2) }, fmtopt)
+		fmt([[<>.hfi((<>)=>>{return <>})]], {
+			f(function(_, parent)
+				return parent.snippet.env.POSTFIX_MATCH
+			end, {}),
+			c(1, { t("e"), t("e, i"), t("e, i, arr") }),
+			i(2),
+		}, fmtopt)
 	),
 	-- every highorder function
 	postfix(
 		{ name = ".every", trig = ".hev" },
-		fmt([[.hev((<>)=>>{return <>})]], { c(1, { t("e"), t("e, i"), t("e, i, arr") }), i(2) }, fmtopt)
+		fmt([[<>.hev((<>)=>>{return <>})]], {
+			f(function(_, parent)
+				return parent.snippet.env.POSTFIX_MATCH
+			end, {}),
+			c(1, { t("e"), t("e, i"), t("e, i, arr") }),
+			i(2),
+		}, fmtopt)
 	),
 	-- some highorder function
 	postfix(
 		{ name = ".some", trig = ".hso" },
-		fmt([[.some((<>)=>>{return <>})]], { c(1, { t("e"), t("e, i"), t("e, i, arr") }), i(2) }, fmtopt)
+		fmt([[<>.some((<>)=>>{return <>})]], {
+			f(function(_, parent)
+				return parent.snippet.env.POSTFIX_MATCH
+			end, {}),
+			c(1, { t("e"), t("e, i"), t("e, i, arr") }),
+			i(2),
+		}, fmtopt)
 	),
 	-- reduce highorder function
 	postfix(
 		{ name = ".reduce", trig = ".hre" },
+		fmt([[<>.reduce((<>)=>>{return <>}, <>)]], {
+			f(function(_, parent)
+				return parent.snippet.env.POSTFIX_MATCH
+			end, {}),
+			c(3, { t("a, c"), t("a, c, i"), t("a, c, i, arr") }),
+			i(2),
+			i(1),
+		}, fmtopt)
+	),
+	-- sort
+	postfix(
+		{ name = ".sort", trig = ".hso" },
 		fmt(
-			[[.reduce((<>)=>>{return <>}, <>)]],
-			{ c(3, { t("a, c"), t("a, c, i"), t("a, c, i, arr") }), i(2), i(1) },
+			"<>.sort((a, b)=>>{return <>})",
+			{ f(function(_, parent)
+				return parent.snippet.env.POSTFIX_MATCH
+			end, {}), i(1) },
 			fmtopt
 		)
 	),
-	-- sort
-	postfix({ name = ".sort", trig = ".hso" }, fmt(".sort((a, b)=>>{return <>})", { i(1) }, fmtopt)),
 	-- JSON
 	s(
 		{ name = "JSON.stringify", trig = "fjss" },
@@ -466,30 +511,40 @@ local typescript = {
 	),
 }
 
+local repeatFn = function(args, parent, user_args)
+	return args[1][1]
+end
+
 local react = {
-	s({ name = "react component", trig = "rec" }, {
+	s(
+		{ name = "react component", trig = "rec" },
 		fmt(
 			[[
 		import React from "react";
 
 		export interface <>Props{
-			<a>
 		}
 
-		const <a> = (props: <a>Props) =>> {
-			return <c>;
+		const <> = (props: <>Props) =>> {
+			return <<>><</>>;
 		}
 
-		export default <a>;
+		export default <>;
 			]],
-			{ a = i(1, "Name"), c = i(2, "<></>") },
+			{
+				f(repeatFn, { 1 }),
+				i(1, "Name"),
+				f(repeatFn, { 1 }),
+				f(repeatFn, { 1 }),
+			},
 			fmtopt
-		),
-	}),
+		)
+	),
 }
 
 ls.add_snippets("javascript", es6)
 ls.add_snippets("typescript", es6)
+ls.add_snippets("typescript", typescript)
 ls.add_snippets("javascriptreact", es6)
 ls.add_snippets("typescriptreact", es6)
 ls.add_snippets("typescriptreact", react)
