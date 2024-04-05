@@ -1,3 +1,23 @@
+-- LSP actions
+vim.keymap.set(
+	{ "n" },
+	"gl",
+	"<cmd>lua vim.diagnostic.open_float()<cr><esc>",
+	{ desc = "Show diagnostic in a floating window" }
+)
+vim.keymap.set(
+	{ "n" },
+	"[d",
+	"<cmd>lua vim.diagnostic.goto_prev()<cr><esc>",
+	{ desc = "Move to the previous diagnostic in the current buffer" }
+)
+vim.keymap.set(
+	{ "n" },
+	"]d",
+	"<cmd>lua vim.diagnostic.goto_next()<cr><esc>",
+	{ desc = "Move to the next diagnostic in the current buffer" }
+)
+
 -- blazing fast save
 vim.keymap.set({ "i", "x", "n", "s" }, "<leader>w", "<cmd>w<cr><esc>", { desc = "Save file" })
 vim.keymap.set({ "n", "s" }, "<leader>n", "<cmd>noh<cr><esc>", { desc = ":noh" })
