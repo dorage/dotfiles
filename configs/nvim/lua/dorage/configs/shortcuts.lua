@@ -30,4 +30,6 @@ vim.keymap.set({ "n", "s" }, "<leader>P", '"+P', { desc = "Paste from clipboard"
 
 -- better substitute
 -- references: https://www.youtube.com/watch?v=k_PBlhH-DKk&t=13s
-vim.keymap.set("n", "<leader>ss", ":%s/<C-R><C-W>/<C-R>0/g<CR>", { desc = "Substitute" })
+vim.keymap.set({ "n" }, "<leader>sa", ":%s/<C-R><C-W>/<C-R>0/g<CR>", { desc = "Substitute all" })
+vim.keymap.set({ "n" }, "<leader>ss", ":s/<C-R><C-W>/<C-R>0/g<CR>", { desc = "Substitute current line" })
+vim.keymap.set({ "n", "s" }, "<leader>sv", ":'<,'>s/<C-R><C-W>/<C-R>0/g<CR>", { desc = "Substitute in selection" })
