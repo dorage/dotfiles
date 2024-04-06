@@ -277,33 +277,6 @@ local es6 = {
 	s({ name = "break statement", trig = "br" }, { t("break;") }),
 	-- continue statement
 	s({ name = "continue statement", trig = "cn" }, { t("continue;") }),
-	-- -- for..idx statement
-	-- postfix(
-	-- 	".for",
-	-- 	fmt(
-	-- 		[[
-	-- for(let <> = 1; <>;	<>){
-	-- 	<>
-	-- }
-	-- ]],
-	-- 		{
-	-- 			i(1, "i"),
-	-- 		},
-	-- 		fmtopt
-	-- 	)
-	-- ),
-	-- s(
-	-- 	{ name = "for statement", trig = "for" },
-	-- 	fmt(
-	-- 		[[
-	-- for(<>;<>;<>){
-	-- 	<>
-	-- }
-	-- ]],
-	-- 		{ i(2), i(1), i(3) },
-	-- 		fmtopt
-	-- 	)
-	-- ),
 	-- -- for..of statement
 	s(
 		{ name = "for statement", trig = "for" },
@@ -471,6 +444,17 @@ local es6 = {
 					return sn(nil, { i(1, reg) })
 				end),
 			},
+			fmtopt
+		)
+	),
+	-- template string
+	s(
+		{ name = "template string", trig = "$" },
+		fmt(
+			[[
+	${<>}
+	]],
+			{ i(1) },
 			fmtopt
 		)
 	),
