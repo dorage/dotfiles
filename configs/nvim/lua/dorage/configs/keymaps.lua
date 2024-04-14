@@ -39,3 +39,8 @@ vim.keymap.set(
 	'"vy:s/<C-R>v/<C-R>0/g<CR>:noh<CR>',
 	{ desc = "Substitute selected in current line" }
 )
+
+-- etc
+vim.keymap.set({ "n", "s" }, "<leader>n", "<cmd>noh<cr><esc>", { desc = ":noh" })
+vim.keymap.set({ "n" }, "<c-u>", "<c-u>zz", { silent = true })
+vim.keymap.set({ "n" }, "<c-d>", "<c-d>zz", { silent = true })
