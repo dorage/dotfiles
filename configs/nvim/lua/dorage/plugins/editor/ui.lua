@@ -155,4 +155,13 @@ return {
 			})
 		end,
 	},
+	-- pretty vim select/input hook
+	{
+		"stevearc/dressing.nvim",
+		opts = {},
+	},
+	-- notify
+	{
+		"rcarriga/nvim-notify",
+	},
 }
