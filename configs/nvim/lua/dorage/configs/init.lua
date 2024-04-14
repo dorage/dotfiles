@@ -1,1 +1,1 @@
-require('dorage.configs.shortcuts')
+require("dorage.configs.keymaps")

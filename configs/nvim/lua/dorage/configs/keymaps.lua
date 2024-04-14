@@ -30,6 +30,12 @@ vim.keymap.set({ "n", "s" }, "<leader>P", '"+P', { desc = "Paste from clipboard"
 
 -- better substitute
 -- references: https://www.youtube.com/watch?v=k_PBlhH-DKk&t=13s
-vim.keymap.set({ "n" }, "<leader>sa", ":%s/<C-R><C-W>/<C-R>0/g<CR>", { desc = "Substitute all" })
-vim.keymap.set({ "n" }, "<leader>ss", ":s/<C-R><C-W>/<C-R>0/g<CR>", { desc = "Substitute current line" })
-vim.keymap.set({ "n", "s" }, "<leader>sv", ":'<,'>s/<C-R><C-W>/<C-R>0/g<CR>", { desc = "Substitute in selection" })
+vim.keymap.set({ "n" }, "<leader>sa", ":%s/<C-R><C-W>/<C-R>0/g<CR>:noh<CR>", { desc = "Substitute all" })
+vim.keymap.set({ "n" }, "<leader>ss", ":s/<C-R><C-W>/<C-R>0/g<CR>:noh<CR>", { desc = "Substitute current line" })
+vim.keymap.set({ "v" }, "<leader>sa", '"vy:%s/<C-R>v/<C-R>0/g<CR>:noh<CR>', { desc = "Substitute selected in file" })
+vim.keymap.set(
+	{ "v" },
+	"<leader>ss",
+	'"vy:s/<C-R>v/<C-R>0/g<CR>:noh<CR>',
+	{ desc = "Substitute selected in current line" }
+)
