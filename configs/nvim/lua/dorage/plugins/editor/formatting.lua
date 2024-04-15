@@ -1,75 +1,49 @@
 return {
+	-- formatter
 	{
-		"nvimtools/none-ls.nvim",
-	},
-	{
-		"MunifTanjim/prettier.nvim",
-		dependencies = {
-			"nvimtools/none-ls.nvim",
-		},
-		config = function()
-			local null_ls = require("null-ls")
-			local formatting = null_ls.builtins.formatting
-
-			local group = vim.api.nvim_create_augroup("lsp_format_on_save", { clear = false })
-			local event = "BufWritePre" -- or "BufWritePost"
-			local async = event == "BufWritePost"
-
-			null_ls.setup({
-				sources = {
-					null_ls.builtins.formatting.stylua,
-					null_ls.builtins.diagnostics.eslint,
-					null_ls.builtins.completion.spell,
-				},
-				on_attach = function(client, bufnr)
-					if client.supports_method("textDocument/formatting") then
-						vim.keymap.set("n", "<Leader>f", function()
-							vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
-						end, { buffer = bufnr, desc = "[lsp] format" })
-
-						-- format on save
-						vim.api.nvim_clear_autocmds({ buffer = bufnr, group = group })
-						vim.api.nvim_create_autocmd(event, {
-							buffer = bufnr,
-							group = group,
-							callback = function()
-								vim.lsp.buf.format({ bufnr = bufnr, async = async })
-							end,
-							desc = "[lsp] format on save",
-						})
-					end
-
-					if client.supports_method("textDocument/rangeFormatting") then
-						vim.keymap.set("x", "<Leader>f", function()
-							vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
-						end, { buffer = bufnr, desc = "[lsp] format" })
-					end
+		"stevearc/conform.nvim",
+		event = { "BufReadPre", "BufNewFile" },
+		cmd = { "ConformInfo" },
+		keys = {
+			{
+				-- Customize or remove this keymap to your liking
+				"<F3>",
+				function()
+					require("conform").format({ timeout_ms = 500, lsp_fallback = true, async = true })
 				end,
-			})
-
-			local prettier = require("prettier")
-
-			prettier.setup({
-				bin = "prettier", -- or `'prettierd'` (v0.23.3+)
-				filetypes = {
-					"css",
-					"graphql",
-					"html",
-					"javascript",
-					"javascriptreact",
-					"json",
-					"less",
-					"markdown",
-					"scss",
-					"typescript",
-					"typescriptreact",
-					"yaml",
-					"astro",
+				mode = "",
+				desc = "Conform:Format buffer",
+			},
+		},
+		-- Everything in opts will be passed to setup()
+		opts = {
+			-- Define your formatters
+			formatters_by_ft = {
+				lua = { "stylua" },
+				python = { "isort", "black" },
+				javascript = { "prettier" },
+				typescript = { "prettier" },
+				javascriptreact = { "prettier" },
+				typescriptreact = { "prettier" },
+				markdown = { "prettier" },
+				html = { "prettier" },
+				css = { "prettier" },
+				json = { "prettier" },
+				astro = { "prettier" },
+				yaml = { "prettier" },
+			},
+			-- Set up format-on-save
+			format_on_save = { timeout_ms = 500, lsp_fallback = true, async = true },
+			-- Customize formatters
+			formatters = {
+				shfmt = {
+					prepend_args = { "-i", "2" },
 				},
-				cli_options = {
-					config_precedence = "prefer-file",
-				},
-			})
+			},
+		},
+		init = function()
+			-- If you want the formatexpr, here is the place to set it
+			vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 		end,
 	},
 }

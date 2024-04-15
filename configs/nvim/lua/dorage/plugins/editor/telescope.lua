@@ -43,7 +43,6 @@ return {
 			vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "live grep" })
 			vim.keymap.set("n", "<leader>fw", builtin.buffers, { desc = "buffers" })
 			vim.keymap.set("n", "<leader>fe", builtin.current_buffer_fuzzy_find, { desc = "current buffer fuzzy find" })
-			vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "help tags" })
 			vim.keymap.set("n", "<leader>fl", builtin.lsp_definitions, { desc = "lsp definitions" })
 			vim.keymap.set("n", "<leader>fr", builtin.lsp_references, { desc = "lsp references" })
 			vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "keymaps" })

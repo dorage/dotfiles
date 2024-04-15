@@ -15,12 +15,70 @@ return {
 	-- show indent guide
 	{
 		"lukas-reineke/indent-blankline.nvim",
-		main = "ibl",
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
 		},
+		opts = {
+			indent = {
+				char = "│",
+				tab_char = "│",
+			},
+			scope = { enabled = false },
+			exclude = {
+				filetypes = {
+					"help",
+					"alpha",
+					"dashboard",
+					"neo-tree",
+					"Trouble",
+					"trouble",
+					"lazy",
+					"mason",
+					"notify",
+					"toggleterm",
+					"lazyterm",
+				},
+			},
+		},
+		main = "ibl",
+	},
+	-- pretty diagnostic
+	{
+		"folke/trouble.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		opts = {
+			-- your configuration comes here
+			-- or leave it empty to use the default settings
+			-- refer to the configuration section below
+		},
+	},
+	{
+		"folke/todo-comments.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		opts = {
+			-- your configuration comes here
+			-- or leave it empty to use the default settings
+			-- refer to the configuration section below
+		},
 		config = function()
-			require("ibl").setup()
+			vim.keymap.set("n", "<leader>fc", "<Cmd>TodoTelescope<CR>", { desc = "file browser" })
+		end,
+	},
+	{
+		"nvim-pack/nvim-spectre",
+		config = function()
+			vim.keymap.set("n", "<leader>so", '<cmd>lua require("spectre").toggle()<CR>', {
+				desc = "Toggle Spectre",
+			})
+			vim.keymap.set("n", "<leader>sw", '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
+				desc = "Search current word",
+			})
+			vim.keymap.set("v", "<leader>sw", '<esc><cmd>lua require("spectre").open_visual()<CR>', {
+				desc = "Search current word",
+			})
+			vim.keymap.set("n", "<leader>ep", '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', {
+				desc = "Search on current file",
+			})
 		end,
 	},
 }
