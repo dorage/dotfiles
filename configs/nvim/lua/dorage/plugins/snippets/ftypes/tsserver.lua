@@ -52,9 +52,9 @@ local es6 = {
 		)
 	),
 	-- async
-	s({ name = "async ~", trig = "as" }, { t("async") }),
+	s({ name = "async ~", trig = "as" }, { t("async "), i(1) }),
 	-- await
-	s({ name = "await ~", trig = "aw" }, { t("await") }),
+	s({ name = "await ~", trig = "aw" }, { t("await "), i(1) }),
 	-- import
 	s(
 		{ name = "import statement", trig = "im" },
@@ -475,6 +475,8 @@ local es6 = {
 			fmtopt
 		)
 	),
+	-- env variable
+	s({ name = "env variable", trig = "env" }, { t("process.env."), i(1, "NODE_ENV") }),
 }
 
 local typescript = {
