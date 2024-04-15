@@ -27,6 +27,8 @@ local ms = ls.multi_snippet
 local k = require("luasnip.nodes.key_indexer").new_key
 local fmtopt = { delimiters = "<>" }
 
+local cmn = require("dorage.plugins.snippets.ftypes.common")
+
 local es6 = {
 	-- javascript types
 	s({ name = "string type", trig = "str" }, { t("string") }),
@@ -282,11 +284,26 @@ local es6 = {
 		{ name = "for statement", trig = "for" },
 		fmt(
 			[[
-	for(const <> of <>){
+	for(<>){
 		<>
 	}
 	]],
-			{ i(2), i(1), i(3) },
+			{
+				c(1, {
+					fmt([[const <> of <>]], {
+						d(2, cmn.singular, { 1 }),
+						i(1, "elements"),
+					}, fmtopt),
+					fmt([[let <> = <>; <> << <>.length; <>++]], {
+						i(2, "i"),
+						i(3, "0"),
+						rep(1),
+						i(1, "arr"),
+						rep(1),
+					}, fmtopt),
+				}),
+				i(2),
+			},
 			fmtopt
 		)
 	),
