@@ -18,6 +18,7 @@ return {
 		lazy = false,
 		config = true,
 	},
+	{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
 	{
 		"williamboman/mason-lspconfig.nvim",
 	},
@@ -27,6 +28,7 @@ return {
 		cmd = { "LspInfo", "LspInstall", "LspStart" },
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
+			{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
 			{ "folke/neodev.nvim" },
 			{ "hrsh7th/cmp-nvim-lsp" },
 			{ "williamboman/mason-lspconfig.nvim" },
@@ -49,6 +51,16 @@ return {
 				warn = "▲",
 				hint = "⚑",
 				info = "»",
+			})
+
+			require("mason-tool-installer").setup({
+				ensure_installed = {
+					"prettier",
+					"eslint_d",
+					"markdownlint",
+					"isort",
+					"black",
+				},
 			})
 
 			require("mason-lspconfig").setup({
