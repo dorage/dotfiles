@@ -17,7 +17,7 @@ option_as_alt = "OnlyLeft"
 # normal = { family = "Monaspace Argon Var", style = "Regular" }
 # size = 13
 # normal = { family = "GohuFont uni14 Nerd Font Mono", style = "Regular" }
-size = 13
+size = 15
 normal = { family = "FiraCode Nerd Font", style = "Regular" }
 bold = { style = "Bold" }
 italic = { style = "Italic" }
