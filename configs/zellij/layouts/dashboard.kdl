@@ -1,0 +1,22 @@
+layout {
+    pane size="45%" split_direction="vertical" {
+			pane size="40%" {
+				pane command="tuime" {
+					args "--format" "🙌 %H:%M:%S" "-f" "font-block" "-g" "#C6FFDD" "-g" "#FBD786" "-g" "#f7797d"
+				}
+			}
+			pane size="60%" {
+				pane command="hackernews_tui" {
+					focus true
+				}
+			}
+    }
+    pane size="55%" split_direction="vertical" {
+			pane size="40%" {
+				pane command="taskwarrior-tui"
+			}
+			pane size="60%" {
+				pane command="btop"
+			}
+    }
+}

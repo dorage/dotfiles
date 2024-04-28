@@ -1,28 +1,3 @@
-layout {
-    pane size=1 borderless=true {
-        plugin location="file:~/.config/zellij/plugins/zjstatus.wasm" {
-            format_left  "{mode} #[fg=#d79921,bold,bg=#3c3836]{session} {tabs}"
-            format_right "#[bg=#3c3836,fg=#191919]{datetime}"
-            format_space ""
-
-            border_enabled  "true"
-
-            tab_normal   "#[fg=#928374] {name} "
-            tab_active   "#[fg=#d79921,bold,bg=#504945] {name} "
-
-
-            datetime        "#[fg=#d79921,bold,bg=#3c3836] {format} "
-            datetime_format "%A, %d %b %Y %H:%M"
-            datetime_timezone "Australia/Melbourne"
-        }
-    }
-    pane
-    pane size=2 borderless=true {
-        plugin location="zellij:status-bar"
-    }
-}
-
-
 // If you'd like to override the default keybindings completely, be sure to change "keybinds" to "keybinds clear-defaults=true"
 themes {
     // gruvbox-dark
@@ -61,6 +36,8 @@ keybinds {
         unbind "Ctrl b"
         // general stuff
         bind "Alt n" { NewPane; }
+				bind "Alt d" { NewPane "Down"; }
+				bind "Alt r" { NewPane "Right"; }
         bind "Alt x" { CloseFocus; SwitchToMode "Normal"; }
         bind "Alt w" { ToggleFloatingPanes;}
         bind "Alt t" { NewTab;}
@@ -86,6 +63,11 @@ keybinds {
         bind "o" { SwitchToMode "Session"; }
         bind "q" { Quit; }
     }
+
+		pane {
+				bind "d" { NewPane "Down"; SwitchToMode "Normal"; }
+				bind "r" { NewPane "Right"; SwitchToMode "Normal"; }
+		}
 
 
     // locked {
