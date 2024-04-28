@@ -47,10 +47,11 @@ return {
 						key = "f",
 					},
 				},
-				projects = {
-					enable = true,
-					limit = 8,
+				project = {
+					enable = false,
 				},
+				mru = { limit = 5 },
+				footer = {},
 			},
 		})
 
