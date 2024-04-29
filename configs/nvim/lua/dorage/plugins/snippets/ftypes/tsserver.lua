@@ -29,7 +29,37 @@ local fmtopt = { delimiters = "<>" }
 
 local cmn = require("dorage.plugins.snippets.ftypes.common")
 
+local common = {
+	arrow_function = function(arg, body)
+		if body == nil then
+			body = c(2, {
+				fmt(
+					[[
+				{
+					<>
+				}
+				]],
+					{ i(1) },
+					fmtopt
+				),
+				i(1),
+			})
+		end
+
+		return fmt([[(<>) =>> <>]], {
+			arg,
+			body,
+		}, fmtopt)
+	end,
+}
+
 local es6 = {
+	-- comment
+	s({ name = "TODO comment", trig = "todo" }, { t("// TODO:"), i(1) }),
+	s({ name = "WARN comment", trig = "warn" }, { t("// WARN:"), i(1) }),
+	s({ name = "NOTE comment", trig = "note" }, { t("// NOTE:"), i(1) }),
+	s({ name = "TEST comment", trig = "test" }, { t("// TEST:"), i(1) }),
+	s({ name = "FIX comment", trig = "fix" }, { t("// FIX:"), i(1) }),
 	-- javascript types
 	s({ name = "string type", trig = "str" }, { t("string") }),
 	s({ name = "number type", trig = "num" }, { t("number") }),
@@ -109,33 +139,10 @@ local es6 = {
 		)
 	),
 	-- arrow function
-	s(
-		{
-			name = "arrow function",
-			trig = "fna",
-		},
-		fmt(
-			[[
-	(<>) =>> <>
-	]],
-			{
-				i(1),
-				c(2, {
-					fmt(
-						[[
-				{
-					<>
-				}
-				]],
-						{ i(1) },
-						fmtopt
-					),
-					i(1),
-				}),
-			},
-			fmtopt
-		)
-	),
+	s({
+		name = "arrow function",
+		trig = "fna",
+	}, common.arrow_function(i(1))),
 	-- normal function
 	s(
 		{
@@ -188,11 +195,23 @@ local es6 = {
 		{ name = "if statement", trig = "if" },
 		fmt(
 			[[
-	if (<>) {
-		<>
-	}
+	if (<>) <>
 	]],
-			{ i(1, "true"), i(2) },
+			{
+				i(1, "true"),
+				c(2, {
+					fmt(
+						[[
+				{
+					<>
+				}
+				]],
+						{ i(1) },
+						fmtopt
+					),
+					i(1),
+				}),
+			},
 			fmtopt
 		)
 	),
@@ -204,11 +223,23 @@ local es6 = {
 		},
 		fmt(
 			[[
-	else if(<>) {
-		<>
-	}
+	else if(<>) <>
 	]],
-			{ i(1, "true"), i(2) },
+			{
+				i(1, "true"),
+				c(2, {
+					fmt(
+						[[
+				{
+					<>
+				}
+				]],
+						{ i(1) },
+						fmtopt
+					),
+					i(1),
+				}),
+			},
 			fmtopt
 		)
 	),
@@ -217,11 +248,20 @@ local es6 = {
 		{ name = "else statement", trig = "ife" },
 		fmt(
 			[[
-	else {
-		<>
-	}
+	else <>	
 	]],
-			{ i(1) },
+			{ c(1, {
+				fmt(
+					[[
+				{
+					<>
+				}
+				]],
+					{ i(1) },
+					fmtopt
+				),
+				i(1),
+			}) },
 			fmtopt
 		)
 	),
@@ -279,30 +319,43 @@ local es6 = {
 	s({ name = "break statement", trig = "br" }, { t("break;") }),
 	-- continue statement
 	s({ name = "continue statement", trig = "cn" }, { t("continue;") }),
-	-- -- for..of statement
+	-- for statement
 	s(
-		{ name = "for statement", trig = "for" },
+		{ name = "for statement", trig = "fr" },
 		fmt(
 			[[
-	for(<>){
+	for(let <> = <>; <> << <>.length; <>++){
+		const <> = <>[<>];
 		<>
 	}
 	]],
 			{
-				c(1, {
-					fmt([[const <> of <>]], {
-						d(2, cmn.singular, { 1 }),
-						i(1, "elements"),
-					}, fmtopt),
-					fmt([[let <> = <>; <> << <>.length; <>++]], {
-						i(2, "i"),
-						i(3, "0"),
-						rep(1),
-						i(1, "arr"),
-						rep(1),
-					}, fmtopt),
-				}),
-				i(2),
+				i(2, "i"),
+				i(3, "0"),
+				rep(2),
+				i(1, "elements"),
+				rep(2),
+				d(4, cmn.singular, { 1 }),
+				rep(1),
+				rep(2),
+				i(5),
+			},
+			fmtopt
+		)
+	),
+	-- -- for..of statement
+	s(
+		{ name = "for..of statement", trig = "fro" },
+		fmt(
+			[[
+	for(const <> of <>){
+		<>
+	}
+	]],
+			{
+				d(2, cmn.singular, { 1 }),
+				i(1, "elements"),
+				i(3),
 			},
 			fmtopt
 		)
@@ -310,73 +363,67 @@ local es6 = {
 	-- forEach highorder function
 	postfix(
 		{ name = ".forEach", trig = ".hfe" },
-		fmt([[<>.forEach((<>)=>>{<>})]], {
+		fmt([[<>.forEach(<>)]], {
 			f(function(_, parent)
 				return parent.snippet.env.POSTFIX_MATCH
 			end, {}),
-			c(1, { t("e"), t("e, i"), t("e, i, arr") }),
-			i(2),
+			common.arrow_function(c(1, { t("e"), t("e, idx"), t("e, idx, arr") })),
 		}, fmtopt)
 	),
 	-- map highorder function
 	postfix(
-		{ name = ".map", trig = ".hma" },
-		fmt([[<>.map((<>)=>>{return <>})]], {
+		{ name = ".map", trig = ".hmp" },
+		fmt([[<>.map(<>)]], {
 			f(function(_, parent)
 				return parent.snippet.env.POSTFIX_MATCH
 			end, {}),
-			c(1, { t("e"), t("e, i"), t("e, i, arr") }),
-			i(2),
+			common.arrow_function(c(1, { t("e"), t("e, idx"), t("e, idx, arr") })),
 		}, fmtopt)
 	),
 	-- filter highorder function
 	postfix(
-		{ name = ".filter", trig = ".hfi" },
-		fmt([[<>.hfi((<>)=>>{return <>})]], {
+		{ name = ".filter", trig = ".hfl" },
+		fmt([[<>.hfi(<>)]], {
 			f(function(_, parent)
 				return parent.snippet.env.POSTFIX_MATCH
 			end, {}),
-			c(1, { t("e"), t("e, i"), t("e, i, arr") }),
-			i(2),
+			common.arrow_function(c(1, { t("e"), t("e, idx"), t("e, idx, arr") })),
 		}, fmtopt)
 	),
 	-- every highorder function
 	postfix(
 		{ name = ".every", trig = ".hev" },
-		fmt([[<>.hev((<>)=>>{return <>})]], {
+		fmt([[<>.hev(<>)]], {
 			f(function(_, parent)
 				return parent.snippet.env.POSTFIX_MATCH
 			end, {}),
-			c(1, { t("e"), t("e, i"), t("e, i, arr") }),
-			i(2),
+			common.arrow_function(c(1, { t("e"), t("e, idx"), t("e, idx, arr") })),
 		}, fmtopt)
 	),
 	-- some highorder function
 	postfix(
-		{ name = ".some", trig = ".hso" },
-		fmt([[<>.some((<>)=>>{return <>})]], {
+		{ name = ".some", trig = ".hsm" },
+		fmt([[<>.some(<>)]], {
 			f(function(_, parent)
 				return parent.snippet.env.POSTFIX_MATCH
 			end, {}),
-			c(1, { t("e"), t("e, i"), t("e, i, arr") }),
-			i(2),
+			common.arrow_function(c(1, { t("e"), t("e, idx"), t("e, idx, arr") })),
 		}, fmtopt)
 	),
 	-- reduce highorder function
 	postfix(
-		{ name = ".reduce", trig = ".hre" },
-		fmt([[<>.reduce((<>)=>>{return <>}, <>)]], {
+		{ name = ".reduce", trig = ".hrd" },
+		fmt([[<>.reduce(<>, <>)]], {
 			f(function(_, parent)
 				return parent.snippet.env.POSTFIX_MATCH
 			end, {}),
-			c(3, { t("a, c"), t("a, c, i"), t("a, c, i, arr") }),
-			i(2),
+			common.arrow_function(c(2, { t("a, c"), t("a, c, i"), t("a, c, i, arr") })),
 			i(1),
 		}, fmtopt)
 	),
 	-- sort
 	postfix(
-		{ name = ".sort", trig = ".hso" },
+		{ name = ".sort", trig = ".hsrt" },
 		fmt(
 			"<>.sort((a, b)=>>{return <>})",
 			{ f(function(_, parent)
@@ -480,11 +527,9 @@ local es6 = {
 }
 
 local typescript = {
-	-- extends
-	s({ name = "typescript extends", trig = "ext" }, { t(" extends "), i(1) }),
 	-- interface
 	s(
-		{ name = "typescript interface", trig = "int" },
+		{ name = "typescript interface definition", trig = "tsdi" },
 		fmt(
 			[[
 		interface <><>{
@@ -501,7 +546,7 @@ local typescript = {
 	),
 	-- type
 	s(
-		{ name = "typescript type", trig = "typ" },
+		{ name = "typescript type definition", trig = "tsdt" },
 		fmt(
 			[[
 			type <> = <>
@@ -517,6 +562,32 @@ local repeatFn = function(args, parent, user_args)
 end
 
 local react = {
+	s({ name = "react hook", trig = "reh" }, {
+		fmt(
+			[[
+			import React from "react";
+
+			export type Use<>Options = {
+			};
+
+			const use<> = (options:<>) =>> {
+				<>
+
+				return {}
+			}
+
+			export default use<>
+			]],
+			{
+				f(repeatFn, { 1 }),
+				i(1, "Name"),
+				f(repeatFn, { 1 }),
+				f(repeatFn, { 1 }),
+				i(2),
+			},
+			fmtopt
+		),
+	}),
 	s(
 		{ name = "react component", trig = "rec" },
 		fmt(
@@ -543,10 +614,118 @@ local react = {
 	),
 }
 
+local hono = {
+	s({ name = "hono index router", trig = "hnri" }, {
+		fmt(
+			[[
+	import { OpenAPIHono } from "@hono/zod-openapi";
+
+	const app = new OpenAPIHono();
+
+	<>
+
+	export default app;
+	]],
+			{ i(1) },
+			fmtopt
+		),
+	}),
+	s({ name = "hono endpoint", trig = "hnre" }, {
+		fmt(
+			[[
+	import { OpenAPIHono, createRoute, z } from "@hono/zod-openapi";
+	import { controller } from "./<>.controller";
+
+	export const zRes = z.any();
+
+	const route = createRoute({
+	path: "",
+	tags: [],
+	method: "<>",
+	summary: "",
+	description: "",
+	responses: {
+	200: {
+	content: {
+	"application/json": {
+	schema: zRes,
+	},
+	},
+	description: "",
+	},
+	},
+	});
+
+	const app = new OpenAPIHono();
+
+	app.use(route.getRoutingPath());
+
+	export type EndpointType = typeof ep;
+	export const ep = app.openapi(route, async (c) =>> {
+	const res = await controller({});
+
+	return c.json(res);
+	});
+
+	export default app;
+	]],
+			{ i(1), rep(1) },
+			fmtopt
+		),
+	}),
+}
+-- remix
+local remix = {}
+
+-- jest
+local jest = {
+	s(
+		{ name = "jest describe", trig = "jtd" },
+		fmt(
+			[[
+			describe("<>", () =>> {
+				<>
+			})
+			]],
+			{ i(1, "description"), i(2) },
+			fmtopt
+		)
+	),
+	s(
+		{ name = "jest test", trig = "jtt" },
+		fmt(
+			[[
+			test("<>", async () =>> {
+				<>
+			})
+			]],
+			{ i(1, "description"), i(2) },
+			fmtopt
+		)
+	),
+	s(
+		{ name = "jest expect", trig = "jte" },
+		fmt(
+			[[
+			expect(<>)<>
+			]],
+			{ i(1, "result"), i(2) },
+			fmtopt
+		)
+	),
+}
+
 ls.add_snippets("javascript", es6)
+ls.add_snippets("javascriptreact", es6)
+
 ls.add_snippets("typescript", es6)
 ls.add_snippets("typescript", typescript)
-ls.add_snippets("javascriptreact", es6)
+ls.add_snippets("typescript", jest)
+ls.add_snippets("typescript", remix)
+ls.add_snippets("typescript", hono)
+
 ls.add_snippets("typescriptreact", es6)
 ls.add_snippets("typescriptreact", react)
 ls.add_snippets("typescriptreact", typescript)
+ls.add_snippets("typescriptreact", jest)
+ls.add_snippets("typescriptreact", remix)

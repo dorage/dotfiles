@@ -31,6 +31,7 @@ return {
 			local parse = require("luasnip.util.parser").parse_snippet
 			local ms = ls.multi_snippet
 			local k = require("luasnip.nodes.key_indexer").new_key
+			local fmtopt = { delimiters = "<>" }
 
 			ls.setup({
 				history = true,
@@ -39,7 +40,7 @@ return {
 			})
 
 			ls.add_snippets("lua", {
-				s("luasnip-import", {
+				s({ name = "luasnip import", trig = "lsni" }, {
 					t({
 						'local ls = require("luasnip")',
 						"local s = ls.snippet",
@@ -70,6 +71,24 @@ return {
 						'local k = require("luasnip.nodes.key_indexer").new_key',
 						'local fmtopt = { delimiters = "<>" }',
 					}),
+				}),
+				s({ name = "luasnip snippet", trig = "lsns" }, {
+					fmt(
+						[[
+					s({ name = "<>", trig = "<>" }, {<>})
+					]],
+						{ i(1), i(2), i(3) },
+						fmtopt
+					),
+				}),
+				s({ name = "luasnip formatting", trig = "fmt" }, {
+					fmt(
+						[[
+						fmt(<>, <>, fmtopt)
+					]],
+						{ i(1), i(2) },
+						fmtopt
+					),
 				}),
 			})
 
