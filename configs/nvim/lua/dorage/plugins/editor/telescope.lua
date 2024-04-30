@@ -12,11 +12,11 @@ return {
 				defaults = {
 					theme = "cursor",
 					file_ignore_patterns = {
-						"node_modules",
-						"build",
-						"dist",
-						"yarn.lock",
-						".git",
+						"node_modules/",
+						"build/",
+						"dist/",
+						"yarn.lock$",
+						".git/",
 					},
 				},
 				pickers = {
