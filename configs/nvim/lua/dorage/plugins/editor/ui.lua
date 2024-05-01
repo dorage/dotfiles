@@ -3,14 +3,20 @@ return {
 	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
-		config = function()
-			require("lualine").setup()
-		end,
 	},
 	-- tabline plugin
 	{
 		"https://github.com/romgrk/barbar.nvim",
+		dependencies = {
+			"nvim-tree/nvim-web-devicons", -- OPTIONAL: for file icons
+		},
 		config = function()
+			require("barbar").setup({
+				animation = false,
+				clickable = false,
+				hide = { extensions = true },
+			})
+
 			local map = vim.api.nvim_set_keymap
 			local opts = { noremap = true, silent = true }
 
