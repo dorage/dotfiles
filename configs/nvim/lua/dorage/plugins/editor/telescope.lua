@@ -42,9 +42,6 @@ return {
 							preview_width = 0.55,
 							results_width = 0.8,
 						},
-						vertical = {
-							-- mirror = false,
-						},
 						width = 0.87,
 						height = 0.90,
 						preview_cutoff = 140,
@@ -52,7 +49,6 @@ return {
 					file_sorter = require("telescope.sorters").get_fuzzy_file,
 					generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
 					path_display = { "truncate" },
-					winblend = 0,
 					borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
 					color_devicons = true,
 					set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
@@ -80,8 +76,7 @@ return {
 				},
 			})
 
-			-- remove highlights
-			vim.api.nvim_set_hl(0, "TelescopeBorder", { default = false })
+			vim.api.nvim_set_hl(0, "TelescopeBorder", { default = false, bg = nil })
 			vim.api.nvim_set_hl(0, "TelescopeTitle", { default = false })
 
 			-- load extension
