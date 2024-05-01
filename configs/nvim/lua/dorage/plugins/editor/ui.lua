@@ -109,6 +109,8 @@ return {
 		"https://github.com/voldikss/vim-floaterm",
 		config = function()
 			vim.keymap.set("n", "<leader>ag", "<Cmd>:FloatermNew --width=0.95 --height=0.95 lazygit<CR>")
+			-- remove border
+			vim.api.nvim_set_hl(0, "FloatermBorder", { default = false })
 		end,
 	},
 	-- show shortcut hints
