@@ -8,6 +8,7 @@ return {
 		},
 		config = function()
 			-- telescope setup
+			-- referenced by NvChad
 			require("telescope").setup({
 				defaults = {
 					theme = "cursor",
@@ -28,31 +29,30 @@ return {
 						"--column",
 						"--smart-case",
 					},
-					prompt_prefix = "   ",
-					selection_caret = "  ",
+					prompt_prefix = "   ",
+					selection_caret = "  ",
 					entry_prefix = "  ",
 					initial_mode = "insert",
 					selection_strategy = "reset",
-					sorting_strategy = "ascending",
+					sorting_strategy = "descending",
 					layout_strategy = "horizontal",
 					layout_config = {
 						horizontal = {
-							prompt_position = "top",
+							prompt_position = "bottom",
 							preview_width = 0.55,
 							results_width = 0.8,
 						},
 						vertical = {
-							mirror = false,
+							-- mirror = false,
 						},
 						width = 0.87,
-						height = 0.80,
-						preview_cutoff = 120,
+						height = 0.90,
+						preview_cutoff = 140,
 					},
 					file_sorter = require("telescope.sorters").get_fuzzy_file,
 					generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
 					path_display = { "truncate" },
 					winblend = 0,
-					border = {},
 					borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
 					color_devicons = true,
 					set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
@@ -79,6 +79,10 @@ return {
 					},
 				},
 			})
+
+			-- remove highlights
+			vim.api.nvim_set_hl(0, "TelescopeBorder", { default = false })
+			vim.api.nvim_set_hl(0, "TelescopeTitle", { default = false })
 
 			-- load extension
 			require("telescope").load_extension("ui-select")
