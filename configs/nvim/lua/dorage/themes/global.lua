@@ -9,13 +9,14 @@ local afterThemeConfig = function()
 	vim.api.nvim_set_hl(0, "lineNrBelow", { fg = "#AAAAAA", bold = false })
 
 	-- clear float highlight
-	vim.api.nvim_set_hl(0, "NormalFloat", { guibg = nil })
-	vim.api.nvim_set_hl(0, "FloatBorder", { guibg = nil })
+	vim.api.nvim_set_hl(0, "BufferOffset", { guibg = nil })
+	vim.api.nvim_set_hl(0, "BufferTabpageFill", { guibg = nil })
+	vim.api.nvim_set_hl(0, "BufferTabpages", { guibg = nil })
+	vim.api.nvim_set_hl(0, "BufferTabpagesSep", { guibg = nil })
+	vim.api.nvim_set_hl(0, "BufferScrollArrowBufferTabpageFill", { guibg = nil })
 
 	-- setup current line highlight
 	vim.opt.cursorline = true
-	-- vim.cmd([[hi CursorLine   guifg=#E3FCBF]])
-	-- vim.cmd([[hi CursorColumn guifg=#E3FCBF]])
 	--
 	-- setup color highlighter
 	require("colorizer").setup()
