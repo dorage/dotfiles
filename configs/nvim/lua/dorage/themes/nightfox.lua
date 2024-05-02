@@ -20,7 +20,5 @@ return {
 		-- vim.cmd([[ colorscheme nordfox ]])
 		-- vim.cmd([[ colorscheme terafox ]])
 		vim.cmd([[ colorscheme carbonfox ]])
-
-		require("lualine").setup({})
 	end,
 }

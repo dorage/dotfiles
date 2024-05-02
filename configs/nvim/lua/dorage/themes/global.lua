@@ -20,6 +20,7 @@ local afterThemeConfig = function()
 	--
 	-- setup color highlighter
 	require("colorizer").setup()
+	require("dorage.themes.lualine")
 end
 
 return { afterThemeConfig = afterThemeConfig }
