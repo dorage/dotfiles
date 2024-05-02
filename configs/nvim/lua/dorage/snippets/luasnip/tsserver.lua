@@ -27,7 +27,7 @@ local ms = ls.multi_snippet
 local k = require("luasnip.nodes.key_indexer").new_key
 local fmtopt = { delimiters = "<>" }
 
-local cmn = require("dorage.plugins.snippets.ftypes.common")
+local cmn = require("dorage.snippets.luasnip.common")
 
 local common = {
 	arrow_function = function(arg, body)
@@ -561,122 +561,6 @@ local repeatFn = function(args, parent, user_args)
 	return args[1][1]
 end
 
-local react = {
-	s({ name = "react hook", trig = "reh" }, {
-		fmt(
-			[[
-			import React from "react";
-
-			export type Use<>Options = {
-			};
-
-			const use<> = (options:<>) =>> {
-				<>
-
-				return {}
-			}
-
-			export default use<>
-			]],
-			{
-				f(repeatFn, { 1 }),
-				i(1, "Name"),
-				f(repeatFn, { 1 }),
-				f(repeatFn, { 1 }),
-				i(2),
-			},
-			fmtopt
-		),
-	}),
-	s(
-		{ name = "react component", trig = "rec" },
-		fmt(
-			[[
-		import React from "react";
-
-		export interface <>Props{
-		}
-
-		const <> = (props: <>Props) =>> {
-			return <<>><</>>;
-		}
-
-		export default <>;
-			]],
-			{
-				f(repeatFn, { 1 }),
-				i(1, "Name"),
-				f(repeatFn, { 1 }),
-				f(repeatFn, { 1 }),
-			},
-			fmtopt
-		)
-	),
-}
-
-local hono = {
-	s({ name = "hono index router", trig = "hnri" }, {
-		fmt(
-			[[
-	import { OpenAPIHono } from "@hono/zod-openapi";
-
-	const app = new OpenAPIHono();
-
-	<>
-
-	export default app;
-	]],
-			{ i(1) },
-			fmtopt
-		),
-	}),
-	s({ name = "hono endpoint", trig = "hnre" }, {
-		fmt(
-			[[
-	import { OpenAPIHono, createRoute, z } from "@hono/zod-openapi";
-	import { controller } from "./<>.controller";
-
-	export const zRes = z.any();
-
-	const route = createRoute({
-	path: "",
-	tags: [],
-	method: "<>",
-	summary: "",
-	description: "",
-	responses: {
-	200: {
-	content: {
-	"application/json": {
-	schema: zRes,
-	},
-	},
-	description: "",
-	},
-	},
-	});
-
-	const app = new OpenAPIHono();
-
-	app.use(route.getRoutingPath());
-
-	export type EndpointType = typeof ep;
-	export const ep = app.openapi(route, async (c) =>> {
-	const res = await controller({});
-
-	return c.json(res);
-	});
-
-	export default app;
-	]],
-			{ i(1), rep(1) },
-			fmtopt
-		),
-	}),
-}
--- remix
-local remix = {}
-
 -- jest
 local jest = {
 	s(
@@ -721,11 +605,7 @@ ls.add_snippets("javascriptreact", es6)
 ls.add_snippets("typescript", es6)
 ls.add_snippets("typescript", typescript)
 ls.add_snippets("typescript", jest)
-ls.add_snippets("typescript", remix)
-ls.add_snippets("typescript", hono)
 
 ls.add_snippets("typescriptreact", es6)
-ls.add_snippets("typescriptreact", react)
 ls.add_snippets("typescriptreact", typescript)
 ls.add_snippets("typescriptreact", jest)
-ls.add_snippets("typescriptreact", remix)

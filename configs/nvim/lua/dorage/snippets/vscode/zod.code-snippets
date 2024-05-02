@@ -1,0 +1,23 @@
+{
+	// import
+	"import_zod": {
+		"prefix": "izd",
+		"body": ["import {z} from 'zod';"],
+		"description": "import_zod"
+	},
+	"import_zod_validator": {
+		"prefix": "izdv",
+		"body": ["import { zValidator } from '@hono/zod-validator';"],
+		"description": "import_zod & zod validator"
+	},
+	"zod_object": {
+		"prefix": "zdo",
+		"body": ["const $1 = z.object({$2});"],
+		"description": "create zod object"
+	},
+	"zod_infer_type":{
+		"prefix": "zdif",
+		"body": ["z.infer<typeof $ZodType>"],
+		"description": "create zod infer type"
+	}
+}

@@ -1,0 +1,44 @@
+{
+  "solid component": {
+  "prefix": "slc",
+  "body": [
+    "import type { Component } from 'solid-js';",
+    "",
+    "interface ${1:Name}Props {}",
+    "",
+    "const ${1:Name}: Component<${1:Name}Props> = (props) => {",
+    "  return <div></div>;",
+    "};",
+    "",
+    "export default ${1:Name};",
+  ],
+  "description": "solid component"
+  },
+  "solid index": {
+    "prefix": "sli",
+    "body": [
+      "const ${1:name} = {};",
+      "",
+      "export default ${1:name};"
+    ],
+    "description": "solid index"
+  },
+  "api endpoint snippet": {
+    "prefix": "slapi",
+    "body": [
+      "interface ${1:METHOD}${3:path}Args {",
+      "   params:{},",
+      "   query:{},",
+      "   body:{},",
+      "}",
+      "type ${1:METHOD}${3:path}Response = {}",
+      "",
+      "const ${1:METHOD}${3:path} = (args: ${1:METHOD}${3:path}Args) =>",
+      "  API.${1:METHOD}<${1:METHOD}${3:path}Response>({",
+      "    pathname: `${2:path}`,",
+      "    args: args",
+      "  });"
+    ],
+    "description": "api endpoint snippet"
+  }
+}

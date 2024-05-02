@@ -1,0 +1,23 @@
+{
+    "kysely_schema": {
+        "prefix": "kysely_zod_schema",
+        "body": [
+          "import type { Insertable, Selectable, Updateable } from \"kysely\";",
+          "import { z } from \"zod\";",
+          "",
+          "export const {1:NAME}}Schema = z.object({",
+          "  id: z.string(),",
+          "});",
+          "",
+          "export interface Ky{1:NAME}}Table {",
+          "  id: z.infer<typeof {1:NAME}}Schema.shape.id>;",
+          "}",
+          "",
+          "export type {1:NAME}} = Selectable<Ky{1:NAME}}Table>;",
+          "export type New{1:NAME}} = Insertable<Ky{1:NAME}}Table>;",
+          "export type {1:NAME}}Update = Updateable<Ky{1:NAME}}Table>;",
+          ""
+        ],
+        "description": "kysely_schema"
+    }
+}
