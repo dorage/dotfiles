@@ -6,8 +6,8 @@ return {
 		},
 		build = ":TSUpdate",
 		event = { "BufReadPre", "BufNewFile" },
-		config = function ()
-			require('nvim-treesitter.configs').setup({
+		config = function()
+			require("nvim-treesitter.configs").setup({
 				ensure_installed = {
 					"astro",
 					"c",
@@ -24,6 +24,7 @@ return {
 					"regex",
 					"rust",
 					"sql",
+					"perl",
 				},
 				highlight = {
 					enable = true,
@@ -44,16 +45,16 @@ return {
 						scope_incremental = "gnm",
 						node_incremental = "gn;",
 						node_decremental = "gn,",
-					}
-				}
+					},
+				},
 			})
-		end
+		end,
 	},
 	{
-		'nvim-treesitter/nvim-treesitter-textobjects',
+		"nvim-treesitter/nvim-treesitter-textobjects",
 		lazy = true,
 		config = function()
-			require('nvim-treesitter.configs').setup({
+			require("nvim-treesitter.configs").setup({
 				textobjects = {
 					select = {
 						enable = true,
@@ -83,7 +84,7 @@ return {
 
 							["ac"] = { query = "@class.outer", desc = "outer part of a class" },
 							["ic"] = { query = "@class.inner", desc = "inner part of a class" },
-						}
+						},
 					},
 					swap = {
 						enable = true,
@@ -135,7 +136,7 @@ return {
 							["[L"] = { query = "@loop.outer", desc = "Prev loop end" },
 						},
 					},
-				}
+				},
 			})
 
 			local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
@@ -149,6 +150,6 @@ return {
 			-- vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F)
 			-- vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t)
 			-- vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T)
-		end
-	}
+		end,
+	},
 }

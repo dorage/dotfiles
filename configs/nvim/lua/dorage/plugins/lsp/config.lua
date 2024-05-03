@@ -1,5 +1,5 @@
 return {
-	{ "folke/neodev.nvim", opts = {} },
+	{ "folke/neodev.nvim" },
 	-- LSP config helper
 	{
 		"VonHeikemen/lsp-zero.nvim",
@@ -34,6 +34,9 @@ return {
 			{ "williamboman/mason-lspconfig.nvim" },
 		},
 		config = function()
+			-- IMPORTANT: make sure to setup neodev BEFORE lspconfig
+			require("neodev").setup({})
+
 			-- This is where all the LSP shenanigans will live
 			local lsp_zero = require("lsp-zero")
 			lsp_zero.extend_lspconfig()
@@ -60,6 +63,8 @@ return {
 					"markdownlint",
 					"isort",
 					"black",
+					"perlnavigator",
+					"perl-debug-adapter",
 				},
 			})
 
@@ -81,6 +86,7 @@ return {
 					"yamlls",
 					"marksman",
 					"sqlls",
+					"perlnavigator",
 				},
 				handlers = {
 					lsp_zero.default_setup,
