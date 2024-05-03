@@ -1,2 +1,2 @@
-require("dorage.configs.debuggeres.nodejs")
-require("dorage.configs.debuggeres.perl")
+require("dorage.configs.debuggers.nodejs")
+require("dorage.configs.debuggers.perl")
