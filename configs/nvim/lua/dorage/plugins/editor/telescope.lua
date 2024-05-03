@@ -17,7 +17,7 @@ return {
 						"build/",
 						"dist/",
 						"yarn.lock$",
-						".git/",
+						"$.git/",
 					},
 					vimgrep_arguments = {
 						"rg",
