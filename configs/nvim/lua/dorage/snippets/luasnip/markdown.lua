@@ -132,24 +132,22 @@ local markdown = {
 	]],
 			{
 				c(1, { t(""), t("!") }),
-				i(2),
+				f(function(_, parent)
+					local url = parent.snippet.env.POSTFIX_MATCH
+					local v, handle = pcall(io.popen, "perl ~/.config/nvim/scripts/fetch_title.pl " .. url)
+
+					if v == false or handle == nil then
+						print(handle)
+						return ""
+					end
+
+					local output = handle:read("*a")
+					local value = output:gsub("[\n\r]", " ")
+					return tostring(value)
+				end),
 				f(function(_, parent)
 					return parent.snippet.env.POSTFIX_MATCH
 				end),
-			},
-			fmtopt
-		)
-	),
-	s(
-		{ name = "link", trig = "ln" },
-		fmt(
-			[[
-	<>[<>](<>)
-	]],
-			{
-				c(1, { t(""), t("!") }),
-				i(0),
-				i(2),
 			},
 			fmtopt
 		)
