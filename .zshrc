@@ -3,7 +3,7 @@
 set -o ignoreeof
 
 # zellij startup
-eval "$(zellij setup --generate-auto-start zsh)"
+eval "$(zellij a dashboard)"
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -12,11 +12,14 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME:/usr/local/bin:$PATH
 export PATH="$HOME:/opt/homebrew/bin:$PATH"
 export PATH="$HOME:/opt/homebrew/sbin:$PATH"
 export PATH="$HOME:/Users/kanghyunlee/.cargo/bin:$PATH"
+# perl scripts
+export PATH=~/.dorage-scripts:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"

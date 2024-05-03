@@ -9,6 +9,7 @@
     "mv:tmux": "rsync -avh --delete .tmux.conf ~/.tmux.conf",
     "mv:zellij": "rsync -avh --delete configs/zellij/ ~/.config/zellij",
     "mv:debuggers": "rsync -avh --delete configs/debuggers/ ~/.config/debuggers",
+    "mv:scripts": "rsync -avh --delete scripts/ ~/.dorage-scripts",
     "backup:karabiner": "rsync -avh --delete ~/.config/karabiner/ configs/karabiner"
   }
 }
