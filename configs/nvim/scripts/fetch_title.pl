@@ -1,4 +1,4 @@
-# !/usr/bin/perl
+#! /usr/bin/perl
 use HTTP::Tiny;
 use LWP::Simple;
 # LWP::Protocols::https | it needs to request on 'https'
