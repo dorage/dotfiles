@@ -89,7 +89,6 @@ return {
 						gitsigns.diffthis("~")
 					end, { desc = "open diff with lastest commit" })
 					map("n", "<leader>hq", "<cmd>wincmd p | q<cr>", { desc = "close diff" })
-					map("n", "<leader>td", gitsigns.toggle_deleted, { desc = "toggle deleted" })
 
 					-- Text object
 					map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
