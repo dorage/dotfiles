@@ -65,6 +65,7 @@ return {
 					"black",
 					"perlnavigator",
 					"perl-debug-adapter",
+					"stylua",
 				},
 			})
 
