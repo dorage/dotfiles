@@ -1,16 +1,81 @@
 return {
+	-- auto pair
+	{ "echasnovski/mini.pairs", version = "*", opts = {} },
 	-- html toolkit
 	{
 		"mattn/emmet-vim",
 		branch = "master",
 	},
-	-- easy commenting
+	-- extend a/i textobojects
 	{
-		"https://github.com/tpope/vim-commentary",
+		"echasnovski/mini.ai",
+		version = "*",
+		opts = {
+			-- Module mappings. Use `''` (empty string) to disable one.
+			mappings = {
+				-- Main textobject prefixes
+				around = "a",
+				inside = "i",
+
+				-- Next/last variants
+				around_next = "an",
+				inside_next = "in",
+				around_last = "al",
+				inside_last = "il",
+
+				-- Move cursor to corresponding edge of `a` textobject
+				goto_left = "g[",
+				goto_right = "g]",
+			},
+		},
+	},
+	-- easy commenting
+	{ "JoosepAlviste/nvim-ts-context-commentstring", opts = { enable_autocmd = true } },
+	{
+		"echasnovski/mini.comment",
+		dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
+		version = "*",
+		opts = {
+			mappings = {
+				-- Toggle comment (like `gcip` - comment inner paragraph) for both
+				-- Normal and Visual modes
+				comment = "gc",
+
+				-- Toggle comment on current line
+				comment_line = "gcc",
+
+				-- Toggle comment on visual selection
+				comment_visual = "gc",
+
+				-- Define 'comment' textobject (like `dgc` - delete whole comment block)
+				-- Works also in Visual mode if mapping differs from `comment_visual`
+				textobject = "gc",
+			},
+			options = {
+				custom_commentstring = function()
+					return require("ts_context_commentstring").calculate_commentstring() or vim.bo.commentstring
+				end,
+			},
+		},
 	},
 	-- easy surrounding
 	{
-		"https://github.com/tpope/vim-surround",
+		"echasnovski/mini.surround",
+		version = "*",
+		opts = {
+			mappings = {
+				add = "sa", -- Add surrounding in Normal and Visual modes
+				delete = "sd", -- Delete surrounding
+				find = "sf", -- Find surrounding (to the right)
+				find_left = "sF", -- Find surrounding (to the left)
+				highlight = "sh", -- Highlight surrounding
+				replace = "sr", -- Replace surrounding
+				update_n_lines = "sn", -- Update `n_lines`
+
+				suffix_last = "l", -- Suffix to search with "prev" method
+				suffix_next = "n", -- Suffix to search with "next" method
+			},
+		},
 	},
 	-- show indent guide
 	{
