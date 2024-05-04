@@ -40,9 +40,15 @@ return {
 			config = {
 				header = header,
 				shortcut = {
+					{
+						desc = "💾 Session",
+						group = "@property",
+						action = "lua require('persistence').load()",
+						key = "o",
+					},
 					{ desc = "💫 Update", group = "@property", action = "Lazy update", key = "u" },
 					{
-						icon = "📑 ",
+						icon = "📑 Files",
 						icon_hl = "@variable",
 						desc = "Files",
 						group = "Label",
