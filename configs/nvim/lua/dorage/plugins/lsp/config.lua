@@ -35,7 +35,9 @@ return {
 		},
 		config = function()
 			-- IMPORTANT: make sure to setup neodev BEFORE lspconfig
-			require("neodev").setup({})
+			require("neodev").setup({
+				library = { plugins = { "neotest" }, types = true },
+			})
 
 			-- This is where all the LSP shenanigans will live
 			local lsp_zero = require("lsp-zero")
@@ -123,31 +125,31 @@ return {
 					)
 					vim.keymap.set(
 						"n",
-						"<leader>tr",
+						"<leader>lr",
 						"<cmd>TSToolsRenameFile<cr>",
 						{ buffer = bufnr, desc = "TS Rename file" }
 					)
 					vim.keymap.set(
 						"n",
-						"<leader>toa",
+						"<leader>loa",
 						"<cmd>TSToolsOrganizeImports<cr>",
 						{ buffer = bufnr, desc = "TS Sort and Remove unused imports" }
 					)
 					vim.keymap.set(
 						"n",
-						"<leader>tos",
+						"<leader>los",
 						"<cmd>TSToolsSortImports<cr>",
 						{ buffer = bufnr, desc = "TS Sort imports" }
 					)
 					vim.keymap.set(
 						"n",
-						"<leader>tod",
+						"<leader>lod",
 						"<cmd>TSToolsRemoveUnusedImports<cr>",
 						{ buffer = bufnr, desc = "TS Remove unused imports" }
 					)
 					vim.keymap.set(
 						"n",
-						"<leader>tf",
+						"<leader>lf",
 						"<cmd>TSToolsFileReferences<cr>",
 						{ buffer = bufnr, desc = "TS Remove unused imports" }
 					)
