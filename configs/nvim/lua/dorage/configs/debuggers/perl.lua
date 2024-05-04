@@ -3,9 +3,9 @@ dap.adapters.perl = {
 	type = "executable",
 	-- Path to perl-debug-adapter - will be different based on the installation method
 	-- mason.nvim
-	command = vim.env.MASON .. "/bin/perl-debug-adapter",
+	-- command = vim.env.MASON .. "/bin/perl-debug-adapter",
 	-- AUR (or if perl-debug-adapter is in PATH)
-	-- command = 'perl-debug-adapter',
+	command = "perl-debug-adapter",
 	args = {},
 }
 
