@@ -33,6 +33,25 @@ return {
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
 			require("trouble").setup()
+
+			vim.keymap.set("n", "<leader>ftt", function()
+				require("trouble").toggle()
+			end)
+			vim.keymap.set("n", "<leader>ftw", function()
+				require("trouble").toggle("workspace_diagnostics")
+			end)
+			vim.keymap.set("n", "<leader>ftd", function()
+				require("trouble").toggle("document_diagnostics")
+			end)
+			vim.keymap.set("n", "<leader>ftq", function()
+				require("trouble").toggle("quickfix")
+			end)
+			vim.keymap.set("n", "<leader>ftl", function()
+				require("trouble").toggle("loclist")
+			end)
+			vim.keymap.set("n", "gtr", function()
+				require("trouble").toggle("lsp_references")
+			end)
 		end,
 	},
 	{
