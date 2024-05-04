@@ -9,7 +9,7 @@ return {
 				-- Customize or remove this keymap to your liking
 				"<F3>",
 				function()
-					require("conform").format({ timeout_ms = 500, lsp_fallback = true, async = true })
+					require("conform").format({ timeout_ms = 500, lsp_fallback = true, async = true, quiet = true })
 				end,
 				mode = "",
 				desc = "Conform:Format buffer",
@@ -34,7 +34,7 @@ return {
 				perl = { "perltidy" },
 			},
 			-- Set up format-on-save
-			format_on_save = { timeout_ms = 500, lsp_fallback = true, async = true },
+			format_on_save = { timeout_ms = 500, lsp_fallback = true, async = true, quiet = true },
 			-- Customize formatters
 			formatters = {
 				shfmt = {
