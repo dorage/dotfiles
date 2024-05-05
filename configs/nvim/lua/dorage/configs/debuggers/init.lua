@@ -1,2 +1,3 @@
-require("dorage.configs.debuggers.nodejs")
-require("dorage.configs.debuggers.perl")
+for _, ftype in ipairs({ "nodejs", "perl" }) do
+	require("dorage.configs.debuggers." .. ftype)
+end
