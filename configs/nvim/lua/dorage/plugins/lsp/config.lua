@@ -68,6 +68,7 @@ return {
 					"perlnavigator",
 					"perl-debug-adapter",
 					"stylua",
+					"js-debug-adapter",
 				},
 			})
 
