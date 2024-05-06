@@ -15,6 +15,9 @@ local afterThemeConfig = function()
 	vim.api.nvim_set_hl(0, "BufferTabpagesSep", { guibg = nil })
 	vim.api.nvim_set_hl(0, "BufferScrollArrowBufferTabpageFill", { guibg = nil })
 
+	-- border color
+	vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#BfBfBf" })
+
 	-- setup current line highlight
 	vim.opt.cursorline = true
 	--
