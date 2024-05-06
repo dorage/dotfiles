@@ -25,12 +25,14 @@ for _, language in ipairs({ "typescript", "javascript", "javascriptreact", "type
 		{
 			type = "pwa-node",
 			request = "launch",
-			name = "Debug Jest Tests",
+			name = "Jest: Current File",
 			trace = true, -- include debugger info
 			-- runtimeExecutable = "node",
 			runtimeArgs = {
 				"./node_modules/jest/bin/jest.js",
 				"--runInBand",
+				"--",
+				"${file}",
 			},
 			rootPath = "${workspaceFolder}",
 			cwd = "${workspaceFolder}",
@@ -41,7 +43,7 @@ for _, language in ipairs({ "typescript", "javascript", "javascriptreact", "type
 		{
 			type = "pwa-node",
 			request = "launch",
-			name = "Node:Current File",
+			name = "Node: Current File",
 			cwd = vim.fn.getcwd(),
 			runtimeExecutable = "ts-node",
 			args = { "${file}" },
