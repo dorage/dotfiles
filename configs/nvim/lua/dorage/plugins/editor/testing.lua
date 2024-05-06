@@ -1,5 +1,6 @@
 return {
-	{ "https://github.com/nvim-neotest/neotest-jest" },
+	{ "nvim-neotest/neotest-jest" },
+	{ "nvim-neotest/neotest-plenary" },
 	{
 		"nvim-neotest/neotest",
 		dependencies = {
@@ -7,15 +8,16 @@ return {
 			"nvim-lua/plenary.nvim",
 			"antoinemadec/FixCursorHold.nvim",
 			"nvim-treesitter/nvim-treesitter",
-			"https://github.com/nvim-neotest/neotest-jest",
+			"nvim-neotest/neotest-plenary",
+			"nvim-neotest/neotest-jest",
 		},
 		config = function()
 			require("neotest").setup({
 				adapters = {
 					require("neotest-plenary"),
-					require("neotest-vim-test")({
-						ignore_file_types = { "python", "vim", "lua" },
-					}),
+					-- require("neotest-vim-test")({
+					-- 	ignore_file_types = { "python", "vim", "lua" },
+					-- }),
 					require("neotest-jest")({
 						jestCommand = "npm test --",
 						jestConfigFile = function(file)
@@ -33,6 +35,7 @@ return {
 				},
 				status = { virtual_text = true },
 				output = { open_on_run = true },
+				-- TODO: add custom debugging strategy
 			})
 
 			local neotest_ns = vim.api.nvim_create_namespace("neotest")
@@ -68,6 +71,13 @@ return {
 					require("neotest").run.run()
 				end,
 				desc = "Test:Run Nearest",
+			},
+			{
+				"<leader>td",
+				function()
+					require("neotest").run.run({ strategy = "dap" })
+				end,
+				desc = "Test:Debug Nearest",
 			},
 			{
 				"<leader>tl",
