@@ -16,7 +16,8 @@ local afterThemeConfig = function()
 	vim.api.nvim_set_hl(0, "BufferScrollArrowBufferTabpageFill", { guibg = nil })
 
 	-- border color
-	vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#BfBfBf" })
+	vim.api.nvim_set_hl(0, "NormalFloat", { bg = nil })
+	vim.api.nvim_set_hl(0, "FloatBorder", { link = "MoonflySky" })
 
 	-- setup current line highlight
 	vim.opt.cursorline = true
