@@ -1,35 +1,10 @@
 return {
-	-- auto pair
-	{ "echasnovski/mini.pairs", version = "*", opts = {} },
 	-- html toolkit
 	{
 		"mattn/emmet-vim",
 		branch = "master",
 	},
-	-- extend a/i textobojects
-	{
-		"echasnovski/mini.ai",
-		version = "*",
-		opts = {
-			-- Module mappings. Use `''` (empty string) to disable one.
-			mappings = {
-				-- Main textobject prefixes
-				around = "a",
-				inside = "i",
-
-				-- Next/last variants
-				around_next = "an",
-				inside_next = "in",
-				around_last = "al",
-				inside_last = "il",
-
-				-- Move cursor to corresponding edge of `a` textobject
-				goto_left = "g[",
-				goto_right = "g]",
-			},
-		},
-	},
-	-- easy commenting
+	--	 easy commenting
 	{ "JoosepAlviste/nvim-ts-context-commentstring", opts = { enable_autocmd = true } },
 	{
 		"echasnovski/mini.comment",
@@ -40,13 +15,10 @@ return {
 				-- Toggle comment (like `gcip` - comment inner paragraph) for both
 				-- Normal and Visual modes
 				comment = "gc",
-
 				-- Toggle comment on current line
 				comment_line = "gcc",
-
 				-- Toggle comment on visual selection
 				comment_visual = "gc",
-
 				-- Define 'comment' textobject (like `dgc` - delete whole comment block)
 				-- Works also in Visual mode if mapping differs from `comment_visual`
 				textobject = "gc",

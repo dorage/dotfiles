@@ -60,9 +60,9 @@ return {
 					mappings = {
 						n = {
 							["q"] = require("telescope.actions").close,
-							["<c-t>"] = require("trouble").open_with_trouble,
+							-- ["<c-t>"] = require("trouble").open_with_trouble,
 						},
-						i = { ["<c-t>"] = require("trouble").open_with_trouble },
+						-- i = { ["<c-t>"] = require("trouble").open_with_trouble },
 					},
 				},
 				pickers = {
@@ -81,7 +81,7 @@ return {
 			})
 
 			vim.api.nvim_set_hl(0, "TelescopeBorder", { default = false, bg = nil })
-			vim.api.nvim_set_hl(0, "TelescopeTitle", { default = false })
+			vim.api.nvim_set_hl(0, "TelescopeTitle", { link = "MoonflyBlue" })
 
 			-- load extension
 			require("telescope").load_extension("ui-select")

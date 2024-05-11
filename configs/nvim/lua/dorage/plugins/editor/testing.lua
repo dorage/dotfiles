@@ -18,9 +18,11 @@ return {
 					-- require("neotest-vim-test")({
 					-- 	ignore_file_types = { "python", "vim", "lua" },
 					-- }),
+					-- TODO: Error in monorepo. in finding jest dependencies
 					require("neotest-jest")({
 						jestCommand = "npm test --",
 						jestConfigFile = function(file)
+							print("file", file)
 							if string.find(file, "/packages/") then
 								return string.match(file, "(.-/[^/]+/)src") .. "jest.config.ts"
 							end
