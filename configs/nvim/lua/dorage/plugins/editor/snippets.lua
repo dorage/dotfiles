@@ -10,8 +10,9 @@ return {
 				updateevents = "TextChanged,TextChangedI",
 				enable_autosnippets = true,
 			})
-			-- FIX: vscode snippet is not working
-			require("luasnip.loaders.from_vscode").lazy_load({ path = { "dorage.snippets.vscode" } })
+			require("luasnip.loaders.from_vscode").lazy_load({
+				paths = { "~/.config/nvim/lua/dorage/snippets/vscode" },
+			})
 
 			require("dorage.snippets.luasnip")
 
