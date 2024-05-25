@@ -8,5 +8,5 @@ my $url = shift(@ARGV);
 $content = get($url);
 $content =~ /\<title\>(.*?)\<\/title\>|<meta [^>]*property=[\"']og:title[\"'] [^>]*content=[\"']([^'^\"]+?)[\"'][^>]*>/;
 
-die "Can't GET $url" if (! defined $content);
+print "Untitled" if (! defined $content);
 print "$1"
