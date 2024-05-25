@@ -28,6 +28,15 @@
           "javascriptreact"
         ],
         "path": "./tsserver/hono.json"
+      },
+      {
+        "language": [
+          "typescript",
+          "javascript",
+          "typescriptreact",
+          "javascriptreact"
+        ],
+        "path": "./tsserver/remix.json"
       }
     ]
   }

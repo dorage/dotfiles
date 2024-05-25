@@ -14,8 +14,18 @@
   },
   "react useEffect": {
     "prefix": "rehe",
-    "body": ["useEffect(() => {${1:}}, []);;"],
+    "body": ["useEffect(() => {${2:}}, [${1:}]);;"],
     "description": "react useEffect"
+  },
+  "react useMemo": {
+    "prefix": "rehm",
+    "body": ["useMemo(() => {${2:}}, [${1:}]);;"],
+    "description": "react useMemo"
+  },
+  "react useCallback": {
+    "prefix": "rehe",
+    "body": ["useCallback(() => {${2:}}, [${1:}]);;"],
+    "description": "react useCallback"
   },
   "react new component": {
     "prefix": "recn",
