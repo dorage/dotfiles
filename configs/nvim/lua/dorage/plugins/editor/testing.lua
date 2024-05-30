@@ -1,3 +1,5 @@
+local pathUtils = require("dorage.utils.path")
+
 return {
 	{ "nvim-neotest/neotest-jest" },
 	{ "nvim-neotest/neotest-plenary" },
@@ -20,18 +22,27 @@ return {
 					-- }),
 					-- TODO: Error in monorepo. in finding jest dependencies
 					require("neotest-jest")({
-						jestCommand = "npm test --",
-						jestConfigFile = function(file)
-							print("file", file)
-							if string.find(file, "/packages/") then
-								return string.match(file, "(.-/[^/]+/)src") .. "jest.config.ts"
+						jestCommand = "pnpm test --",
+						jestConfigFile = function()
+							local jsPath = pathUtils.findDirectoryByFilename(vim.fn.expand("%"), "jest.config.js")
+							if jsPath ~= nil then
+								return jsPath .. "jest.config.js"
 							end
-
-							return vim.fn.getcwd() .. "/jest.config.ts"
+							local tsPath = pathUtils.findDirectoryByFilename(vim.fn.expand("%"), "jest.config.ts")
+							print("tsPath is", tsPath)
+							if tsPath ~= nil then
+								return tsPath .. "jest.config.ts"
+							end
+							return vim.fn.getcwd()
 						end,
 						env = { CI = true },
-						cwd = function(path)
-							return vim.fn.getcwd()
+						cwd = function()
+							local rootPath = pathUtils.findDirectoryByFilename(vim.fn.expand("%"), "package.json")
+							print("rootPath is", rootPath)
+							if rootPath == nil then
+								return vim.fn.getcwd()
+							end
+							return rootPath
 						end,
 					}),
 				},
