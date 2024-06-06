@@ -1,3 +1,5 @@
+require("hs.ipc")
+
 -- reload config
 hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "R", function()
 	hs.reload()
@@ -7,3 +9,4 @@ hs.alert.show("Config loaded")
 -- import modules
 require("Spoons.language")
 require("Spoons.hotkey-window")
+require("ipc.wifi")

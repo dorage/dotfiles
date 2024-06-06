@@ -20,6 +20,7 @@ local function create_hot_key_window(app_name, command_key, key)
 end
 
 create_hot_key_window("alacritty", { "cmd", "shift" }, "g")
+create_hot_key_window("safari", { "cmd", "shift" }, "s")
 
 create_hot_key_window("arc", { "alt" }, "1")
 create_hot_key_window("Google Chrome", { "alt" }, "2")
