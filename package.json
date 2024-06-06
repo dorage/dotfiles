@@ -10,6 +10,7 @@
     "mv:zellij": "rsync -avh --delete configs/zellij/ ~/.config/zellij",
     "mv:debuggers": "rsync -avh --delete configs/debuggers/ ~/.config/debuggers",
     "mv:scripts": "rsync -avh --delete scripts/ ~/.dorage-scripts",
+    "mv:sketchybar": "rsync -avh --delete configs/sketchybar/ ~/.config/sketchybar",
     "backup:karabiner": "rsync -avh --delete ~/.config/karabiner/ configs/karabiner"
   }
 }
