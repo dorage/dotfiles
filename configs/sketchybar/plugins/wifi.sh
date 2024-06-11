@@ -9,4 +9,4 @@ if [ "$NETWORK" = "" ]; then
 	CONNECTION="DIS"
 fi
 
-sketchybar --set "$NAME" label="${ICON}  ${CONNECTION}"
+sketchybar --set "$NAME" icon="${ICON}" label="${CONNECTION}"

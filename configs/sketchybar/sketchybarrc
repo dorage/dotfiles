@@ -9,11 +9,15 @@ PLUGIN_DIR="$CONFIG_DIR/plugins"
 
 ##### Themes #####
 primary=0xFFA7F205
+secondary=0xFF74FAFC
 text=0xFFD4D4D4
 bg=0xB3080808
+bg_blue=0xAA00091E
+transparent=0x00000000
 
 ##### Global Vars #####
 bar_width=90
+corner_radius=6
 
 ##### Bar Appearance #####
 # Configuring the general appearance of the bar.
@@ -29,10 +33,13 @@ bar=(
 	height="${bar_width}"
 	margin=4
 	y_offset=4
-	corner_radius=6
-	# border_width=1
+	corner_radius="${corner_radius}"
+	border_width=1
+	border_color="${transparent}"
 	# border_color="${primary}"
+	# border_color="${secondary}"
 	color="${bg}"
+	color="${bg_blue}"
 	# color=0x00000000
 )
 
@@ -51,7 +58,7 @@ default=(
 	label.width="${bar_width}"
 	label.algin=left
   icon.font="FiraCode Nerd Font:Bold:17.0"
-  icon.color="${primary}"
+  icon.color="${secondary}"
   icon.padding_left=4
   icon.padding_right=4
   label.padding_left=4
@@ -59,38 +66,19 @@ default=(
 )
 sketchybar --default "${default[@]}"
 
-##### Adding Mission Control Space Indicators #####
-# Let's add some mission control spaces:
-# https://felixkratz.github.io/SketchyBar/config/components#space----associate-mission-control-spaces-with-an-item
-# to indicate active and available mission control spaces.
-
-# SPACE_ICONS=("いち" "二" "三" "四" "五" "六" "七" "八" "九" "十")
-# for i in "${!SPACE_ICONS[@]}"
-# do
-#   sid="$(($i+1))"
-#   space=(
-#     space="$sid"
-#     icon="${SPACE_ICONS[i]}"
-#     # icon.padding_left=7
-#     # icon.padding_right=7
-#     background.color=0x60ffffff
-#     background.corner_radius=5
-#     background.height=25
-#     label.drawing=off
-#     script="$PLUGIN_DIR/space.sh"
-#     click_script="yabai -m space --focus $sid"
-#   )
-#   sketchybar --add space space."$sid" left --set space."$sid" "${space[@]}"
-# done
-
 ##### Common Components #####
+
 badge_options=(
-	label.width=60
-	label.color=0xff333333
-	label.align=center
-	icon.drawing=off
+	label.width=40
+	label.color="${text}"
+	label.align=right
+	icon.width=30
+	icon.align=center
 	background.corner_radius=5
-	background.color=0xDDDDDDDD
+	background.color="${transparent}"
+	# background.border_color="${text}"
+	# background.border_color="${secondary}"
+	# background.border_width=1
 	background.height=25
 )
 
@@ -99,79 +87,112 @@ popup_item_options=(
 )
 
 ##### Adding Left Items #####
-# We add some regular items to the left side of the bar, where
-# only the properties deviating from the current defaults need to be set
 
-battery_options=(
-	update_freq=10
-	script="$PLUGIN_DIR/battery.sh"
-	click_script="open /System/Library/PreferencePanes/Battery.prefPane"
+active_app_label_options=(
+	label="active"
+	label.width=70
+	label.align=center
+	icon.drawing=off
 )
-sketchybar --add item battery left \
-           --set battery "${badge_options[@]}" "${battery_options[@]}" \ 
-           --subscribe battery system_woke power_source_change
-
-wifi_options=(
-	update_freq=10
-	script="$PLUGIN_DIR/wifi.sh"
-	click_script="open /System/Library/PreferencePanes/Network.prefPane"
+active_app_options=(
+	background.drawing=on
+	background.image=app.org.alacritty
+	background.image.scale=0.8
+	background.image.padding_left=20
 )
-
-sketchybar --add item wifi left \
-					 --set wifi "${badge_options[@]}" "${wifi_options[@]}" \
-					 --subscribe wifi wifi_change system_woke \
-
-sketchybar --add bracket badges wifi battery \
-					 --set badges background.drawing=on \
-												background.border_width=2 \
-												background.border_color=0xffffffff \
-												background.height=40
-
-# bluetooth_option=(
-# 	click_script="open /System/Library/PreferencePanes/Bluetooth.prefPane/"
-# 	label=""
-# )
-# sketchybar --add item bluetooth left \
-# 					 --set bluetooth "${badge_options[@]}" "${bluetooth_option[@]}"
-
-# front_app_options=(
-# icon.drawing=off
-# script="$PLUGIN_DIR/front_app.sh"
-# )
-# sketchybar --add item front_app left \
-# 					 --set front_app "${front_app_options[@]}" \
-#            --subscribe front_app front_app_switched 
-
+sketchybar \
+--add item app_icon_label left \
+--set app_icon_label "${badge_options[@]}" "${active_app_label_options[@]}" \
+--add item app_icon left \
+--set app_icon "${active_app_options[@]}"
 
 ##### Adding Right Items #####
-# In the same way as the left items we can add items to the right side.
-# Additional position (e.g. center) are available, see:
-# https://felixkratz.github.io/SketchyBar/config/items#adding-items-to-sketchybar
-
-# Some items refresh on a fixed cycle, e.g. the clock runs its script once
-# every 10s. Other items respond to events they subscribe to, e.g. the
-# volume.sh script is only executed once an actual change in system audio
-# volume is registered. More info about the event system can be found here:
-# https://felixkratz.github.io/SketchyBar/config/events
-
 
 clock_options=(
 	update_freq=10
 	script="$PLUGIN_DIR/clock.sh"
 )
-
 sketchybar --add item clock_time right \
 					 --add item clock_day right \
 					 --add item clock_month right \
 					 --add item clock_year right \
 					 --set '/clock_.*/' "${clock_options[@]}"
 
+sketchybar --add item divider right \
+           --set divider background.height=20 background.color=0x00ffffff
+
+
+
 # sketchybar --add item volume right \
 #            --set volume script="$PLUGIN_DIR/volume.sh" \
 #            --subscribe volume volume_change \
-#            --add item battery right \
-#            --set battery update_freq=120 script="$PLUGIN_DIR/battery.sh" \
-#            --subscribe battery system_woke power_source_change
+
+battery_options=(
+	updates=when_shown
+	update_freq=10
+	script="$PLUGIN_DIR/battery.sh"
+	click_script="open /System/Library/PreferencePanes/Battery.prefPane"
+)
+sketchybar --add item battery right \
+           --set battery "${badge_options[@]}" "${battery_options[@]}" \ 
+           --subscribe battery system_woke power_source_change
+
+wifi_options=(
+	updates=when_shown
+	update_freq=10
+	script="$PLUGIN_DIR/wifi.sh"
+	click_script="open /System/Library/PreferencePanes/Network.prefPane"
+)
+sketchybar --add item wifi right \
+					 --set wifi "${badge_options[@]}" "${wifi_options[@]}" \
+					 --subscribe wifi wifi_change system_woke \
+
+caffeinate_options=(
+	updates=when_shown
+	icon=""
+	label="WKP"
+	click_script="sketchybar -m --set \$NAME popup.drawing=toggle" \
+	popup.height=40
+	popup.background.color="${bg}"
+	popup.background.corner_radius="${corner_radius}"
+	popup.background.border_width=1
+	popup.background.border_color="${secondary}"
+)
+sketchybar \
+--add item caffeinate right \
+--set caffeinate "${badge_options[@]}" "${caffeinate_options[@]}" \
+
+caffeinate_label_options=(
+	padding_left=0
+	padding_right=0
+	label.width=100
+	label.align=center
+	label.font.size=12
+	icon.drawing=off
+)
+caffeinate_item_options=(
+	padding_left=10
+	padding_right=10
+	label=""
+	label.align=center
+	label.color="${bg}"
+	label.width=80
+	icon.drawing=off
+	background.color="${secondary}"
+	background.corner_radius="${corner_radius}"
+	background.height=20
+)
+sketchybar \
+--add item caffeinate.label.displayIdle popup.caffeinate \
+--add item caffeinate.item.displayIdle popup.caffeinate \
+--add item caffeinate.label.systemIdle popup.caffeinate \
+--add item caffeinate.item.systemIdle popup.caffeinate \
+--add item caffeinate.label.system popup.caffeinate \
+--add item caffeinate.item.system popup.caffeinate \
+--set /caffeinate\.label\.[a-zA-Z]*/ "${caffeinate_label_options[@]}" \
+--set /caffeinate\.item\.[a-zA-Z]*/ "${caffeinate_item_options[@]}" \
+--set caffeinate script="$PLUGIN_DIR/caffeinate.sh"
+--subscribe caffeinate mouse.exited.global
 
 ##### Force all scripts to run the first time (never do this in a script) #####
 sketchybar --update

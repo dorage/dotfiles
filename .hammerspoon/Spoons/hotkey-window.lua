@@ -19,8 +19,21 @@ local function create_hot_key_window(app_name, command_key, key)
 	end)
 end
 
-create_hot_key_window("alacritty", { "cmd", "shift" }, "g")
+create_hot_key_window("org.alacritty", { "cmd", "shift" }, "g")
 create_hot_key_window("safari", { "cmd", "shift" }, "s")
+create_hot_key_window("iterm", { "cmd", "shift" }, "f")
 
-create_hot_key_window("arc", { "alt" }, "1")
-create_hot_key_window("Google Chrome", { "alt" }, "2")
+local w = 15
+local h = 2
+
+hs.grid.setGrid(w .. "x" .. h)
+
+hs.hotkey.bind({ "cmd", "shift" }, "c", function()
+	local activeWindow = hs.window.focusedWindow()
+	hs.grid.set(activeWindow, "1,0 14x2")
+end)
+hs.hotkey.bind({ "cmd", "shift" }, "f", function()
+	local activeWindow = hs.window.focusedWindow()
+	print("cell: ", hs.grid.get(activeWindow))
+	hs.grid.set(activeWindow, "0,0 15x2")
+end)
