@@ -88,12 +88,6 @@ popup_item_options=(
 
 ##### Adding Left Items #####
 
-active_app_label_options=(
-	label="active"
-	label.width=70
-	label.align=center
-	icon.drawing=off
-)
 active_app_options=(
 	background.drawing=on
 	background.image=app.org.alacritty
@@ -101,8 +95,6 @@ active_app_options=(
 	background.image.padding_left=20
 )
 sketchybar \
---add item app_icon_label left \
---set app_icon_label "${badge_options[@]}" "${active_app_label_options[@]}" \
 --add item app_icon left \
 --set app_icon "${active_app_options[@]}"
 
@@ -128,27 +120,20 @@ sketchybar --add item divider right \
 #            --subscribe volume volume_change \
 
 battery_options=(
-	updates=when_shown
-	update_freq=10
 	script="$PLUGIN_DIR/battery.sh"
 	click_script="open /System/Library/PreferencePanes/Battery.prefPane"
 )
 sketchybar --add item battery right \
            --set battery "${badge_options[@]}" "${battery_options[@]}" \ 
-           --subscribe battery system_woke power_source_change
 
 wifi_options=(
-	updates=when_shown
-	update_freq=10
 	script="$PLUGIN_DIR/wifi.sh"
 	click_script="open /System/Library/PreferencePanes/Network.prefPane"
 )
 sketchybar --add item wifi right \
 					 --set wifi "${badge_options[@]}" "${wifi_options[@]}" \
-					 --subscribe wifi wifi_change system_woke \
 
 caffeinate_options=(
-	updates=when_shown
 	icon=""
 	label="WKP"
 	click_script="sketchybar -m --set \$NAME popup.drawing=toggle" \
@@ -193,6 +178,14 @@ sketchybar \
 --set /caffeinate\.item\.[a-zA-Z]*/ "${caffeinate_item_options[@]}" \
 --set caffeinate script="$PLUGIN_DIR/caffeinate.sh"
 --subscribe caffeinate mouse.exited.global
+
+volume_options=(
+	icon=""
+	label="100 GB"
+)
+sketchybar \
+--add item volume right \
+--set volume "${volume_options[@]}"
 
 ##### Force all scripts to run the first time (never do this in a script) #####
 sketchybar --update

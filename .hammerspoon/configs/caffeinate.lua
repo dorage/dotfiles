@@ -7,17 +7,17 @@ local caffeinate = require("hs.caffeinate")
 
 -- Default Setup
 -- keep waken up on charging
-caffeinate.set("displayIdle", true, true)
-caffeinate.set("systemIdle", true, true)
-caffeinate.set("system", true, true)
+caffeinate.set("displayIdle", false, true)
+caffeinate.set("systemIdle", false, true)
+caffeinate.set("system", false, true)
 
 -- Sketchybar IPC
 
 function ToggleCaffeinate(sleepType)
 	local aValue = caffeinate.get(sleepType)
-	caffeinate.set(sleepType, !aValue, true)
+	caffeinate.toggle(sleepType)
 
 	-- toggle sketchybar options
-	local text = aValue and 'on' or 'off'
-	os.execute("sketchybar --set caffeinate_" .. sleepType .." label=" .. text )
+	local text = aValue and "on" or "off"
+	os.execute("sketchybar --set caffeinate_" .. sleepType .. " label=" .. text)
 end
