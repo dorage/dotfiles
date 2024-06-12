@@ -134,6 +134,7 @@ memory_options=(
 	update_freq=30
 	icon=""
 	script="$PLUGIN_DIR/memory.sh"
+	click_script="open -b com.apple.ActivityMonitor"
 )
 sketchybar \
 --add item memory right \

@@ -4,7 +4,6 @@
 -- key bindding reference --> https://www.hammerspoon.org/docs/hs.hotkey.html
 local inputEnglish = "com.apple.keylayout.ABC"
 local inputKorean = "com.apple.inputmethod.Korean.2SetKorean"
-local esc_bind
 
 local function convert_to_eng_with_esc()
 	local inputSource = hs.keycodes.currentSourceID()
@@ -12,9 +11,9 @@ local function convert_to_eng_with_esc()
 		hs.eventtap.keyStroke({}, "right")
 		hs.keycodes.currentSourceID(inputEnglish)
 	end
-	esc_bind:disable()
+	ESC_BIND:disable()
 	hs.eventtap.keyStroke({}, "escape")
-	esc_bind:enable()
+	ESC_BIND:enable()
 end
 
-esc_bind = hs.hotkey.new({}, "escape", convert_to_eng_with_esc):enable()
+ESC_BIND = hs.hotkey.new({}, "escape", convert_to_eng_with_esc):enable()
