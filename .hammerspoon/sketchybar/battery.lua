@@ -18,13 +18,13 @@ local function handleChangeBattery()
 	local isCharging = GetBatteryIsCharging()
 
 	if isCharging then
-		hs.execute("sketchybar --set battery label='" .. percentage .. "' icon='" .. icon["charging"] .. "'", true)
+		hs.execute("sketchybar --set battery label='" .. percentage .. "%' icon='" .. icon["charging"] .. "'", true)
 		return
 	end
 
 	for i = 100, 0, -10 do
 		if percentage >= i then
-			hs.execute("sketchybar --set battery label='" .. percentage .. "' icon='" .. icon[i] .. "'", true)
+			hs.execute("sketchybar --set battery label='" .. percentage .. "%' icon='" .. icon[i] .. "'", true)
 			break
 		end
 	end
@@ -55,6 +55,7 @@ function GetBatteryIsCharging()
 end
 
 -- IPC
-function InitBatterySketchyBar()
+function InitBatterySketchybar()
+	print("InitBatterySketchybar")
 	handleChangeBattery()
 end

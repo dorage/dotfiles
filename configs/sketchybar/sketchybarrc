@@ -69,17 +69,19 @@ sketchybar --default "${default[@]}"
 ##### Common Components #####
 
 badge_options=(
-	label.width=40
+	label.width=50
 	label.color="${text}"
 	label.align=right
+	label.font.size=12
 	icon.width=30
 	icon.align=center
+	icon.font.size=14
 	background.corner_radius=5
 	background.color="${transparent}"
 	# background.border_color="${text}"
 	# background.border_color="${secondary}"
 	# background.border_width=1
-	background.height=25
+	background.height=20
 )
 
 popup_item_options=(
@@ -118,6 +120,24 @@ sketchybar --add item divider right \
 # sketchybar --add item volume right \
 #            --set volume script="$PLUGIN_DIR/volume.sh" \
 #            --subscribe volume volume_change \
+
+storage_options=(
+	update_freq=1000
+	icon=""
+	script="$PLUGIN_DIR/storage.sh"
+)
+sketchybar \
+--add item storage right \
+--set storage "${badge_options[@]}" "${storage_options[@]}"
+
+memory_options=(
+	update_freq=30
+	icon=""
+	script="$PLUGIN_DIR/memory.sh"
+)
+sketchybar \
+--add item memory right \
+--set memory "${badge_options[@]}" "${memory_options[@]}"
 
 battery_options=(
 	script="$PLUGIN_DIR/battery.sh"
@@ -179,13 +199,6 @@ sketchybar \
 --set caffeinate script="$PLUGIN_DIR/caffeinate.sh"
 --subscribe caffeinate mouse.exited.global
 
-volume_options=(
-	icon=""
-	label="100 GB"
-)
-sketchybar \
---add item volume right \
---set volume "${volume_options[@]}"
 
 ##### Force all scripts to run the first time (never do this in a script) #####
 sketchybar --update
