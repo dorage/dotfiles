@@ -23,7 +23,7 @@
     "description": "react useMemo"
   },
   "react useCallback": {
-    "prefix": "rehe",
+    "prefix": "rehc",
     "body": ["useCallback(() => {${2:}}, [${1:}]);;"],
     "description": "react useCallback"
   },
