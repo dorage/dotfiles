@@ -106,7 +106,12 @@ return {
 					:hi link NvimTreeImageFile   Title
 			]])
 
-			vim.keymap.set("n", "<leader>ab", "<Cmd>:NvimTreeToggle<CR>", { silent = true })
+			vim.keymap.set("n", "<leader>ab", function()
+				require("nvim-tree.api").tree.toggle({
+					find_file = true,
+					focus = true,
+				})
+			end, { silent = true })
 		end,
 	},
 	-- floating terminal
