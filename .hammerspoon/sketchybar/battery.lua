@@ -25,9 +25,11 @@ local function handleChangeBattery()
 	for i = 100, 0, -10 do
 		if percentage >= i then
 			hs.execute("sketchybar --set battery label='" .. percentage .. "%' icon='" .. icon[i] .. "'", true)
-			break
+			return
 		end
 	end
+
+	hs.execute("sketchybar --set battery label='" .. percentage .. "%' icon='" .. icon[0] .. "'", true)
 end
 
 BatteryWatcher = hs.battery.watcher.new(handleChangeBattery)
