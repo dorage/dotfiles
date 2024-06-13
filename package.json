@@ -11,6 +11,6 @@
     "mv:scripts": "rsync -avh --delete scripts/ ~/.dorage-scripts",
     "mv:sketchybar": "rsync -avh --delete configs/sketchybar/ ~/.config/sketchybar",
     "bkp:karabiner": "rsync -avh --delete ~/.config/karabiner/ configs/karabiner",
-    "bkp:brew": "rsync -avh --delete ~/.config/karabiner/ configs/karabiner"
+    "bkp:brew": "brew bundle dump --file=./deps/Brewfile --force"
   }
 }
