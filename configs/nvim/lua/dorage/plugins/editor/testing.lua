@@ -1,4 +1,4 @@
-local pathUtils = require("dorage.utils.path")
+local utils = require("dorage.utils")
 
 return {
 	{ "nvim-neotest/neotest-jest" },
@@ -24,11 +24,11 @@ return {
 					require("neotest-jest")({
 						jestCommand = "pnpm test --",
 						jestConfigFile = function()
-							local jsPath = pathUtils.findDirectoryByFilename(vim.fn.expand("%"), "jest.config.js")
+							local jsPath = utils.path.findDirectoryByFilename(vim.fn.expand("%"), "jest.config.js")
 							if jsPath ~= nil then
 								return jsPath .. "jest.config.js"
 							end
-							local tsPath = pathUtils.findDirectoryByFilename(vim.fn.expand("%"), "jest.config.ts")
+							local tsPath = utils.path.findDirectoryByFilename(vim.fn.expand("%"), "jest.config.ts")
 							print("tsPath is", tsPath)
 							if tsPath ~= nil then
 								return tsPath .. "jest.config.ts"
@@ -37,7 +37,7 @@ return {
 						end,
 						env = { CI = true },
 						cwd = function()
-							local rootPath = pathUtils.findDirectoryByFilename(vim.fn.expand("%"), "package.json")
+							local rootPath = utils.path.findDirectoryByFilename(vim.fn.expand("%"), "package.json")
 							print("rootPath is", rootPath)
 							if rootPath == nil then
 								return vim.fn.getcwd()
