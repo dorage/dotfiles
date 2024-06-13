@@ -6,11 +6,11 @@
     "mv:alacritty": "rsync -avh --delete configs/alacritty/ ~/.config/alacritty",
     "mv:hammerspoon": "rsync -avh --delete .hammerspoon/ ~/.hammerspoon",
     "mv:zshrc": "rsync -avh --delete .zshrc ~/.zshrc",
-    "mv:tmux": "rsync -avh --delete .tmux.conf ~/.tmux.conf",
     "mv:zellij": "rsync -avh --delete configs/zellij/ ~/.config/zellij",
     "mv:debuggers": "rsync -avh --delete configs/debuggers/ ~/.config/debuggers",
     "mv:scripts": "rsync -avh --delete scripts/ ~/.dorage-scripts",
     "mv:sketchybar": "rsync -avh --delete configs/sketchybar/ ~/.config/sketchybar",
-    "backup:karabiner": "rsync -avh --delete ~/.config/karabiner/ configs/karabiner"
+    "bkp:karabiner": "rsync -avh --delete ~/.config/karabiner/ configs/karabiner",
+    "bkp:brew": "rsync -avh --delete ~/.config/karabiner/ configs/karabiner"
   }
 }
