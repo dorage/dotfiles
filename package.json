@@ -1,6 +1,7 @@
 {
   "name": "dev-env",
   "scripts": {
+    "mv:kitty": "rsync --avh --delete configs/kitty/ ~/.config/kitty",
     "mv:nvim": "rsync -avh --delete configs/nvim/ ~/.config/nvim",
     "mv:ranger": "rsync -avh --delete configs/ranger/ ~/.config/ranger",
     "mv:alacritty": "rsync -avh --delete configs/alacritty/ ~/.config/alacritty",
