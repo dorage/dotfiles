@@ -39,13 +39,16 @@ for _, language in ipairs({ "typescript", "javascript", "javascriptreact", "type
 			console = "integratedTerminal",
 			internalConsoleOptions = "neverOpen",
 		},
-		-- debug Node
+		-- debug Typescript
 		{
 			type = "pwa-node",
 			request = "launch",
-			name = "Node: Current File",
-			cwd = vim.fn.getcwd(),
-			runtimeExecutable = "ts-node",
+			name = "TS-Node: Current File",
+			trace = true,
+			rootPath = "${workspaceFolder}",
+			cwd = "${workspaceFolder}",
+			runtimeExecutable = "node",
+			runtimeArgs = { "--loader", "ts-node/esm", "--trace-warnings" },
 			args = { "${file}" },
 			sourceMaps = true,
 			protocol = "inspector",
@@ -58,7 +61,7 @@ for _, language in ipairs({ "typescript", "javascript", "javascriptreact", "type
 		{
 			type = "pwa-node",
 			request = "attach",
-			name = "Node:Attach",
+			name = "TS-Node:Attach",
 			processId = require("dap.utils").pick_process,
 			runtimeArgs = { "-r", "ts-node/register" },
 			cwd = "${workspaceFolder}",
@@ -68,6 +71,15 @@ for _, language in ipairs({ "typescript", "javascript", "javascriptreact", "type
 			resolveSourceMapLocations = {
 				"${workspaceFolder}/**",
 				"!**/node_modules/**",
+			},
+			-- debug NodeJS
+			{
+				type = "pwa-node",
+				request = "launch",
+				name = "Node: Current File",
+				program = "${file}",
+				cwd = "${workspaceFolder}",
+				console = "integratedTerminal",
 			},
 		},
 	}
