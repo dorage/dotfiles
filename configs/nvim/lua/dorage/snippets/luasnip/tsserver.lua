@@ -70,7 +70,7 @@ local es6 = {
 		{ name = "return ~", trig = "re" },
 		fmt(
 			[[
-	return <>;
+	return <>
 	]],
 			{
 				d(1, function()
