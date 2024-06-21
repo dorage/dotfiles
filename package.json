@@ -1,17 +1,17 @@
 {
   "name": "dev-env",
   "scripts": {
-    "mv:kitty": "rsync --avh --delete configs/kitty/ ~/.config/kitty",
-    "mv:nvim": "rsync -avh --delete configs/nvim/ ~/.config/nvim",
-    "mv:ranger": "rsync -avh --delete configs/ranger/ ~/.config/ranger",
-    "mv:alacritty": "rsync -avh --delete configs/alacritty/ ~/.config/alacritty",
-    "mv:hammerspoon": "rsync -avh --delete .hammerspoon/ ~/.hammerspoon",
-    "mv:zshrc": "rsync -avh --delete .zshrc ~/.zshrc",
-    "mv:zellij": "rsync -avh --delete configs/zellij/ ~/.config/zellij",
-    "mv:debuggers": "rsync -avh --delete configs/debuggers/ ~/.config/debuggers",
-    "mv:scripts": "rsync -avh --delete scripts/ ~/.dorage-scripts",
-    "mv:sketchybar": "rsync -avh --delete configs/sketchybar/ ~/.config/sketchybar",
-    "bkp:karabiner": "rsync -avh --delete ~/.config/karabiner/ configs/karabiner",
+    "mv:kitty": "rsync --avh --delete --update configs/kitty/ ~/.config/kitty",
+    "mv:nvim": "rsync -avh --delete --update configs/nvim/ ~/.config/nvim",
+    "mv:ranger": "rsync -avh --delete --update configs/ranger/ ~/.config/ranger",
+    "mv:alacritty": "rsync -avh --delete --update configs/alacritty/ ~/.config/alacritty",
+    "mv:hammerspoon": "rsync -avh --delete --update .hammerspoon/ ~/.hammerspoon",
+    "mv:zshrc": "rsync -avh --delete --update .zshrc ~/.zshrc",
+    "mv:zellij": "rsync -avh --delete --update configs/zellij/ ~/.config/zellij",
+    "mv:debuggers": "rsync -avh --delete --update configs/debuggers/ ~/.config/debuggers",
+    "mv:scripts": "rsync -avh --delete --update scripts/ ~/.dorage-scripts",
+    "mv:sketchybar": "rsync -avh --delete --update configs/sketchybar/ ~/.config/sketchybar",
+    "bkp:karabiner": "rsync -avh --delete --update ~/.config/karabiner/ configs/karabiner",
     "bkp:brew": "brew bundle dump --file=./deps/Brewfile --force"
   }
 }
