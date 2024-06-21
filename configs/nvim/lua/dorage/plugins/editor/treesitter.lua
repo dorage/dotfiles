@@ -25,6 +25,7 @@ return {
 					"rust",
 					"sql",
 					"perl",
+					"http",
 				},
 				highlight = {
 					enable = true,
