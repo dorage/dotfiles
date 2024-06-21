@@ -9,9 +9,6 @@ hs.alert.show("Config loaded")
 -- import modules
 require("Spoons.language")
 require("Spoons.hotkey-window")
-require("configs.caffeinate")
-require("ipc.wifi")
-require("ipc.ui")
 
 require("sketchybar.active-app")
 require("sketchybar.battery")

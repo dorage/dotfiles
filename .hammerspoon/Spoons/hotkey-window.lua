@@ -19,7 +19,7 @@ local function create_hot_key_window(app_name, command_key, key)
 	end)
 end
 
-create_hot_key_window("org.alacritty", { "cmd", "shift" }, "g")
+create_hot_key_window("net.kovidgoyal.kitty", { "cmd", "shift" }, "g")
 create_hot_key_window("safari", { "cmd", "shift" }, "s")
 create_hot_key_window("iterm", { "cmd", "shift" }, "f")
 

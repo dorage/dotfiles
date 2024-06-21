@@ -3,7 +3,6 @@ function GetAvailableStoarge()
 	local availableSpace = volumeInformation["/"].NSURLVolumeAvailableCapacityKey / 1024 / 1024 / 1024
 	availableSpace = math.floor(availableSpace * 10) / 10
 
-	print(availableSpace .. "GB")
 	return availableSpace
 end
 

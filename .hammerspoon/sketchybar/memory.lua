@@ -4,7 +4,6 @@ function GetVMStatsInGB()
 
 	for partition, size in pairs(vmStats) do
 		if partition ~= "pageSize" then
-			print(partition)
 			print(math.floor((size * pageSize) / 1023 / 1024 / 1024 * 100) / 100)
 		end
 	end
@@ -29,7 +28,6 @@ function GetAvailableMemoryGB()
 
 	local totalPagesUsed = appMemory + wiredMemory
 	local totalMemoryUsage = totalPagesUsed * pageSize
-	print(totalMemoryUsage .. "/" .. totalMemory)
 
 	-- local available = (totalMemory - totalMemoryUsage) / 1024 / 1024 / 1024
 	local available = totalMemory - totalMemoryUsage
