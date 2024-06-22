@@ -1,5 +1,17 @@
 return {
-	{ "folke/neodev.nvim" },
+	-- Neovim dev env
+	{
+		"folke/lazydev.nvim",
+		ft = "lua", -- only load on lua files
+		opts = {
+			library = {
+				-- See the configuration section for more details
+				-- Load luvit types when the `vim.uv` word is found
+				{ path = "luvit-meta/library", words = { "vim%.uv" } },
+			},
+		},
+	},
+	{ "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
 	-- LSP config helper
 	{
 		"VonHeikemen/lsp-zero.nvim",
@@ -29,16 +41,10 @@ return {
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
 			{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
-			{ "folke/neodev.nvim" },
 			{ "hrsh7th/cmp-nvim-lsp" },
 			{ "williamboman/mason-lspconfig.nvim" },
 		},
 		config = function()
-			-- IMPORTANT: make sure to setup neodev BEFORE lspconfig
-			require("neodev").setup({
-				library = { plugins = { "neotest" }, types = true },
-			})
-
 			-- This is where all the LSP shenanigans will live
 			local lsp_zero = require("lsp-zero")
 			lsp_zero.extend_lspconfig()
@@ -96,18 +102,20 @@ return {
 					lsp_zero.default_setup,
 					lua_ls = function()
 						-- (Optional) Configure lua language server for neovim
-						local lua_opts = lsp_zero.nvim_lua_ls()
+						-- local lua_opts = lsp_zero.nvim_lua_ls()
 						require("lspconfig").lua_ls.setup({
 							settings = {
-								Lua = {
-									completion = {
-										callSnippet = "Replace",
-									},
-								},
+								-- Lua = {
+								-- 	diagnostics = {
+								-- 		globals = { "vim" },
+								-- 	},
+								-- 	completion = {
+								-- 		callSnippet = "Replace",
+								-- 	},
+								-- },
 							},
 						})
 					end,
-					-- end,
 				},
 			})
 		end,
@@ -153,6 +161,12 @@ return {
 						"<leader>lf",
 						"<cmd>TSToolsFileReferences<cr>",
 						{ buffer = bufnr, desc = "TS Remove unused imports" }
+					)
+					vim.keymap.set(
+						"n",
+						"<leader>lof",
+						"<cmd>TSToolsAddMissingImports<cr>",
+						{ buffer = bufnr, desc = "TS Add missing imports" }
 					)
 				end,
 			})
