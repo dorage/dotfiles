@@ -1,3 +1,6 @@
-local path = require("dorage.utils.path")
+local M = {}
 
-return { path = path }
+M.path = require("dorage.utils.path")
+M.fp = require("dorage.utils.fp")
+
+return M
