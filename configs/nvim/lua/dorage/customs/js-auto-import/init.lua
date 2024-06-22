@@ -168,6 +168,8 @@ local M = {}
 M.import = function(imports)
 	-- local import_stmts = get_import_statements()
 	local parsed_import_stmts = get_parsed_import_statements()
+	-- preserve cursor position
+	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
 
 	for _, import in ipairs(imports) do
 		local matched_import_stmts = f.filter(parsed_import_stmts, function(import_stmt)
@@ -177,9 +179,16 @@ M.import = function(imports)
 		-- if the import statement, has same source, does not exist
 		if matched_import_stmts[#matched_import_stmts] == nil then
 			local last_import_stmt = parsed_import_stmts[#parsed_import_stmts]
-			local _, _, end_row = last_import_stmt.node:range()
-			local buf = vim.api.nvim_buf_get_lines(0, end_row + 1, -1, false)
-			vim.api.nvim_buf_set_lines(0, end_row + 1, -1, false, { gen_import_statement(import), unpack(buf) })
+			if last_import_stmt == nil then
+				local buf = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+				vim.api.nvim_buf_set_lines(0, 0, -1, false, { gen_import_statement(import), unpack(buf) })
+			else
+				local _, _, end_row = last_import_stmt.node:range()
+				local buf = vim.api.nvim_buf_get_lines(0, end_row + 1, -1, false)
+				vim.api.nvim_buf_set_lines(0, end_row + 1, -1, false, { gen_import_statement(import), unpack(buf) })
+			end
+			-- line had added
+			row = row + 1
 			goto continue
 		end
 
@@ -221,8 +230,27 @@ M.import = function(imports)
 				modules = f.combine(last_import_stmt.modules, missing_modules),
 			}),
 		})
+
 		::continue::
 	end
+
+	-- preserve cursor position
+	vim.cmd(":" .. row)
+	vim.cmd(":norm" .. col .. "l")
+end
+
+---import modules under the last import statement in the buffer
+---@param imports Import[]
+M.import_callback = function(imports)
+	return {
+		[-1] = {
+			[require("luasnip.util.events").leave] = function()
+				vim.schedule(function()
+					M.import(imports)
+				end)
+			end,
+		},
+	}
 end
 
 return M
