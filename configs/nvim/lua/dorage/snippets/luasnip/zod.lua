@@ -26,38 +26,43 @@ local parse = require("luasnip.util.parser").parse_snippet
 local ms = ls.multi_snippet
 local k = require("luasnip.nodes.key_indexer").new_key
 local fmtopt = { delimiters = "<>" }
-local f = require("dorage.utils.fp")
+local ls_utils = require("dorage.snippets.luasnip.common")
+local im = require("dorage.customs.js-auto-import")
+local fp = require("dorage.utils.fp")
 
-local M = {}
+local zod_import_opts =
+	{ callbacks = im.import_callback({
+		{ source = "zod", default_modules = {}, modules = { "z" } },
+	}) }
 
-M.singular = function(input)
-	local plural_word = input[1][1]
-	local last_word = string.match(plural_word, "[_%w]*$")
+local M = {
+	-- zod type inference
+	s(
+		{ name = "Zod: infer type", trig = "zdf" },
+		fmt(
+			[[
+z.infer<<typeof <>>>
+	]],
+			{ i(1) },
+			fmtopt
+		),
+		zod_import_opts
+	),
+	-- zod object
+	s(
+		{ name = "Zod: object", trig = "zdo" },
+		fmt(
+			[[
+z.object({
+	<>
+})
+	]],
+			{ i(1) },
+			fmtopt
+		),
+		zod_import_opts
+	),
+}
 
-	-- initialize with fallback
-	local singular_word = "item"
-
-	if string.match(last_word, ".s$") then
-		-- assume the given input is plural if it ends in s. This isn't always
-		-- perfect, but it's pretty good
-		singular_word = string.gsub(last_word, "s$", "", 1)
-	elseif string.match(last_word, "^_?%w.+") then
-		-- include an underscore in the match so that inputs like '_name' will
-		-- become '_n' and not just '_'
-		singular_word = string.match(last_word, "^_?.")
-	end
-
-	return s("{}", i(1, singular_word))
-end
-
-M.capitalize_first_char = function(input)
-	local word = input[1][1]
-	local capitalize = f.pipe(f.pipe_curry(string.sub, 1, 1), string.upper)(word) .. string.sub(word, 2)
-	return capitalize
-end
-
-M.identity = function(input)
-	return input[1][1]
-end
-
-return M
+ls.add_snippets("typescript", M)
+ls.add_snippets("typescriptreact", M)

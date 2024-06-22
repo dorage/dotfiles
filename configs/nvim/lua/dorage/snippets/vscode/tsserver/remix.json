@@ -1,0 +1,22 @@
+{
+  "remix header": {
+    "prefix": "remhd",
+    "body": ["export const use${1:NAME} = () => {", "    return [];    ", "}"],
+    "description": "remix header"
+  },
+  "remix loader": {
+    "prefix": "remld",
+    "body": ["export const use${1:NAME} = () => {", "    return [];    ", "}"],
+    "description": "remix loader"
+  },
+  "remix action": {
+    "prefix": "remac",
+    "body": ["export const use${1:NAME} = () => {", "    return [];    ", "}"],
+    "description": "remix action"
+  },
+  "remix component": {
+    "prefix": "remcn",
+    "body": ["export const use${1:NAME} = () => {", "    return [];    ", "}"],
+    "description": "remix component"
+  }
+}
