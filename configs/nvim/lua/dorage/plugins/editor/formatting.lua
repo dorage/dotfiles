@@ -33,7 +33,7 @@ return {
 				perl = { "perltidy" },
 			},
 			-- Set up format-on-save
-			format_on_save = { timeout_ms = 500, lsp_fallback = true, async = true, quiet = true },
+			format_on_save = { timeout_ms = 500, lsp_fallback = true, quiet = true },
 			-- Customize formatters
 			formatters = {
 				shfmt = {
