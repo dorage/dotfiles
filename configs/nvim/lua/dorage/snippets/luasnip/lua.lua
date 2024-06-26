@@ -60,6 +60,9 @@ ls.add_snippets("lua", {
 			"local ms = ls.multi_snippet",
 			'local k = require("luasnip.nodes.key_indexer").new_key',
 			'local fmtopt = { delimiters = "<>" }',
+			'local ls_utils = require("dorage.snippets.luasnip.common")',
+			'local ls_auto_import = require("dorage.customs.js-auto-import")',
+			'local fp = require("dorage.utils.fp")',
 		}),
 	}),
 	s(

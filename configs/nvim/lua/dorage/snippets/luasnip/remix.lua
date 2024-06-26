@@ -31,133 +31,79 @@ local ls_auto_import = require("dorage.customs.js-auto-import")
 local fp = require("dorage.utils.fp")
 
 local M = {
-	-- new hook
+	-- Remix new loader
 	s(
-		{ name = "React: new hook", trig = "rehn" },
+		{ name = "Remix: new Loader", trig = "reml" },
 		fmt(
 			[[
-	export const use<> = () =>> {
-		return {};
-	}
+export const loader = async ({}: LoaderFunctionArgs) =>> {
+	<>
+
+	return json({});
+};
+	]],
+			{ i(1) },
+			fmtopt
+		),
+		{
+			callbacks = ls_auto_import.import_callback({
+				{
+					source = "@remix-run/node",
+					modules = { "LoaderFunctionArgs", "json" },
+					default_modules = {},
+				},
+			}),
+		}
+	),
+	-- Remix new action
+	s(
+		{ name = "Remix: new Action", trig = "rema" },
+		fmt(
+			[[
+export const action = async ({ }: ActionFunctionArgs) =>> {
+	<>
+
+	return json({ ok: true });
+};
+	]],
+			{ i(1) },
+			fmtopt
+		),
+		{
+			callbacks = ls_auto_import.import_callback({
+				{
+					source = "@remix-run/node",
+					modules = { "ActionFunctionArgs", "json" },
+					default_modules = {},
+				},
+			}),
+		}
+	),
+	-- Remix new Route
+	s(
+		{ name = "Remix: new Route", trig = "remr" },
+		fmt(
+			[[
+export default function <>() {
+	return <<>><</>>
+}
 	]],
 			{ i(1) },
 			fmtopt
 		)
 	),
-	-- useState
-	s(
-		{ name = "React: useState", trig = "rehs" },
-		fmt(
-			[[
-	const [<>, use<>] = useState<<<>>>(<>);
-		]],
+	-- Remix useLoaderData
+	s({ name = "Remix: useLoaderData", trig = "remhd" }, {
+		t("const loaderData = useLoaderData<typeof loader>();"),
+	}, {
+		callbacks = ls_auto_import.import_callback({
 			{
-				i(1),
-				f(ls_utils.capitalize_first_char, { 1 }),
-				i(2),
-				i(3),
+				source = "@remix-run/react",
+				modules = { "useLoaderData" },
+				default_modules = {},
 			},
-			fmtopt
-		),
-		{
-			callbacks = ls_auto_import.import_callback({
-				{
-					source = "react",
-					modules = { "useState" },
-					default_modules = {},
-				},
-			}),
-		}
-	),
-	-- -- useEffect
-	s(
-		{ name = "React: useEffect", trig = "rehe" },
-		fmt(
-			[[
-useEffect(() =>> {
-	<>
-},[<>]);
-	]],
-			{ i(1), i(2) },
-			fmtopt
-		),
-		{
-			callbacks = ls_auto_import.import_callback({
-				{
-					source = "react",
-					modules = { "useEffect" },
-					default_modules = {},
-				},
-			}),
-		}
-	),
-	-- -- useCallback
-	s(
-		{ name = "React: useCallback", trig = "rehc" },
-		fmt(
-			[[
-useCallback((<>)=>>{
-	<>
-}, [<>]);
-	]],
-			{ i(1), i(2), i(3) },
-			fmtopt
-		),
-		{
-			callbacks = ls_auto_import.import_callback({
-				{
-					source = "react",
-					modules = { "useCallback" },
-					default_modules = {},
-				},
-			}),
-		}
-	),
-	-- -- useMemo
-	s(
-		{ name = "React: useMemo", trig = "rehm" },
-		fmt(
-			[[
-useMemo(()=>>{
-	<>
-}, [<>]);
-	]],
-			{ i(1), i(2) },
-			fmtopt
-		),
-		{
-			callbacks = ls_auto_import.import_callback({
-				{
-					source = "react",
-					modules = { "useMemo" },
-					default_modules = {},
-				},
-			}),
-		}
-	),
-	-- -- new Component
-	s(
-		{ name = "React: new Component", trig = "recn" },
-		fmt(
-			[[
-interface <>Props {};
-
-const <> = (props: <>Props) =>> {
-	return <<>><</>>;
-};
-
-export default <>;
-	]],
-			{
-				f(ls_utils.identity, { 1 }),
-				i(1),
-				f(ls_utils.identity, { 1 }),
-				f(ls_utils.identity, { 1 }),
-			},
-			fmtopt
-		)
-	),
+		}),
+	}),
 }
 
-ls.add_snippets("typescript", M)
 ls.add_snippets("typescriptreact", M)
