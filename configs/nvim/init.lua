@@ -1,4 +1,4 @@
-vim.cmd([[ language en_US ]])
+#vim.cmd([[ language en_US ]])
 
 vim.cmd([[ :set syntax=on ]])
 vim.cmd([[ :set number ]])
