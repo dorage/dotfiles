@@ -96,7 +96,7 @@ return {
 		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function()
 			require("todo-comments").setup()
-			vim.keymap.set("n", "<leader>fc", "<Cmd>TodoTelescope<CR>", { desc = "file browser" })
+			vim.keymap.set("n", "<leader>o", "<Cmd>TodoTelescope<CR>", { desc = "Todo comments" })
 		end,
 	},
 	{
