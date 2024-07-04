@@ -155,6 +155,62 @@ local function gen_import_statement(import)
 	return table.concat(import_stmt_tokens, " ")
 end
 
+---comment
+---@param ts_node TSNode
+---@return table
+local function get_ts_path(ts_node)
+	local ts_path = {}
+	local cursor = ts_node
+
+	if cursor == nil then
+		return ts_path
+	end
+
+	local parent = cursor:parent()
+	while parent ~= nil do
+		local n = 0
+		for child in parent:iter_children() do
+			-- find cursor n th
+			if child:type() == cursor:type() then
+				if child:id() == cursor:id() then
+					goto continue
+				end
+				n = n + 1
+			end
+		end
+		::continue::
+		ts_path = f.combine({ { cursor, n } }, ts_path)
+		cursor = parent
+		parent = cursor:parent()
+	end
+
+	return ts_path
+end
+
+---comment
+---@param ts_path any
+---@return TSNode
+local function find_ts_node(ts_path)
+	local cursor = get_curr_bufr_root()
+
+	for _, ts_path_node in ipairs(ts_path) do
+		local ts_node, ts_nth = unpack(ts_path_node)
+		local n = 0
+		for child in cursor:iter_children() do
+			if child:type() == ts_node:type() then
+				if n == ts_nth then
+					cursor = child
+					goto continue
+				end
+				n = n + 1
+			end
+		end
+		::continue::
+	end
+
+	return cursor
+end
+
 ---------------------------------------------------------------------------------------
 --
 -- module end-points
@@ -179,13 +235,22 @@ M.import = function(imports)
 		-- if the import statement, has same source, does not exist
 		if matched_import_stmts[#matched_import_stmts] == nil then
 			local last_import_stmt = parsed_import_stmts[#parsed_import_stmts]
+			-- if there has no import statement
 			if last_import_stmt == nil then
-				local buf = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-				vim.api.nvim_buf_set_lines(0, 0, -1, false, { gen_import_statement(import), unpack(buf) })
+				local first_line = vim.api.nvim_buf_get_lines(0, 0, 1, false)
+
+				vim.api.nvim_buf_set_lines(0, 0, 1, false, f.combine({ gen_import_statement(import), "" }, first_line))
+				-- add below of the last import statement
 			else
-				local _, _, end_row = last_import_stmt.node:range()
-				local buf = vim.api.nvim_buf_get_lines(0, end_row + 1, -1, false)
-				vim.api.nvim_buf_set_lines(0, end_row + 1, -1, false, { gen_import_statement(import), unpack(buf) })
+				local start_row, _, end_row = last_import_stmt.node:range()
+				local last_import_stmt_lines = vim.api.nvim_buf_get_lines(0, start_row, end_row + 1, false)
+				vim.api.nvim_buf_set_lines(
+					0,
+					start_row,
+					end_row + 1,
+					false,
+					f.combine(last_import_stmt_lines, { gen_import_statement(import) })
+				)
 			end
 			-- line had added
 			row = row + 1
@@ -242,12 +307,18 @@ M.import_callback = function(imports)
 		[-1] = {
 			[require("luasnip.util.events").enter] = function()
 				vim.schedule(function()
-					local start_node_row = vim.treesitter.get_node():range()
+					local start_node = vim.treesitter.get_node()
+					if start_node == nil then
+						start_node = get_curr_bufr_root()
+					end
+					local ts_path = get_ts_path(start_node)
+					local start_node_row = start_node:range()
 					local start_cursor_row, start_cursor_col = unpack(vim.api.nvim_win_get_cursor(0))
 
 					M.import(imports)
 
-					local final_node_row = vim.treesitter.get_node():range()
+					local final_node = find_ts_node(ts_path)
+					local final_node_row = final_node:range()
 					vim.api.nvim_win_set_cursor(0, {
 						final_node_row + (start_cursor_row - start_node_row),
 						start_cursor_col,
