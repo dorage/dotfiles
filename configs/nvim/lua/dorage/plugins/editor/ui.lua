@@ -119,6 +119,7 @@ return {
 		"https://github.com/voldikss/vim-floaterm",
 		config = function()
 			vim.keymap.set("n", "<leader>ag", "<Cmd>:FloatermNew --width=0.95 --height=0.95 lazygit<CR>")
+			vim.keymap.set("n", "<leader>ao", "<Cmd>:FloatermNew --width=0.95 --height=0.95 lazydocker<CR>")
 			-- remove border
 			vim.api.nvim_set_hl(0, "FloatermBorder", { default = false })
 		end,
