@@ -44,3 +44,13 @@ vim.keymap.set(
 vim.keymap.set({ "n", "s" }, "<leader>n", "<cmd>noh<cr><esc>", { desc = ":noh" })
 vim.keymap.set({ "n" }, "<c-u>", "<c-u>zz", { silent = true })
 vim.keymap.set({ "n" }, "<c-d>", "<c-d>zz", { silent = true })
+
+-- httpyac
+vim.keymap.set({ "n" }, "<leader>hh", function()
+	local fpath = vim.fn.expand("%")
+	if string.match(fpath, "%.http") then
+		vim.schedule(function()
+			os.execute("httpyac " .. fpath)
+		end)
+	end
+end, { desc = "Httpyac: reqeust current buffer" })
