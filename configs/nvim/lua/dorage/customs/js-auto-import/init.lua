@@ -20,6 +20,12 @@ local f = require("dorage.utils.fp")
 ---@class ImportMap: Import
 ---@field node TSNode
 
+---------------------------------------------------------------------------------------
+--
+-- functions
+--
+---------------------------------------------------------------------------------------
+
 ---return root of AST
 ---@return TSNode
 local function get_curr_bufr_root()
@@ -29,12 +35,6 @@ local function get_curr_bufr_root()
 
 	return root
 end
-
----------------------------------------------------------------------------------------
---
--- functions
---
----------------------------------------------------------------------------------------
 
 ---return the text that the range indicates
 ---@param start_row integer
@@ -221,9 +221,9 @@ M.import = function(imports)
 		end)
 
 		local last_import_stmt = matched_import_stmts[#matched_import_stmts]
-		local start_row = last_import_stmt.node:range()
+		local start_row, _, end_row = last_import_stmt.node:range()
 
-		vim.api.nvim_buf_set_lines(0, start_row, start_row + 1, false, {
+		vim.api.nvim_buf_set_lines(0, start_row, end_row + 1, false, {
 			gen_import_statement({
 				source = import.source,
 				default_modules = f.combine(last_import_stmt.default_modules, missing_default_modules),
@@ -233,10 +233,6 @@ M.import = function(imports)
 
 		::continue::
 	end
-
-	-- preserve cursor position
-	vim.cmd(":" .. row)
-	vim.cmd(":norm" .. col .. "l")
 end
 
 ---import modules under the last import statement in the buffer
@@ -244,9 +240,18 @@ end
 M.import_callback = function(imports)
 	return {
 		[-1] = {
-			[require("luasnip.util.events").leave] = function()
+			[require("luasnip.util.events").enter] = function()
 				vim.schedule(function()
+					local start_node_row = vim.treesitter.get_node():range()
+					local start_cursor_row, start_cursor_col = unpack(vim.api.nvim_win_get_cursor(0))
+
 					M.import(imports)
+
+					local final_node_row = vim.treesitter.get_node():range()
+					vim.api.nvim_win_set_cursor(0, {
+						final_node_row + (start_cursor_row - start_node_row),
+						start_cursor_col,
+					})
 				end)
 			end,
 		},
