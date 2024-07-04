@@ -131,7 +131,7 @@ ins_left({
 ins_left({
 	-- "filename",
 	function()
-		local filepath = vim.fn.expand("%")
+		local filepath = vim.fn.expand("%:.")
 		return filepath
 	end,
 	cond = conditions.buffer_not_empty,
