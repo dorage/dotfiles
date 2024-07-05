@@ -249,7 +249,7 @@ M.import = function(imports)
 					start_row,
 					end_row + 1,
 					false,
-					f.combine(last_import_stmt_lines, { gen_import_statement(import) })
+					f.combine(last_import_stmt_lines, { gen_import_statement(import), "" })
 				)
 			end
 			-- line had added
