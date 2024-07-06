@@ -40,6 +40,15 @@ vim.keymap.set(
 	{ desc = "Substitute selected in current line" }
 )
 
+-- window adjust
+vim.keymap.set({ "n" }, "<space>h", "10<c-w><", { desc = "Decrease window" })
+vim.keymap.set({ "n" }, "<space>l", "10<c-w>>", { desc = "Increase window" })
+vim.keymap.set({ "n" }, "<space>j", "10<c-w>-", { desc = "Decrease height" })
+vim.keymap.set({ "n" }, "<space>k", "10<c-w>+", { desc = "Increase height" })
+vim.keymap.set({ "n" }, "<space>o", "<c-w>o", { desc = "Close all other windows" })
+vim.keymap.set({ "n" }, "<space>sh", "<c-w>s", { desc = "Split window horizontally" })
+vim.keymap.set({ "n" }, "<space>sv", "<c-w>v", { desc = "Split window vertically" })
+
 -- etc
 vim.keymap.set({ "n", "s" }, "<leader>n", "<cmd>noh<cr><esc>", { desc = ":noh" })
 vim.keymap.set({ "n" }, "<c-u>", "<c-u>zz", { silent = true })
