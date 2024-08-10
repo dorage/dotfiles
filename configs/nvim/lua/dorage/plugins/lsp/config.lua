@@ -84,7 +84,7 @@ return {
 					"pyright",
 					"rust_analyzer",
 					"lua_ls",
-					-- "tsserver",
+					"tsserver",
 					"astro",
 					"html",
 					"jedi_language_server",
@@ -97,6 +97,7 @@ return {
 					"marksman",
 					"sqlls",
 					"perlnavigator",
+					"autotools_ls",
 				},
 				handlers = {
 					lsp_zero.default_setup,
@@ -116,6 +117,11 @@ return {
 							},
 						})
 					end,
+					tsserver = function()
+						require("lspconfig").tsserver.setup({
+							filetypes = { "javascript", "javascriptreact" },
+						})
+					end,
 				},
 			})
 		end,
@@ -125,6 +131,7 @@ return {
 		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
 		config = function()
 			require("typescript-tools").setup({
+				filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
 				on_attach = function(_, bufnr)
 					vim.keymap.set(
 						"n",
@@ -171,5 +178,11 @@ return {
 				end,
 			})
 		end,
+	},
+	-- tailwind-tools.lua
+	{
+		"luckasRanarison/tailwind-tools.nvim",
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
+		opts = {}, -- your configuration
 	},
 }

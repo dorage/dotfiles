@@ -19,7 +19,21 @@ vim.keymap.set(
 )
 
 -- blazing fast save
-vim.keymap.set({ "i", "x", "n", "s" }, "<leader>w", "<cmd>w<cr><esc>", { desc = "Save file" })
+vim.keymap.set({ "i", "x", "n", "s" }, "<leader>w", function()
+	local ftype = vim.bo.filetype
+	local is_might_be_include_tailwind = ftype == "jsx"
+		or ftype == "tsx"
+		or ftype == "javascriptreact"
+		or ftype == "typescriptreact"
+		or ftype == "html"
+		or ftype == "css"
+	if is_might_be_include_tailwind then
+		vim.cmd("TailwindSort")
+	end
+
+	vim.cmd("w")
+	print("buffer has saved!")
+end, { desc = "Save file" })
 vim.keymap.set({ "n", "s" }, "<leader>n", "<cmd>noh<cr><esc>", { desc = ":noh" })
 
 -- yank to clipboard
