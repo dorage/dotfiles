@@ -46,11 +46,11 @@ export const loader = async ({}: LoaderFunctionArgs) =>> {
 			fmtopt
 		),
 		{
-			callbacks = ls_auto_import.import_callback({
+			-- callbacks = ls_auto_import.import_callback({
+			callbacks = require("ts-manual-import").luasnip_callback({
 				{
 					source = "@remix-run/node",
 					modules = { "LoaderFunctionArgs", "json" },
-					default_modules = {},
 				},
 			}),
 		}

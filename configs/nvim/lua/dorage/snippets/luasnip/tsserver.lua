@@ -54,20 +54,77 @@ local common = {
 }
 
 local es6 = {
-	-- comment
-	s({ name = "TODO comment", trig = "todo" }, { t("// TODO:"), i(1) }),
-	s({ name = "WARN comment", trig = "warn" }, { t("// WARN:"), i(1) }),
-	s({ name = "NOTE comment", trig = "note" }, { t("// NOTE:"), i(1) }),
-	s({ name = "TEST comment", trig = "test" }, { t("// TEST:"), i(1) }),
-	s({ name = "FIX comment", trig = "fix" }, { t("// FIX:"), i(1) }),
-	-- javascript types
-	s({ name = "string type", trig = "str" }, { t("string") }),
-	s({ name = "number type", trig = "num" }, { t("number") }),
-	s({ name = "boolean type", trig = "boo" }, { t("boolean") }),
-	s({ name = "object type", trig = "obj" }, { t("object") }),
-	-- return statement
+	-- keywords
+	s({ name = "js async keyword", trig = "jka" }, { t("async "), i(1) }),
+	s({ name = "js await keyowrd", trig = "jkw" }, { t("await "), i(1) }),
+	-- comments
+	s({ name = "js TODO comment", trig = "jct" }, { t("// TODO:"), i(1) }),
+	s({ name = "js WARN comment", trig = "jcw" }, { t("// WARN:"), i(1) }),
+	s({ name = "js NOTE comment", trig = "jcn" }, { t("// NOTE:"), i(1) }),
+	s({ name = "js TEST comment", trig = "jcs" }, { t("// TEST:"), i(1) }),
+	s({ name = "js FIX comment", trig = "jcf" }, { t("// FIX:"), i(1) }),
+	-- types
+	s({ name = "js string type", trig = "jts" }, { t("string") }),
+	s({ name = "js number type", trig = "jtn" }, { t("number") }),
+	s({ name = "js boolean type", trig = "jtb" }, { t("boolean") }),
+	s({ name = "js object type", trig = "jto" }, { t("object") }),
+	s({ name = "js null type", trig = "jtn" }, { t("object") }),
+	s({ name = "js undefined type", trig = "jtu" }, { t("object") }),
+	-- variables
+	s({ name = "js variable declaration", trig = "jvl" }, fmt([[let <> = <>]], { i(1, "var"), i(2) }, fmtopt)),
+	s({ name = "js constant declaration", trig = "jvc" }, fmt([[const <> = <>]], { i(1, "constant"), i(2) }, fmtopt)),
+	-- expressions (function)
 	s(
-		{ name = "return ~", trig = "re" },
+		{ name = "js function expression", trig = "jef" },
+		fmt(
+			[[
+			function (<>) {
+				<>
+			}
+	]],
+			{ i(1), i(2) },
+			fmtopt
+		)
+	),
+	s(
+		{ name = "js async function expression", trig = "jefa" },
+		fmt(
+			[[
+			async function (<>) {
+				<>
+			}
+	]],
+			{ i(1), i(2) },
+			fmtopt
+		)
+	),
+	s(
+		{ name = "js arrow function expression", trig = "jea" },
+		fmt(
+			[[
+			(<>) =>> {
+				<>
+			}
+	]],
+			{ i(1), i(2) },
+			fmtopt
+		)
+	),
+	s(
+		{ name = "js async arrow function expression", trig = "jeaa" },
+		fmt(
+			[[
+			async (<>) =>> {
+				<>
+			}
+	]],
+			{ i(1), i(2) },
+			fmtopt
+		)
+	),
+	-- statements (return)
+	s(
+		{ name = "js return statement", trig = "jsr" },
 		fmt(
 			[[
 	return <>
@@ -81,13 +138,9 @@ local es6 = {
 			fmtopt
 		)
 	),
-	-- async
-	s({ name = "async ~", trig = "as" }, { t("async "), i(1) }),
-	-- await
-	s({ name = "await ~", trig = "aw" }, { t("await "), i(1) }),
-	-- import
+	-- statements (import)
 	s(
-		{ name = "import statement", trig = "im" },
+		{ name = "js import statement", trig = "jsi" },
 		fmt(
 			[[
 	import <> from '<>';
@@ -103,14 +156,26 @@ local es6 = {
 						fmtopt
 					),
 				}),
-				i(1),
+				i(1, "module"),
 			},
 			fmtopt
 		)
 	),
-	-- export
 	s(
-		{ name = "export statement", trig = "ex" },
+		{ name = "js import only statement", trig = "jsio" },
+		fmt(
+			[[
+	import '<>';
+	]],
+			{
+				i(1, "module"),
+			},
+			fmtopt
+		)
+	),
+	-- statements (export)
+	s(
+		{ name = "export statement", trig = "jse" },
 		fmt(
 			[[
 	<> <>
@@ -119,22 +184,203 @@ local es6 = {
 			fmtopt
 		)
 	),
-	-- variable
+	-- arrow function
+	s({
+		name = "arrow function",
+		trig = "fna",
+	}, common.arrow_function(i(1))),
+	-- normal function
 	s(
-		{ name = "variable statement", trig = "var" },
+		{
+			name = "function statement",
+			trig = "fns",
+		},
 		fmt(
 			[[
-	<> <> = <>
+	function <> (<>){
+		<>
+	}
+	]],
+			{ i(1), i(2), i(3) },
+			fmtopt
+		)
+	),
+	-- try-catch statement
+	s(
+		{ name = "try-catch statement", trig = "try" },
+		fmt(
+			[[
+	try {
+		<>
+	} catch(err) {
+		<>
+	}
+	]],
+			{ i(1), c(2, {
+				sn(1, { t("console.error(err);"), i(1) }),
+				i(1),
+			}) },
+			fmtopt
+		)
+	),
+	-- default statement
+	s(
+		{ name = "try-default statement", trig = "tryd" },
+		fmt(
+			[[
+	default {
+		<>
+	}
+	]],
+			{ i(1) },
+			fmtopt
+		)
+	),
+	-- if statement
+	s(
+		{ name = "if statement", trig = "if" },
+		fmt(
+			[[
+	if (<>) <>
 	]],
 			{
-				c(1, {
-					t("const"),
-					t("let"),
-					t("var"),
+				i(1, "true"),
+				c(2, {
+					fmt(
+						[[
+				{
+					<>
+				}
+				]],
+						{ i(1) },
+						fmtopt
+					),
+					i(1),
 				}),
-				i(2, "name"),
-				i(3, ""),
 			},
+			fmtopt
+		)
+	),
+	-- else if statement
+	s(
+		{
+			name = "else if statement",
+			trig = "ifi",
+		},
+		fmt(
+			[[
+	else if(<>) <>
+	]],
+			{
+				i(1, "true"),
+				c(2, {
+					fmt(
+						[[
+				{
+					<>
+				}
+				]],
+						{ i(1) },
+						fmtopt
+					),
+					i(1),
+				}),
+			},
+			fmtopt
+		)
+	),
+	-- else statement
+	s(
+		{ name = "else statement", trig = "ife" },
+		fmt(
+			[[
+	else <>	
+	]],
+			{ c(1, {
+				fmt(
+					[[
+				{
+					<>
+				}
+				]],
+					{ i(1) },
+					fmtopt
+				),
+				i(1),
+			}) },
+			fmtopt
+		)
+	),
+	-- switch statement
+	s(
+		{ name = "switch statement", trig = "sw" },
+		fmt(
+			[[
+	switch(<>) {
+	<>
+	}
+	]],
+			{
+				i(1, "value"),
+				sn(0, {
+					i(1),
+				}),
+			},
+			fmtopt
+		)
+	),
+	-- case statement
+	s(
+		{ name = "switch-case statement", trig = "swc" },
+		fmt(
+			[[
+	case <>:
+		<>
+		<>
+	]],
+			{
+				i(1, "value"),
+				i(2),
+				c(3, {
+					t("break;"),
+					t(""),
+				}),
+			},
+			fmtopt
+		)
+	),
+	-- default statement
+	s(
+		{ name = "switch-default statement", trig = "swd" },
+		fmt(
+			[[
+	default:
+		<>
+	]],
+			{ i(1) },
+			fmtopt
+		)
+	),
+	-- break statement
+	s({ name = "break statement", trig = "br" }, { t("break;") }),
+	-- continue statement
+	s({ name = "continue statement", trig = "cn" }, { t("continue;") }),
+	-- for statement
+	s(
+		{ name = "for statement", trig = "fr" },
+		fmt(
+			[[
+	for(let <> = <>; <> << <>.length; <>++){
+		const <> = <>[<>];
+		<>
+	-- export
+	s(
+		{ name = "export statement", trig = "ex" },
+		fmt(
+			[[
+	<> <>
+	]],
+			{ c(1, { t("export"), t("export default") }), i(2) },
 			fmtopt
 		)
 	),
@@ -434,7 +680,7 @@ local es6 = {
 	),
 	-- JSON
 	s(
-		{ name = "JSON.stringify", trig = "fjss" },
+		{ name = "JSON.stringify", trig = "jfjs" },
 		fmt(
 			[[
 	JSON.stringify(<>)
@@ -449,7 +695,7 @@ local es6 = {
 		)
 	),
 	s(
-		{ name = "JSON.parse", trig = "fjsp" },
+		{ name = "JSON.parse", trig = "jfjp" },
 		fmt(
 			[[
 	JSON.parse(<>)
@@ -469,6 +715,21 @@ local es6 = {
 		fmt(
 			[[
 			console.log(<>)
+			]],
+			{
+				d(1, function()
+					local reg = string.gsub(vim.fn.getreg(0), "[\n\r]", "")
+					return sn(nil, { i(1, reg) })
+				end),
+			},
+			fmtopt
+		)
+	),
+	s(
+		{ name = "console.log object", trig = "logo" },
+		fmt(
+			[[
+			console.log(JSON.stringify(<>, undefined, 2)))
 			]],
 			{
 				d(1, function()

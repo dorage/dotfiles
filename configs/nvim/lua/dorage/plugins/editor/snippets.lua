@@ -3,7 +3,10 @@ return {
 		"l3mon4d3/luasnip",
 		lazy = true,
 		build = "make install_jsregexp",
-		dependencies = { "nvim-lua/plenary.nvim" },
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"dorage/ts-manual-import.nvim",
+		},
 		config = function()
 			local ls = require("luasnip")
 			ls.setup({
@@ -12,6 +15,7 @@ return {
 				enable_autosnippets = true,
 			})
 
+			print("load luasnip")
 			require("luasnip.loaders.from_vscode").lazy_load({
 				paths = { "~/.config/nvim/lua/dorage/snippets/vscode" },
 			})

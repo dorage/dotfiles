@@ -49,7 +49,7 @@ local M = {
 		{ name = "React: useState", trig = "rehs" },
 		fmt(
 			[[
-	const [<>, use<>] = useState<<<>>>(<>);
+	const [<>, set<>] = useState<<<>>>(<>);
 		]],
 			{
 				i(1),
@@ -60,7 +60,7 @@ local M = {
 			fmtopt
 		),
 		{
-			callbacks = ls_auto_import.import_callback({
+			callbacks = require("ts-manual-import").luasnip_callback({
 				{
 					source = "react",
 					modules = { "useState" },
