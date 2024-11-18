@@ -20,8 +20,9 @@ local function create_hot_key_window(app_name, command_key, key)
 end
 
 create_hot_key_window("net.kovidgoyal.kitty", { "cmd", "shift" }, "g")
+create_hot_key_window("com.google.Chrome", { "cmd", "shift" }, "a")
 create_hot_key_window("safari", { "cmd", "shift" }, "s")
-create_hot_key_window("iterm", { "cmd", "shift" }, "f")
+create_hot_key_window("com.apple.finder", { "cmd", "shift" }, "d")
 
 local w = 15
 local h = 2
