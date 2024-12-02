@@ -2,7 +2,7 @@
 # It is meant to be changed and configured, as it is intentionally kept sparse.
 # For a (much) more advanced configuration example see my dotfiles:
 
-PLUGIN_DIR="$CONFIG_DIR/plugins"
+
 
 
 ##### Variables #####
@@ -164,9 +164,9 @@ caffeinate_options=(
 	popup.background.border_width=1
 	popup.background.border_color="${secondary}"
 )
-sketchybar \
---add item caffeinate right \
---set caffeinate "${badge_options[@]}" "${caffeinate_options[@]}" \
+# sketchybar \
+# --add item caffeinate right \
+# --set caffeinate "${badge_options[@]}" "${caffeinate_options[@]}" \
 
 caffeinate_label_options=(
 	padding_left=0
