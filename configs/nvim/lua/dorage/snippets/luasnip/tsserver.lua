@@ -68,8 +68,8 @@ local es6 = {
 	s({ name = "js number type", trig = "jtn" }, { t("number") }),
 	s({ name = "js boolean type", trig = "jtb" }, { t("boolean") }),
 	s({ name = "js object type", trig = "jto" }, { t("object") }),
-	s({ name = "js null type", trig = "jtn" }, { t("object") }),
-	s({ name = "js undefined type", trig = "jtu" }, { t("object") }),
+	s({ name = "js null type", trig = "jtn" }, { t("null") }),
+	s({ name = "js undefined type", trig = "jtu" }, { t("undefined") }),
 	-- variables
 	s({ name = "js variable declaration", trig = "jvl" }, fmt([[let <> = <>]], { i(1, "var"), i(2) }, fmtopt)),
 	s({ name = "js constant declaration", trig = "jvc" }, fmt([[const <> = <>]], { i(1, "constant"), i(2) }, fmtopt)),
@@ -366,13 +366,13 @@ local es6 = {
 	-- continue statement
 	s({ name = "continue statement", trig = "cn" }, { t("continue;") }),
 	-- for statement
-	s(
-		{ name = "for statement", trig = "fr" },
-		fmt(
-			[[
-	for(let <> = <>; <> << <>.length; <>++){
-		const <> = <>[<>];
-		<>
+	-- s(
+	-- 	{ name = "for statement", trig = "fr" },
+	-- 	fmt(
+	-- 		[[
+	-- for(let <> = <>; <> << <>.length; <>++){
+	-- 	const <> = <>[<>];
+	-- 	<>
 	-- export
 	s(
 		{ name = "export statement", trig = "ex" },
