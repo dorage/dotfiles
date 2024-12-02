@@ -91,16 +91,35 @@ useEffect(() =>> {
 			}),
 		}
 	),
+	s(
+		{ name = "React: useRef", trig = "rehr" },
+		fmt(
+			[[
+const <> = useRef<<<>>>(<>);
+	]],
+			{ i(1), i(2), i(3) },
+			fmtopt
+		),
+		{
+			callbacks = ls_auto_import.import_callback({
+				{
+					source = "react",
+					modules = { "useRef" },
+					default_modules = {},
+				},
+			}),
+		}
+	),
 	-- -- useCallback
 	s(
 		{ name = "React: useCallback", trig = "rehc" },
 		fmt(
 			[[
-useCallback((<>)=>>{
+const <> = useCallback((<>)=>>{
 	<>
 }, [<>]);
 	]],
-			{ i(1), i(2), i(3) },
+			{ i(1), i(2), i(3), i(4) },
 			fmtopt
 		),
 		{
@@ -118,11 +137,11 @@ useCallback((<>)=>>{
 		{ name = "React: useMemo", trig = "rehm" },
 		fmt(
 			[[
-useMemo(()=>>{
+const <> = useMemo(()=>>{
 	<>
 }, [<>]);
 	]],
-			{ i(1), i(2) },
+			{ i(1), i(2), i(3) },
 			fmtopt
 		),
 		{
@@ -140,18 +159,17 @@ useMemo(()=>>{
 		{ name = "React: new Component", trig = "recn" },
 		fmt(
 			[[
-interface <>Props {};
+type <>Props = {
 
-const <> = (props: <>Props) =>> {
-	return <<>><</>>;
 };
 
-export default <>;
+export const <> = (props: <>Props) =>> {
+	return <<>><</>>;
+};
 	]],
 			{
 				f(ls_utils.identity, { 1 }),
 				i(1),
-				f(ls_utils.identity, { 1 }),
 				f(ls_utils.identity, { 1 }),
 			},
 			fmtopt
