@@ -13,7 +13,7 @@ local icon = {
 	charging = "󰂄",
 }
 
-local function handleChangeBattery()
+local update = function()
 	local percentage = GetBatteryPercentage()
 	local isCharging = GetBatteryIsCharging()
 
@@ -32,23 +32,20 @@ local function handleChangeBattery()
 	hs.execute("sketchybar --set battery label='" .. percentage .. "%' icon='" .. icon[0] .. "'", true)
 end
 
-BatteryWatcher = hs.battery.watcher.new(handleChangeBattery)
--- start Watcher
-BatteryWatcher:start()
+battery_watcher = hs.battery.watcher.new(update)
 
 -- return number
 -- ex) 0, 40, 80, 100
-function GetBatteryPercentage()
+local function get_percentage()
 	local battery = hs.battery.getAll()
 	local percentage = math.floor(battery.percentage)
 
-	print(percentage)
 	return percentage
 end
 
 -- return boolean string
 -- ex) true, false
-function GetBatteryIsCharging()
+local function get_is_charging()
 	local battery = hs.battery.getAll()
 	local isCharging = battery.powerSource == "AC Power"
 
@@ -56,8 +53,12 @@ function GetBatteryIsCharging()
 	return isCharging
 end
 
--- IPC
-function InitBatterySketchybar()
-	print("InitBatterySketchybar")
-	handleChangeBattery()
+local M = {}
+
+M.init = function()
+	-- start Watcher
+	battery_watcher:start()
 end
+
+M.update = update
+return M

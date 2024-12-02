@@ -4,7 +4,7 @@ local icon = {
 	nosignal = "󱚵",
 }
 
-local function handleChangeWifi(watcher, message)
+local function update(watcher, message)
 	local network = hs.wifi.currentNetwork()
 
 	if network == nil then
@@ -18,10 +18,15 @@ local function handleChangeWifi(watcher, message)
 	)
 end
 
-WifiWatcher = hs.wifi.watcher.new(handleChangeWifi)
+WifiWatcher = hs.wifi.watcher.new(update)
 -- Watcher:watchingFor({ "SSIDChange", "BSSIDChange", "linkChange", "powerChange", "modeChange" })
-WifiWatcher:start()
 
-function InitWifiSketchybar()
-	handleChangeWifi()
+local M = {}
+
+M.init = function()
+	WifiWatcher:start()
 end
+
+M.update = update
+
+return M

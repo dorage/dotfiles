@@ -1,4 +1,4 @@
-function GetAvailableStoarge()
+function get_available_storage()
 	local volumeInformation = hs.host.volumeInformation()
 	local availableSpace = volumeInformation["/"].NSURLVolumeAvailableCapacityKey / 1024 / 1024 / 1024
 	availableSpace = math.floor(availableSpace * 10) / 10
@@ -6,8 +6,12 @@ function GetAvailableStoarge()
 	return availableSpace
 end
 
-function InitStorageSketchybar()
-	local availableSpace = GetAvailableStoarge()
+local M = {}
+
+M.init = function() end
+
+M.update = function()
+	local availableSpace = get_available_storage()
 
 	if availableSpace >= 100 then
 		hs.execute("sketchybar --set storage label='≥100GB'", true)
@@ -16,3 +20,5 @@ function InitStorageSketchybar()
 
 	hs.execute("sketchybar --set storage label='" .. availableSpace .. "GB'", true)
 end
+
+return M

@@ -1,4 +1,4 @@
-function GetVMStatsInGB()
+local function get_vmstat_in_gb()
 	local vmStats = hs.host.vmStat()
 	local pageSize = vmStats["pageSize"]
 
@@ -9,7 +9,7 @@ function GetVMStatsInGB()
 	end
 end
 
-function GetAvailableMemoryGB()
+local function get_available_memory_in_gb()
 	local GB = 1024 * 1024 * 1024
 	local vmStats = hs.host.vmStat()
 
@@ -35,8 +35,14 @@ function GetAvailableMemoryGB()
 	return math.floor(available * 10) / 10
 end
 
-function InitMemorySketchybar()
-	local avaialbeMemory = GetAvailableMemoryGB()
+local M = {}
+
+M.init = function() end
+
+M.update = function()
+	local avaialbeMemory = get_available_memory_in_gb()
 
 	hs.execute("sketchybar --set memory label='" .. avaialbeMemory .. "GB'", true)
 end
+
+return M

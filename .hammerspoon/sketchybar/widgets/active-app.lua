@@ -2,7 +2,7 @@
 WindowWatcher = hs.window.filter.new(true)
 
 -- Define a function to handle window focus changes
-local function handleWindowFocusChange(window, appName, watcher)
+local function update(window, appName, watcher)
 	local activeWindow = hs.window.focusedWindow()
 
 	-- update app_icon item
@@ -19,7 +19,18 @@ local function handleWindowFocusChange(window, appName, watcher)
 	end
 end
 
-WindowWatcher:subscribe({
-	[hs.window.filter.windowFocused] = handleWindowFocusChange,
-	[hs.window.filter.windowUnfocused] = handleWindowFocusChange,
-})
+local M = {}
+
+M.init = function()
+	WindowWatcher:subscribe({
+		[hs.window.filter.windowFocused] = update,
+		[hs.window.filter.windowUnfocused] = update,
+	})
+end
+
+M.update = function()
+	-- DO NOT WRITE CODE
+	-- update by hammerspoon builtin watcher
+end
+
+return M
