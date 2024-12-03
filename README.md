@@ -1,5 +1,9 @@
 # dorage-dev
 
+## Preview
+
+![preview](./public/dev-env.png)
+
 ## applications
  
 | name | installation |
