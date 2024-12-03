@@ -1,4 +1,4 @@
-_configs = { sec = 3 }
+_configs = { sec = 10 }
 _widgets = {}
 
 _timer = hs.timer.new(_configs.sec, function()
