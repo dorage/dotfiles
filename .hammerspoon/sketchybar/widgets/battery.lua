@@ -13,27 +13,6 @@ local icon = {
 	charging = "󰂄",
 }
 
-local update = function()
-	local percentage = GetBatteryPercentage()
-	local isCharging = GetBatteryIsCharging()
-
-	if isCharging then
-		hs.execute("sketchybar --set battery label='" .. percentage .. "%' icon='" .. icon["charging"] .. "'", true)
-		return
-	end
-
-	for i = 100, 0, -10 do
-		if percentage >= i then
-			hs.execute("sketchybar --set battery label='" .. percentage .. "%' icon='" .. icon[i] .. "'", true)
-			return
-		end
-	end
-
-	hs.execute("sketchybar --set battery label='" .. percentage .. "%' icon='" .. icon[0] .. "'", true)
-end
-
-battery_watcher = hs.battery.watcher.new(update)
-
 -- return number
 -- ex) 0, 40, 80, 100
 local function get_percentage()
@@ -53,6 +32,26 @@ local function get_is_charging()
 	return isCharging
 end
 
+local update = function()
+	local percentage = get_percentage()
+	local isCharging = get_is_charging()
+
+	if isCharging then
+		hs.execute("sketchybar --set battery label='" .. percentage .. "%' icon='" .. icon["charging"] .. "'", true)
+		return
+	end
+
+	for i = 100, 0, -10 do
+		if percentage >= i then
+			hs.execute("sketchybar --set battery label='" .. percentage .. "%' icon='" .. icon[i] .. "'", true)
+			return
+		end
+	end
+
+	hs.execute("sketchybar --set battery label='" .. percentage .. "%' icon='" .. icon[0] .. "'", true)
+end
+
+battery_watcher = hs.battery.watcher.new(update)
 local M = {}
 
 M.init = function()
