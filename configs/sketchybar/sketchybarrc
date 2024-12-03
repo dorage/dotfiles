@@ -7,6 +7,9 @@
 
 ##### Variables #####
 
+##### OS #####
+PLUGIN_DIR=~/.config/sketchybar/plugins
+
 ##### Themes #####
 primary=0xFFA7F205
 secondary=0xFF74FAFC
@@ -104,7 +107,7 @@ sketchybar \
 
 clock_options=(
 	update_freq=10
-	script="$PLUGIN_DIR/clock.sh"
+	script="${PLUGIN_DIR}/clock.sh"
 )
 sketchybar --add item clock_time right \
 					 --add item clock_day right \
@@ -114,7 +117,6 @@ sketchybar --add item clock_time right \
 
 sketchybar --add item divider right \
            --set divider background.height=20 background.color=0x00ffffff
-
 
 
 # sketchybar --add item volume right \
@@ -154,52 +156,52 @@ wifi_options=(
 sketchybar --add item wifi right \
 					 --set wifi "${badge_options[@]}" "${wifi_options[@]}" \
 
-caffeinate_options=(
-	icon=""
-	label="WKP"
-	click_script="sketchybar -m --set \$NAME popup.drawing=toggle" \
-	popup.height=40
-	popup.background.color="${bg}"
-	popup.background.corner_radius="${corner_radius}"
-	popup.background.border_width=1
-	popup.background.border_color="${secondary}"
-)
+# caffeinate_options=(
+# 	icon=""
+# 	label="WKP"
+# 	click_script="sketchybar -m --set \$NAME popup.drawing=toggle" \
+# 	popup.height=40
+# 	popup.background.color="${bg}"
+# 	popup.background.corner_radius="${corner_radius}"
+# 	popup.background.border_width=1
+# 	popup.background.border_color="${secondary}"
+# )
 # sketchybar \
 # --add item caffeinate right \
 # --set caffeinate "${badge_options[@]}" "${caffeinate_options[@]}" \
 
-caffeinate_label_options=(
-	padding_left=0
-	padding_right=0
-	label.width=100
-	label.align=center
-	label.font.size=12
-	icon.drawing=off
-)
-caffeinate_item_options=(
-	padding_left=10
-	padding_right=10
-	label=""
-	label.align=center
-	label.color="${bg}"
-	label.width=80
-	icon.drawing=off
-	background.color="${secondary}"
-	background.corner_radius="${corner_radius}"
-	background.height=20
-)
-sketchybar \
---add item caffeinate.label.displayIdle popup.caffeinate \
---add item caffeinate.item.displayIdle popup.caffeinate \
---add item caffeinate.label.systemIdle popup.caffeinate \
---add item caffeinate.item.systemIdle popup.caffeinate \
---add item caffeinate.label.system popup.caffeinate \
---add item caffeinate.item.system popup.caffeinate \
---set /caffeinate\.label\.[a-zA-Z]*/ "${caffeinate_label_options[@]}" \
---set /caffeinate\.item\.[a-zA-Z]*/ "${caffeinate_item_options[@]}" \
---set caffeinate script="$PLUGIN_DIR/caffeinate.sh"
---subscribe caffeinate mouse.exited.global
-
+# caffeinate_label_options=(
+# 	padding_left=0
+# 	padding_right=0
+# 	label.width=100
+# 	label.align=center
+# 	label.font.size=12
+# 	icon.drawing=off
+# )
+# caffeinate_item_options=(
+# 	padding_left=10
+# 	padding_right=10
+# 	label=""
+# 	label.align=center
+# 	label.color="${bg}"
+# 	label.width=80
+# 	icon.drawing=off
+# 	background.color="${secondary}"
+# 	background.corner_radius="${corner_radius}"
+# 	background.height=20
+# )
+# sketchybar \
+# --add item caffeinate.label.displayIdle popup.caffeinate \
+# --add item caffeinate.item.displayIdle popup.caffeinate \
+# --add item caffeinate.label.systemIdle popup.caffeinate \
+# --add item caffeinate.item.systemIdle popup.caffeinate \
+# --add item caffeinate.label.system popup.caffeinate \
+# --add item caffeinate.item.system popup.caffeinate \
+# --set /caffeinate\.label\.[a-zA-Z]*/ "${caffeinate_label_options[@]}" \
+# --set /caffeinate\.item\.[a-zA-Z]*/ "${caffeinate_item_options[@]}" \
+# --set caffeinate script="$PLUGIN_DIR/caffeinate.sh"
+# --subscribe caffeinate mouse.exited.global
+#
 
 ##### Force all scripts to run the first time (never do this in a script) #####
 sketchybar --update
