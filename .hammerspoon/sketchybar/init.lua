@@ -2,7 +2,7 @@ print("here")
 
 local manager = require("sketchybar.manager")
 
-manager.config({ sec = 5 })
+manager.config({ sec = 10 })
 
 manager.add_widget(require("sketchybar.widgets.active-app"))
 manager.add_widget(require("sketchybar.widgets.battery"))

@@ -1,8 +1,8 @@
-# dorage-dev
+# Dev-Env
 
 ## Preview
 
-![preview](./public/dev-env.png)
+![preview](./public/preview.png)
 
 ## applications
  
