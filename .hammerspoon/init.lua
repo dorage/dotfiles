@@ -6,6 +6,7 @@ hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "R", function()
 end)
 
 -- generate hammerspoon annotation
+-- https://github.com/Hammerspoon/Spoons/pull/240
 hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "L", function()
 	require("Spoons.Annotation").init()
 	hs.alert.show("HS annotation generated")
