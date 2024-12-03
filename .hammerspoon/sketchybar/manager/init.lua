@@ -2,7 +2,6 @@ _configs = { sec = 3 }
 _widgets = {}
 
 _timer = hs.timer.new(_configs.sec, function()
-	print("sketchybar: tik-tok")
 	if not hs.application.get("sketchybar") then
 		return
 	end

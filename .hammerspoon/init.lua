@@ -9,5 +9,6 @@ hs.alert.show("Config loaded")
 -- import modules
 require("Spoons.language")
 require("Spoons.hotkey-window")
+require("Spoons.tiling")
 
 require("sketchybar")

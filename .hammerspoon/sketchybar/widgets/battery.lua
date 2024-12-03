@@ -28,7 +28,6 @@ local function get_is_charging()
 	local battery = hs.battery.getAll()
 	local isCharging = battery.powerSource == "AC Power"
 
-	print(isCharging)
 	return isCharging
 end
 
