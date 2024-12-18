@@ -1,29 +1,37 @@
-_configs = { sec = 10 }
 _widgets = {}
-
-_timer = hs.timer.new(_configs.sec, function()
-	if not hs.application.get("sketchybar") then
-		return
-	end
-
-	for _, widget in ipairs(_widgets) do
-		widget.update()
-	end
-end)
-
-_timer:start()
 
 local M = {}
 
-M.config = function(configs)
-	_configs = configs
-	_timer:stop()
-	_timer:start()
+M.add_widget = function(widget, opts)
+	if opts == nil then
+		opts = {}
+	end
+
+	widget.init()
+
+	local widget_id = hs.host.uuid()
+	_widgets[widget_id] = {}
+
+	if not opts.only_init then
+		local timer = hs.timer.new(opts.time, function()
+			if not hs.application.get("sketchybar") then
+				return
+			end
+
+			widget.update()
+		end)
+		_widgets[widget_id].timer = timer
+	end
+	_widgets[widget_id].widget = widget
+
+	return widget_id
 end
 
-M.add_widget = function(widget)
-	widget.init()
-	table.insert(_widgets, widget)
+M.remove_widget = function(widget_id)
+	if not _widgets[widget_id].timer then
+		_widgets[widget_id].timer:stop()
+	end
+	_widgets[widget_id] = nil
 end
 
 return M

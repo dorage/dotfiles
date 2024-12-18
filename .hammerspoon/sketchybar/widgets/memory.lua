@@ -10,29 +10,35 @@ local function get_vmstat_in_gb()
 end
 
 local function get_available_memory_in_gb()
-	local GB = 1024 * 1024 * 1024
+	-- local GB = 1024 * 1024 * 1024
 	local vmStats = hs.host.vmStat()
 
-	local totalMemory = vmStats["memSize"] / GB
+	-- local totalMemory = vmStats["memSize"] / GB
 
 	-- File Cache: -> File-backed pages
 	-- Wired Memory: -> Pages wired down
 	-- Compressed: -> Pages occupied by compressor
 	-- App Memory: -> Pages Active + Pages Speculative
 
-	local pageSize = vmStats["pageSize"] / GB
-
-	-- Calculate total memory used by adding up relevant page counts
-	local appMemory = vmStats["pagesActive"] + vmStats["pagesSpeculative"] + vmStats["pagesUsedByVMCompressor"]
-	local wiredMemory = vmStats["pagesWiredDown"]
-
-	local totalPagesUsed = appMemory + wiredMemory
-	local totalMemoryUsage = totalPagesUsed * pageSize
+	-- local pageSize = vmStats["pageSize"] / GB
+	--
+	-- -- Calculate total memory used by adding up relevant page counts
+	-- local appMemory = vmStats["pagesActive"] + vmStats["pagesSpeculative"] + vmStats["pagesUsedByVMCompressor"]
+	-- local wiredMemory = vmStats["pagesWiredDown"]
+	--
+	-- local totalPagesUsed = appMemory + wiredMemory
+	-- local totalMemoryUsage = totalPagesUsed * pageSize
 
 	-- local available = (totalMemory - totalMemoryUsage) / 1024 / 1024 / 1024
-	local available = totalMemory - totalMemoryUsage
+	-- local available = totalMemory - totalMemoryUsage
 
-	return math.floor(available * 10) / 10
+	-- https://www.reddit.com/r/MacOS/comments/1dg8vgb/tracking_historical_ram_usage_on_a_mac/
+	local pageSizeKB = 16
+	local freeMemoryKB = (vmStats["pagesFree"] + vmStats["pagesInactive"] + vmStats["pagesSpeculative"]) * pageSizeKB
+
+	local availableGB = freeMemoryKB / 1024 / 1024
+
+	return math.floor(availableGB * 10) / 10
 end
 
 local M = {}

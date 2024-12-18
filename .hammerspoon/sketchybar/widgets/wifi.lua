@@ -27,6 +27,9 @@ M.init = function()
 	WifiWatcher:start()
 end
 
-M.update = update
+M.update = function()
+	-- DO NOT WRITE CODE
+	-- update by hammerspoon builtin watcher
+end
 
 return M
