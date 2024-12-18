@@ -38,6 +38,32 @@ return {
 				indent = {
 					enable = true,
 				},
+				textobjects = {
+					select = {
+						enable = true,
+						lookahead = true,
+						keymaps = {
+							["aa"] = { query = "@assignment.outer", desc = "@assignment.outer" },
+							["ia"] = { query = "@assignment.inner", desc = "@assignment.inner" },
+							["la"] = { query = "@assignment.lhs", desc = "@assignment.lhs" },
+							["ra"] = { query = "@assignment.rhs", desc = "@assignment.rhs" },
+							["ab"] = { query = "@block.outer", desc = "@block.outer" },
+							["ib"] = { query = "@block.inner", desc = "@block.inner" },
+							["af"] = { query = "@function.outer", desc = "@function.outer" },
+							["if"] = { query = "@function.inner", desc = "@function.inner" },
+							["ac"] = { query = "@comment.outer", desc = "@comment.outer" },
+							["ic"] = { query = "@comment.inner", desc = "@comment.inner" },
+							["ai"] = { query = "@conditional.outer", desc = "@conditional.outer" },
+							["ii"] = { query = "@conditional.inner", desc = "@conditional.inner" },
+							["al"] = { query = "@loop.outer", desc = "@loop.outer" },
+							["il"] = { query = "@loop.inner", desc = "@loop.inner" },
+						},
+					},
+					move = {
+						enable = true,
+						set_jumps = true,
+					},
+				},
 				sync_install = true,
 				auto_install = true,
 				incremental_selection = {
