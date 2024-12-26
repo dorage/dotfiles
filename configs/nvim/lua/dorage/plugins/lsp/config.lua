@@ -9,6 +9,7 @@ return {
 				-- Load luvit types when the `vim.uv` word is found
 				{ path = "luvit-meta/library", words = { "vim%.uv" } },
 				{ path = "~/.hammerspoon/Spoons/Annotation/annotations", words = { "hs" } },
+				{ path = "~/.config/lua_ls/defold/api" },
 			},
 		},
 	},
