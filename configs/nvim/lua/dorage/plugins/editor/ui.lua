@@ -106,10 +106,13 @@ return {
 					:hi link NvimTreeImageFile   Title
 			]])
 
-			vim.keymap.set("n", "<leader>ab", function()
-				require("nvim-tree.api").tree.toggle({
+			vim.keymap.set("n", "<leader>abc", function()
+				require("nvim-tree.api").tree.close()
+			end, { silent = true })
+
+			vim.keymap.set("n", "<leader>abb", function()
+				require("nvim-tree.api").tree.focus({
 					find_file = true,
-					focus = true,
 				})
 			end, { silent = true })
 		end,
