@@ -86,7 +86,7 @@ return {
 					"pyright",
 					"rust_analyzer",
 					"lua_ls",
-					"tsserver",
+					"ts_ls",
 					"astro",
 					"html",
 					"jedi_language_server",
@@ -119,8 +119,8 @@ return {
 							},
 						})
 					end,
-					tsserver = function()
-						require("lspconfig").tsserver.setup({
+					ts_ls = function()
+						require("lspconfig").ts_ls.setup({
 							filetypes = { "javascript", "javascriptreact" },
 						})
 					end,
