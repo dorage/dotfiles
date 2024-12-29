@@ -1,8 +1,14 @@
 return {
-	-- html toolkit
+	-- emmet
 	{
-		"mattn/emmet-vim",
-		branch = "master",
+		"dorage/tree-emmet.nvim",
+		config = function()
+			local emmet = require("tree-emmet")
+			vim.keymap.set({ "n" }, "<leader>ed", emmet.balance_inward, { desc = "Emmet:Balance Inward" })
+			vim.keymap.set({ "n" }, "<leader>eD", emmet.balance_outward, { desc = "Emmet:Balance Outward" })
+			vim.keymap.set({ "n" }, "<leader>et", emmet.go_to_matching_pair, { desc = "Emmet:Go to Matching Pair" })
+			vim.keymap.set({ "n" }, "<leader>eM", emmet.merge_line, { desc = "Emmet:Merge Line" })
+		end,
 	},
 	--	 easy commenting
 	{ "JoosepAlviste/nvim-ts-context-commentstring", opts = { enable_autocmd = true } },
@@ -69,7 +75,23 @@ return {
 		"folke/trouble.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
-			require("trouble").setup()
+			require("trouble").setup({
+				icons = {
+					indent = {
+						middle = " ",
+						last = " ",
+						top = " ",
+						ws = "│  ",
+					},
+				},
+				modes = {
+					diagnostics = {
+						groups = {
+							{ "filename", format = "{file_icon} {basename:Title} {count}" },
+						},
+					},
+				},
+			})
 
 			vim.keymap.set("n", "<leader>ftt", function()
 				require("trouble").toggle()
