@@ -21,6 +21,7 @@ M.add_widget = function(widget, opts)
 			widget.update()
 		end)
 		_widgets[widget_id].timer = timer
+		timer:start()
 	end
 	_widgets[widget_id].widget = widget
 
