@@ -178,6 +178,5 @@ eval "$(zoxide init zsh)"
 
 alias cd="z"
 
-# harlequin
 
-alias db='harlequin'
+export EDITOR="nvim"
