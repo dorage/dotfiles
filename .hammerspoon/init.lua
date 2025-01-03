@@ -2,14 +2,8 @@ require("hs.ipc")
 
 -- reload config
 hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "R", function()
-	hs.reload()
-end)
-
--- generate hammerspoon annotation
--- https://github.com/Hammerspoon/Spoons/pull/240
-hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "L", function()
 	require("Spoons.Annotation").init()
-	hs.alert.show("HS annotation generated")
+	hs.reload()
 end)
 
 -- import modules
