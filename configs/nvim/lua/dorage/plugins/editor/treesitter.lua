@@ -27,6 +27,7 @@ return {
 					"sql",
 					"perl",
 					"http",
+					"nix",
 				},
 				highlight = {
 					enable = true,
