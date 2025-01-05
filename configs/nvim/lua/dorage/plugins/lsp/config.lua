@@ -93,6 +93,7 @@ return {
 					"biome",
 					"cssls",
 					"tailwindcss",
+					"nil_ls", -- nix
 					"taplo",
 					"vuels",
 					"yamlls",
