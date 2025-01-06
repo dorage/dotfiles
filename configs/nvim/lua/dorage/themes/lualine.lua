@@ -129,6 +129,21 @@ ins_left({
 	padding = { left = 0, right = 1 }, -- We don't need space before this
 })
 
+ins_left({
+	"filename",
+	cond = conditions.buffer_not_empty,
+	color = { fg = colors.blue, gui = "bold" },
+}, "winbar")
+
+ins_left({
+	function()
+		local filepath = vim.fn.expand("%:.")
+		return filepath
+	end,
+	cond = conditions.buffer_not_empty,
+	color = { fg = colors.magenta, gui = "bold" },
+}, "winbar")
+
 ins_right({
 	function()
 		local animation = {
@@ -148,15 +163,6 @@ ins_right({
 		}
 		return animation[os.date("%S") % #animation + 1]
 	end,
-}, "winbar")
-
-ins_left({
-	function()
-		local filepath = vim.fn.expand("%:.")
-		return filepath
-	end,
-	cond = conditions.buffer_not_empty,
-	color = { fg = colors.magenta, gui = "bold" },
 }, "winbar")
 
 ins_left({
