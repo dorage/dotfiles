@@ -54,7 +54,7 @@ vim.keymap.set({ "n" }, "<c-u>", "<c-u>zz", { silent = true, desc = "scroll up a
 vim.keymap.set({ "n" }, "<c-d>", "<c-d>zz", { silent = true, desc = "scroll down and center" })
 
 -- buffer manipulation
-vim.keymap.set({ "n" }, "<a-c>", "<cmd>bp<cr><esc>", { desc = "delete current buffer" })
+vim.keymap.set({ "n" }, "<a-c>", "<cmd>bd<cr><esc>", { desc = "delete current buffer" })
 vim.keymap.set({ "n" }, "<a-.>", "<cmd>bn<cr><esc>", { desc = "move to next buffer" })
 vim.keymap.set({ "n" }, "<a-,>", "<cmd>bp<cr><esc>", { desc = "move to prev buffer" })
 vim.keymap.set({ "n" }, "<a-;>", "<cmd>b#<cr><esc>", { desc = "move to last buffer" })
