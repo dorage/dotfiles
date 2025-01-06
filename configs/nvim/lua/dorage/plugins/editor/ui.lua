@@ -66,8 +66,18 @@ return {
 	{
 		"https://github.com/voldikss/vim-floaterm",
 		config = function()
-			vim.keymap.set("n", "<leader>ag", "<Cmd>:FloatermNew --width=0.95 --height=0.95 lazygit<CR>")
-			vim.keymap.set("n", "<leader>ao", "<Cmd>:FloatermNew --width=0.95 --height=0.95 lazydocker<CR>")
+			vim.keymap.set(
+				"n",
+				"<leader>ag",
+				"<Cmd>:FloatermNew --width=0.95 --height=0.95 lazygit<CR>",
+				{ desc = "Lazygit" }
+			)
+			vim.keymap.set(
+				"n",
+				"<leader>ao",
+				"<Cmd>:FloatermNew --width=0.95 --height=0.95 lazydocker<CR>",
+				{ desc = "Lazydocker" }
+			)
 			-- remove border
 			vim.api.nvim_set_hl(0, "FloatermBorder", { default = false })
 		end,
@@ -81,8 +91,11 @@ return {
 			vim.o.timeoutlen = 300
 		end,
 		opts = {
-			window = {
+			preset = "helix",
+			win = {
 				border = "single",
+				title_pos = "center",
+				no_overlap = false,
 			},
 			icons = {
 				breadcrumb = "󰇘", -- symbol used in the command line area that shows your active key combo
