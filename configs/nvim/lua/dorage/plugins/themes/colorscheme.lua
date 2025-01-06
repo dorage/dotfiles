@@ -6,7 +6,6 @@ local theme_config = function(theme_name)
 		dependencies = {
 			"tribela/vim-transparent", -- remove background color on vim
 			"nvim-lualine/lualine.nvim",
-			"romgrk/barbar.nvim",
 			"norcalli/nvim-colorizer.lua", -- high-performance color highlighter
 		},
 		lazy = false, -- make sure we load this during startup if it is your main colorscheme

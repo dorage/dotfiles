@@ -58,11 +58,8 @@ return {
 					-- Developer configurations: Not meant for general override
 					buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
 					mappings = {
-						n = {
-							["q"] = require("telescope.actions").close,
-							-- ["<c-t>"] = require("trouble").open_with_trouble,
-						},
-						-- i = { ["<c-t>"] = require("trouble").open_with_trouble },
+						n = { ["<c-t>"] = require("trouble.sources.telescope").open },
+						i = { ["<c-t>"] = require("trouble.sources.telescope").open },
 					},
 				},
 				pickers = {

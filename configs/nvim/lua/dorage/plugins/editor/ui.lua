@@ -5,6 +5,7 @@ return {
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 	},
 	-- tabline plugin
+	-- other buffer viewer is more productive
 	-- {
 	-- 	"https://github.com/romgrk/barbar.nvim",
 	-- 	dependencies = {
