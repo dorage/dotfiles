@@ -54,6 +54,9 @@ vim.keymap.set({ "n", "s" }, "<leader>n", "<cmd>noh<cr><esc>", { desc = ":noh" }
 vim.keymap.set({ "n" }, "<c-u>", "<c-u>zz", { silent = true })
 vim.keymap.set({ "n" }, "<c-d>", "<c-d>zz", { silent = true })
 
+-- delete buffer
+vim.keymap.set({ "n" }, "<a-c>", "<cmd>bd<cr><esc>", { silent = true })
+
 -- httpyac
 vim.keymap.set({ "n" }, "<leader>hh", function()
 	local fpath = vim.fn.expand("%")
