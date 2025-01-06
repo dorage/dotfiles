@@ -58,6 +58,7 @@ vim.keymap.set({ "n" }, "<c-d>", "<c-d>zz", { silent = true })
 vim.keymap.set({ "n" }, "<a-c>", "<cmd>bp<cr><esc>", { desc = "delete current buffer" })
 vim.keymap.set({ "n" }, "<a-.>", "<cmd>bn<cr><esc>", { desc = "move to next buffer" })
 vim.keymap.set({ "n" }, "<a-,>", "<cmd>bp<cr><esc>", { desc = "move to prev buffer" })
+vim.keymap.set({ "n" }, "<a-;>", "<cmd>b#<cr><esc>", { desc = "move to last used buffer" })
 
 -- httpyac
 vim.keymap.set({ "n" }, "<leader>hh", function()
