@@ -66,16 +66,34 @@ local config = {
 		lualine_c = {},
 		lualine_x = {},
 	},
+	winbar = {
+		lualine_a = {},
+		lualine_b = {},
+		lualine_c = {},
+		lualine_x = {},
+		lualine_y = {},
+		lualine_z = {},
+	},
 }
 
--- Inserts a component in lualine_c at left section
-local function ins_left(component)
-	table.insert(config.sections.lualine_c, component)
+--- Inserts a component in lualine_c at left section
+---@param component any
+---@param line? 'sections'|'winbar'
+local function ins_left(component, line)
+	if line == nil then
+		line = "sections"
+	end
+	table.insert(config[line].lualine_c, component)
 end
 
--- Inserts a component in lualine_x at right section
-local function ins_right(component)
-	table.insert(config.sections.lualine_x, component)
+---Inserts a component in lualine_x at right section
+---@param component any
+---@param line? 'sections'|'winbar'
+local function ins_right(component, line)
+	if line == nil then
+		line = "sections"
+	end
+	table.insert(config[line].lualine_x, component)
 end
 
 ins_left({
@@ -111,31 +129,46 @@ ins_left({
 	padding = { left = 0, right = 1 }, -- We don't need space before this
 })
 
--- ins_left({
--- 	-- filesize component
--- 	"filesize",
--- 	cond = conditions.buffer_not_empty,
--- })
-ins_left({
+ins_right({
 	function()
 		local animation = {
-			"      ",
-			"󰇘    ",
-			"  󰇘  ",
-			"     󰇘",
+			"‿︵‿︵‿︵‿︵‿︵",
+			")ノ‿︵‿︵‿︵‿︵",
+			" )ノ︵‿︵‿︵‿︵",
+			"□° )ノ‿︵‿︵‿︵",
+			"°□° )ノ︵‿︵‿︵",
+			"(°□° )ノ‿︵‿︵‿",
+			"ヽ(°□° )ノ︵‿︵",
+			"︵‿ヽ(°□° )ノ︵",
+			"‿︵‿︵‿ヽ(°□° )",
+			"‿︵‿︵‿︵ヽ(°□°",
+			"‿︵‿︵‿︵‿ヽ(°□",
+			"︵‿︵‿︵‿︵‿ヽ(",
+			"‿︵‿︵‿︵‿︵‿ヽ",
 		}
 		return animation[os.date("%S") % #animation + 1]
 	end,
-})
+}, "winbar")
 
 ins_left({
-	-- "filename",
 	function()
 		local filepath = vim.fn.expand("%:.")
 		return filepath
 	end,
 	cond = conditions.buffer_not_empty,
 	color = { fg = colors.magenta, gui = "bold" },
+}, "winbar")
+
+ins_left({
+	"diff",
+	-- Is it me or the symbol for modified us really weird
+	symbols = { added = " ", modified = "󰝤 ", removed = " " },
+	diff_color = {
+		added = { fg = colors.green },
+		modified = { fg = colors.orange },
+		removed = { fg = colors.red },
+	},
+	cond = conditions.hide_in_width,
 })
 
 ins_left({ "location" })
@@ -201,18 +234,6 @@ ins_right({
 	"branch",
 	icon = "",
 	color = { fg = colors.violet, gui = "bold" },
-})
-
-ins_right({
-	"diff",
-	-- Is it me or the symbol for modified us really weird
-	symbols = { added = " ", modified = "󰝤 ", removed = " " },
-	diff_color = {
-		added = { fg = colors.green },
-		modified = { fg = colors.orange },
-		removed = { fg = colors.red },
-	},
-	cond = conditions.hide_in_width,
 })
 
 ins_right({
