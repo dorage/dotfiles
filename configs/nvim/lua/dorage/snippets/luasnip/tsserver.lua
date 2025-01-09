@@ -53,29 +53,44 @@ local common = {
 	end,
 }
 
-local es6 = {
+local language = {
 	-- keywords
-	s({ name = "js async keyword", trig = "jka" }, { t("async "), i(1) }),
-	s({ name = "js await keyowrd", trig = "jkw" }, { t("await "), i(1) }),
-	-- comments
-	s({ name = "js TODO comment", trig = "jct" }, { t("// TODO:"), i(1) }),
-	s({ name = "js WARN comment", trig = "jcw" }, { t("// WARN:"), i(1) }),
-	s({ name = "js NOTE comment", trig = "jcn" }, { t("// NOTE:"), i(1) }),
-	s({ name = "js TEST comment", trig = "jcs" }, { t("// TEST:"), i(1) }),
-	s({ name = "js FIX comment", trig = "jcf" }, { t("// FIX:"), i(1) }),
+	s({ name = "async keyword", trig = "lka" }, { t("async "), i(1) }),
+	s({ name = "await keyowrd", trig = "lkw" }, { t("await "), i(1) }),
+	s({ name = "break keyowrd", trig = "lkb" }, { t("break;"), i(1) }),
+	s({ name = "continue keyowrd", trig = "lkc" }, { t("continue;"), i(1) }),
 	-- types
-	s({ name = "js string type", trig = "jts" }, { t("string") }),
-	s({ name = "js number type", trig = "jtn" }, { t("number") }),
-	s({ name = "js boolean type", trig = "jtb" }, { t("boolean") }),
-	s({ name = "js object type", trig = "jto" }, { t("object") }),
-	s({ name = "js null type", trig = "jtn" }, { t("null") }),
-	s({ name = "js undefined type", trig = "jtu" }, { t("undefined") }),
+	s({ name = "string type", trig = "lts" }, { t("string") }),
+	s({ name = "number type", trig = "ltn" }, { t("number") }),
+	s({ name = "boolean type", trig = "ltb" }, { t("boolean") }),
+	s({ name = "null type", trig = "ltn" }, { t("null") }),
+	s({ name = "undefined type", trig = "ltu" }, { t("undefined") }),
 	-- variables
-	s({ name = "js variable declaration", trig = "jvl" }, fmt([[let <> = <>]], { i(1, "var"), i(2) }, fmtopt)),
-	s({ name = "js constant declaration", trig = "jvc" }, fmt([[const <> = <>]], { i(1, "constant"), i(2) }, fmtopt)),
-	-- expressions (function)
 	s(
-		{ name = "js function expression", trig = "jef" },
+		{ name = "let variable", trig = "lvl" },
+		fmt(
+			[[<> = <>]],
+			{ c(1, {
+				sn(1, { t("let "), r(1, "var") }),
+				sn(1, { t("const "), r(1, "var") }),
+			}), i(2) },
+			fmtopt
+		)
+	),
+	s(
+		{ name = "constant variable", trig = "lvc" },
+		fmt(
+			[[<> = <>]],
+			{ c(1, {
+				sn(1, { t("const "), r(1, "var") }),
+				sn(1, { t("let "), r(1, "var") }),
+			}), i(2) },
+			fmtopt
+		)
+	),
+	-- functions
+	s(
+		{ name = "js function", trig = "lf" },
 		fmt(
 			[[
 			function (<>) {
@@ -86,159 +101,11 @@ local es6 = {
 			fmtopt
 		)
 	),
+	s({ name = "arrow function", trig = "lfa" }, common.arrow_function(i(1))),
+	-- statements
+	-- statement: if
 	s(
-		{ name = "js async function expression", trig = "jefa" },
-		fmt(
-			[[
-			async function (<>) {
-				<>
-			}
-	]],
-			{ i(1), i(2) },
-			fmtopt
-		)
-	),
-	s(
-		{ name = "js arrow function expression", trig = "jea" },
-		fmt(
-			[[
-			(<>) =>> {
-				<>
-			}
-	]],
-			{ i(1), i(2) },
-			fmtopt
-		)
-	),
-	s(
-		{ name = "js async arrow function expression", trig = "jeaa" },
-		fmt(
-			[[
-			async (<>) =>> {
-				<>
-			}
-	]],
-			{ i(1), i(2) },
-			fmtopt
-		)
-	),
-	-- statements (return)
-	s(
-		{ name = "js return statement", trig = "jsr" },
-		fmt(
-			[[
-	return <>
-	]],
-			{
-				d(1, function()
-					local reg = string.gsub(vim.fn.getreg(0), "[\n\r]", "")
-					return sn(nil, { i(1, reg) })
-				end),
-			},
-			fmtopt
-		)
-	),
-	-- statements (import)
-	s(
-		{ name = "js import statement", trig = "jsi" },
-		fmt(
-			[[
-	import <> from '<>';
-	]],
-			{
-				c(2, {
-					i(1),
-					fmt(
-						[[
-					{ <> }
-					]],
-						{ i(1) },
-						fmtopt
-					),
-				}),
-				i(1, "module"),
-			},
-			fmtopt
-		)
-	),
-	s(
-		{ name = "js import only statement", trig = "jsio" },
-		fmt(
-			[[
-	import '<>';
-	]],
-			{
-				i(1, "module"),
-			},
-			fmtopt
-		)
-	),
-	-- statements (export)
-	s(
-		{ name = "export statement", trig = "jse" },
-		fmt(
-			[[
-	<> <>
-	]],
-			{ c(1, { t("export"), t("export default") }), i(2) },
-			fmtopt
-		)
-	),
-	-- arrow function
-	s({
-		name = "arrow function",
-		trig = "fna",
-	}, common.arrow_function(i(1))),
-	-- normal function
-	s(
-		{
-			name = "function statement",
-			trig = "fns",
-		},
-		fmt(
-			[[
-	function <> (<>){
-		<>
-	}
-	]],
-			{ i(1), i(2), i(3) },
-			fmtopt
-		)
-	),
-	-- try-catch statement
-	s(
-		{ name = "try-catch statement", trig = "try" },
-		fmt(
-			[[
-	try {
-		<>
-	} catch(err) {
-		<>
-	}
-	]],
-			{ i(1), c(2, {
-				sn(1, { t("console.error(err);"), i(1) }),
-				i(1),
-			}) },
-			fmtopt
-		)
-	),
-	-- default statement
-	s(
-		{ name = "try-default statement", trig = "tryd" },
-		fmt(
-			[[
-	default {
-		<>
-	}
-	]],
-			{ i(1) },
-			fmtopt
-		)
-	),
-	-- if statement
-	s(
-		{ name = "if statement", trig = "if" },
+		{ name = "if statement", trig = "lsif" },
 		fmt(
 			[[
 	if (<>) <>
@@ -252,20 +119,19 @@ local es6 = {
 					<>
 				}
 				]],
-						{ i(1) },
+						{ r(1) },
 						fmtopt
 					),
-					i(1),
+					r(1),
 				}),
 			},
 			fmtopt
 		)
 	),
-	-- else if statement
 	s(
 		{
 			name = "else if statement",
-			trig = "ifi",
+			trig = "lsifi",
 		},
 		fmt(
 			[[
@@ -280,18 +146,17 @@ local es6 = {
 					<>
 				}
 				]],
-						{ i(1) },
+						{ r(1) },
 						fmtopt
 					),
-					i(1),
+					r(1),
 				}),
 			},
 			fmtopt
 		)
 	),
-	-- else statement
 	s(
-		{ name = "else statement", trig = "ife" },
+		{ name = "else statement", trig = "lsife" },
 		fmt(
 			[[
 	else <>	
@@ -303,17 +168,17 @@ local es6 = {
 					<>
 				}
 				]],
-					{ i(1) },
+					{ r(1) },
 					fmtopt
 				),
-				i(1),
+				r(1),
 			}) },
 			fmtopt
 		)
 	),
-	-- switch statement
+	-- statement: switch
 	s(
-		{ name = "switch statement", trig = "sw" },
+		{ name = "switch statement", trig = "lss" },
 		fmt(
 			[[
 	switch(<>) {
@@ -329,29 +194,28 @@ local es6 = {
 			fmtopt
 		)
 	),
-	-- case statement
 	s(
-		{ name = "switch-case statement", trig = "swc" },
+		{ name = "switch-case statement", trig = "lssc" },
 		fmt(
 			[[
 	case <>:
 		<>
-		<>
 	]],
 			{
 				i(1, "value"),
-				i(2),
-				c(3, {
-					t("break;"),
-					t(""),
+				c(2, {
+					sn(1, {
+						r(1),
+						t("break;"),
+					}),
+					sn(1, { r(1) }),
 				}),
 			},
 			fmtopt
 		)
 	),
-	-- default statement
 	s(
-		{ name = "switch-default statement", trig = "swd" },
+		{ name = "switch-default statement", trig = "lssd" },
 		fmt(
 			[[
 	default:
@@ -361,213 +225,9 @@ local es6 = {
 			fmtopt
 		)
 	),
-	-- break statement
-	s({ name = "break statement", trig = "br" }, { t("break;") }),
-	-- continue statement
-	s({ name = "continue statement", trig = "cn" }, { t("continue;") }),
-	-- for statement
-	-- s(
-	-- 	{ name = "for statement", trig = "fr" },
-	-- 	fmt(
-	-- 		[[
-	-- for(let <> = <>; <> << <>.length; <>++){
-	-- 	const <> = <>[<>];
-	-- 	<>
-	-- export
+	--- statement: for
 	s(
-		{ name = "export statement", trig = "ex" },
-		fmt(
-			[[
-	<> <>
-	]],
-			{ c(1, { t("export"), t("export default") }), i(2) },
-			fmtopt
-		)
-	),
-	-- arrow function
-	s({
-		name = "arrow function",
-		trig = "fna",
-	}, common.arrow_function(i(1))),
-	-- normal function
-	s(
-		{
-			name = "function statement",
-			trig = "fns",
-		},
-		fmt(
-			[[
-	function <> (<>){
-		<>
-	}
-	]],
-			{ i(1), i(2), i(3) },
-			fmtopt
-		)
-	),
-	-- try-catch statement
-	s(
-		{ name = "try-catch statement", trig = "try" },
-		fmt(
-			[[
-	try {
-		<>
-	} catch(err) {
-		<>
-	}
-	]],
-			{ i(1), c(2, {
-				sn(1, { t("console.error(err);"), i(1) }),
-				i(1),
-			}) },
-			fmtopt
-		)
-	),
-	-- default statement
-	s(
-		{ name = "try-default statement", trig = "tryd" },
-		fmt(
-			[[
-	default {
-		<>
-	}
-	]],
-			{ i(1) },
-			fmtopt
-		)
-	),
-	-- if statement
-	s(
-		{ name = "if statement", trig = "if" },
-		fmt(
-			[[
-	if (<>) <>
-	]],
-			{
-				i(1, "true"),
-				c(2, {
-					fmt(
-						[[
-				{
-					<>
-				}
-				]],
-						{ i(1) },
-						fmtopt
-					),
-					i(1),
-				}),
-			},
-			fmtopt
-		)
-	),
-	-- else if statement
-	s(
-		{
-			name = "else if statement",
-			trig = "ifi",
-		},
-		fmt(
-			[[
-	else if(<>) <>
-	]],
-			{
-				i(1, "true"),
-				c(2, {
-					fmt(
-						[[
-				{
-					<>
-				}
-				]],
-						{ i(1) },
-						fmtopt
-					),
-					i(1),
-				}),
-			},
-			fmtopt
-		)
-	),
-	-- else statement
-	s(
-		{ name = "else statement", trig = "ife" },
-		fmt(
-			[[
-	else <>	
-	]],
-			{ c(1, {
-				fmt(
-					[[
-				{
-					<>
-				}
-				]],
-					{ i(1) },
-					fmtopt
-				),
-				i(1),
-			}) },
-			fmtopt
-		)
-	),
-	-- switch statement
-	s(
-		{ name = "switch statement", trig = "sw" },
-		fmt(
-			[[
-	switch(<>) {
-	<>
-	}
-	]],
-			{
-				i(1, "value"),
-				sn(0, {
-					i(1),
-				}),
-			},
-			fmtopt
-		)
-	),
-	-- case statement
-	s(
-		{ name = "switch-case statement", trig = "swc" },
-		fmt(
-			[[
-	case <>:
-		<>
-		<>
-	]],
-			{
-				i(1, "value"),
-				i(2),
-				c(3, {
-					t("break;"),
-					t(""),
-				}),
-			},
-			fmtopt
-		)
-	),
-	-- default statement
-	s(
-		{ name = "switch-default statement", trig = "swd" },
-		fmt(
-			[[
-	default:
-		<>
-	]],
-			{ i(1) },
-			fmtopt
-		)
-	),
-	-- break statement
-	s({ name = "break statement", trig = "br" }, { t("break;") }),
-	-- continue statement
-	s({ name = "continue statement", trig = "cn" }, { t("continue;") }),
-	-- for statement
-	s(
-		{ name = "for statement", trig = "fr" },
+		{ name = "for statement", trig = "lsf" },
 		fmt(
 			[[
 	for(let <> = <>; <> << <>.length; <>++){
@@ -589,9 +249,8 @@ local es6 = {
 			fmtopt
 		)
 	),
-	-- -- for..of statement
 	s(
-		{ name = "for..of statement", trig = "fro" },
+		{ name = "for..of statement", trig = "lsfo" },
 		fmt(
 			[[
 	for(const <> of <>){
@@ -606,6 +265,121 @@ local es6 = {
 			fmtopt
 		)
 	),
+	s(
+		{ name = "for..in statement", trig = "lsfi" },
+		fmt(
+			[[
+	for(const <> in <>){
+		<>
+	}
+	]],
+			{
+				d(2, cmn.singular, { 1 }),
+				i(1, "elements"),
+				i(3),
+			},
+			fmtopt
+		)
+	),
+	-- statement: try
+	s(
+		{ name = "try-catch statement", trig = "lst" },
+		fmt(
+			[[
+	try {
+		<>
+	} catch(err) {
+		<>
+	}
+	]],
+			{ i(1), c(2, {
+				sn(1, { t("console.error(err);"), i(1) }),
+				i(1),
+			}) },
+			fmtopt
+		)
+	),
+	-- default statement
+	s(
+		{ name = "try-default statement", trig = "lstd" },
+		fmt(
+			[[
+	default {
+		<>
+	}
+	]],
+			{ i(1) },
+			fmtopt
+		)
+	),
+
+	-- statement: return
+	s(
+		{ name = "return statement", trig = "lsr" },
+		fmt(
+			[[
+	return <>
+	]],
+			{
+				d(1, function()
+					local reg = string.gsub(vim.fn.getreg(0), "[\n\r]", "")
+					return sn(nil, { i(1, reg) })
+				end),
+			},
+			fmtopt
+		)
+	),
+	-- statement: export
+	s(
+		{ name = "export statement", trig = "lse" },
+		fmt(
+			[[
+	<> <>
+	]],
+			{ c(1, { t("export"), t("export default") }), i(2) },
+			fmtopt
+		)
+	),
+	-- statement: import
+	s(
+		{ name = "import statement", trig = "lsi" },
+		fmt(
+			[[
+	import <>;
+	]],
+			{
+				c(1, {
+					sn(1, {
+						-- destructive
+						c(2, {
+							i(1),
+							fmt(
+								[[
+					{ <> }
+					]],
+								{ i(1) },
+								fmtopt
+							),
+						}),
+						t(" from '"),
+						r(1, "module"),
+						t("'"),
+					}),
+					sn(1, { t("'"), r(1, "module"), t("'") }),
+				}),
+			},
+			fmtopt
+		)
+	),
+	-- TODO:
+	-- move to common snippet
+	-- commentize with vim.comment api
+	-- comments
+	s({ name = "js TODO comment", trig = "jct" }, { t("// TODO:"), i(1) }),
+	s({ name = "js WARN comment", trig = "jcw" }, { t("// WARN:"), i(1) }),
+	s({ name = "js NOTE comment", trig = "jcn" }, { t("// NOTE:"), i(1) }),
+	s({ name = "js TEST comment", trig = "jcs" }, { t("// TEST:"), i(1) }),
+	s({ name = "js FIX comment", trig = "jcf" }, { t("// FIX:"), i(1) }),
 	-- forEach highorder function
 	postfix(
 		{ name = ".forEach", trig = ".hfe" },
@@ -860,13 +634,13 @@ local jest = {
 	),
 }
 
-ls.add_snippets("javascript", es6)
-ls.add_snippets("javascriptreact", es6)
+ls.add_snippets("javascript", language)
+ls.add_snippets("javascriptreact", language)
 
-ls.add_snippets("typescript", es6)
+ls.add_snippets("typescript", language)
 ls.add_snippets("typescript", typescript)
 ls.add_snippets("typescript", jest)
 
-ls.add_snippets("typescriptreact", es6)
+ls.add_snippets("typescriptreact", language)
 ls.add_snippets("typescriptreact", typescript)
 ls.add_snippets("typescriptreact", jest)

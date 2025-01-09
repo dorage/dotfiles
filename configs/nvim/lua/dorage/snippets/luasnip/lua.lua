@@ -82,4 +82,13 @@ ls.add_snippets("lua", {
 		)
 	),
 	s({ name = "luasnip formatting", trig = "lsnf" }, fmt_snip),
+	s(
+		{ name = "local variable", trig = "lv" },
+		fmt(
+			[[---@<>
+	local <> = <>]],
+			{ i(1), i(2), i(3) },
+			fmtopt
+		)
+	),
 })
