@@ -119,10 +119,10 @@ local language = {
 					<>
 				}
 				]],
-						{ r(1) },
+						{ r(1, "") },
 						fmtopt
 					),
-					r(1),
+					r(1, ""),
 				}),
 			},
 			fmtopt
@@ -146,10 +146,10 @@ local language = {
 					<>
 				}
 				]],
-						{ r(1) },
+						{ r(1, "") },
 						fmtopt
 					),
-					r(1),
+					r(1, ""),
 				}),
 			},
 			fmtopt
@@ -161,18 +161,20 @@ local language = {
 			[[
 	else <>	
 	]],
-			{ c(1, {
-				fmt(
-					[[
+			{
+				c(1, {
+					fmt(
+						[[
 				{
 					<>
 				}
 				]],
-					{ r(1) },
-					fmtopt
-				),
-				r(1),
-			}) },
+						{ r(1, "") },
+						fmtopt
+					),
+					r(1, ""),
+				}),
+			},
 			fmtopt
 		)
 	),
@@ -205,10 +207,10 @@ local language = {
 				i(1, "value"),
 				c(2, {
 					sn(1, {
-						r(1),
+						r(1, ""),
 						t("break;"),
 					}),
-					sn(1, { r(1) }),
+					sn(1, { r(1, "") }),
 				}),
 			},
 			fmtopt
