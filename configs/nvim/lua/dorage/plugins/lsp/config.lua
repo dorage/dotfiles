@@ -68,6 +68,7 @@ return {
 
 			require("mason-tool-installer").setup({
 				ensure_installed = {
+					"bashls",
 					"prettier",
 					"eslint_d",
 					"markdownlint",
@@ -83,6 +84,7 @@ return {
 			require("mason-lspconfig").setup({
 				automatic_installation = true,
 				ensure_installed = {
+					"bashls",
 					"pyright",
 					"rust_analyzer",
 					"lua_ls",
