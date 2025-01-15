@@ -31,19 +31,6 @@ local ls_auto_import = require("dorage.customs.js-auto-import")
 local fp = require("dorage.utils.fp")
 
 local M = {
-	-- new hook
-	s(
-		{ name = "React: new hook", trig = "rehn" },
-		fmt(
-			[[
-	export const use<> = () =>> {
-		return {};
-	}
-	]],
-			{ i(1) },
-			fmtopt
-		)
-	),
 	-- useState
 	s(
 		{ name = "React: useState", trig = "rehs" },
@@ -154,23 +141,42 @@ const <> = useMemo(()=>>{
 			}),
 		}
 	),
+	-- new hook
+	s(
+		{ name = "React: new hook", trig = "rehn" },
+		fmt(
+			[[
+type <>Props = {};
+
+export const use<> = (props: <>Props) =>> {
+	return {};
+}
+	]],
+			{
+
+				f(ls_utils.identity, { 1 }),
+				i(1),
+				f(ls_utils.identity, { 1 }),
+			},
+			fmtopt
+		)
+	),
 	-- -- new Component
 	s(
 		{ name = "React: new Component", trig = "recn" },
 		fmt(
 			[[
-type <>Props = {
-
-};
+type <>Props = {};
 
 export const <> = (props: <>Props) =>> {
-	return <<>><</>>;
+	return <<>><><</>>;
 };
 	]],
 			{
 				f(ls_utils.identity, { 1 }),
 				i(1),
 				f(ls_utils.identity, { 1 }),
+				i(2),
 			},
 			fmtopt
 		)
