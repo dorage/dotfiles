@@ -10,6 +10,15 @@ return {
 			vim.keymap.set({ "n" }, "<leader>eM", emmet.merge_line, { desc = "Emmet:Merge Line" })
 		end,
 	},
+	-- jsdoc
+	{
+		"heavenshell/vim-jsdoc",
+		ft = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+		build = "make install",
+		config = function()
+			vim.keymap.set({ "n" }, "<leader>ld", "<cmd>JsDoc<cr>", { desc = "JsDoc: insert" })
+		end,
+	},
 	--	 easy commenting
 	{ "JoosepAlviste/nvim-ts-context-commentstring", opts = { enable_autocmd = true } },
 	{
@@ -118,7 +127,7 @@ return {
 		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function()
 			require("todo-comments").setup()
-			vim.keymap.set("n", "<leader>o", "<Cmd>TodoTelescope<CR>", { desc = "Todo comments" })
+			vim.keymap.set("n", "<leader>fo", "<Cmd>TodoTelescope<CR>", { desc = "Todo comments" })
 		end,
 	},
 	{
