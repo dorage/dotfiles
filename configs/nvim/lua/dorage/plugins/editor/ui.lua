@@ -4,61 +4,25 @@ return {
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 	},
-	-- file tree explorer
+	-- file tree
+	-- https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-files.md
 	{
-		"nvim-tree/nvim-tree.lua",
-		dependencies = {
-			"nvim-tree/nvim-web-devicons",
-		},
+		"echasnovski/mini.files",
+		version = false,
 		config = function()
-			-- nvim-tree setup
-			-- disable netrw at the very start of your init.lua
-			vim.g.loaded_netrw = 1
-			vim.g.loaded_netrwPlugin = 1
-
-			-- optionally enable 24-bit colour
-			vim.opt.termguicolors = true
-
-			local nvim_tree = require("nvim-tree")
-			nvim_tree.setup({
-				sort = {
-					sorter = "case_sensitive",
-				},
-				view = {
-					width = 30,
-					relativenumber = true,
-				},
-				renderer = {
-					group_empty = true,
-				},
-				filters = {
-					-- dotfiles = true,
-				},
-				actions = {
-					change_dir = {
-						enable = false,
-						global = false,
-						restrict_above_cwd = false,
-					},
+			local miniFiles = require("mini.files")
+			miniFiles.setup({
+				windows = {
+					preview = true,
+					width_preview = 25,
 				},
 			})
-			vim.cmd([[
-					:hi      NvimTreeExecFile    guifg=#ffa0a0
-					:hi      NvimTreeSpecialFile guifg=#ff80ff gui=underline
-					:hi      NvimTreeSymlink     guifg=Yellow  gui=italic
-					:hi link NvimTreeImageFile   Title
-			]])
 
 			vim.keymap.set("n", "<leader>ab", function()
-				require("nvim-tree.api").tree.toggle({
-					find_file = true,
-				})
+				miniFiles.open()
 			end, { silent = true })
-
 			vim.keymap.set("n", "<leader>abb", function()
-				require("nvim-tree.api").tree.focus({
-					find_file = true,
-				})
+				miniFiles.open(vim.api.nvim_buf_get_name(0))
 			end, { silent = true })
 		end,
 	},
@@ -134,4 +98,5 @@ return {
 			})
 		end,
 	},
+	{ "rachartier/tiny-glimmer.nvim", event = "TextYankPost", opts = {} },
 }
