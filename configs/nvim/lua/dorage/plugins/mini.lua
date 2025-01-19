@@ -1,4 +1,13 @@
 return {
+	-- split & join
+	{
+		"echasnovski/mini.splitjoin",
+		version = false,
+		config = function()
+			local miniSplitjoin = require("mini.splitjoin")
+			miniSplitjoin.setup({})
+		end,
+	},
 	-- jump
 	{
 		"echasnovski/mini.jump",
@@ -36,16 +45,16 @@ return {
 			miniFiles.setup({
 				windows = {
 					preview = true,
-					width_preview = 25,
+					width_preview = 50,
 				},
 			})
 
-			vim.keymap.set("n", "<leader>ab", function()
+			vim.keymap.set("n", "<leader>fb", function()
 				miniFiles.open()
-			end, { silent = true })
-			vim.keymap.set("n", "<leader>abb", function()
+			end, { desc = "files in root directory" })
+			vim.keymap.set("n", "<leader>fv", function()
 				miniFiles.open(vim.api.nvim_buf_get_name(0))
-			end, { silent = true })
+			end, { desc = "files in current file directory" })
 		end,
 	},
 	-- indent
