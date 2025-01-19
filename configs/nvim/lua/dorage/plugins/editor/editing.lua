@@ -64,21 +64,6 @@ return {
 			},
 		},
 	},
-	-- show indent guide
-	{
-		"lukas-reineke/indent-blankline.nvim",
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter",
-		},
-		opts = {
-			indent = {
-				char = "│",
-				tab_char = "│",
-			},
-			scope = { enabled = false },
-		},
-		main = "ibl",
-	},
 	-- pretty diagnostic
 	{
 		"folke/trouble.nvim",
