@@ -1,4 +1,5 @@
 return {
+	-- miniPick.start()
 	{ "nvim-telescope/telescope-ui-select.nvim" },
 	-- fuzzy finder
 	{
@@ -85,23 +86,23 @@ return {
 			require("telescope").load_extension("file_browser")
 
 			local builtin = require("telescope.builtin")
-			vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "find files" })
-			vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "live grep" })
-			vim.keymap.set("n", "<leader>fw", function()
-				return builtin.buffers({ ignore_current_buffer = true })
-			end, { desc = "buffers" })
-			vim.keymap.set("n", "<leader>f/", builtin.current_buffer_fuzzy_find, { desc = "current buffer fuzzy find" })
-			vim.keymap.set("n", "<leader>fl", builtin.lsp_definitions, { desc = "lsp definitions" })
-			vim.keymap.set("n", "<leader>fr", builtin.lsp_references, { desc = "lsp references" })
-			vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "keymaps" })
-			vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "diagnostics" })
-			vim.keymap.set("n", "<leader>fb", "<Cmd>Telescope file_browser<CR>", { desc = "file browser" })
-			vim.keymap.set(
-				"n",
-				"<leader>fv",
-				"<Cmd>Telescope file_browser path=%:p:h select_buffer=true<CR>",
-				{ desc = "file browser" }
-			)
+			-- vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "find files" })
+			-- vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "live grep" })
+			-- vim.keymap.set("n", "<leader>fw", function()
+			-- 	return builtin.buffers({ ignore_current_buffer = true })
+			-- end, { desc = "buffers" })
+			-- vim.keymap.set("n", "<leader>f/", builtin.current_buffer_fuzzy_find, { desc = "current buffer fuzzy find" })
+			-- vim.keymap.set("n", "<leader>fl", builtin.lsp_definitions, { desc = "lsp definitions" })
+			-- vim.keymap.set("n", "<leader>fr", builtin.lsp_references, { desc = "lsp references" })
+			-- vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "keymaps" })
+			-- vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "diagnostics" })
+			-- vim.keymap.set("n", "<leader>fb", "<Cmd>Telescope file_browser<CR>", { desc = "file browser" })
+			-- vim.keymap.set(
+			-- 	"n",
+			-- 	"<leader>fv",
+			-- 	"<Cmd>Telescope file_browser path=%:p:h select_buffer=true<CR>",
+			-- 	{ desc = "file browser" }
+			-- )
 		end,
 	},
 	-- markdown

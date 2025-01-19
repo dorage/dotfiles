@@ -4,28 +4,6 @@ return {
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 	},
-	-- file tree
-	-- https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-files.md
-	{
-		"echasnovski/mini.files",
-		version = false,
-		config = function()
-			local miniFiles = require("mini.files")
-			miniFiles.setup({
-				windows = {
-					preview = true,
-					width_preview = 25,
-				},
-			})
-
-			vim.keymap.set("n", "<leader>ab", function()
-				miniFiles.open()
-			end, { silent = true })
-			vim.keymap.set("n", "<leader>abb", function()
-				miniFiles.open(vim.api.nvim_buf_get_name(0))
-			end, { silent = true })
-		end,
-	},
 	-- floating terminal
 	{
 		"https://github.com/voldikss/vim-floaterm",
@@ -68,23 +46,6 @@ return {
 			},
 		},
 	},
-	-- show indent guide
-	{
-		"echasnovski/mini.indentscope",
-		version = false,
-		config = function()
-			local miniIndentscope = require("mini.indentscope")
-			miniIndentscope.setup({})
-		end,
-	},
-	{
-		"echasnovski/mini.notify",
-		version = false,
-		config = function()
-			local miniNotify = require("mini.notify")
-			miniNotify.setup({})
-		end,
-	},
 	-- cursor movement
 	{
 		"gen740/SmoothCursor.nvim",
@@ -116,5 +77,13 @@ return {
 		end,
 	},
 	-- yank visualizer
-	{ "rachartier/tiny-glimmer.nvim", event = "TextYankPost", opts = {} },
+	{
+		"rachartier/tiny-glimmer.nvim",
+		event = "TextYankPost",
+		config = function()
+			require("tiny-glimmer").setup({
+				transparency_color = "333333ef",
+			})
+		end,
+	},
 }
