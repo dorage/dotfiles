@@ -1,6 +1,14 @@
 return {
 	-- emmet
 	{
+		"https://github.com/mattn/emmet-vim",
+		config = function()
+			vim.g.user_emmet_settings = "{ 'javascript.jsx' : { 'extends' : 'jsx' } }"
+			vim.g.user_emmet_settings = "{ 'typescriptreact.tsx' : { 'extends' : 'tsx' } }"
+			vim.g.user_emmet_leader_key = "<leader>e"
+		end,
+	},
+	{
 		"dorage/tree-emmet.nvim",
 		config = function()
 			local emmet = require("tree-emmet")
@@ -43,24 +51,21 @@ return {
 				},
 			})
 
-			vim.keymap.set("n", "<leader>ftt", function()
-				require("trouble").toggle()
-			end)
-			vim.keymap.set("n", "<leader>ftw", function()
-				require("trouble").toggle("workspace_diagnostics")
-			end)
-			vim.keymap.set("n", "<leader>ftd", function()
-				require("trouble").toggle("document_diagnostics")
-			end)
-			vim.keymap.set("n", "<leader>ftq", function()
-				require("trouble").toggle("quickfix")
-			end)
-			vim.keymap.set("n", "<leader>ftl", function()
-				require("trouble").toggle("loclist")
-			end)
-			vim.keymap.set("n", "gtr", function()
-				require("trouble").toggle("lsp_references")
-			end)
+			vim.keymap.set(
+				"n",
+				"<leader>ftw",
+				"<cmd>Trouble diagnostics toggle<cr>",
+				{ desc = "Trouble: Toggle workspace_diagnostics" }
+			)
+			vim.keymap.set(
+				"n",
+				"<leader>ftb",
+				"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+				{ desc = "Trouble: Toggle buffer_diagnostics" }
+			)
+			vim.keymap.set("n", "<leader>fts", "<cmd>Trouble symbols toggle<cr>", { desc = "Trouble: Toggle symbols" })
+			vim.keymap.set("n", "<leader>ftl", "<cmd>Trouble lsp toggle<cr>", { desc = "Trouble: Toggle LSP" })
+			vim.keymap.set("n", "<leader>lq", "<cmd>Trouble qflist toggle<cr>", { desc = "Trouble: Quick Fix" })
 		end,
 	},
 	{
