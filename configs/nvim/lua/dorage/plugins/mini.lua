@@ -23,13 +23,24 @@ return {
 		version = false,
 		config = function()
 			local miniPick = require("mini.pick")
-			local builtin = miniPick.builtin
-
 			miniPick.setup({})
 
+			local builtin = miniPick.builtin
 			vim.keymap.set("n", "<leader>ff", builtin.files, { desc = "find files" })
 			vim.keymap.set("n", "<leader>fg", builtin.grep_live, { desc = "live grep" })
 			vim.keymap.set("n", "<leader>fw", builtin.buffers, { desc = "buffers" })
+			-- [custom]
+			-- registry
+			miniPick.registry.registry = function()
+				local items = vim.tbl_keys(MiniPick.registry)
+				table.sort(items)
+				local source = { items = items, name = "Registry", choose = function() end }
+				local chosen_picker_name = MiniPick.start({ source = source })
+				if chosen_picker_name == nil then
+					return
+				end
+				return MiniPick.registry[chosen_picker_name]()
+			end
 			-- diagnostics
 			-- keymaps
 			-- color
