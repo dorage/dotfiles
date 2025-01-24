@@ -1,12 +1,5 @@
 return {
 	{
-		"Exafunction/codeium.nvim",
-		event = "BufEnter",
-		config = function()
-			require("codeium").setup({})
-		end,
-	},
-	{
 		"saadparwaiz1/cmp_luasnip",
 	},
 	{
@@ -21,7 +14,6 @@ return {
 			{ "l3mon4d3/luasnip" }, -- snippet
 			{ "saadparwaiz1/cmp_luasnip" }, -- snippet
 			{ "onsails/lspkind.nvim" }, -- vscode style compeletion
-			{ "Exafunction/codeium.nvim" }, -- ai autocompletion
 		},
 		config = function()
 			local cmp = require("cmp")
@@ -34,7 +26,6 @@ return {
 					{ name = "path" },
 					{ name = "nvim_lsp" },
 					{ name = "buffer" },
-					{ name = "codeium" },
 					{ name = "mkdnflow" },
 					{ name = "lazydev", group_index = 0 },
 				}),
