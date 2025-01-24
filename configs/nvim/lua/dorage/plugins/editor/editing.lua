@@ -73,7 +73,12 @@ return {
 		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function()
 			require("todo-comments").setup()
-			vim.keymap.set("n", "<leader>fo", "<Cmd>TodoTelescope<CR>", { desc = "Todo comments" })
+			vim.keymap.set(
+				"n",
+				"<leader>ftt",
+				"<Cmd>Trouble todo filter = {tag = {TODO}}<CR>",
+				{ desc = "Trouble: Toggle TODO" }
+			)
 		end,
 	},
 	{
