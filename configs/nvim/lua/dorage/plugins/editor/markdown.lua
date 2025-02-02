@@ -12,4 +12,8 @@ return {
 			vim.keymap.set("n", "<leader>zp", "<cmd>MarkdownPreviewToggle<CR>")
 		end,
 	},
+	{
+		"OXY2DEV/markview.nvim",
+		lazy = false,
+	},
 }
