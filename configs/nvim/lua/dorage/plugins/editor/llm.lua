@@ -14,6 +14,7 @@ return {
 				api_key_name = "GEMINI_API_KEY",
 			},
 			vendors = {
+				-- https://studio.nebius.ai/
 				nebius_r1 = {
 					__inherited_from = "openai",
 					endpoint = "https://api.studio.nebius.ai/v1",
