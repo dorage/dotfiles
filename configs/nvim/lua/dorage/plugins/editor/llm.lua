@@ -43,7 +43,17 @@ return {
 					temperature = 0,
 					max_tokens = 8192,
 					-- optional
-					api_key_name = "OPENAI_API_KEY", -- default OPENAI_API_KEY if not set
+					api_key_name = "DEEPINFRA_API_KEY", -- default OPENAI_API_KEY if not set
+				},
+				deepinfra_v3 = {
+					__inherited_from = "openai",
+					endpoint = "https://api.deepinfra.com/v1/openai",
+					model = "deepseek-ai/DeepSeek-V3",
+					timeout = 30000, -- Timeout in milliseconds
+					temperature = 0,
+					max_tokens = 8192,
+					-- optional
+					api_key_name = "DEEPINFRA_API_KEY", -- default OPENAI_API_KEY if not set
 				},
 				deepseek = {
 					endpoint = "https://api.deepseek.com/v1",
@@ -52,7 +62,7 @@ return {
 					temperature = 0,
 					max_tokens = 8192,
 					-- optional
-					api_key_name = "OPENAI_API_KEY",
+					api_key_name = "DEEPSEEK_API_KEY",
 				},
 			},
 		},
