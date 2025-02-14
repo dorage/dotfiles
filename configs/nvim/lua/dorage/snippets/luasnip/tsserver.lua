@@ -379,6 +379,32 @@ local language = {
 	s({ name = "js NOTE comment", trig = "lcn" }, { t("// NOTE: "), i(1) }),
 	s({ name = "js TEST comment", trig = "lcs" }, { t("// TEST: "), i(1) }),
 	s({ name = "js FIX comment", trig = "lcf" }, { t("// FIX: "), i(1) }),
+	s(
+		{ name = "js Separator comment", trig = "lcf" },
+		fmt(
+			[[
+// --------------------------------------------------------------------------------------------------
+
+<>
+	]],
+			{ i(1) },
+			fmtopt
+		)({ name = "js Header comment", trig = "lch" }),
+		fmt(
+			[[
+// --------------------------------------------------------------------------------------------------
+// <>
+// --------------------------------------------------------------------------------------------------
+
+<>
+		]],
+			{
+				i(1),
+				i(2),
+			},
+			fmtopt
+		)
+	),
 	-- array
 	s({ name = "Empty Array", trig = "lae" }, fmt([[Array(<>).fill(null))]], { i(1) }, fmtopt)),
 	-- array: highorder
