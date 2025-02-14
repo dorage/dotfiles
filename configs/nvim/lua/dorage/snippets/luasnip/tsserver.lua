@@ -389,7 +389,10 @@ local language = {
 	]],
 			{ i(1) },
 			fmtopt
-		)({ name = "js Header comment", trig = "lch" }),
+		)
+	),
+	s(
+		{ name = "js Header comment", trig = "lch" },
 		fmt(
 			[[
 // --------------------------------------------------------------------------------------------------
