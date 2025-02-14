@@ -373,18 +373,17 @@ local language = {
 			fmtopt
 		)
 	),
-	-- TODO:
-	-- move to common snippet
-	-- commentize with vim.comment api
 	-- comments
-	s({ name = "js TODO comment", trig = "jct" }, { t("// TODO:"), i(1) }),
-	s({ name = "js WARN comment", trig = "jcw" }, { t("// WARN:"), i(1) }),
-	s({ name = "js NOTE comment", trig = "jcn" }, { t("// NOTE:"), i(1) }),
-	s({ name = "js TEST comment", trig = "jcs" }, { t("// TEST:"), i(1) }),
-	s({ name = "js FIX comment", trig = "jcf" }, { t("// FIX:"), i(1) }),
-	-- forEach highorder function
+	s({ name = "js TODO comment", trig = "lct" }, { t("// TODO: "), i(1) }),
+	s({ name = "js WARN comment", trig = "lcw" }, { t("// WARN: "), i(1) }),
+	s({ name = "js NOTE comment", trig = "lcn" }, { t("// NOTE: "), i(1) }),
+	s({ name = "js TEST comment", trig = "lcs" }, { t("// TEST: "), i(1) }),
+	s({ name = "js FIX comment", trig = "lcf" }, { t("// FIX: "), i(1) }),
+	-- array
+	s({ name = "Empty Array", trig = "lae" }, fmt([[Array(<>).fill(null))]], { i(1) }, fmtopt)),
+	-- array: highorder
 	postfix(
-		{ name = ".forEach", trig = ".hfe" },
+		{ name = ".forEach", trig = ".fo" },
 		fmt([[<>.forEach(<>)]], {
 			f(function(_, parent)
 				return parent.snippet.env.POSTFIX_MATCH
@@ -392,9 +391,8 @@ local language = {
 			common.arrow_function(c(1, { t("e"), t("e, idx"), t("e, idx, arr") })),
 		}, fmtopt)
 	),
-	-- map highorder function
 	postfix(
-		{ name = ".map", trig = ".hmp" },
+		{ name = ".map", trig = ".m" },
 		fmt([[<>.map(<>)]], {
 			f(function(_, parent)
 				return parent.snippet.env.POSTFIX_MATCH
@@ -402,29 +400,26 @@ local language = {
 			common.arrow_function(c(1, { t("e"), t("e, idx"), t("e, idx, arr") })),
 		}, fmtopt)
 	),
-	-- filter highorder function
 	postfix(
-		{ name = ".filter", trig = ".hfl" },
-		fmt([[<>.hfi(<>)]], {
+		{ name = ".filter", trig = ".fi" },
+		fmt([[<>.filter(<>)]], {
 			f(function(_, parent)
 				return parent.snippet.env.POSTFIX_MATCH
 			end, {}),
 			common.arrow_function(c(1, { t("e"), t("e, idx"), t("e, idx, arr") })),
 		}, fmtopt)
 	),
-	-- every highorder function
 	postfix(
-		{ name = ".every", trig = ".hev" },
-		fmt([[<>.hev(<>)]], {
+		{ name = ".every", trig = ".ev" },
+		fmt([[<>.every(<>)]], {
 			f(function(_, parent)
 				return parent.snippet.env.POSTFIX_MATCH
 			end, {}),
 			common.arrow_function(c(1, { t("e"), t("e, idx"), t("e, idx, arr") })),
 		}, fmtopt)
 	),
-	-- some highorder function
 	postfix(
-		{ name = ".some", trig = ".hsm" },
+		{ name = ".some", trig = ".s" },
 		fmt([[<>.some(<>)]], {
 			f(function(_, parent)
 				return parent.snippet.env.POSTFIX_MATCH
@@ -432,9 +427,8 @@ local language = {
 			common.arrow_function(c(1, { t("e"), t("e, idx"), t("e, idx, arr") })),
 		}, fmtopt)
 	),
-	-- reduce highorder function
 	postfix(
-		{ name = ".reduce", trig = ".hrd" },
+		{ name = ".reduce", trig = ".re" },
 		fmt([[<>.reduce(<>, <>)]], {
 			f(function(_, parent)
 				return parent.snippet.env.POSTFIX_MATCH
@@ -445,7 +439,7 @@ local language = {
 	),
 	-- sort
 	postfix(
-		{ name = ".sort", trig = ".hsrt" },
+		{ name = ".sort", trig = ".so" },
 		fmt(
 			"<>.sort((a, b)=>>{return <>})",
 			{ f(function(_, parent)

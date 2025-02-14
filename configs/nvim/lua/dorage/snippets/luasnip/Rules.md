@@ -99,7 +99,9 @@
 
 ### Method
 
-**high-order**
+**Array**
+
+**prefix** `a`
 
 - forEach
 - map

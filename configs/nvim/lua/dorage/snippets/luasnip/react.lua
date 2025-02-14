@@ -181,6 +181,28 @@ export const <> = (props: <>Props) =>> {
 			fmtopt
 		)
 	),
+	s(
+		{ name = "React: new HoC", trig = "rech" },
+		fmt(
+			[[
+type <>Props = {};
+
+type <>DerivedProps = {};
+
+export const <> = <<T,>>(Component: React.ComponentType<<<>DerivedProps & T>>) =>> (props: <>Props & T) =>> {
+	return <<Component {...props} />>;
+};
+	]],
+			{
+				f(ls_utils.identity, { 1 }),
+				f(ls_utils.identity, { 1 }),
+				i(1),
+				f(ls_utils.identity, { 1 }),
+				f(ls_utils.identity, { 1 }),
+			},
+			fmtopt
+		)
+	),
 }
 
 ls.add_snippets("typescript", M)
