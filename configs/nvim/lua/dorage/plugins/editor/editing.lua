@@ -14,6 +14,7 @@ return {
 			local emmet = require("tree-emmet")
 			vim.keymap.set({ "n" }, "<leader>ed", emmet.balance_inward, { desc = "Emmet:Balance Inward" })
 			vim.keymap.set({ "n" }, "<leader>eD", emmet.balance_outward, { desc = "Emmet:Balance Outward" })
+			vim.keymap.set({ "n" }, "<leader>er", emmet.remove_tag, { desc = "Emmet:Remove Tag" })
 			vim.keymap.set({ "n" }, "<leader>et", emmet.go_to_matching_pair, { desc = "Emmet:Go to Matching Pair" })
 			vim.keymap.set({ "n" }, "<leader>eM", emmet.merge_line, { desc = "Emmet:Merge Line" })
 		end,
