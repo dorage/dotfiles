@@ -412,70 +412,110 @@ local language = {
 	s({ name = "Empty Array", trig = "lae" }, fmt([[Array(<>).fill(null))]], { i(1) }, fmtopt)),
 	-- array: highorder
 	postfix(
-		{ name = ".forEach", trig = ".fo" },
+		{ name = ".forEach~", match_pattern = "[%w%.%_%-%\"%'%`%[%]]+$", trig = ".for" },
 		fmt([[<>.forEach(<>)]], {
 			f(function(_, parent)
 				return parent.snippet.env.POSTFIX_MATCH
 			end, {}),
-			common.arrow_function(c(1, { t("e"), t("e, idx"), t("e, idx, arr") })),
+			sn(
+				1,
+				common.arrow_function(c(1, {
+					t("el"),
+					t("el, idx"),
+					t("el, idx, arr"),
+				}))
+			),
 		}, fmtopt)
 	),
 	postfix(
-		{ name = ".map", trig = ".m" },
+		{ name = ".map~", match_pattern = "[%w%.%_%-%\"%'%`%[%]]+$", trig = ".map" },
 		fmt([[<>.map(<>)]], {
 			f(function(_, parent)
 				return parent.snippet.env.POSTFIX_MATCH
 			end, {}),
-			common.arrow_function(c(1, { t("e"), t("e, idx"), t("e, idx, arr") })),
+			sn(
+				1,
+				common.arrow_function(c(1, {
+					t("el"),
+					t("el, idx"),
+					t("el, idx, arr"),
+				}))
+			),
 		}, fmtopt)
 	),
 	postfix(
-		{ name = ".filter", trig = ".fi" },
+		{ name = ".filter~", match_pattern = "[%w%.%_%-%\"%'%`%[%]]+$", trig = ".fil" },
 		fmt([[<>.filter(<>)]], {
 			f(function(_, parent)
 				return parent.snippet.env.POSTFIX_MATCH
 			end, {}),
-			common.arrow_function(c(1, { t("e"), t("e, idx"), t("e, idx, arr") })),
+			sn(
+				1,
+				common.arrow_function(c(1, {
+					t("el"),
+					t("el, idx"),
+					t("el, idx, arr"),
+				}))
+			),
 		}, fmtopt)
 	),
 	postfix(
-		{ name = ".every", trig = ".ev" },
+		{ name = ".every~", match_pattern = "[%w%.%_%-%\"%'%`%[%]]+$", trig = ".eve" },
 		fmt([[<>.every(<>)]], {
 			f(function(_, parent)
 				return parent.snippet.env.POSTFIX_MATCH
 			end, {}),
-			common.arrow_function(c(1, { t("e"), t("e, idx"), t("e, idx, arr") })),
+			sn(
+				1,
+				common.arrow_function(c(1, {
+					t("el"),
+					t("el, idx"),
+					t("el, idx, arr"),
+				}))
+			),
 		}, fmtopt)
 	),
 	postfix(
-		{ name = ".some", trig = ".s" },
+		{ name = ".some~", match_pattern = "[%w%.%_%-%\"%'%`%[%]]+$", trig = ".som" },
 		fmt([[<>.some(<>)]], {
 			f(function(_, parent)
 				return parent.snippet.env.POSTFIX_MATCH
 			end, {}),
-			common.arrow_function(c(1, { t("e"), t("e, idx"), t("e, idx, arr") })),
+			sn(
+				1,
+				common.arrow_function(c(1, {
+					t("el"),
+					t("el, idx"),
+					t("el, idx, arr"),
+				}))
+			),
 		}, fmtopt)
 	),
 	postfix(
-		{ name = ".reduce", trig = ".re" },
+		{ name = ".reduce~", match_pattern = "[%w%.%_%-%\"%'%`%[%]]+$", trig = ".red" },
 		fmt([[<>.reduce(<>, <>)]], {
 			f(function(_, parent)
 				return parent.snippet.env.POSTFIX_MATCH
 			end, {}),
-			common.arrow_function(c(2, { t("a, c"), t("a, c, i"), t("a, c, i, arr") })),
-			i(1),
+			sn(
+				2,
+				common.arrow_function(c(1, {
+					t("acc, el"),
+					t("acc, el, idx"),
+					t("acc, el, idx, arr"),
+				}))
+			),
+			i(1, "{}"),
 		}, fmtopt)
 	),
-	-- sort
 	postfix(
-		{ name = ".sort", trig = ".so" },
-		fmt(
-			"<>.sort((a, b)=>>{return <>})",
-			{ f(function(_, parent)
+		{ name = ".sort~", match_pattern = "[%w%.%_%-%\"%'%`%[%]]+$", trig = ".sor" },
+		fmt([[<>.sort(<>)]], {
+			f(function(_, parent)
 				return parent.snippet.env.POSTFIX_MATCH
-			end, {}), i(1) },
-			fmtopt
-		)
+			end, {}),
+			sn(1, common.arrow_function(t("a, b"))),
+		}, fmtopt)
 	),
 	-- JSON
 	s(
