@@ -7,13 +7,21 @@ return {
 		opts = {
 			provider = "nebius_r1",
 			-- auto_suggestions_provider = "openai", -- Since auto-suggestions are a high-frequency operation and therefore expensive, it is recommended to specify an inexpensive provider or even a free provider: copilot
-			gemini = {
-				model = "gemini-2.0-flash-thinking-exp",
-				timeout = 30000,
-				max_tokens = 65536,
-				api_key_name = "GEMINI_API_KEY",
-			},
 			vendors = {
+				gemini2_thiking = {
+					__inherited_from = "gemini",
+					model = "gemini-2.0-flash-thinking-exp-01-21",
+					timeout = 30000,
+					max_tokens = 65536,
+					api_key_name = "GEMINI_API_KEY",
+				},
+				gemini2_pro = {
+					__inherited_from = "gemini",
+					model = "gemini-2.0-pro-exp-02-05",
+					timeout = 30000,
+					max_tokens = 65536,
+					api_key_name = "GEMINI_API_KEY",
+				},
 				-- https://studio.nebius.ai/
 				nebius_r1 = {
 					__inherited_from = "openai",
