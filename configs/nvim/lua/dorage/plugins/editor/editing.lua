@@ -72,7 +72,14 @@ return {
 		"folke/todo-comments.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function()
-			require("todo-comments").setup()
+			require("todo-comments").setup({
+				keywords = {
+					["LLM"] = { icon = "🤖", color = "llm" },
+				},
+				colors = {
+					llm = { "LLMPromptComment", "#FFA500" },
+				},
+			})
 			vim.keymap.set(
 				"n",
 				"<leader>ftt",
