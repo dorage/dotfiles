@@ -1,10 +1,3 @@
-# This is a demo config to showcase some of the most important commands.
-# It is meant to be changed and configured, as it is intentionally kept sparse.
-# For a (much) more advanced configuration example see my dotfiles:
-
-
-
-
 ##### Variables #####
 
 ##### OS #####
@@ -123,39 +116,39 @@ sketchybar --add item divider right \
 #            --set volume script="$PLUGIN_DIR/volume.sh" \
 #            --subscribe volume volume_change \
 
-storage_options=(
-	update_freq=1000
-	icon=""
-	script="$PLUGIN_DIR/storage.sh"
-)
-sketchybar \
---add item storage right \
---set storage "${badge_options[@]}" "${storage_options[@]}"
-
-memory_options=(
-	update_freq=30
-	icon=""
-	script="$PLUGIN_DIR/memory.sh"
-	click_script="open -b com.apple.ActivityMonitor"
-)
-sketchybar \
---add item memory right \
---set memory "${badge_options[@]}" "${memory_options[@]}"
-
-battery_options=(
-	script="$PLUGIN_DIR/battery.sh"
-	click_script="open /System/Library/PreferencePanes/Battery.prefPane"
-)
-sketchybar --add item battery right \
-           --set battery "${badge_options[@]}" "${battery_options[@]}" \ 
-
-wifi_options=(
-	script="$PLUGIN_DIR/wifi.sh"
-	click_script="open /System/Library/PreferencePanes/Network.prefPane"
-)
-sketchybar --add item wifi right \
-					 --set wifi "${badge_options[@]}" "${wifi_options[@]}" \
-
+# storage_options=(
+# 	update_freq=1000
+# 	icon=""
+# 	script="$PLUGIN_DIR/storage.sh"
+# )
+# sketchybar \
+# --add item storage right \
+# --set storage "${badge_options[@]}" "${storage_options[@]}"
+#
+# memory_options=(
+# 	update_freq=30
+# 	icon=""
+# 	script="$PLUGIN_DIR/memory.sh"
+# 	click_script="open -b com.apple.ActivityMonitor"
+# )
+# sketchybar \
+# --add item memory right \
+# --set memory "${badge_options[@]}" "${memory_options[@]}"
+#
+# battery_options=(
+# 	script="$PLUGIN_DIR/battery.sh"
+# 	click_script="open /System/Library/PreferencePanes/Battery.prefPane"
+# )
+# sketchybar --add item battery right \
+#            --set battery "${badge_options[@]}" "${battery_options[@]}" \ 
+#
+# wifi_options=(
+# 	script="$PLUGIN_DIR/wifi.sh"
+# 	click_script="open /System/Library/PreferencePanes/Network.prefPane"
+# )
+# sketchybar --add item wifi right \
+# 					 --set wifi "${badge_options[@]}" "${wifi_options[@]}" \
+#
 # caffeinate_options=(
 # 	icon=""
 # 	label="WKP"
