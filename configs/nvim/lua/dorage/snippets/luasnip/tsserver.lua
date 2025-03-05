@@ -379,6 +379,7 @@ local language = {
 	s({ name = "js NOTE comment", trig = "lcn" }, { t("// NOTE: "), i(1) }),
 	s({ name = "js TEST comment", trig = "lcs" }, { t("// TEST: "), i(1) }),
 	s({ name = "js FIX comment", trig = "lcf" }, { t("// FIX: "), i(1) }),
+	s({ name = "js AI comment", trig = "lca" }, { t("// LLM: "), i(1) }),
 	s(
 		{ name = "js Separator comment", trig = "lcf" },
 		fmt(
@@ -519,7 +520,7 @@ local language = {
 	),
 	-- JSON
 	s(
-		{ name = "JSON.stringify", trig = "jfjs" },
+		{ name = "JSON.stringify", trig = "lfjs" },
 		fmt(
 			[[
 	JSON.stringify(<>)
@@ -534,7 +535,7 @@ local language = {
 		)
 	),
 	s(
-		{ name = "JSON.parse", trig = "jfjp" },
+		{ name = "JSON.parse", trig = "lfjp" },
 		fmt(
 			[[
 	JSON.parse(<>)
