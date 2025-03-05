@@ -30,6 +30,58 @@ local ls_utils = require("dorage.snippets.luasnip.common")
 local ls_auto_import = require("dorage.customs.js-auto-import")
 local fp = require("dorage.utils.fp")
 
+local components_types = {
+	fmt(
+		[[
+type <>Props = {};
+
+export const <> = (props: <>Props) =>> {
+	return <<>><><</>>;
+};
+	]],
+		{
+			f(ls_utils.identity, { 1 }),
+			i(1),
+			f(ls_utils.identity, { 1 }),
+			i(2),
+		},
+		fmtopt
+	),
+	-- 	fmt(
+	-- 		[[
+	-- const <> = forwardRef<<
+	--   HTMLDivElement,
+	--   React.HTMLAttributes<<HTMLDivElement>> & {}
+	-- >>(({ className, ...props }, ref) =>> {
+	--   return <<div className={cn("", className)} {...props} />>;
+	-- });
+	-- <>.displayName = "<>";
+	-- <>
+	-- 	]],
+	-- 		{
+	-- 			i(1),
+	-- 			f(ls_utils.identity, { 1 }),
+	-- 			f(ls_utils.identity, { 1 }),
+	-- 			f(function()
+	-- 				require("ts-manual-import").luasnip_callback({
+	-- 					{
+	-- 						source = "react",
+	-- 						modules = {},
+	-- 						default_modules = { "forwardRef" },
+	-- 					},
+	-- 					{
+	--
+	-- 						source = "@/lib/utils",
+	-- 						modules = { "cn" },
+	-- 						default_modules = {},
+	-- 					},
+	-- 				})
+	-- 			end),
+	-- 		},
+	-- 		fmtopt
+	-- 	),
+}
+
 local M = {
 	-- useState
 	s(
@@ -162,25 +214,28 @@ export const use<> = (props: <>Props) =>> {
 		)
 	),
 	-- -- new Component
-	s(
-		{ name = "React: new Component", trig = "recn" },
-		fmt(
-			[[
-type <>Props = {};
-
-export const <> = (props: <>Props) =>> {
-	return <<>><><</>>;
-};
-	]],
-			{
-				f(ls_utils.identity, { 1 }),
-				i(1),
-				f(ls_utils.identity, { 1 }),
-				i(2),
-			},
-			fmtopt
-		)
-	),
+	-- 	s(
+	-- 		{ name = "React: new Component", trig = "recn" },
+	-- 		fmt(
+	-- 			[[
+	-- type <>Props = {};
+	--
+	-- export const <> = (props: <>Props) =>> {
+	-- 	return <<>><><</>>;
+	-- };
+	-- 	]],
+	-- 			{
+	-- 				f(ls_utils.identity, { 1 }),
+	-- 				i(1),
+	-- 				f(ls_utils.identity, { 1 }),
+	-- 				i(2),
+	-- 			},
+	-- 			fmtopt
+	-- 		)
+	-- 	),
+	s({ name = "React: new Component", trig = "recn" }, {
+		c(1, components_types),
+	}),
 	s(
 		{ name = "React: new HoC", trig = "rech" },
 		fmt(
