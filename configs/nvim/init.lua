@@ -13,6 +13,7 @@ vim.cmd([[ :set encoding=utf-8 ]])
 vim.cmd([[ :set fileencodings=utf-8,cp949 ]])
 vim.cmd([[ :set termguicolors ]])
 vim.cmd([[ :set nofoldenable ]])
+vim.cmd([[ :set ignorecase smartcase ]])
 
 require("dorage.lazy")
 require("dorage.configs")
