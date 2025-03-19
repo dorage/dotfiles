@@ -5,7 +5,7 @@ return {
 		lazy = false,
 		version = false, -- set this if you want to always pull the latest change
 		opts = {
-			provider = "nebius_r1",
+			provider = "gemini2_pro",
 			-- auto_suggestions_provider = "openai", -- Since auto-suggestions are a high-frequency operation and therefore expensive, it is recommended to specify an inexpensive provider or even a free provider: copilot
 			vendors = {
 				gemini2_thiking = {
