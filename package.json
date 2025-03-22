@@ -12,6 +12,7 @@
     "mv:scripts": "rsync -avh --delete --update scripts/ ~/.dorage-scripts",
     "mv:sketchybar": "rsync -avh --delete --update configs/sketchybar/ ~/.config/sketchybar",
     "mv:ghostty": "rsync -avh --delete --update configs/ghostty $HOME/.config/",
+    "mv:scripts": "rsync -avh --delete --update configs/scripts/ $HOME/.config/scripts",
     "bkp:karabiner": "rsync -avh --delete --update ~/.config/karabiner/ configs/karabiner",
     "bkp:brew": "brew bundle dump --file=./deps/Brewfile --force",
     "bkp:pacman": "pacman -Qe > ./deps/Pacman"
