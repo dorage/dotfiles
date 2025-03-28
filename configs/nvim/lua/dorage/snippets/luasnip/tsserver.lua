@@ -88,6 +88,25 @@ local language = {
 			fmtopt
 		)
 	),
+	s(
+		{ name = "function variable", trig = "lvf" },
+		fmt([[const <> = (<>) =>> <>]], {
+			i(1),
+			i(2),
+			c(3, {
+				fmt(
+					[[
+				{
+					<>
+				}
+				]],
+					{ i(1) },
+					fmtopt
+				),
+				i(1),
+			}),
+		}, fmtopt)
+	),
 	-- functions
 	s(
 		{ name = "js function", trig = "lf" },
@@ -224,6 +243,22 @@ local language = {
 		<>
 	]],
 			{ i(1) },
+			fmtopt
+		)
+	),
+	--- statement: while
+	s(
+		{ name = "while statement", trig = "lsw" },
+		fmt(
+			[[
+	while(<>){
+		<>
+	}
+	]],
+			{
+				i(1),
+				i(2),
+			},
 			fmtopt
 		)
 	),
