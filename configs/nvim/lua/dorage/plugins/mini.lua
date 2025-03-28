@@ -8,15 +8,6 @@ return {
 			miniSplitjoin.setup({})
 		end,
 	},
-	-- jump
-	{
-		"echasnovski/mini.jump",
-		version = false,
-		config = function()
-			local miniJump = require("mini.jump")
-			miniJump.setup({})
-		end,
-	},
 	-- pick
 	{
 		"echasnovski/mini.pick",
