@@ -33,7 +33,7 @@
 ➕ | Adding a dependency | :heavy_plus_sign:
 🐳 | Docker | :whale:
 🔧 | Configuration files | :wrench:
-📦 | Package.json in JS, add a package | :package:
+📦 | Package.json in JS, add a package, dotfiles | :package:
 🔀 | Merging branches | :twisted_rightwards_arrows:
 💩 | Bad code / need improv. | :hankey:
 ⏪ | Reverting changes | :rewind:
@@ -43,3 +43,4 @@
 🚚 | Move/rename repository | :truck:
 🌐 | Localization, i18n, globalization | :globe_with_meridians:
 🔍 | SEO | :mag:
+🔮 | dotfiles | :crystal_ball:
