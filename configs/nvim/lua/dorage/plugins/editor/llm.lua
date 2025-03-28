@@ -5,73 +5,73 @@ return {
 		lazy = false,
 		version = false, -- set this if you want to always pull the latest change
 		opts = {
-			provider = "gemini2_pro",
+			provider = "gemini_pro",
 			-- auto_suggestions_provider = "openai", -- Since auto-suggestions are a high-frequency operation and therefore expensive, it is recommended to specify an inexpensive provider or even a free provider: copilot
 			vendors = {
-				gemini2_thiking = {
+				gemini_thiking = {
 					__inherited_from = "gemini",
 					model = "gemini-2.0-flash-thinking-exp-01-21",
 					timeout = 30000,
 					max_tokens = 65536,
 					api_key_name = "GEMINI_API_KEY",
 				},
-				gemini2_pro = {
+				gemini_pro = {
 					__inherited_from = "gemini",
-					model = "gemini-2.0-pro-exp-02-05",
+					model = "gemini-2.5-pro-exp-03-25",
 					timeout = 30000,
 					max_tokens = 65536,
 					api_key_name = "GEMINI_API_KEY",
 				},
 				-- https://studio.nebius.ai/
-				nebius_r1 = {
-					__inherited_from = "openai",
-					endpoint = "https://api.studio.nebius.ai/v1",
-					model = "deepseek-ai/DeepSeek-R1",
-					timeout = 30000, -- Timeout in milliseconds
-					temperature = 0,
-					max_tokens = 128000,
-					-- optional
-					api_key_name = "NEBIUS_API_KEY",
-				},
-				nebius_v3 = {
-					__inherited_from = "openai",
-					endpoint = "https://api.studio.nebius.ai/v1",
-					model = "deepseek-ai/DeepSeek-V3",
-					timeout = 30000, -- Timeout in milliseconds
-					temperature = 0,
-					max_tokens = 128000,
-					-- optional
-					api_key_name = "NEBIUS_API_KEY",
-				},
-				deepinfra_r1 = {
-					__inherited_from = "openai",
-					endpoint = "https://api.deepinfra.com/v1/openai",
-					model = "deepseek-ai/DeepSeek-R1",
-					timeout = 30000, -- Timeout in milliseconds
-					temperature = 0,
-					max_tokens = 8192,
-					-- optional
-					api_key_name = "DEEPINFRA_API_KEY", -- default OPENAI_API_KEY if not set
-				},
-				deepinfra_v3 = {
-					__inherited_from = "openai",
-					endpoint = "https://api.deepinfra.com/v1/openai",
-					model = "deepseek-ai/DeepSeek-V3",
-					timeout = 30000, -- Timeout in milliseconds
-					temperature = 0,
-					max_tokens = 8192,
-					-- optional
-					api_key_name = "DEEPINFRA_API_KEY", -- default OPENAI_API_KEY if not set
-				},
-				deepseek = {
-					endpoint = "https://api.deepseek.com/v1",
-					model = "deepseek-chat",
-					timeout = 30000, -- Timeout in milliseconds
-					temperature = 0,
-					max_tokens = 8192,
-					-- optional
-					api_key_name = "DEEPSEEK_API_KEY",
-				},
+				-- nebius_r1 = {
+				-- 	__inherited_from = "openai",
+				-- 	endpoint = "https://api.studio.nebius.ai/v1",
+				-- 	model = "deepseek-ai/DeepSeek-R1",
+				-- 	timeout = 30000, -- Timeout in milliseconds
+				-- 	temperature = 0,
+				-- 	max_tokens = 128000,
+				-- 	-- optional
+				-- 	api_key_name = "NEBIUS_API_KEY",
+				-- },
+				-- nebius_v3 = {
+				-- 	__inherited_from = "openai",
+				-- 	endpoint = "https://api.studio.nebius.ai/v1",
+				-- 	model = "deepseek-ai/DeepSeek-V3",
+				-- 	timeout = 30000, -- Timeout in milliseconds
+				-- 	temperature = 0,
+				-- 	max_tokens = 128000,
+				-- 	-- optional
+				-- 	api_key_name = "NEBIUS_API_KEY",
+				-- },
+				-- deepinfra_r1 = {
+				-- 	__inherited_from = "openai",
+				-- 	endpoint = "https://api.deepinfra.com/v1/openai",
+				-- 	model = "deepseek-ai/DeepSeek-R1",
+				-- 	timeout = 30000, -- Timeout in milliseconds
+				-- 	temperature = 0,
+				-- 	max_tokens = 8192,
+				-- 	-- optional
+				-- 	api_key_name = "DEEPINFRA_API_KEY", -- default OPENAI_API_KEY if not set
+				-- },
+				-- deepinfra_v3 = {
+				-- 	__inherited_from = "openai",
+				-- 	endpoint = "https://api.deepinfra.com/v1/openai",
+				-- 	model = "deepseek-ai/DeepSeek-V3",
+				-- 	timeout = 30000, -- Timeout in milliseconds
+				-- 	temperature = 0,
+				-- 	max_tokens = 8192,
+				-- 	-- optional
+				-- 	api_key_name = "DEEPINFRA_API_KEY", -- default OPENAI_API_KEY if not set
+				-- },
+				-- deepseek = {
+				-- 	endpoint = "https://api.deepseek.com/v1",
+				-- 	model = "deepseek-chat",
+				-- 	timeout = 30000, -- Timeout in milliseconds
+				-- 	temperature = 0,
+				-- 	max_tokens = 8192,
+				-- 	-- optional
+				-- 	api_key_name = "DEEPSEEK_API_KEY",
+				-- },
 			},
 		},
 		-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
