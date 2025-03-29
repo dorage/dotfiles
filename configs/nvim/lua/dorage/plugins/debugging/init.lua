@@ -7,17 +7,6 @@ return {
 				"theHamsta/nvim-dap-virtual-text",
 				opts = {},
 			},
-			{
-				"williamboman/mason.nvim",
-				opts = function(_, opts)
-					opts.ensure_installed = opts.ensure_installed or {}
-					table.insert(opts.ensure_installed, "js-debug-adapter")
-				end,
-			},
-			{
-				"microsoft/vscode-js-debug",
-				-- build = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out",
-			},
 		},
 		-- lazyvim setup
 		keys = {
@@ -164,7 +153,9 @@ return {
 			end, { desc = "Debug:Eval" })
 
 			-- load debugger configs
-			require("dorage.configs.debuggers")
+			for _, value in ipairs({ "nodejs" }) do
+				require("dorage.plugins.debugging.configs." .. value)
+			end
 		end,
 	},
 }
