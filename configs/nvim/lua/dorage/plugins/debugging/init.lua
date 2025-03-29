@@ -7,8 +7,6 @@ return {
 				"theHamsta/nvim-dap-virtual-text",
 				opts = {},
 			},
-			-- node.js setups
-			"mxsdev/nvim-dap-vscode-js",
 			{
 				"williamboman/mason.nvim",
 				opts = function(_, opts)
@@ -18,10 +16,7 @@ return {
 			},
 			{
 				"microsoft/vscode-js-debug",
-				-- it might need to install setuptools
-				-- 'setuptools' is removed in python 3.12
-				-- https://stackoverflow.com/questions/69919970/no-module-named-distutils-but-distutils-installed
-				build = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out",
+				-- build = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out",
 			},
 		},
 		-- lazyvim setup
@@ -47,13 +42,6 @@ return {
 				end,
 				desc = "Continue",
 			},
-			-- {
-			-- 	"<leader>da",
-			-- 	function()
-			-- 		require("dap").continue({ before = get_args })
-			-- 	end,
-			-- 	desc = "Run with Args",
-			-- },
 			{
 				"<leader>dC",
 				function()
