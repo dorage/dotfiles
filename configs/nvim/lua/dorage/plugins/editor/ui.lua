@@ -86,6 +86,7 @@ return {
 			})
 		end,
 	},
+	-- symbol view
 	{
 		"hedyhli/outline.nvim",
 		config = function()
@@ -96,5 +97,13 @@ return {
 				-- Your setup opts here (leave empty to use defaults)
 			})
 		end,
+	},
+	-- jump window
+	{
+		"https://github.com/yorickpeterse/nvim-window",
+		keys = {
+			{ "<c-w>m", "<cmd>lua require('nvim-window').pick()<cr>", desc = "nvim-window: Jump to window" },
+		},
+		config = true,
 	},
 }
