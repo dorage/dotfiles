@@ -1,16 +1,16 @@
 // If you'd like to override the default keybindings completely, be sure to change "keybinds" to "keybinds clear-defaults=true"
 themes {
-		 carbonfox {
-			bg "#161616"
-			fg "#f2f4f8"
+		 neon {
+			bg "#333333"
+			fg "#dfdfdf"
 			red "#ee5396"
-			green "#25be6a"
-			blue "#78a9ff"
-			yellow "#08bdba"
-			magenta "#be95ff"
-			orange "#3ddbd9"
+			blue "#4BFF36"
+			green "#74FAFC"
+			yellow "#FFEB01"
+			magenta "#E92EFB"
+			orange "#FF5C00"
 			cyan "#33b1ff"
-			black "#353535"
+			black "#333333"
 			white "#b6b8bb"
 		}
 }
@@ -282,7 +282,7 @@ plugins {
 // Choose the theme that is specified in the themes section.
 // Default: default
 //
-theme "retro-wave"
+theme "neon"
 
 // The name of the default layout to load on startup
 // Default: "default"
