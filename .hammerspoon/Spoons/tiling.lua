@@ -61,14 +61,6 @@ hs.hotkey.bind({ "cmd", "shift" }, "h", function()
 	end)
 end)
 
--- chooser
-hs.hotkey.bind({ "cmd", "shift" }, "j", function()
-	local activeWindow = hs.window.focusedWindow()
-
-	windowChooser(activeWindow:id(), function(choice)
-		hs.alert(choice.subText .. choice.value)
-	end)
-end)
 -- full
 hs.hotkey.bind({ "cmd", "shift" }, "k", function()
 	local active_win = hs.window.focusedWindow()
@@ -86,6 +78,7 @@ hs.hotkey.bind({ "cmd", "shift" }, "k", function()
 
 	active_win:setFrame(active_frame)
 end)
+
 -- half to right
 hs.hotkey.bind({ "cmd", "shift" }, "l", function()
 	local active_win = hs.window.focusedWindow()
