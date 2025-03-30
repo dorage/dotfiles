@@ -12,38 +12,39 @@ return {
 			"nvim-treesitter/nvim-treesitter",
 			"nvim-neotest/neotest-plenary",
 			"nvim-neotest/neotest-jest",
+			"https://github.com/marilari88/neotest-vitest",
 		},
 		config = function()
-			require("neotest").setup({
+			require("neotest")({
 				adapters = {
 					require("neotest-plenary"),
-					-- require("neotest-vim-test")({
-					-- 	ignore_file_types = { "python", "vim", "lua" },
-					-- }),
 					-- TODO: Error in monorepo. in finding jest dependencies
-					require("neotest-jest")({
-						jestCommand = "pnpm test --",
-						jestConfigFile = function()
-							local jsPath = utils.path.findDirectoryByFilename(vim.fn.expand("%"), "jest.config.js")
-							if jsPath ~= nil then
-								return jsPath .. "jest.config.js"
-							end
-							local tsPath = utils.path.findDirectoryByFilename(vim.fn.expand("%"), "jest.config.ts")
-							print("tsPath is", tsPath)
-							if tsPath ~= nil then
-								return tsPath .. "jest.config.ts"
-							end
-							return vim.fn.getcwd()
-						end,
-						env = { CI = true },
-						cwd = function()
-							local rootPath = utils.path.findDirectoryByFilename(vim.fn.expand("%"), "package.json")
-							print("rootPath is", rootPath)
-							if rootPath == nil then
-								return vim.fn.getcwd()
-							end
-							return rootPath
-						end,
+					-- require("neotest-jest")({
+					-- 	jestCommand = "pnpm test --",
+					-- 	jestConfigFile = function()
+					-- 		local jsPath = utils.path.findDirectoryByFilename(vim.fn.expand("%"), "jest.config.js")
+					-- 		if jsPath ~= nil then
+					-- 			return jsPath .. "jest.config.js"
+					-- 		end
+					-- 		local tsPath = utils.path.findDirectoryByFilename(vim.fn.expand("%"), "jest.config.ts")
+					-- 		print("tsPath is", tsPath)
+					-- 		if tsPath ~= nil then
+					-- 			return tsPath .. "jest.config.ts"
+					-- 		end
+					-- 		return vim.fn.getcwd()
+					-- 	end,
+					-- 	env = { CI = true },
+					-- 	cwd = function()
+					-- 		local rootPath = utils.path.findDirectoryByFilename(vim.fn.expand("%"), "package.json")
+					-- 		print("rootPath is", rootPath)
+					-- 		if rootPath == nil then
+					-- 			return vim.fn.getcwd()
+					-- 		end
+					-- 		return rootPath
+					-- 	end,
+					-- }),
+					require("neotest-vitest")({
+						vitestCommand = "pnpm test--",
 					}),
 				},
 				status = { virtual_text = true },
