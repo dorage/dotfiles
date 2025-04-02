@@ -25,7 +25,7 @@ end
 
 --
 -- properties
-local left_margin = 98 -- sketchbar width = 90 , margin of left & right = 8
+local left_margin = 102 -- sketchbar width = 90 , sketchbar left margin = 4 , gap = 8
 
 -- half to left
 hs.hotkey.bind({ "cmd", "shift" }, "h", function()
