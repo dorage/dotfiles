@@ -164,10 +164,10 @@ _fzf_compgen_dir() {
 }
 
 # bat (better cat)
-export BAT_THEME="Monokai Extended Bright"
+export BAT_THEME="zenburn"
 
 # eza (better ls)
-alias ls="eza --classify=always --color=always --long --icons=always --tree --level=2 --git-ignore --no-permissions --no-user --no-filesize --no-time"
+alias ls="eza --classify=always --color=always --long --icons=always --tree --level=2 --no-permissions --no-user --no-filesize --no-time"
 
 # thefuck
 eval $(thefuck --alias)
@@ -180,3 +180,6 @@ alias cd="z"
 
 
 export EDITOR="nvim"
+
+# git
+alias gcg="~/.config/scripts/git/gitmoji-commit.sh"
