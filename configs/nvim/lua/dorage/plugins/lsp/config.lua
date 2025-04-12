@@ -3,6 +3,9 @@ return {
 	{
 		"folke/lazydev.nvim",
 		ft = "lua", -- only load on lua files
+		dependencies = {
+			{ "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
+		},
 		opts = {
 			library = {
 				-- See the configuration section for more details
@@ -13,59 +16,22 @@ return {
 			},
 		},
 	},
-	{ "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
-	-- LSP config helper
-	{
-		"VonHeikemen/lsp-zero.nvim",
-		branch = "v3.x",
-		lazy = true,
-		config = false,
-		init = function()
-			-- Disable automatic setup, we are doing it manually
-			vim.g.lsp_zero_extend_cmp = 0
-			vim.g.lsp_zero_extend_lspconfig = 0
-		end,
-	},
-	-- LSP installation manager
-	{
-		"williamboman/mason.nvim",
-		lazy = false,
-		config = true,
-	},
-	{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
-	{
-		"williamboman/mason-lspconfig.nvim",
-	},
 	-- LSP config
 	{
 		"neovim/nvim-lspconfig",
 		cmd = { "LspInfo", "LspInstall", "LspStart" },
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
+			{
+				"williamboman/mason.nvim",
+				lazy = false,
+				config = true,
+			},
 			{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
-			{ "hrsh7th/cmp-nvim-lsp" },
 			{ "williamboman/mason-lspconfig.nvim" },
+			{ "saghen/blink.cmp" },
 		},
 		config = function()
-			-- This is where all the LSP shenanigans will live
-			local lsp_zero = require("lsp-zero")
-			lsp_zero.extend_lspconfig()
-
-			--- if you want to know more about lsp-zero and mason.nvim
-			--- read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guides/integrate-with-mason-nvim.md
-			lsp_zero.on_attach(function(client, bufnr)
-				-- see :help lsp-zero-keybindings
-				-- to learn the available actions
-				lsp_zero.default_keymaps({ buffer = bufnr })
-			end)
-
-			lsp_zero.set_sign_icons({
-				error = "✘",
-				warn = "▲",
-				hint = "⚑",
-				info = "»",
-			})
-
 			require("mason-tool-installer").setup({
 				ensure_installed = {
 					"bashls",
@@ -103,30 +69,60 @@ return {
 					"sqlls",
 					"perlnavigator",
 					"autotools_ls",
+					"graphql",
 				},
-				handlers = {
-					lsp_zero.default_setup,
-					lua_ls = function()
-						-- (Optional) Configure lua language server for neovim
-						-- local lua_opts = lsp_zero.nvim_lua_ls()
-						require("lspconfig").lua_ls.setup({
-							settings = {
-								-- Lua = {
-								-- 	diagnostics = {
-								-- 		globals = { "vim" },
-								-- 	},
-								-- 	completion = {
-								-- 		callSnippet = "Replace",
-								-- 	},
-								-- },
-							},
-						})
-					end,
-					ts_ls = function()
-						require("lspconfig").ts_ls.setup({
-							filetypes = { "javascript", "javascriptreact" },
-						})
-					end,
+			})
+
+			local enable_lsp = function(name, config)
+				vim.lsp.config(
+					name,
+					vim.tbl_extend("force", require("lspconfig.configs." .. name).default_config, config)
+				)
+				vim.lsp.enable(name)
+			end
+
+			vim.lsp.config("lua_ls", {
+				cmd = { "lua-language-server" },
+				filetypes = { "lua" },
+				root_markers = {
+					".luarc.json",
+					".luarc.jsonc",
+					".luacheckrc",
+					".stylua.toml",
+					"stylua.toml",
+					"selene.toml",
+					"selene.yml",
+					".git",
+				},
+			})
+			vim.lsp.enable("lua_ls")
+
+			vim.lsp.config(
+				"ts_ls",
+				vim.tbl_extend("force", require("lspconfig.configs.ts_ls").default_config, {
+					root_markers = {
+						"tsconfig.json",
+						"jsconfig.json",
+						"package.json",
+						".git",
+					},
+				})
+			)
+			vim.lsp.enable("ts_ls")
+
+			enable_lsp("tailwindcss", {})
+
+			-- blink cmp
+			local capabilities = vim.lsp.protocol.make_client_capabilities()
+			capabilities =
+				vim.tbl_deep_extend("force", capabilities, require("blink.cmp").get_lsp_capabilities({}, false))
+
+			capabilities = vim.tbl_deep_extend("force", capabilities, {
+				textDocument = {
+					foldingRange = {
+						dynamicRegistration = false,
+						lineFoldingOnly = true,
+					},
 				},
 			})
 		end,
@@ -143,12 +139,6 @@ return {
 						"gd",
 						"<cmd>TSToolsGoToSourceDefinition<cr>",
 						{ buffer = bufnr, desc = "TS Go to source definition" }
-					)
-					vim.keymap.set(
-						"n",
-						"<leader>lr",
-						"<cmd>TSToolsRenameFile<cr>",
-						{ buffer = bufnr, desc = "TS Rename file" }
 					)
 					vim.keymap.set(
 						"n",

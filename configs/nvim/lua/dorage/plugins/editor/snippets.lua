@@ -1,8 +1,9 @@
 return {
 	{
-		"l3mon4d3/luasnip",
+		"L3MON4D3/LuaSnip",
 		lazy = true,
 		build = "make install_jsregexp",
+		version = "v2.*",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"dorage/ts-manual-import.nvim",
@@ -15,7 +16,7 @@ return {
 				enable_autosnippets = true,
 			})
 
-			print("load luasnip")
+			print("LuaSnip:loaded!")
 			require("luasnip.loaders.from_vscode").lazy_load({
 				paths = { "~/.config/nvim/lua/dorage/snippets/vscode" },
 			})
@@ -26,14 +27,14 @@ return {
 				if ls.choice_active() then
 					ls.change_choice(-1)
 				else
-					print("No choice active")
+					print("LuaSnip:No choice active")
 				end
 			end, { desc = "Previous luasnip choice" })
 			vim.keymap.set({ "i", "s" }, "<leader>n", function()
 				if ls.choice_active() then
 					ls.change_choice(1)
 				else
-					print("No choice active")
+					print("LuaSnip:No choice active")
 				end
 			end, { desc = "Next luasnip choice" })
 			vim.keymap.set(
@@ -43,7 +44,7 @@ return {
 					if ls.choice_active() then
 						require("luasnip.extras.select_choice")()
 					else
-						print("No choice active")
+						print("LuaSnip:No choice active")
 					end
 				end,
 				-- "<cmd>lua require('luasnip.extras.select_choice')()<cr>",

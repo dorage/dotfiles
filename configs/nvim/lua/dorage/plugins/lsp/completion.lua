@@ -1,94 +1,34 @@
 return {
 	{
-		"saadparwaiz1/cmp_luasnip",
-	},
-	{
-		"hrsh7th/nvim-cmp",
-		event = "InsertEnter",
+		"saghen/blink.cmp",
+		---@module 'blink.cmp'
+		---@type blink.cmp.Config
 		dependencies = {
-			{ "VonHeikemen/lsp-zero.nvim" },
-			{ "hrsh7th/cmp-nvim-lsp" },
-			{ "hrsh7th/cmp-buffer" },
-			{ "hrsh7th/cmp-path" },
-			{ "hrsh7th/cmp-cmdline" },
-			{ "l3mon4d3/luasnip" }, -- snippet
-			{ "saadparwaiz1/cmp_luasnip" }, -- snippet
-			{ "onsails/lspkind.nvim" }, -- vscode style compeletion
+			"L3MON4D3/LuaSnip",
+			version = "v2.*",
 		},
-		config = function()
-			local cmp = require("cmp")
-			local luasnip = require("luasnip")
-			local lspkind = require("lspkind")
-
-			cmp.setup({
-				sources = cmp.config.sources({
-					{ name = "luasnip" },
-					{ name = "path" },
-					{ name = "nvim_lsp" },
-					{ name = "buffer" },
-					{ name = "mkdnflow" },
-					{ name = "lazydev", group_index = 0 },
-				}),
-				snippet = {
-					expand = function(args)
-						luasnip.lsp_expand(args.body) -- For 'luasnip' users
-					end,
+		opts = {
+			snippets = { preset = "luasnip" },
+			keymap = { preset = "super-tab" },
+			appearance = {
+				nerd_font_variant = "mono",
+			},
+			completion = {
+				documentation = {
+					auto_show = true,
+					window = { border = "single" },
 				},
-				mapping = cmp.mapping.preset.insert({
-					-- Enable "Super Tab"
-					["<Tab>"] = cmp.mapping(function(fallback)
-						if luasnip.expand_or_locally_jumpable() then
-							luasnip.expand_or_jump()
-						elseif cmp.visible() then
-							cmp.select_next_item()
-						else
-							fallback()
-						end
-					end, { "i", "s" }),
-					["<S-Tab>"] = cmp.mapping(function()
-						if luasnip.jumpable(-1) then
-							luasnip.jump(-1)
-						elseif cmp.visible() then
-							cmp.select_prev_item()
-						else
-							print("nothing to jump to!")
-						end
-					end, { "i", "s" }),
-
-					["<CR>"] = cmp.mapping({
-						i = function(fallback)
-							if cmp.visible() and cmp.get_active_entry() then
-								cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
-							else
-								fallback()
-							end
-						end,
-						s = cmp.mapping.confirm({ select = true }),
-						c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
-					}),
-				}),
-				window = {
-					completion = {
-						winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel",
-						col_offset = -3,
-						side_padding = 2,
-					},
-					-- documentation = cmp.config.window.bordered(winhighlight),
-				},
-				formatting = {
-					fields = { "kind", "abbr", "menu" },
-					format = lspkind.cmp_format({
-						mode = "symbol_text",
-						maxwidth = 50,
-						ellipsis_char = "...",
-						show_labelDetails = true,
-						symbol_map = {
-							Codeium = "🤖",
-							Snippet = "✨",
-						},
-					}),
-				},
-			})
-		end,
+				ghost_text = { enabled = true },
+			},
+			signature = {
+				enabled = true,
+				window = { border = "single" },
+			},
+			sources = {
+				default = { "lsp", "path", "snippets", "buffer" },
+			},
+			fuzzy = { implementation = "prefer_rust_with_warning" },
+		},
+		opts_extend = { "sources.default" },
 	},
 }
