@@ -8,8 +8,7 @@ return {
 			version = "v2.*",
 		},
 		opts = {
-			snippets = { preset = "luasnip" },
-			keymap = { preset = "super-tab" },
+			keymap = { preset = "enter" },
 			appearance = {
 				nerd_font_variant = "mono",
 			},
@@ -18,14 +17,13 @@ return {
 					auto_show = true,
 					window = { border = "single" },
 				},
-				ghost_text = { enabled = true },
 			},
 			signature = {
 				enabled = true,
 				window = { border = "single" },
 			},
 			sources = {
-				default = { "lsp", "path", "snippets", "buffer" },
+				default = { "lsp", "buffer", "path" },
 			},
 			fuzzy = { implementation = "prefer_rust_with_warning" },
 		},
