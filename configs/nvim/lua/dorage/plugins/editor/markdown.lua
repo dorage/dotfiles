@@ -19,4 +19,19 @@ return {
 			vim.keymap.set("n", "<leader>zv", "<cmd>Markview Toggle<CR>")
 		end,
 	},
+	{
+		"HakonHarnes/img-clip.nvim",
+		event = "VeryLazy",
+		opts = {
+			default = {
+				template = "![$CURSOR]($FILE_PATH)", ---@type string | fun(context: table): string
+			},
+			markdown = {
+				url_encode_path = true, ---@type boolean | fun(): boolean
+				template = "![$CURSOR]($FILE_PATH)", ---@type string | fun(context: table): string
+				download_images = true, ---@type boolean | fun(): boolean
+			},
+		},
+		keys = {},
+	},
 }
