@@ -2,14 +2,12 @@ return {
 	-- Neovim dev env
 	{
 		"folke/lazydev.nvim",
-		ft = "lua", -- only load on lua files
+		ft = "lua",
 		dependencies = {
-			{ "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
+			{ "Bilal2453/luvit-meta", lazy = true },
 		},
 		opts = {
 			library = {
-				-- See the configuration section for more details
-				-- Load luvit types when the `vim.uv` word is found
 				{ path = "luvit-meta/library", words = { "vim%.uv" } },
 				{ path = "~/.hammerspoon/Spoons/Annotation/annotations", words = { "hs" } },
 				{ path = "~/.config/lua_ls/defold/api" },
@@ -22,14 +20,9 @@ return {
 		cmd = { "LspInfo", "LspInstall", "LspStart" },
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
-			{
-				"williamboman/mason.nvim",
-				lazy = false,
-				config = true,
-			},
+			{ "williamboman/mason.nvim", config = true },
 			{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
 			{ "williamboman/mason-lspconfig.nvim" },
-			{ "saghen/blink.cmp" },
 		},
 		config = function()
 			require("mason-tool-installer").setup({
@@ -51,6 +44,8 @@ return {
 				automatic_installation = true,
 				ensure_installed = {
 					"bashls",
+					"eslint",
+					"denols",
 					"pyright",
 					"rust_analyzer",
 					"lua_ls",
@@ -70,59 +65,6 @@ return {
 					"perlnavigator",
 					"autotools_ls",
 					"graphql",
-				},
-			})
-
-			local enable_lsp = function(name, config)
-				vim.lsp.config(
-					name,
-					vim.tbl_extend("force", require("lspconfig.configs." .. name).default_config, config)
-				)
-				vim.lsp.enable(name)
-			end
-
-			vim.lsp.config("lua_ls", {
-				cmd = { "lua-language-server" },
-				filetypes = { "lua" },
-				root_markers = {
-					".luarc.json",
-					".luarc.jsonc",
-					".luacheckrc",
-					".stylua.toml",
-					"stylua.toml",
-					"selene.toml",
-					"selene.yml",
-					".git",
-				},
-			})
-			vim.lsp.enable("lua_ls")
-
-			vim.lsp.config(
-				"ts_ls",
-				vim.tbl_extend("force", require("lspconfig.configs.ts_ls").default_config, {
-					root_markers = {
-						"tsconfig.json",
-						"jsconfig.json",
-						"package.json",
-						".git",
-					},
-				})
-			)
-			vim.lsp.enable("ts_ls")
-
-			enable_lsp("tailwindcss", {})
-
-			-- blink cmp
-			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities =
-				vim.tbl_deep_extend("force", capabilities, require("blink.cmp").get_lsp_capabilities({}, false))
-
-			capabilities = vim.tbl_deep_extend("force", capabilities, {
-				textDocument = {
-					foldingRange = {
-						dynamicRegistration = false,
-						lineFoldingOnly = true,
-					},
 				},
 			})
 		end,

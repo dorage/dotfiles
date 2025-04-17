@@ -15,5 +15,34 @@ vim.cmd([[ :set termguicolors ]])
 vim.cmd([[ :set nofoldenable ]])
 vim.cmd([[ :set ignorecase smartcase ]])
 
+vim.lsp.enable({
+	"bashls",
+	"eslint",
+	"denols",
+	"pyright",
+	"rust_analyzer",
+	"lua_ls",
+	-- "ts_ls",
+	"astro",
+	"html",
+	"jedi_language_server",
+	"biome",
+	"cssls",
+	"tailwindcss",
+	"nil_ls", -- nix
+	"taplo",
+	"vuels",
+	"yamlls",
+	"marksman",
+	"sqlls",
+	"perlnavigator",
+	"autotools_ls",
+})
+vim.lsp.config("denols", {})
+vim.diagnostic.config({
+	virtual_lines = false,
+	virtual_text = { current_line = false },
+})
+
 require("dorage.lazy")
 require("dorage.configs")
