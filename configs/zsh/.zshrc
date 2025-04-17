@@ -183,4 +183,6 @@ export EDITOR="nvim"
 
 # git
 alias gcg="~/.config/scripts/git/gitmoji-commit.sh"
-alias gco="git checkout $(git branch | fzf)"
+function gco() {
+	"git checkout $(git branch | fzf)"
+}
