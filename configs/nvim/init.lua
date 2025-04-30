@@ -15,10 +15,13 @@ vim.cmd([[ :set termguicolors ]])
 vim.cmd([[ :set nofoldenable ]])
 vim.cmd([[ :set ignorecase smartcase ]])
 
+vim.lsp.config("*", {
+	root_markers = { ".git" },
+})
 vim.lsp.enable({
 	"bashls",
 	"eslint",
-	"denols",
+	-- "denols",
 	"pyright",
 	"rust_analyzer",
 	"lua_ls",
@@ -26,7 +29,7 @@ vim.lsp.enable({
 	"astro",
 	"html",
 	"jedi_language_server",
-	"biome",
+	-- "biome",
 	"cssls",
 	"tailwindcss",
 	"nil_ls", -- nix
@@ -38,7 +41,7 @@ vim.lsp.enable({
 	"perlnavigator",
 	"autotools_ls",
 })
-vim.lsp.config("denols", {})
+
 vim.diagnostic.config({
 	virtual_lines = false,
 	virtual_text = { current_line = false },
