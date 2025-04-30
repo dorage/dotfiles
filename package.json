@@ -9,12 +9,12 @@
     "mv:zshrc": "cp ./configs/zsh/.zshrc ~/.zshrc",
     "mv:zellij": "rsync -avh --delete --update configs/zellij/ ~/.config/zellij",
     "mv:debuggers": "rsync -avh --delete --update configs/debuggers/ ~/.config/debuggers",
-    "mv:scripts": "rsync -avh --delete --update scripts/ ~/.dorage-scripts",
+    "mv:scripts": "rsync -avh --delete --update configs/scripts/ $HOME/.config/scripts",
     "mv:sketchybar": "rsync -avh --delete --update configs/sketchybar/ ~/.config/sketchybar",
     "mv:ghostty": "rsync -avh --delete --update configs/ghostty $HOME/.config/",
-    "mv:scripts": "rsync -avh --delete --update configs/scripts/ $HOME/.config/scripts",
     "bkp:karabiner": "rsync -avh --delete --update ~/.config/karabiner/ configs/karabiner",
     "bkp:brew": "brew bundle dump --file=./deps/Brewfile --force",
     "bkp:pacman": "pacman -Qe > ./deps/Pacman"
-  }
+  },
+  "packageManager": "pnpm@10.8.0+sha512.0e82714d1b5b43c74610193cb20734897c1d00de89d0e18420aebc5977fa13d780a9cb05734624e81ebd81cc876cd464794850641c48b9544326b5622ca29971"
 }
