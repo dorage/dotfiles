@@ -5,12 +5,12 @@ return {
 		lazy = false,
 		version = false, -- set this if you want to always pull the latest change
 		opts = {
-			provider = "gemini_pro",
+			provider = "gemini_flash",
 			-- auto_suggestions_provider = "openai", -- Since auto-suggestions are a high-frequency operation and therefore expensive, it is recommended to specify an inexpensive provider or even a free provider: copilot
 			vendors = {
-				gemini_thiking = {
+				gemini_flash = {
 					__inherited_from = "gemini",
-					model = "gemini-2.0-flash-thinking-exp-01-21",
+					model = "gemini-2.5-flash-preview-04-17",
 					timeout = 30000,
 					max_tokens = 65536,
 					api_key_name = "GEMINI_API_KEY",

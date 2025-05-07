@@ -83,6 +83,30 @@ export const <> = (props: <>Props) =>> {
 }
 
 local M = {
+	-- use
+	s(
+		{ name = "React: use", trig = "rehu" },
+		fmt(
+			[[
+	const <> = use<<<>>>(<>);
+		]],
+			{
+				i(1),
+				i(2),
+				i(3),
+			},
+			fmtopt
+		),
+		{
+			callbacks = require("ts-manual-import").luasnip_callback({
+				{
+					source = "react",
+					modules = { "use" },
+					default_modules = {},
+				},
+			}),
+		}
+	),
 	-- useState
 	s(
 		{ name = "React: useState", trig = "rehs" },
@@ -95,6 +119,32 @@ local M = {
 				f(ls_utils.capitalize_first_char, { 1 }),
 				i(2),
 				i(3),
+			},
+			fmtopt
+		),
+		{
+			callbacks = require("ts-manual-import").luasnip_callback({
+				{
+					source = "react",
+					modules = { "useState" },
+					default_modules = {},
+				},
+			}),
+		}
+	),
+	-- useReducer
+	s(
+		{ name = "React: useReducer", trig = "rehr" },
+		fmt(
+			[[
+	const [<>, dispatch<>] = useReducer<<<>>>(<>, <>);
+		]],
+			{
+				i(1, "state"),
+				f(ls_utils.capitalize_first_char, { 1 }),
+				i(2, "Type"),
+				i(3, "reducer"),
+				i(4, "initial_state"),
 			},
 			fmtopt
 		),
@@ -131,7 +181,7 @@ useEffect(() =>> {
 		}
 	),
 	s(
-		{ name = "React: useRef", trig = "rehr" },
+		{ name = "React: useRef", trig = "rehf" },
 		fmt(
 			[[
 const <> = useRef<<<>>>(<>);
