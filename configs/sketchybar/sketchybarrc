@@ -32,7 +32,6 @@ bar=(
 	corner_radius="${corner_radius}"
 	color="${bg}"
 	color="${bg_blue}"
-	# color=0x00000000
 )
 
 sketchybar --bar "${bar[@]}"
@@ -85,8 +84,8 @@ popup_item_options=(
 active_app_options=(
 	background.drawing=on
 	background.image=app.org.alacritty
-	background.image.scale=0.8
-	background.image.padding_left=20
+	background.image.scale=1
+	background.image.padding_left=30
 )
 sketchybar \
 --add item app_icon left \

@@ -13,7 +13,7 @@ local windowChooser = function(active_win_id, callback)
 	-- format for chooser
 	win_list = hs.fnutils.map(win_list, function(win)
 		return {
-			text = win:title(),
+			text = win:title() .. " - " .. win:application():name() .. " - " .. win:application():bundleID(),
 			subText = win:application():name(),
 			image = hs.image.imageFromAppBundle(win:application():bundleID()),
 			value = win:id(),
