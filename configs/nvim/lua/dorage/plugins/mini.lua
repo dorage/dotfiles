@@ -38,8 +38,7 @@ return {
 			vim.keymap.set("n", "<leader>fr", miniPick.registry.registry, { desc = "registry" })
 			-- llm provider of avante_nvim
 			miniPick.registry.llm = function()
-				local items =
-					{ "nebius_r1", "nebius_v3", "deepinfra_r1", "deepinfra_v3", "gemini2_thiking", "gemini2_pro" }
+				local items = { "gemini_flash", "gemini_pro" }
 				local source = { items = items, name = "LLM: Avante", choose = function() end }
 				local chosen_picker_name = MiniPick.start({ source = source })
 				if chosen_picker_name == nil then
