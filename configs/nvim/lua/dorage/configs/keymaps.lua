@@ -75,6 +75,11 @@ vim.keymap.set({ "n" }, "<leader>ag", function()
 		"zellij run --floating --name lazygit --width 90% --height 90% -x 5% -y 5% --close-on-exit -- lazygit"
 	)
 end, { desc = "open lazygit" })
+vim.keymap.set({ "n" }, "<leader>ao", function()
+	vim.fn.jobstart(
+		"zellij run --floating --name lazygit --width 90% --height 90% -x 5% -y 5% --close-on-exit -- lazydocker"
+	)
+end, { desc = "open lazydocker" })
 
 -- treesitter test
 vim.keymap.set({ "n" }, "<leader>oa", function()
