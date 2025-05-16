@@ -50,11 +50,15 @@ return {
 							["la"] = { query = "@assignment.lhs", desc = "@assignment.lhs" },
 							["ra"] = { query = "@assignment.rhs", desc = "@assignment.rhs" },
 							["ab"] = { query = "@block.outer", desc = "@block.outer" },
+							["ap"] = { query = "@attribute.outer", desc = "@attribute.outer" },
+							["ip"] = { query = "@attribute.inner", desc = "@attribute.inner" },
 							["ib"] = { query = "@block.inner", desc = "@block.inner" },
 							["af"] = { query = "@function.outer", desc = "@function.outer" },
 							["if"] = { query = "@function.inner", desc = "@function.inner" },
-							["ac"] = { query = "@comment.outer", desc = "@comment.outer" },
-							["ic"] = { query = "@comment.inner", desc = "@comment.inner" },
+							["ac"] = { query = "@call.outer", desc = "@call.outer" },
+							["ic"] = { query = "@call.inner", desc = "@call.inner" },
+							["at"] = { query = "@comment.outer", desc = "@comment.outer" },
+							["it"] = { query = "@comment.inner", desc = "@comment.inner" },
 							["ai"] = { query = "@conditional.outer", desc = "@conditional.outer" },
 							["ii"] = { query = "@conditional.inner", desc = "@conditional.inner" },
 							["al"] = { query = "@loop.outer", desc = "@loop.outer" },
@@ -78,6 +82,10 @@ return {
 					},
 				},
 			})
+
+			-- local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
+			-- vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move)
+			-- vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_opposite)
 		end,
 	},
 	{
