@@ -56,7 +56,25 @@ local common = {
 local language = {
 	-- keywords
 	s({ name = "async keyword", trig = "lka" }, { t("async "), i(1) }),
-	s({ name = "await keyowrd", trig = "lkw" }, { t("await "), i(1) }),
+	s({
+		name = "await keyowrd",
+		trig = "lkw",
+	}, {
+		t("await "),
+		i(1),
+	}, {
+		callbacks = {
+			[-1] = {
+				[events.enter] = function()
+					vim.schedule(function()
+						require("dorage.snippets.utils").restore_cursor(function()
+							require("dorage.snippets.utils.typescript").auto_async()
+						end)
+					end)
+				end,
+			},
+		},
+	}),
 	s({ name = "break keyowrd", trig = "lkb" }, { t("break;"), i(1) }),
 	s({ name = "continue keyowrd", trig = "lkc" }, { t("continue;"), i(1) }),
 	-- types
