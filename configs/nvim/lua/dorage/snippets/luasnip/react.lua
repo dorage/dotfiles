@@ -248,7 +248,7 @@ const <> = useMemo(()=>>{
 		{ name = "React: new hook", trig = "rehn" },
 		fmt(
 			[[
-type <>Props = {};
+export interface <>Props = {};
 
 export const use<> = (props: <>Props) =>> {
 	return {};
@@ -263,36 +263,58 @@ export const use<> = (props: <>Props) =>> {
 			fmtopt
 		)
 	),
-	-- -- new Component
-	-- 	s(
-	-- 		{ name = "React: new Component", trig = "recn" },
-	-- 		fmt(
-	-- 			[[
-	-- type <>Props = {};
-	--
-	-- export const <> = (props: <>Props) =>> {
-	-- 	return <<>><><</>>;
-	-- };
-	-- 	]],
-	-- 			{
-	-- 				f(ls_utils.identity, { 1 }),
-	-- 				i(1),
-	-- 				f(ls_utils.identity, { 1 }),
-	-- 				i(2),
-	-- 			},
-	-- 			fmtopt
-	-- 		)
-	-- 	),
-	s({ name = "React: new Component", trig = "recn" }, {
-		c(1, components_types),
-	}),
+	s(
+		{ name = "React: new Component", trig = "recn" },
+		fmt(
+			[[
+interface <>Props {
+}
+
+export const <> = (props: <>Props) =>> {
+    return <<>><</>>;
+};
+	]],
+			{
+				i(1),
+				f(ls_utils.identity, { 1 }),
+				f(ls_utils.identity, { 1 }),
+			},
+			fmtopt
+		)
+	),
+	s(
+		{ name = "React: new Pure Component", trig = "recp" },
+		fmt(
+			[[
+export interface <>Props extends React.HTMLAttributes<<<>>> {
+}
+
+export const <> = React.forwardRef<<<>, <>Props>>(
+  (props, ref) =>> {
+    return <<>><</>>;
+  },
+);
+<>.displayName = "<>";
+	]],
+			{
+				i(1),
+				i(2),
+				f(ls_utils.identity, { 1 }),
+				f(ls_utils.identity, { 2 }),
+				f(ls_utils.identity, { 1 }),
+				f(ls_utils.identity, { 1 }),
+				f(ls_utils.identity, { 1 }),
+			},
+			fmtopt
+		)
+	),
 	s(
 		{ name = "React: new HoC", trig = "rech" },
 		fmt(
 			[[
-type <>Props = {};
+interface <>Props = {};
 
-type <>DerivedProps = {};
+interafce <>DerivedProps = {};
 
 export const <> = <<T,>>(Component: React.ComponentType<<<>DerivedProps & T>>) =>> (props: <>Props & T) =>> {
 	return <<Component {...props} />>;
