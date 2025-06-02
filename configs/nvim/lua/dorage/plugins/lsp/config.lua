@@ -22,12 +22,10 @@ return {
 		dependencies = {
 			{ "williamboman/mason.nvim", config = true },
 			{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
-			{ "williamboman/mason-lspconfig.nvim" },
 		},
 		config = function()
 			require("mason-tool-installer").setup({
 				ensure_installed = {
-					"bashls",
 					"prettier",
 					"eslint_d",
 					"markdownlint",
@@ -37,34 +35,6 @@ return {
 					"perl-debug-adapter",
 					"stylua",
 					"js-debug-adapter",
-				},
-			})
-
-			require("mason-lspconfig").setup({
-				automatic_installation = true,
-				ensure_installed = {
-					"bashls",
-					"eslint",
-					"denols",
-					"pyright",
-					"rust_analyzer",
-					"lua_ls",
-					"ts_ls",
-					"astro",
-					"html",
-					"jedi_language_server",
-					"biome",
-					"cssls",
-					"tailwindcss",
-					"nil_ls", -- nix
-					"taplo",
-					"vuels",
-					"yamlls",
-					"marksman",
-					"sqlls",
-					"perlnavigator",
-					"autotools_ls",
-					"graphql",
 				},
 			})
 		end,
