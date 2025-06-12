@@ -463,7 +463,7 @@ local language = {
 		)
 	),
 	-- array
-	s({ name = "Empty Array", trig = "lae" }, fmt([[Array(<>).fill(null))]], { i(1) }, fmtopt)),
+	s({ name = "Empty Array", trig = "lae" }, fmt([[Array(<>).fill(null)]], { i(1) }, fmtopt)),
 	-- array: highorder
 	postfix(
 		{ name = ".forEach~", match_pattern = "[%w%.%_%-%\"%'%`%[%]]+$", trig = ".for" },
