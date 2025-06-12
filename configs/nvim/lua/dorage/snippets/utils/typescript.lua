@@ -1,5 +1,6 @@
 local M = {}
 
+-- 현재 커서가 위치한 함수에 async 키워드를 추가
 M.auto_async = function()
 	local pos = vim.api.nvim_win_get_cursor(0)
 	local row = pos[1] - 1
@@ -24,6 +25,7 @@ M.auto_async = function()
 			end
 
 			vim.api.nvim_buf_set_text(0, start_row, start_col, start_row, start_col, { "async " })
+			return
 		end
 		node = node:parent()
 	end
