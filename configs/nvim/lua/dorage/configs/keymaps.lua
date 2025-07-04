@@ -47,6 +47,8 @@ vim.keymap.set({ "n" }, "<space>k", "10<c-w>+", { desc = "Increase height" })
 vim.keymap.set({ "n" }, "<space>o", "<c-w>o", { desc = "Close all other windows" })
 vim.keymap.set({ "n" }, "<space>sh", "<c-w>s", { desc = "Split window horizontally" })
 vim.keymap.set({ "n" }, "<space>sv", "<c-w>v", { desc = "Split window vertically" })
+-- close buffer only
+vim.keymap.set({ "n" }, "<c-w>b", "<cmd>bp | sp | bn | bd<cr>", { desc = "Close buffer" })
 
 -- etc
 vim.keymap.set({ "n", "s" }, "<leader>n", "<cmd>noh<cr><esc>", { desc = "No highlight" })
@@ -80,3 +82,11 @@ vim.keymap.set({ "n" }, "<leader>ao", function()
 		"zellij run --floating --name lazygit --width 90% --height 90% -x 5% -y 5% --close-on-exit -- lazydocker"
 	)
 end, { desc = "open lazydocker" })
+
+-- LSP
+vim.keymap.set("n", "K", function()
+	vim.lsp.buf.hover({ border = "single", max_height = 25, max_width = 120 })
+end, { silent = true })
+vim.keymap.set("n", "gl", function()
+	vim.diagnostic.open_float({ border = "single", max_height = 25, max_width = 120 })
+end, { silent = true })
