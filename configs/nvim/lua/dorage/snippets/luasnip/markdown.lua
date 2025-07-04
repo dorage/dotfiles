@@ -136,16 +136,9 @@ local markdown = {
 				c(1, { t(""), t("!") }),
 				f(function(_, parent)
 					local url = parent.snippet.env.POSTFIX_MATCH
-					local v, handle = pcall(io.popen, "perl ~/.config/nvim/scripts/fetch_title.pl " .. url)
+					local title = require("dorage.snippets.utils.markdown").get_url_title(url)
 
-					if v == false or handle == nil then
-						print(handle)
-						return ""
-					end
-
-					local output = handle:read("*a")
-					local value = output:gsub("[\n\r]", " ")
-					return tostring(value)
+					return title
 				end),
 				f(function(_, parent)
 					return parent.snippet.env.POSTFIX_MATCH

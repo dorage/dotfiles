@@ -248,7 +248,7 @@ const <> = useMemo(()=>>{
 		{ name = "React: new hook", trig = "rehn" },
 		fmt(
 			[[
-export interface <>Props = {};
+export interface <>Props {};
 
 export const use<> = (props: <>Props) =>> {
 	return {};
