@@ -5,14 +5,15 @@ return {
 		---@type blink.cmp.Config
 		dependencies = {
 			"L3MON4D3/LuaSnip",
-			version = "v2.*",
 		},
+		version = "1.4.1",
 		opts = {
 			keymap = { preset = "enter" },
 			appearance = {
 				nerd_font_variant = "mono",
 			},
 			completion = {
+				menu = { border = "single" },
 				documentation = {
 					auto_show = true,
 					window = { border = "single" },
