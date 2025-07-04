@@ -39,6 +39,13 @@ return {
 				shfmt = {
 					prepend_args = { "-i", "2" },
 				},
+				-- prettier = {
+				-- 	cwd = function()
+				-- 		local v = require("conform.util").root_file({ ".prettierrc" })
+				-- 		print(v)
+				-- 		return v
+				-- 	end,
+				-- },
 			},
 		},
 		init = function()
