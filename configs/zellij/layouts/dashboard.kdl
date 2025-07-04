@@ -13,7 +13,7 @@ layout {
     }
     pane size="55%" split_direction="vertical" {
 			pane size="40%" {
-				pane command="taskwarrior-tui"
+				pane command="gemini"
 			}
 			pane size="60%" {
 				pane command="btop"
