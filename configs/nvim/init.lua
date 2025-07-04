@@ -1,4 +1,4 @@
-vim.cmd([[ language en_US ]])
+-- vim.cmd([[ language en_US ]])
 
 vim.cmd([[ :set syntax=on ]])
 vim.cmd([[ :set number ]])
@@ -15,12 +15,15 @@ vim.cmd([[ :set termguicolors ]])
 vim.cmd([[ :set nofoldenable ]])
 vim.cmd([[ :set ignorecase smartcase ]])
 
+vim.opt.grepprg = "rg --vimgrep --no-heading --smart-case"
+vim.opt.grepformat = "%f:%l:%c:%m"
+
 vim.lsp.config("*", {
 	root_markers = { ".git" },
 })
 vim.lsp.enable({
 	"bashls",
-	"eslint",
+	-- "eslint",
 	-- "denols",
 	"pyright",
 	"rust_analyzer",
@@ -49,3 +52,7 @@ vim.diagnostic.config({
 
 require("dorage.lazy")
 require("dorage.configs")
+
+vim.keymap.set("n", "K", function()
+	vim.lsp.buf.hover({ border = "single", max_height = 25, max_width = 120 })
+end, { silent = true })
