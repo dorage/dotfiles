@@ -22,6 +22,7 @@ vim.lsp.config("*", {
 	root_markers = { ".git" },
 })
 vim.lsp.enable({
+	"jdtls",
 	"bashls",
 	-- "eslint",
 	-- "denols",

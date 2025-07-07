@@ -8,7 +8,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME:/usr/local/bin:$PATH
 export PATH="$HOME:/opt/homebrew/bin:$PATH"
@@ -16,6 +15,8 @@ export PATH="$HOME:/opt/homebrew/sbin:$PATH"
 export PATH="$HOME:/Users/kanghyunlee/.cargo/bin:$PATH"
 # perl scripts
 export PATH=~/.dorage-scripts:$PATH
+# JAVA
+export PATH="/opt/homebrew/opt/openjdk@21/bin:$PATH"
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"

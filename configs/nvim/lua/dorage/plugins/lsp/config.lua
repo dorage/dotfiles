@@ -1,4 +1,6 @@
 return {
+	-- Java LSP
+	{ "nvim-java/nvim-java" },
 	-- Neovim dev env
 	{
 		"folke/lazydev.nvim",
