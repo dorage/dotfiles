@@ -53,7 +53,3 @@ vim.diagnostic.config({
 
 require("dorage.lazy")
 require("dorage.configs")
-
-vim.keymap.set("n", "K", function()
-	vim.lsp.buf.hover({ border = "single", max_height = 25, max_width = 120 })
-end, { silent = true })
