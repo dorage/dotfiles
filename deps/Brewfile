@@ -1,135 +1,246 @@
-tap "felixkratz/formulae"
-tap "homebrew/bundle"
-tap "homebrew/cask-fonts"
-tap "homebrew/services"
-tap "jstkdng/programs"
-tap "koekeishiya/formulae"
-tap "sqitchers/sqitch"
-brew "act"
-brew "giflib"
-brew "libpng"
-brew "aom"
-brew "bat"
-brew "bpytop"
-brew "btop"
-brew "pixman"
-brew "cairo"
-brew "pango"
-brew "librsvg"
-brew "cocoapods"
-brew "perl"
-brew "cpm"
-brew "deno"
-brew "eza"
-brew "fd"
-brew "libevent"
-brew "p11-kit"
-brew "unbound"
-brew "gnutls"
-brew "libass"
-brew "librist"
-brew "srt"
-brew "tesseract"
-brew "ffmpeg"
-brew "fzf"
-brew "git"
-brew "gnu-sed"
-brew "pkg-config"
-brew "jpeg"
-brew "krb5"
-brew "lazygit"
-brew "libfido2"
-brew "libsixel"
-brew "lua-language-server"
-brew "luarocks"
-brew "mysql-client"
-brew "neovim"
-brew "nghttp2"
-brew "nvm"
-brew "poppler"
-brew "python-setuptools"
-brew "rust-analyzer"
-brew "stylua"
-brew "task"
-brew "taskwarrior-tui"
-brew "thefuck"
-brew "tlrc"
-brew "vips"
-brew "zoxide"
-brew "felixkratz/formulae/sketchybar"
-brew "jstkdng/programs/ueberzugpp"
-cask "font-droid-sans-mono-nerd-font"
-cask "font-fira-code-nerd-font"
-cask "font-gohufont-nerd-font"
-cask "font-iosevka-nerd-font"
-cask "font-iosevka-term-slab-nerd-font"
-cask "font-monaspace"
-cask "hammerspoon"
-cask "ngrok"
-vscode "9beach.vscode-hanspell"
-vscode "aaron-bond.better-comments"
-vscode "adpyke.codesnap"
-vscode "aeschli.vscode-css-formatter"
-vscode "aksharpatel47.vscode-flutter-helper"
-vscode "alexisvt.flutter-snippets"
-vscode "antfu.unocss"
-vscode "astro-build.astro-vscode"
-vscode "bierner.markdown-mermaid"
-vscode "bradlc.vscode-tailwindcss"
-vscode "chakrounanas.turbo-console-log"
-vscode "codesandbox-io.codesandbox-projects"
-vscode "dart-code.dart-code"
-vscode "dart-code.flutter"
-vscode "davidanson.vscode-markdownlint"
-vscode "dbaeumer.vscode-eslint"
-vscode "dbankier.vscode-quick-select"
-vscode "denoland.vscode-deno"
-vscode "developer2006.svg-gallery"
-vscode "donjayamanne.githistory"
-vscode "donjayamanne.python-environment-manager"
-vscode "dotjoshjohnson.xml"
-vscode "eamodio.gitlens"
-vscode "esbenp.prettier-vscode"
-vscode "formulahendry.auto-rename-tag"
-vscode "geriyoco.vscode-image-gallery"
-vscode "gornivv.vscode-flutter-files"
-vscode "gruntfuggly.todo-tree"
-vscode "hirantha.json-to-dart"
-vscode "ionic.ionic"
-vscode "jock.svg"
-vscode "jonkwheeler.styled-components-snippets"
-vscode "kevinrose.vsc-python-indent"
-vscode "magicstack.edgedb"
-vscode "mathiasfrohlich.kotlin"
-vscode "meezilla.json"
-vscode "mhutchie.git-graph"
-vscode "mohsen1.prettify-json"
-vscode "monokai.theme-monokai-pro-vscode"
-vscode "ms-azuretools.vscode-azurefunctions"
-vscode "ms-azuretools.vscode-azureresourcegroups"
-vscode "ms-python.autopep8"
-vscode "ms-python.debugpy"
-vscode "ms-python.isort"
-vscode "ms-python.python"
-vscode "ms-python.vscode-pylance"
-vscode "ms-vscode-remote.remote-containers"
-vscode "ms-vscode-remote.remote-ssh"
-vscode "ms-vscode-remote.remote-ssh-edit"
-vscode "ms-vscode.azure-account"
-vscode "ms-vscode.remote-explorer"
-vscode "njpwerner.autodocstring"
-vscode "nrwl.angular-console"
-vscode "orta.vscode-jest"
-vscode "peterhdd.dartgettersetter"
-vscode "redhat.vscode-xml"
-vscode "ritwickdey.liveserver"
-vscode "shd101wyy.markdown-preview-enhanced"
-vscode "shinotatwu-ds.file-tree-generator"
-vscode "statelyai.stately-vscode"
-vscode "streetsidesoftware.code-spell-checker"
-vscode "styled-components.vscode-styled-components"
-vscode "tamasfe.even-better-toml"
-vscode "usernamehw.errorlens"
-vscode "vue.volar"
-vscode "wallabyjs.quokka-vscode"
-vscode "xabikos.javascriptsnippets"
+act
+aom
+aribb24
+bat
+berkeley-db@5
+brotli
+btop
+c-ares
+ca-certificates
+cairo
+cfitsio
+cgif
+chafa
+cjson
+cli11
+cmake
+cocoapods
+cpm
+dav1d
+docker
+docker-completion
+expat
+eza
+fd
+ffmpeg
+fftw
+flac
+fmt
+fontconfig
+freetype
+frei0r
+fribidi
+fzf
+gcc
+gdbm
+gdk-pixbuf
+gettext
+gh
+ghostscript
+giflib
+git
+glib
+gmp
+gnu-sed
+gnupg
+gnutls
+go
+gpgme
+graphite2
+gum
+harfbuzz
+hdf5
+highway
+hwloc
+icu4c@76
+icu4c@77
+imagemagick
+imath
+isl
+jansson
+jasper
+jbig2dec
+jdtls
+jemalloc
+jpeg
+jpeg-turbo
+jpeg-xl
+jq
+krb5
+lame
+lazydocker
+lazygit
+leptonica
+libaec
+libarchive
+libass
+libassuan
+libavif
+libb2
+libbluray
+libcbor
+libde265
+libdeflate
+libdicom
+libev
+libevent
+libexif
+libfido2
+libgcrypt
+libgit2
+libgpg-error
+libheif
+libidn
+libidn2
+libimagequant
+libksba
+liblqr
+libmatio
+libmicrohttpd
+libmpc
+libnghttp2
+libogg
+libomp
+libpng
+libpq
+libraqm
+libraw
+librist
+librsvg
+libsamplerate
+libsixel
+libsndfile
+libsodium
+libsoxr
+libspng
+libssh
+libssh2
+libtasn1
+libtiff
+libtool
+libunibreak
+libunistring
+libusb
+libuv
+libvidstab
+libvmaf
+libvorbis
+libvpx
+libx11
+libxau
+libxcb
+libxdmcp
+libxext
+libxml2
+libxrender
+libyaml
+little-cms2
+lpeg
+lua
+lua-language-server
+luajit
+luarocks
+luv
+lz4
+lzo
+m4
+maven
+mbedtls
+mozjpeg
+mpdecimal
+mpfr
+mpg123
+mysql-client
+neovim
+nettle
+nghttp2
+nlohmann-json
+npth
+nspr
+nss
+nvm
+oniguruma
+open-mpi
+opencore-amr
+openexr
+openjdk
+openjdk@21
+openjpeg
+openldap
+openslide
+openssl@1.1
+openssl@3
+opus
+p11-kit
+pango
+pcre
+pcre2
+perl
+pgcli
+pillow
+pinentry
+pipx
+pixman
+pkgconf
+pmix
+pngpaste
+poppler
+python-packaging
+python-setuptools
+python@3.12
+python@3.13
+range-v3
+rav1e
+readline
+ripgrep
+rubberband
+ruby
+rust-analyzer
+sdl2
+shared-mime-info
+sketchybar
+snappy
+spdlog
+speex
+sqlite
+srt
+starship
+stylua
+svt-av1
+tbb
+tesseract
+the_silver_searcher
+thefuck
+theora
+tlrc
+tree-sitter
+ueberzugpp
+unbound
+unibilium
+universal-ctags
+utf8proc
+uthash
+vips
+webp
+x264
+x265
+xorgproto
+xvid
+xz
+yazi
+zeromq
+zimg
+zlib
+zoxide
+zstd
+anki
+dbeaver-community
+font-droid-sans-mono-nerd-font
+font-fira-code-nerd-font
+font-gohufont-nerd-font
+font-iosevka-nerd-font
+font-iosevka-term-slab-nerd-font
+font-monaspace
+hammerspoon
+ngrok
+orbstack
