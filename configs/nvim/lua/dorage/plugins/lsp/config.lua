@@ -28,7 +28,9 @@ return {
 		config = function()
 			require("mason-tool-installer").setup({
 				ensure_installed = {
+					"typescript-language-server",
 					"prettier",
+					"pyright",
 					"jdtls",
 					"eslint_d",
 					"markdownlint",
