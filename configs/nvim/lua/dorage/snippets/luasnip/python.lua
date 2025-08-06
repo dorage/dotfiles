@@ -208,6 +208,24 @@ local M = {
 	),
 	-- statement: return
 	s(
+		{ name = "with statement", trig = "lswi" },
+		fmt(
+			[[
+	with <>:
+		<>
+	]],
+			{
+				c(1, {
+					sn(1, { i(1) }),
+					sn(1, { i(1), t(" as "), i(2) }),
+				}),
+				i(2, "pass"),
+			},
+			fmtopt
+		)
+	),
+	-- statement: return
+	s(
 		{ name = "return statement", trig = "lsr" },
 		fmt(
 			[[
