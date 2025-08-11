@@ -16,41 +16,38 @@ return {
 			},
 		},
 		-- Everything in opts will be passed to setup()
-		opts = {
-			-- Define your formatters
-			formatters_by_ft = {
-				lua = { "stylua" },
-				python = { "isort", "black" },
-				javascript = { "prettier" },
-				typescript = { "prettier" },
-				javascriptreact = { "prettier" },
-				typescriptreact = { "prettier" },
-				html = { "prettier" },
-				css = { "prettier" },
-				json = { "prettier" },
-				astro = { "prettier" },
-				yaml = { "prettier" },
-				perl = { "perltidy" },
-			},
-			-- Set up format-on-save
-			format_on_save = { timeout_ms = 500, lsp_fallback = true, quiet = true },
-			-- Customize formatters
-			formatters = {
-				shfmt = {
-					prepend_args = { "-i", "2" },
-				},
-				-- prettier = {
-				-- 	cwd = function()
-				-- 		local v = require("conform.util").root_file({ ".prettierrc" })
-				-- 		print(v)
-				-- 		return v
-				-- 	end,
-				-- },
-			},
-		},
 		init = function()
 			-- If you want the formatexpr, here is the place to set it
 			vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+			require("conform").setup({
+				-- Define your formatters
+				formatters_by_ft = {
+					lua = { "stylua" },
+					python = { "isort", "black" },
+					javascript = { "prettier" },
+					typescript = { "prettier" },
+					javascriptreact = { "prettier" },
+					typescriptreact = { "prettier" },
+					html = { "prettier" },
+					css = { "prettier" },
+					json = { "prettier" },
+					astro = { "prettier" },
+					yaml = { "prettier" },
+					perl = { "perltidy" },
+				},
+				-- Set up format-on-save
+				format_on_save = { timeout_ms = 500, lsp_fallback = true, quiet = true },
+				-- Customize formatters
+				formatters = {
+					shfmt = {
+						prepend_args = { "-i", "2" },
+					},
+					prettier = {
+						cwd = require("conform.util").root_file({ ".prettierrc" }),
+						require_cwd = true,
+					},
+				},
+			})
 		end,
 	},
 }
