@@ -75,7 +75,7 @@ return {
 		config = function()
 			require("todo-comments").setup({
 				keywords = {
-					["LLM"] = { icon = "🤖", color = "llm" },
+					["AI"] = { icon = "🦾", color = "llm" },
 				},
 				colors = {
 					llm = { "LLMPromptComment", "#FFA500" },
