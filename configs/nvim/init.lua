@@ -44,6 +44,7 @@ vim.lsp.enable({
 	"sqlls",
 	"perlnavigator",
 	"autotools_ls",
+	"dcmls",
 })
 
 vim.diagnostic.config({
