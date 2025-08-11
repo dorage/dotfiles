@@ -58,7 +58,7 @@ local M = {
 	s({ name = "variable", trig = "lvc" }, fmt([[<> = <>]], { i(1), i(2) }, fmtopt)),
 	-- functions
 	s(
-		{ name = "js function", trig = "lf" },
+		{ name = "function", trig = "lf" },
 		fmt(
 			[[
 			def <>(<>) ->> <>:
@@ -266,7 +266,21 @@ local M = {
 	),
 	-- comments
 	s(
-		{ name = "js TODO comment", trig = "lct" },
+		{ name = "Multiline comment", trig = "lcm" },
+		fmt(
+			[[
+			"""
+			<>
+			"""
+	]],
+			{
+				i(1),
+			},
+			fmtopt
+		)
+	),
+	s(
+		{ name = "TODO comment", trig = "lct" },
 		fmt(
 			[[
 	# TODO:
@@ -279,7 +293,7 @@ local M = {
 		)
 	),
 	s(
-		{ name = "js WARN comment", trig = "lcw" },
+		{ name = "WARN comment", trig = "lcw" },
 		fmt(
 			[[
 	# WARN:
@@ -292,7 +306,7 @@ local M = {
 		)
 	),
 	s(
-		{ name = "js NOTE comment", trig = "lcn" },
+		{ name = "NOTE comment", trig = "lcn" },
 		fmt(
 			[[
 	# NOTE:
@@ -305,7 +319,7 @@ local M = {
 		)
 	),
 	s(
-		{ name = "js TEST comment", trig = "lcs" },
+		{ name = "TEST comment", trig = "lcs" },
 		fmt(
 			[[
 	# TEST:
@@ -318,7 +332,7 @@ local M = {
 		)
 	),
 	s(
-		{ name = "js FIX comment", trig = "lcf" },
+		{ name = "FIX comment", trig = "lcf" },
 		fmt(
 			[[
 	# FIX:
@@ -331,7 +345,7 @@ local M = {
 		)
 	),
 	s(
-		{ name = "js AI comment", trig = "lca" },
+		{ name = "AI comment", trig = "lca" },
 		fmt(
 			[[
 	# AI:
@@ -344,7 +358,7 @@ local M = {
 		)
 	),
 	s(
-		{ name = "comment - GWT", trig = "lsr" },
+		{ name = "comment - GWT", trig = "lcg" },
 		fmt(
 			[[
 	# Given
