@@ -21,18 +21,35 @@ vim.opt.grepformat = "%f:%l:%c:%m"
 vim.lsp.config("*", {
 	root_markers = { ".git" },
 })
+vim.lsp.config("basedpyright", {
+	root_markers = { ".venv", "pyproject.toml" },
+	settings = {
+		basedpyright = {
+			analysis = {
+				autoSearchPaths = true,
+				autoImportCompletions = true,
+				useLibraryCodeForTypes = true,
+				logLevel = "Warning",
+			},
+		},
+		python = {
+			pythonPath = vim.fn.exepath("python3"), -- 또는 가상환경 경로
+		},
+	},
+})
 vim.lsp.enable({
 	"jdtls",
 	"bashls",
 	-- "eslint",
 	-- "denols",
-	"pyright",
+	"basedpyright",
+	-- "pyright",
 	"rust_analyzer",
 	"lua_ls",
 	-- "ts_ls",
 	"astro",
 	"html",
-	"jedi_language_server",
+	-- "jedi_language_server",
 	-- "biome",
 	"cssls",
 	"tailwindcss",
