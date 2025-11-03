@@ -22,7 +22,7 @@ vim.lsp.config("*", {
 	root_markers = { ".git" },
 })
 vim.lsp.config("basedpyright", {
-	root_markers = { ".venv", "pyproject.toml" },
+	root_markers = { ".git" },
 	settings = {
 		basedpyright = {
 			analysis = {
@@ -52,6 +52,7 @@ vim.lsp.enable({
 	-- "jedi_language_server",
 	-- "biome",
 	"cssls",
+	"dartls",
 	"tailwindcss",
 	"nil_ls", -- nix
 	"taplo",

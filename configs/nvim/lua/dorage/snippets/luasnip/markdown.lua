@@ -119,6 +119,25 @@ local markdown = {
 			fmtopt
 		)
 	),
+	-- claude skills
+	s(
+		{ name = "Claude Skills", trig = "csk" },
+		fmt(
+			[[---
+name: <>
+description: <>
+---
+
+# <>
+
+## Instruction
+
+<>
+	]],
+			{ i(1), i(2), rep(1), i(3) },
+			fmtopt
+		)
+	),
 	-- horizontal rule
 	s({ name = "horizontal rule", trig = "hr" }, { t("---") }),
 	-- break a line

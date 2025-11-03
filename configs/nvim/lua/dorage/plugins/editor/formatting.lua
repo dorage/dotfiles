@@ -32,6 +32,7 @@ return {
 					css = { "prettier" },
 					json = { "prettier" },
 					astro = { "prettier" },
+					sql = { "prettier" },
 					yaml = { "prettier" },
 					perl = { "perltidy" },
 				},
