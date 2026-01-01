@@ -74,6 +74,10 @@ return {
 				miniFiles.open(vim.api.nvim_buf_get_name(0))
 				vim.cmd("set relativenumber")
 			end, { desc = "files in current file directory" })
+			vim.keymap.set("n", "<leader>fv", function()
+				miniFiles.open(vim.api.nvim_buf_get_name(0))
+				vim.cmd("set relativenumber")
+			end, { desc = "files in current file directory" })
 		end,
 	},
 	-- indent

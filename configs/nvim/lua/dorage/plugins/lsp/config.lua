@@ -19,6 +19,8 @@ return {
 	-- LSP config
 	{
 		"neovim/nvim-lspconfig",
+		lazy = false,
+		priority = 100,
 		cmd = { "LspInfo", "LspInstall", "LspStart" },
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
@@ -41,63 +43,66 @@ return {
 					"perl-debug-adapter",
 					"stylua",
 					"js-debug-adapter",
+					"tsgo",
 				},
 			})
-		end,
-	},
-	{
-		"pmizio/typescript-tools.nvim",
-		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-		config = function()
-			require("typescript-tools").setup({
-				filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
-				on_attach = function(_, bufnr)
-					vim.keymap.set(
-						"n",
-						"gd",
-						"<cmd>TSToolsGoToSourceDefinition<cr>",
-						{ buffer = bufnr, desc = "TS Go to source definition" }
-					)
-					vim.keymap.set(
-						"n",
-						"<leader>loa",
-						"<cmd>TSToolsOrganizeImports<cr>",
-						{ buffer = bufnr, desc = "TS Sort and Remove unused imports" }
-					)
-					vim.keymap.set(
-						"n",
-						"<leader>los",
-						"<cmd>TSToolsSortImports<cr>",
-						{ buffer = bufnr, desc = "TS Sort imports" }
-					)
-					vim.keymap.set(
-						"n",
-						"<leader>lod",
-						"<cmd>TSToolsRemoveUnusedImports<cr>",
-						{ buffer = bufnr, desc = "TS Remove unused imports" }
-					)
-					vim.keymap.set(
-						"n",
-						"<leader>lf",
-						"<cmd>TSToolsFileReferences<cr>",
-						{ buffer = bufnr, desc = "TS Remove unused imports" }
-					)
-					vim.keymap.set(
-						"n",
-						"<leader>lof",
-						"<cmd>TSToolsAddMissingImports<cr>",
-						{ buffer = bufnr, desc = "TS Add missing imports" }
-					)
-				end,
+
+			vim.lsp.config("basedpyright", {
+				root_markers = { ".git" },
+				settings = {
+					basedpyright = {
+						analysis = {
+							autoSearchPaths = true,
+							autoImportCompletions = true,
+							useLibraryCodeForTypes = true,
+							logLevel = "Warning",
+						},
+					},
+					python = {
+						pythonPath = vim.fn.exepath("python3"), -- 또는 가상환경 경로
+					},
+				},
+			})
+
+			vim.lsp.enable({
+				"tsgo",
+				"jdtls",
+				"bashls",
+				-- "eslint",
+				-- "denols",
+				"basedpyright",
+				-- "pyright",
+				"rust_analyzer",
+				"lua_ls",
+				-- "ts_ls",
+				"astro",
+				"html",
+				-- "jedi_language_server",
+				-- "biome",
+				"cssls",
+				"dartls",
+				-- "tailwindcss",
+				"nil_ls", -- nix
+				"taplo",
+				"vuels",
+				"yamlls",
+				"marksman",
+				"sqlls",
+				"perlnavigator",
+				"autotools_ls",
+				"dcmls",
 			})
 		end,
 	},
-	-- tailwind-tools.lua
-	{
-		"luckasRanarison/tailwind-tools.nvim",
-		dependencies = { "nvim-treesitter/nvim-treesitter" },
-		opts = {}, -- your configuration
-	},
+	-- {
+	-- 	"pmizio/typescript-tools.nvim",
+	-- 	dependencies = { "nvim-lua/plenary.nvim" },
+	-- 	config = function()
+	-- 		require("typescript-tools").setup({
+	-- 			filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
+	-- 		})
+	-- 	end,
+	-- },
 	-- flutter-tools
 	{
 		"nvim-flutter/flutter-tools.nvim",

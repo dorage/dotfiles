@@ -90,3 +90,8 @@ end, { silent = true })
 vim.keymap.set("n", "gl", function()
 	vim.diagnostic.open_float({ border = "single", max_height = 25, max_width = 120 })
 end, { silent = true })
+
+-- Markdown view with typora
+vim.keymap.set("n", "<leader>zp", function()
+	vim.cmd("!open -a typora " .. vim.fn.expand("%:p"))
+end, { desc = "Open Markdown in Typora" })

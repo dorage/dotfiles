@@ -34,7 +34,9 @@ return {
 					ls.expand()
 					return
 				end
-
+				vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, false, true), "n", false)
+			end, { silent = true })
+			vim.keymap.set({ "i", "s" }, "<leader><Tab>", function()
 				if ls.in_snippet() then
 					if ls.expandable() then
 						print("expandable in snippet")
@@ -45,7 +47,6 @@ return {
 					end
 					return
 				end
-				vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, false, true), "n", false)
 			end, { silent = true })
 			vim.keymap.set({ "i", "s" }, "<S-Tab>", function()
 				if ls.in_snippet() then
