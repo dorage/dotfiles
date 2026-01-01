@@ -4,14 +4,26 @@ function current_branch_issue_id() {
 	git branch --show-current | sed 's/^\([0-9]*\).*/\1/'
 }
 
+function git-branch-name() {
+    local name="$*"
+    echo "$name" | sed '
+        s/[[:space:]\/]\+/-/g
+        s/[^a-zA-Z0-9._-]//g
+        s/--\+/-/g
+        s/\.\./-/g
+        s/^[.-]\+//
+        s/[.-]\+$//
+    ' | tr '[:upper:]' '[:lower:]'
+}
+
 # Commit with Gitmoji
 alias gcg="~/.config/scripts/git/gitmoji-commit.sh"
 
 # Checkout branch with fzf
+unalias gco 2>/dev/null  # 기존 alias 제거
 function gco() {
 	git checkout $(git branch | fzf)
 }
-
 
 # commit closing issue id
 function gcr() {
@@ -66,7 +78,20 @@ function ghprma() {
 	gh pr merge --squash --auto
 }
 
+function select_branch() {
+	git branch | fzf | sed 's/. \(.*\)/\1/'
+}
+
 # Worktree - add git worktree with branch
-function gwta() {
-	branch=$(git branch -r | fzf) && git worktree add "./worktrees/$branch" $branch
+function gwoa() {
+	branch=$(select_branch)
+	mkdir -p ~/worktrees # 디렉터리 없으면 생성
+	git worktree add "$HOME/worktrees/$branch" "$branch"
+	gum format -- "**$branch** 워크트리 생성"
+}
+
+function gwor() {
+	branch=$(select_branch)
+	git worktree remove "$branch"
+	gum format -- "**$branch** 워크트리 삭제"
 }
