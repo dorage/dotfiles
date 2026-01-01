@@ -19,8 +19,9 @@ local function create_hot_key_window(app_name, command_key, key)
 	end)
 end
 
-create_hot_key_window("net.ankiweb.dtop", { "cmd", "shift" }, "m")
+-- create_hot_key_window("net.ankiweb.dtop", { "cmd", "shift" }, "m")
 create_hot_key_window("md.obsidian", { "cmd", "shift" }, "z")
 create_hot_key_window("net.kovidgoyal.kitty", { "cmd", "shift" }, "s")
 -- create_hot_key_window("com.mitchellh.ghostty", { "cmd", "shift" }, "g")
 create_hot_key_window("com.google.Chrome", { "cmd", "shift" }, "a")
+create_hot_key_window("abnerworks.Typora", { "cmd", "shift" }, "m")
