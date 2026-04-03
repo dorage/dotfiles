@@ -39,19 +39,7 @@ local M = {
 	}, {
 		t("await "),
 		i(1),
-	}, {
-		callbacks = {
-			[-1] = {
-				[events.enter] = function()
-					vim.schedule(function()
-						require("dorage.snippets.utils").restore_cursor(function()
-							require("dorage.snippets.utils.typescript").auto_async()
-						end)
-					end)
-				end,
-			},
-		},
-	}),
+	}, {}),
 	-- types
 	-- variables
 	s({ name = "variable", trig = "lvl" }, fmt([[<> = <>]], { i(1), i(2) }, fmtopt)),
@@ -189,17 +177,33 @@ local M = {
 			[[
 	try:
 		<>
+	except <> as e:
+		<>
 	]],
-			{ i(1, "pass") },
+			{ i(1, "pass"), i(2, "Exception"), i(3, "pass") },
 			fmtopt
 		)
 	),
 	-- default statement
 	s(
-		{ name = "try-default statement", trig = "lstd" },
+		{ name = "try-else statement", trig = "lste" },
 		fmt(
 			[[
 	else: 
+		# 예외가 발생하지 않았을 때 실행할 코드
+		<>
+	]],
+			{ i(1, "pass") },
+			fmtopt
+		)
+	),
+	-- finally statement
+	s(
+		{ name = "try-finally statement", trig = "lstf" },
+		fmt(
+			[[
+	finally: 
+		# 예외 발생 여부와 상관없이 항상 실행할 코드
 		<>
 	]],
 			{ i(1, "pass") },
