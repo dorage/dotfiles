@@ -34,6 +34,7 @@ keybinds {
         bind "Alt Left" { MoveTab "Left"; }
         bind "Alt Right" { MoveTab "Right"; }
         bind "Alt +" { Resize "Increase"; }
+        bind "Alt =" { Resize "Increase"; }
         bind "Alt -" { Resize "Decrease"; }
         bind "Alt [" { PreviousSwapLayout; }
         bind "Alt ]" { NextSwapLayout; }
@@ -49,6 +50,13 @@ keybinds {
         bind "h" { SwitchToMode "Move"; }
         bind "s" { SwitchToMode "Scroll"; }
         bind "o" { SwitchToMode "Session"; }
+        bind "f" {
+					LaunchOrFocusPlugin "file:~/.config/zellij/plugins/room.wasm" {
+							floating true
+							ignore_case true
+							quick_jump true
+        }
+				}
         bind "q" { Quit; }
     }
 
