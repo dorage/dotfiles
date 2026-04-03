@@ -95,3 +95,18 @@ end, { silent = true })
 vim.keymap.set("n", "<leader>zp", function()
 	vim.cmd("!open -a typora " .. vim.fn.expand("%:p"))
 end, { desc = "Open Markdown in Typora" })
+
+-- Copy filepath
+-- 현재 파일 경로를 시스템 클립보드에 복사
+vim.keymap.set("n", "<leader>cf", function()
+	local path = vim.fn.expand("%") -- 상대 경로
+	vim.fn.setreg("+", path)
+	vim.notify("Copied: " .. path)
+end, { desc = "Copy file path to clipboard" })
+
+-- 절대 경로 버전도 유용함
+vim.keymap.set("n", "<leader>cF", function()
+	local path = vim.fn.expand("%:p") -- 절대 경로
+	vim.fn.setreg("+", path)
+	vim.notify("Copied: " .. path)
+end, { desc = "Copy absolute file path to clipboard" })
