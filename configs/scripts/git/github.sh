@@ -47,7 +47,6 @@ function ghib() {
 
 # PR - create
 function ghpr() {
-	gcr
 	git push
 	# If current branch is created by `gh issue develop --base`, then base branch will be configured as the base for pr
 	gh pr create --fill
@@ -70,13 +69,13 @@ function ghprm() {
 
 
 # PR - create & squash merge automatically
-function ghprma() {
-	gcr
-	git push
-	# If current branch is created by `gh issue develop --base`, then base branch will be configured as the base for pr
-	gh pr create --fill
-	gh pr merge --squash --auto
-}
+# function ghprma() {
+# 	gcr
+# 	git push
+# 	# If current branch is created by `gh issue develop --base`, then base branch will be configured as the base for pr
+# 	gh pr create --fill
+# 	gh pr merge --squash --auto
+# }
 
 function select_branch() {
 	git branch | fzf | sed 's/. \(.*\)/\1/'
