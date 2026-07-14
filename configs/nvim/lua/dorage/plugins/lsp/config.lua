@@ -70,19 +70,6 @@ return {
 
 			vim.lsp.config("basedpyright", {
 				root_markers = { ".git" },
-				settings = {
-					basedpyright = {
-						analysis = {
-							autoSearchPaths = true,
-							autoImportCompletions = true,
-							useLibraryCodeForTypes = true,
-							logLevel = "Warning",
-						},
-					},
-					python = {
-						pythonPath = vim.fn.exepath("python3"), -- 또는 가상환경 경로
-					},
-				},
 			})
 
 			vim.lsp.config("markdown-oxide", {
