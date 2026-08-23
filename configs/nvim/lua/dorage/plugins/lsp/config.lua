@@ -53,13 +53,7 @@ return {
 			})
 
 			vim.lsp.config("ty", {
-				cmd = { "/Users/kanghyunlee/.local/share/uv/tools/ty/bin/ty", "server" },
 				root_markers = { ".git" },
-				settings = {
-					-- python = {
-					-- 	pythonPath = vim.fn.exepath("python3"), -- 또는 가상환경 경로
-					-- },
-				},
 			})
 
 			vim.lsp.config("tsgo", {
@@ -67,10 +61,6 @@ return {
 			})
 
 			vim.lsp.config("mdx-analyzer", {})
-
-			vim.lsp.config("basedpyright", {
-				root_markers = { ".git" },
-			})
 
 			vim.lsp.config("markdown-oxide", {
 				root_markers = { ".git" },
@@ -87,9 +77,9 @@ return {
 				"terraformls",
 				-- "eslint",
 				-- "denols",
-				-- "ty", -- astral.sh
+				"ty", -- astral.sh
 				-- "pyrefly",
-				"basedpyright",
+				-- "basedpyright",
 				-- "pyright",
 				"rust_analyzer",
 				"lua_ls",
@@ -121,14 +111,4 @@ return {
 	-- 		})
 	-- 	end,
 	-- },
-	-- flutter-tools
-	{
-		"nvim-flutter/flutter-tools.nvim",
-		lazy = false,
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"stevearc/dressing.nvim", -- optional for vim.ui.select
-		},
-		config = true,
-	},
 }
