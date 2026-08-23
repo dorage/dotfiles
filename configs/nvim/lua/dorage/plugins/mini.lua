@@ -11,9 +11,7 @@ return {
 	-- pick
 	{
 		"echasnovski/mini.pick",
-		dependencies = {
-			"yetone/avante.nvim",
-		},
+		dependencies = {},
 		version = false,
 		config = function()
 			local miniPick = require("mini.pick")
@@ -36,17 +34,6 @@ return {
 				return MiniPick.registry[chosen_picker_name]()
 			end
 			vim.keymap.set("n", "<leader>fr", miniPick.registry.registry, { desc = "registry" })
-			-- llm provider of avante_nvim
-			miniPick.registry.llm = function()
-				local items = { "gemini_flash", "gemini_pro" }
-				local source = { items = items, name = "LLM: Avante", choose = function() end }
-				local chosen_picker_name = MiniPick.start({ source = source })
-				if chosen_picker_name == nil then
-					return
-				end
-				return require("avante.api").switch_provider(chosen_picker_name)
-			end
-			vim.keymap.set("n", "<leader>fl", miniPick.registry.llm, { desc = "LLM: Avante" })
 			-- diagnostics
 			-- keymaps
 			-- color
