@@ -7,6 +7,7 @@
     "mv:alacritty": "rsync -avh --delete --update configs/alacritty/ ~/.config/alacritty",
     "mv:hammerspoon": "rsync -avh --delete --update .hammerspoon/ ~/.hammerspoon",
     "mv:zshrc": "cp ./configs/zsh/.zshrc ~/.zshrc",
+    "mv:p10k": "cp ./configs/zsh/.p10k.zsh ~/.p10k.zsh",
     "mv:zellij": "rsync -avh --delete --update configs/zellij/ ~/.config/zellij",
     "mv:debuggers": "rsync -avh --delete --update configs/debuggers/ ~/.config/debuggers",
     "mv:scripts": "rsync -avh --delete --update configs/scripts/ $HOME/.config/scripts",
