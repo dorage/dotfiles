@@ -11,3 +11,6 @@
 /lua_modules
 /.luarocks
 .credential
+
+# wrangler local state (caches the Cloudflare account id - public repo)
+.wrangler/

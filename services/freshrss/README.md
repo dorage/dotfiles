@@ -159,7 +159,9 @@ docker compose run --rm -v /mnt/usb:/out backup snapshot   # 반대로 내보내
 ## 6. 주의사항
 
 - **이 리포지토리는 public 이다.** 자격증명은 `.env` 에만 두고, 이 디렉터리의
-  `.gitignore` 가 `.env` 와 `*.tar.gz` 를 막는다. 커밋 전에 `git status` 로 확인.
+  `.gitignore` 가 `.env` 와 `*.tar.gz` 를 막는다. `bootstrap-r2.sh` 는 wrangler
+  가 만드는 `.wrangler/` 도 남기는데(계정 ID 캐시), 리포지토리 루트
+  `.gitignore` 에서 막아둔다. 커밋 전에 `git status` 로 확인.
 - 현재 FreshRSS 설정은 `auth_type => 'none'` 이다. 8080 포트에 닿을 수 있는
   누구나 전체 권한을 갖는다. LAN 밖으로 노출한다면 FreshRSS 쪽 인증을 켜거나
   (설정 → 인증) 리버스 프록시를 앞에 두는 편이 좋다.

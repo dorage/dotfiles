@@ -26,11 +26,12 @@ LOCATION=${R2_LOCATION_HINT:-apac}
 say() { printf '\n\033[1m==> %s\033[0m\n' "$1"; }
 
 say "Checking Cloudflare authentication"
-# `wrangler whoami` exits 0 either way, so match on its message. Note that
-# "preview account" appears in the *unauthenticated* output - grepping for
-# "account" is not a usable signal.
+# `wrangler whoami` exits 0 either way, so match on its message - and match a
+# positive signal, because both plausible negatives are traps: "preview account"
+# appears in the unauthenticated output, and "CLOUDFLARE_API_TOKEN" appears in
+# the authenticated one ("read from the CLOUDFLARE_API_TOKEN env variable").
 whoami_out=$($WRANGLER whoami 2>&1 || true)
-if grep -qiE 'not authenticated|CLOUDFLARE_API_TOKEN' <<<"$whoami_out"; then
+if ! grep -qiE 'you are logged in|Account ID' <<<"$whoami_out"; then
 	printf '%s\n' "$whoami_out" >&2
 	cat >&2 <<-'EOF'
 
@@ -56,7 +57,9 @@ fi
 say "Building the backup image and taking the first snapshot"
 mkdir -p ./tmp
 docker compose build backup
-docker compose run --rm -v "$PWD/tmp:/out" backup snapshot >/dev/null
+# --no-deps: a snapshot only needs the volumes. Starting the freshrss service
+# here would collide with an instance already running from `docker run`.
+docker compose run --rm --no-deps -v "$PWD/tmp:/out" backup snapshot >/dev/null
 
 ARCHIVE=$(ls -1t ./tmp/freshrss-*.tar.gz 2>/dev/null | head -n 1)
 [[ -n $ARCHIVE ]] || {
