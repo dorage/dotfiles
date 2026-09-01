@@ -1,0 +1,7 @@
+# This repository is public: never commit credentials.
+.env
+.env.*
+!.env.example
+
+# Local scratch space for manual backup/restore runs
+*.tar.gz
