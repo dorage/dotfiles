@@ -10,6 +10,7 @@
 
 - git 리포지토리가 아니면, `형상관리` 규칙 무시
 - 조사 시행 이전 HEAD 최신상태 확인
+- 변경이 필요한 작업은 worktree를 생성해서 작업합니다.
 
 ### PR
 
@@ -21,7 +22,7 @@
 
 컨벤션: `<type>/<short-description>`
 
-- 항상 `.claude/worktrees` 에 worktree를 만들어서 작업.
+- `.claude/worktrees` 에 worktree를 만들어서 작업.
 - `type` 은 conventional commit type 사용
 - `description` 은 영어/숫자/- 만 사용, 50자 이내로 짧고 명확하게 작성
 - 예시
