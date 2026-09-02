@@ -20,7 +20,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/kanghyunlee/.claude/hooks/discord-notify.sh"
+            "command": "/Users/kanghyunlee/.claude/skills/discord-notify.sh"
           }
         ]
       }
@@ -30,7 +30,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/kanghyunlee/.claude/hooks/discord-notify.sh"
+            "command": "/Users/kanghyunlee/.claude/skills/discord-notify.sh"
           }
         ]
       }
@@ -38,7 +38,7 @@
   },
   "statusLine": {
     "type": "command",
-    "command": "input=$(cat); current_dir=$(echo \"$input\" | jq -r '.workspace.current_dir'); model=$(echo \"$input\" | jq -r '.model.display_name'); git_branch=$(cd \"$current_dir\" 2>/dev/null && git branch --show-current 2>/dev/null || echo ''); if [ -n \"$git_branch\" ]; then printf \"\\033[2m$(whoami)@$(hostname -s):\\033[22m$(basename \"$current_dir\") \\033[2m(\\033[22m$git_branch\\033[2m) \\033[22m| $model\"; else printf \"\\033[2m$(whoami)@$(hostname -s):\\033[22m$(basename \"$current_dir\") \\033[2m| \\033[22m$model\"; fi"
+    "command": "bash /Users/kanghyunlee/.claude/skills/statusline.sh"
   },
   "enabledPlugins": {
     "typescript-lsp@claude-plugins-official": true,
