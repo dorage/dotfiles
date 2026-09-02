@@ -42,10 +42,9 @@
   },
   "enabledPlugins": {
     "typescript-lsp@claude-plugins-official": true,
-    "notion-po@dotfiles": true,
+    "pyright-lsp@claude-plugins-official": true
     "side-issue@dotfiles": true,
     "aol@dotfiles": true,
-    "pyright-lsp@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "dotfiles": {
