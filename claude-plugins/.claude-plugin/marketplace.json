@@ -1,0 +1,15 @@
+{
+  "name": "dotfiles",
+  "description": "dotfiles 리포에서 관리하는 개인용 Claude Code 플러그인 모음",
+  "owner": {
+    "name": "dorage",
+    "email": "baloonflower554@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "aol",
+      "source": "./aol",
+      "description": "응답 마지막 줄의 [aol] 마커와 훅 이벤트를 JSONL로 남겨, 반복 작업을 스킬로 바꿀 후보를 찾는 로그"
+    }
+  ]
+}
