@@ -9,8 +9,9 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # 외부에서 주입하는 값들(웹훅 주소, API 토큰 등). 리포에 커밋하지 않는다.
-# 채울 항목의 목록은 dotfiles 리포의 configs/env.example.sh 에 있다.
-export DOTFILES_ENV_FILE="${DOTFILES_ENV_FILE:-$HOME/.config/dotfiles/env.sh}"
+# configs/claude/env.sh 에 두면 sync-claude.sh 가 ~/.claude 로 함께 옮긴다.
+# 채울 항목의 목록은 dotfiles 리포의 configs/claude/env.example.sh 에 있다.
+export DOTFILES_ENV_FILE="${DOTFILES_ENV_FILE:-$HOME/.claude/env.sh}"
 [ -f "$DOTFILES_ENV_FILE" ] && source "$DOTFILES_ENV_FILE"
 
 # If you come from bash you might have to change your $PATH.

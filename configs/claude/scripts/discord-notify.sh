@@ -6,10 +6,10 @@
 # 웹훅 URL은 DISCORD_WEBHOOK_URL 환경변수에서 읽는다.
 # 이 훅은 터미널을 거치지 않고 실행될 수도 있어서 .zshrc 의 export 를 물려받는다는
 # 보장이 없다. 그래서 값이 비어 있으면 env.sh 를 직접 읽는다.
-# 채울 항목의 목록은 dotfiles 리포의 configs/env.example.sh 에 있다.
+# 채울 항목의 목록은 dotfiles 리포의 configs/claude/env.example.sh 에 있다.
 
 if [ -z "${DISCORD_WEBHOOK_URL:-}" ]; then
-  ENV_FILE="${DOTFILES_ENV_FILE:-$HOME/.config/dotfiles/env.sh}"
+  ENV_FILE="${DOTFILES_ENV_FILE:-$HOME/.claude/env.sh}"
   [ -f "$ENV_FILE" ] && . "$ENV_FILE"
 fi
 

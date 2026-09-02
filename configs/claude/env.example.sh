@@ -1,15 +1,16 @@
 #!/bin/bash
 # 외부에서 주입해야 하는 값들의 목록.
-# 이 파일은 키 이름과 설명만 담는다. 실제 값은 리포 밖에 두고 커밋하지 않는다.
+# 이 파일은 키 이름과 설명만 담는다. 실제 값은 같은 폴더의 env.sh 에 두고,
+# .gitignore 로 커밋되지 않게 막는다.
 #
-#   mkdir -p ~/.config/dotfiles
-#   cp configs/env.example.sh ~/.config/dotfiles/env.sh
-#   chmod 600 ~/.config/dotfiles/env.sh
-#   $EDITOR ~/.config/dotfiles/env.sh   # 각 값을 채운다
+#   cp configs/claude/env.example.sh configs/claude/env.sh
+#   chmod 600 configs/claude/env.sh
+#   $EDITOR configs/claude/env.sh   # 각 값을 채운다
+#   scripts/sync-claude.sh          # ~/.claude 로 함께 복사된다
 #
 # 읽는 쪽이 둘이다.
-# - configs/zsh/.zshrc          : 대화형 셸을 열 때 source 한다.
-# - configs/claude/scripts/*.sh : 물려받은 환경이 비어 있으면 이 파일을 직접 읽는다.
+# - configs/zsh/.zshrc          : 대화형 셸을 열 때 ~/.claude/env.sh 를 source 한다.
+# - configs/claude/scripts/*.sh : 물려받은 환경이 비어 있으면 ~/.claude/env.sh 를 직접 읽는다.
 #   Claude Code 훅은 터미널을 거치지 않고 실행될 수 있어서 .zshrc 를 타지 않는다.
 #   그래서 셸 쪽 한 곳만 걸어두면 훅에서 값이 비는 경우가 생긴다.
 #
