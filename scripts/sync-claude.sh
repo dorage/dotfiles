@@ -7,6 +7,9 @@ SRC="$(cd "$(dirname "$0")/.." && pwd)/configs/claude"
 DEST="$HOME/.claude"
 
 # 리포가 관리하지 않는 비밀 파일은 제외해 목적지에 남긴다.
+# 웹훅 주소는 ~/.config/dotfiles/env.sh 로 옮겼다(목록은 configs/env.example.sh).
+# 그 파일은 리포 밖이라 애초에 이 동기화 대상이 아니다. 아래 제외 규칙은 예전
+# 방식으로 이미 파일을 둔 환경을 위한 이행 조치이고, 옮긴 걸 확인하면 걷어낸다.
 EXCLUDES=(--exclude 'discord-webhook-url')
 
 # settings.json 은 ~ 나 상대 경로를 못 읽으므로, 리포에는 $HOME 을 그대로 적어두고
