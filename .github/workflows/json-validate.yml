@@ -1,0 +1,22 @@
+name: JSON 문법 검사
+
+on:
+  push:
+    paths:
+      - '**/*.json'
+      - 'scripts/validate-json.sh'
+      - '.github/workflows/json-validate.yml'
+  pull_request:
+    paths:
+      - '**/*.json'
+      - 'scripts/validate-json.sh'
+      - '.github/workflows/json-validate.yml'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 추적 중인 JSON 전체 검사
+        run: scripts/validate-json.sh

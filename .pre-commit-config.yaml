@@ -1,0 +1,10 @@
+# 설치: pnpm run hooks:install (내부적으로 pre-commit install)
+repos:
+  - repo: local
+    hooks:
+      - id: validate-json
+        name: JSON 문법 검사
+        description: 스테이징된 *.json 이 유효한 JSON 인지 검사한다
+        entry: scripts/validate-json.sh
+        language: script
+        types: [json]
