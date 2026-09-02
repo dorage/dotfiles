@@ -14,3 +14,6 @@
 
 # claude code worktrees
 .claude/worktrees/
+
+# 외부주입 값. 실제 값은 ~/.config/dotfiles/env.sh 에 두고, 리포에는 예시만 남긴다.
+env.sh
