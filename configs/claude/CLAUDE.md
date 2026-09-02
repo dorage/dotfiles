@@ -64,9 +64,4 @@
 
 ## 기록
 
-사용자와의 대화 중 다음 내용들 Append-Only-Log로 기록(~/.lit/AOL.log)
-컨벤션: `2026-08-29T00:00:00Z {session-id} {type} {summary}`
-
-- `type` - 마스터 질문 Q, LLM 응답 A
-- 
-- 
+마스터의 반복 요청, LLM의 질문, 자주 하는 작업의 라벨은 `aol` 플러그인(`claude-plugins/aol`)이 남긴다. 규칙 본문은 플러그인이 세션 시작 때 주입한다.
