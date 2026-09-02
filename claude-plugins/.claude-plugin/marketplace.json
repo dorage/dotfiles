@@ -1,0 +1,25 @@
+{
+  "name": "dotfiles",
+  "description": "dotfiles 리포에서 관리하는 개인용 Claude Code 플러그인 모음",
+  "owner": {
+    "name": "dorage",
+    "email": "baloonflower554@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "aol",
+      "source": "./aol",
+      "description": "응답 마지막 줄의 [aol] 마커와 훅 이벤트를 JSONL로 남겨, 반복 작업을 스킬로 바꿀 후보를 찾는 로그"
+    },
+    {
+      "name": "notion-po",
+      "source": "./notion-po",
+      "description": "Notion CLI(ntn) 기반 개발팀 PO 보조 — 스프린트/백로그 DB를 다루는 /po 커맨드와 notion 스킬"
+    },
+    {
+      "name": "side-issue",
+      "source": "./side-issue",
+      "description": "발견한 무관 문제를 백그라운드 포크 세션이 자족적 GitHub 이슈로 올린다"
+    }
+  ]
+}
