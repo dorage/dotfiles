@@ -11,4 +11,6 @@
 /lua_modules
 /.luarocks
 .credential
-.claude/worktrees/**/*
+
+# claude code worktrees
+.claude/worktrees/

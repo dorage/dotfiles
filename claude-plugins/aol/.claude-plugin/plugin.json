@@ -1,0 +1,10 @@
+{
+  "name": "aol",
+  "description": "Append-Only Label log. 마스터의 반복 요청, LLM의 질문, 자주 하는 작업을 배치로 분석해 스킬로 바꾸기 위한 라벨을 남긴다. SessionStart 훅이 기록 규칙을 주입하고, Stop 훅이 응답 마지막 줄의 [aol] 마커를 읽어 ~/.claude/aol/{host}-{YYYY-MM}.jsonl 에 한 줄씩 쌓는다. 마커가 빠지면 응답을 되돌린다.",
+  "version": "0.1.0",
+  "author": {
+    "name": "dorage",
+    "email": "baloonflower554@gmail.com"
+  },
+  "keywords": ["log", "hooks", "automation", "skill-discovery"]
+}
