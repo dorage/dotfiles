@@ -1,6 +1,7 @@
 {
   "name": "dev-env",
   "scripts": {
+    "hooks:install": "pre-commit install",
     "mv:kitty": "rsync -avh --delete --update configs/kitty/ ~/.config/kitty",
     "mv:nvim": "rsync -avh --delete --update configs/nvim/ ~/.config/nvim",
     "mv:ranger": "rsync -avh --delete --update configs/ranger/ ~/.config/ranger",
