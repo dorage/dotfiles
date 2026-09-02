@@ -15,7 +15,7 @@
 ## 설치
 
 ```sh
-claude plugin marketplace add ~/workspace/dotfiles/claude-plugins
+claude plugin marketplace add ~/.config/claude-plugins
 claude plugin install aol@dotfiles
 ```
 

@@ -14,10 +14,10 @@
 
 ## 설치
 
-이 플러그인은 dotfiles 리포의 로컬 마켓플레이스 `dotfiles`(`~/workspace/dotfiles/claude-plugins`)에 속해요.
+이 플러그인은 dotfiles 리포의 로컬 마켓플레이스 `dotfiles`(`~/.config/claude-plugins`)에 속해요.
 
 ```sh
-claude plugin marketplace add ~/workspace/dotfiles/claude-plugins   # 이미 등록돼 있으면 생략
+claude plugin marketplace add ~/.config/claude-plugins   # 이미 등록돼 있으면 생략
 claude plugin install side-issue@dotfiles
 ```
 
