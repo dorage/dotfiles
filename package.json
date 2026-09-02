@@ -14,6 +14,8 @@
     "mv:sketchybar": "rsync -avh --delete --update configs/sketchybar/ ~/.config/sketchybar",
     "mv:ghostty": "rsync -avh --delete --update configs/ghostty $HOME/.config/",
     "mv:karabiner": "rsync -avh --delete --update configs/karabiner/ $HOME/.config/karabiner",
+    "mv:claude": "bash scripts/sync-claude.sh",
+    "mv:claude-plugins": "rsync -avh --delete claude-plugins/ $HOME/.config/claude-plugins",
     "bkp:karabiner": "rsync -avh --delete --update ~/.config/karabiner/ configs/karabiner",
     "bkp:brew": "brew bundle dump --file=./deps/Brewfile --force",
     "bkp:pacman": "pacman -Qe > ./deps/Pacman"

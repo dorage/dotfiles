@@ -7,7 +7,7 @@
   "permissions": {
     "defaultMode": "auto"
   },
-  "model": "opus1m",
+  "model": "claude-opus-5[1m]",
   "availableModels": [
     "fable",
     "opus",
@@ -20,7 +20,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/kanghyunlee/.claude/skills/discord-notify.sh"
+            "command": "$HOME/.claude/scripts/discord-notify.sh"
           }
         ]
       }
@@ -30,7 +30,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/kanghyunlee/.claude/skills/discord-notify.sh"
+            "command": "$HOME/.claude/scripts/discord-notify.sh"
           }
         ]
       }
@@ -38,7 +38,7 @@
   },
   "statusLine": {
     "type": "command",
-    "command": "bash /Users/kanghyunlee/.claude/skills/statusline.sh"
+    "command": "bash $HOME/.claude/scripts/statusline.sh"
   },
   "enabledPlugins": {
     "typescript-lsp@claude-plugins-official": true,
@@ -51,7 +51,7 @@
     "dotfiles": {
       "source": {
         "source": "directory",
-        "path": "/Users/kanghyunlee/workspace/dotfiles/claude-plugins"
+        "path": "$HOME/.config/claude-plugins"
      }
     }
   },
