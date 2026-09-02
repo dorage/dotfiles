@@ -1,0 +1,18 @@
+{
+  "name": "notion-po",
+  "description": "Notion CLI(ntn) 기반 개발팀 PO 보조 플러그인. 개발 스크럼/스프린트/백로그/에픽 Notion DB를 다루는 /po 커맨드와, 범용 Notion CLI 조작을 위한 notion 스킬을 제공합니다.",
+  "version": "0.3.0",
+  "author": {
+    "name": "dorage",
+    "email": "baloonflower554@gmail.com"
+  },
+  "keywords": [
+    "notion",
+    "po",
+    "product-owner",
+    "sprint",
+    "backlog",
+    "scrum",
+    "circularlabs"
+  ]
+}
