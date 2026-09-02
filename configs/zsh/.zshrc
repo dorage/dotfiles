@@ -9,6 +9,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # If you come from bash you might have to change your $PATH.
+export PATH="$HOME/.local/bin:$PATH"
 export PATH=$HOME:/usr/local/bin:$PATH
 export PATH="$HOME:/opt/homebrew/bin:$PATH"
 export PATH="$HOME:/opt/homebrew/sbin:$PATH"
