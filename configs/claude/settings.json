@@ -25,6 +25,17 @@
         ]
       }
     ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/scripts/rules-inject.py"
+          }
+        ]
+      }
+    ],
     "Stop": [
       {
         "hooks": [
