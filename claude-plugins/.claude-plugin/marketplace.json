@@ -20,6 +20,11 @@
       "name": "side-issue",
       "source": "./side-issue",
       "description": "발견한 무관 문제를 백그라운드 포크 세션이 자족적 GitHub 이슈로 올린다"
+    },
+    {
+      "name": "socrates",
+      "source": "./socrates",
+      "description": "소크라테스식 질답으로 앵커를 잡고 답을 찾아가는 socratic-tutor / socratic-record 스킬"
     }
   ]
 }

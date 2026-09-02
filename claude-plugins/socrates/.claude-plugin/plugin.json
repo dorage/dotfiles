@@ -1,0 +1,10 @@
+{
+  "name": "socrates",
+  "description": "소크라테스식 질문으로 앵커를 잡고 질답을 반복해 답을 찾아가는 학습 플러그인. socratic-tutor 스킬이 질답 진행을, socratic-record 스킬이 그 질답 과정을 복습용 기록 문서로 정리한다. /scrt ask {주제} / /scrt record 커맨드로도 호출할 수 있다.",
+  "version": "0.1.0",
+  "author": {
+    "name": "dorage",
+    "email": "baloonflower554@gmail.com"
+  },
+  "keywords": ["socratic", "tutor", "learning", "questioning", "record"]
+}
