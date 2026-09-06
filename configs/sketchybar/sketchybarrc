@@ -47,7 +47,7 @@ default=(
   label.font="FiraCode Nerd Font:Bold:14.0"
   label.color="${text}"
 	label.width="${bar_width}"
-	label.algin=left
+	label.align=left
   icon.font="FiraCode Nerd Font:Bold:17.0"
   icon.color="${secondary}"
   icon.padding_left=4
@@ -83,7 +83,6 @@ popup_item_options=(
 
 active_app_options=(
 	background.drawing=on
-	background.image=app.org.alacritty
 	background.image.scale=1
 	background.image.padding_left=30
 )
