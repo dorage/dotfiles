@@ -179,18 +179,18 @@ export BAT_THEME="zenburn"
 # eza (better ls)
 alias ls="eza --classify=always --color=always --long --icons=always --tree --level=2 --no-permissions --no-user --no-filesize --no-time"
 
-# thefuck
-eval $(thefuck --alias)
-eval $(thefuck --alias fk)
-
 # zoxide (better cd)
 eval "$(zoxide init zsh)"
 
 alias cd="z"
 
+# nvim
 export EDITOR="nvim"
+alias v="nvim"
+alias vi="nvim"
+alias vim="nvim"
 
-# git
+# scripts
 source ~/.config/scripts/index.sh
 
 # typora
