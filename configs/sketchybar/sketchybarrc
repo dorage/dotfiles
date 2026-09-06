@@ -4,8 +4,8 @@
 PLUGIN_DIR=~/.config/sketchybar/plugins
 
 ##### Themes #####
-primary=0xFFA7F205
-secondary=0xFF74FAFC
+primary=0xFF74FAFC
+secondary=0xFFFF5C00
 text=0xFFD4D4D4
 bg=0xB3080808
 bg_blue=0xAA00091E
@@ -23,12 +23,12 @@ corner_radius=6
 # https://felixkratz.github.io/SketchyBar/config/tricks#color-picker
 
 bar=(
-	position=left
-	# topmost=true
+	border_color="${primary}"
+	border_width=1
 	sticky=true
 	height="${bar_width}"
 	margin=4
-	y_offset=4
+	y_offset=8
 	corner_radius="${corner_radius}"
 	color="${bg}"
 	color="${bg_blue}"
@@ -108,3 +108,4 @@ sketchybar --add item divider right \
 
 ##### Force all scripts to run the first time (never do this in a script) #####
 sketchybar --update
+sketchybar --bar position=left
