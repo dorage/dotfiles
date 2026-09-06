@@ -43,7 +43,7 @@ return {
 			},
 		})
 
-		vim.api.nvim_set_hl(0, "DashboardHeader", { fg = "#e1d800" })
+		vim.api.nvim_set_hl(0, "DashboardHeader", { fg = "#FFEB01" })
 
 		vim.keymap.set("n", "<leader>ad", "<Cmd>Dashboard<CR>")
 	end,
