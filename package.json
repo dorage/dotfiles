@@ -6,7 +6,7 @@
     "mv:nvim": "rsync -avh --delete --update configs/nvim/ ~/.config/nvim",
     "mv:ranger": "rsync -avh --delete --update configs/ranger/ ~/.config/ranger",
     "mv:alacritty": "rsync -avh --delete --update configs/alacritty/ ~/.config/alacritty",
-    "mv:hammerspoon": "rsync -avh --delete --update .hammerspoon/ ~/.hammerspoon",
+    "mv:hammerspoon": "rsync -avh --delete --update configs/hammerspoon/ ~/.hammerspoon",
     "mv:zshrc": "cp ./configs/zsh/.zshrc ~/.zshrc",
     "mv:p10k": "cp ./configs/zsh/.p10k.zsh ~/.p10k.zsh",
     "mv:zellij": "rsync -avh --delete --update configs/zellij/ ~/.config/zellij",
