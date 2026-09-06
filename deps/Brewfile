@@ -1,125 +1,212 @@
+tap "asmvik/formulae", "https://github.com/asmvik/homebrew-formulae.git"
 tap "dart-lang/dart"
 tap "felixkratz/formulae"
 tap "hashicorp/tap"
 tap "jstkdng/programs"
-tap "koekeishiya/formulae"
 tap "localstack/tap"
 tap "nats-io/nats-tools"
 tap "nikitabobko/tap"
 tap "oven-sh/bun"
 tap "runpod/runpodctl"
 tap "sqitchers/sqitch"
+# Run your GitHub Actions locally
 brew "act"
+# Automate deployment, configuration, and upgrading
 brew "ansible"
+# Library and utilities for processing GIFs
 brew "giflib"
+# Library for manipulating PNG images
 brew "libpng"
+# Codec library for encoding and decoding AV1 video streams
 brew "aom"
+# Code searching, linting, rewriting
 brew "ast-grep"
+# Thin wrapper around the `aws` command-line interface for use with LocalStack
 brew "awscli-local"
+# Markdown‑native Task Manager & Kanban visualizer for any Git repository
 brew "backlog-md"
+# Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
+# Resource monitor. C++ version and continuation of bashtop and bpytop
 brew "btop"
+# Low-level library for pixel manipulation
 brew "pixman"
+# Vector graphics library with cross-device output support
 brew "cairo"
-brew "pango"
-brew "librsvg"
+# Statistics utility to count lines of code
 brew "cloc"
+# Dependency manager for Cocoa projects
 brew "cocoapods"
+# GNU File, Shell, and Text utilities
 brew "coreutils"
+# Highly capable, feature-rich programming language
 brew "perl"
+# Fast CPAN module installer
 brew "cpm"
+# Lightweight, framework-agnostic database migration tool
 brew "dbmate"
+# Pack, ship and run any application as a lightweight container
 brew "docker"
+# Isolated development environments using Docker
+brew "docker-compose"
+# Asynchronous event library
 brew "libevent"
+# Modern, maintained replacement for ls
 brew "eza"
+# Simple, fast and user-friendly alternative to find
 brew "fd"
-brew "p11-kit"
-brew "unbound"
-brew "gnutls"
-brew "libass"
-brew "librist"
-brew "srt"
-brew "tesseract"
+# Play, record, convert, and stream select audio and video codecs
 brew "ffmpeg"
+# Collection of GNU find, xargs, and locate
 brew "findutils"
+# Command-line fuzzy finder written in Go
 brew "fzf"
+# GitHub command-line tool
 brew "gh"
+# Distributed revision control system
 brew "git"
+# Manage stacked Git branches
+brew "git-spice"
+# GNU implementation of the famous stream editor
 brew "gnu-sed"
+# Library to load and enumerate PKCS#11 modules
+brew "p11-kit"
+# Validating, recursive, caching DNS resolver
+brew "unbound"
+# GNU Transport Layer Security (TLS) Library
+brew "gnutls"
+# Open source programming language to build simple/reliable/efficient software
 brew "go"
+# Tool for glamorous shell scripts
 brew "gum"
+# Package compiler and linker metadata toolkit
 brew "pkgconf"
+# Tools and libraries to manipulate images in select formats
 brew "imagemagick"
+# Java language specific implementation of the Language Server Protocol
 brew "jdtls"
+# Image manipulation library
 brew "jpeg"
+# Lightweight and flexible command-line JSON processor
 brew "jq"
+# Lazier way to manage everything docker
 brew "lazydocker"
+# Simple terminal UI for git commands
 brew "lazygit"
+# Subtitle renderer for the ASS/SSA subtitle format
+brew "libass"
+# Provides library functionality for FIDO U2F & FIDO 2.0, including USB
 brew "libfido2"
+# Reliable Internet Stream Transport (RIST)
+brew "librist"
+# Framework for layout and rendering of i18n text
+brew "pango"
+# Library to render SVG files using Cairo
+brew "librsvg"
+# SIXEL encoder/decoder implementation
 brew "libsixel"
+# Language Server for the Lua language
 brew "lua-language-server"
+# Package manager for the Lua programming language
 brew "luarocks"
+# Java-based project management
 brew "maven"
+# Feature-rich command-line audio/video downloader
 brew "yt-dlp"
+# Media player based on MPlayer and mplayer2
 brew "mpv"
+# Open source relational database management system
 brew "mysql-client"
+# Open source relational database management system
 brew "mysql@8.0", link: true
+# Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
+# HTTP/2 C Library
 brew "nghttp2"
+# Manage multiple Node.js versions
 brew "nvm"
+# Smart, Fast and Extensible Build System
 brew "nx"
+# Create, run, and share large language models (LLMs)
 brew "ollama"
+# Generate clients, server & docs from an OpenAPI spec (v2, v3)
 brew "openapi-generator"
+# Search tool like grep and The Silver Searcher
 brew "ripgrep"
+# AI coding agent, built for the terminal
 brew "opencode"
+# Development kit for the Java programming language
 brew "openjdk@21"
+# CLI for Postgres with auto-completion and syntax highlighting
 brew "pgcli"
+# Friendly PIL fork (Python Imaging Library)
 brew "pillow"
+# Execute binaries from Python packages in isolated environments
 brew "pipx"
+# Paste PNG into files
 brew "pngpaste"
+# PDF rendering library (based on the xpdf-3.0 code base)
 brew "poppler"
+# Framework for managing multi-language pre-commit hooks
 brew "pre-commit"
+# Python version management
 brew "pyenv"
+# Easily download, build, install, upgrade, and uninstall Python packages
 brew "python-setuptools"
+# QR Code generation
 brew "qrencode"
+# Ultra-fast CSV data-wrangling toolkit
 brew "qsv"
+# Persistent key-value database, with built-in net interface
 brew "redis"
+# Experimental Rust compiler front-end for IDEs
 brew "rust-analyzer"
+# Secure Reliable Transport
+brew "srt"
+# Cross-shell prompt for astronauts
 brew "starship"
+# Opinionated Lua code formatter
 brew "stylua"
+# CI-Friendly tool to document a database
 brew "tbls"
+# Send macOS User Notifications from the command-line
 brew "terminal-notifier"
+# CLI wrapper to deploy your Terraform applications directly to LocalStack
 brew "terraform-local"
+# OCR (Optical Character Recognition) engine
+brew "tesseract"
+# Code-search similar to ack
 brew "the_silver_searcher"
+# Programmatically correct mistyped console commands
 brew "thefuck"
+# Official tldr client written in Rust
 brew "tlrc"
+# Program that allows you to count code, quickly
 brew "tokei"
+# Simple GTD-style task management for the command-line
 brew "ultralist"
+# Maintained ctags implementation
 brew "universal-ctags"
+# Image processing library
 brew "vips"
+# Watch files and take action when they change
 brew "watchman"
+# Internet file retriever
 brew "wget"
+# Blazing fast terminal file manager written in Rust, based on async I/O
 brew "yazi"
+# Pluggable terminal workspace, with terminal multiplexer as the base feature
 brew "zellij"
+# Shell extension to navigate your filesystem faster
 brew "zoxide"
-brew "dart-lang/dart/dart"
-brew "felixkratz/formulae/sketchybar"
-brew "hashicorp/tap/terraform"
-brew "jstkdng/programs/ueberzugpp"
-brew "localstack/tap/localstack-cli"
-brew "nats-io/nats-tools/nats"
-brew "oven-sh/bun/bun"
-brew "runpod/runpodctl/runpodctl"
-cask "android-studio"
+# Memory training application
 cask "anki"
-cask "brave-browser"
+# Open source IDE for exploring and testing APIs
 cask "bruno"
-cask "capcut"
-cask "claude-code"
+# Universal database tool and SQL client
 cask "dbeaver-community"
+# Voice and text chat software
 cask "discord"
-cask "drawio"
-cask "flutter"
 cask "font-droid-sans-mono-nerd-font"
 cask "font-fira-code-nerd-font"
 cask "font-gohufont-nerd-font"
@@ -127,52 +214,18 @@ cask "font-google-sans-code"
 cask "font-iosevka-nerd-font"
 cask "font-iosevka-term-slab-nerd-font"
 cask "font-monaspace"
+# Web browser
+cask "google-chrome"
+# Desktop automation application
 cask "hammerspoon"
+# Keyboard customiser
 cask "karabiner-elements"
+# GPU-based terminal emulator
 cask "kitty"
-cask "ngrok"
+# Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
+# Replacement for Docker Desktop
 cask "orbstack"
-cask "raspberry-pi-imager"
-cask "visual-studio-code"
-cask "vlc"
-cask "zulu@17"
-vscode "9beach.vscode-hanspell"
-vscode "aaron-bond.better-comments"
-vscode "adpyke.codesnap"
-vscode "aksharpatel47.vscode-flutter-helper"
-vscode "alexisvt.flutter-snippets"
-vscode "astro-build.astro-vscode"
-vscode "dart-code.dart-code"
-vscode "dart-code.flutter"
-vscode "dbankier.vscode-quick-select"
-vscode "dendron.dendron"
-vscode "donjayamanne.githistory"
-vscode "donjayamanne.python-environment-manager"
-vscode "dotjoshjohnson.xml"
-vscode "geriyoco.vscode-image-gallery"
-vscode "gornivv.vscode-flutter-files"
-vscode "gruntfuggly.todo-tree"
-vscode "hirantha.json-to-dart"
-vscode "ionic.ionic"
-vscode "kevinrose.vsc-python-indent"
-vscode "mathiasfrohlich.kotlin"
-vscode "monokai.theme-monokai-pro-vscode"
-vscode "ms-python.autopep8"
-vscode "ms-python.debugpy"
-vscode "ms-python.isort"
-vscode "ms-python.python"
-vscode "ms-python.vscode-pylance"
-vscode "ms-python.vscode-python-envs"
-vscode "ms-vscode-remote.remote-ssh"
-vscode "ms-vscode-remote.remote-ssh-edit"
-vscode "ms-vscode.remote-explorer"
-vscode "peterhdd.dartgettersetter"
-vscode "redhat.vscode-xml"
-vscode "ritwickdey.liveserver"
-vscode "shinotatwu-ds.file-tree-generator"
-vscode "streetsidesoftware.code-spell-checker"
-vscode "tamasfe.even-better-toml"
-vscode "usernamehw.errorlens"
-vscode "vscodevim.vim"
-vscode "wallabyjs.quokka-vscode"
+npm "pnpm"
+npm "remote-hooks"
+npm "tsx"
