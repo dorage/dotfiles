@@ -14,16 +14,21 @@ fi
 export DOTFILES_ENV_FILE="${DOTFILES_ENV_FILE:-$HOME/.claude/env.sh}"
 [ -f "$DOTFILES_ENV_FILE" ] && source "$DOTFILES_ENV_FILE"
 
-# If you come from bash you might have to change your $PATH.
-export PATH="$HOME/.local/bin:$PATH"
-export PATH=$HOME:/usr/local/bin:$PATH
-export PATH="$HOME:/opt/homebrew/bin:$PATH"
-export PATH="$HOME:/opt/homebrew/sbin:$PATH"
-export PATH="$HOME:/Users/kanghyunlee/.cargo/bin:$PATH"
-# perl scripts
-export PATH=~/.dorage-scripts:$PATH
-# JAVA
-export PATH="/opt/homebrew/opt/openjdk@21/bin:$PATH"
+# PATH 는 여기 한 곳에서만 손댄다. 앞에 적은 경로가 우선한다.
+# typeset -U 는 중복 항목을 자동으로 걷어낸다.
+# 경로 뒤의 (N-/) 는 "실제로 있는 디렉터리만 넣는다"는 뜻이라,
+# 설치하지 않은 도구의 경로가 PATH 에 남지 않는다.
+# /usr/local/bin 과 그 아래 기본 경로들은 이미 $path 에 들어 있다.
+typeset -U path PATH
+path=(
+  $HOME/.local/bin(N-/)                 # uv, claude
+  $HOME/.bun/bin(N-/)                   # bun
+  $HOME/.cargo/bin(N-/)                 # rust
+  /opt/homebrew/bin(N-/)                # homebrew (macOS)
+  /opt/homebrew/sbin(N-/)
+  /opt/homebrew/opt/openjdk@21/bin(N-/) # keg-only 라 homebrew/bin 에 링크가 없다
+  $path
+)
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -196,8 +201,8 @@ source ~/.config/scripts/index.sh
 # typora
 alias mk="open -a typora"
 
+# bun 설치 스크립트가 참조하는 값이라 남긴다. bin 은 위 PATH 블록에 있다.
 export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
 
 # git-spice
 alias gs='git-spice'
