@@ -20,6 +20,8 @@ export PATH=$HOME:/usr/local/bin:$PATH
 export PATH="$HOME:/opt/homebrew/bin:$PATH"
 export PATH="$HOME:/opt/homebrew/sbin:$PATH"
 export PATH="$HOME:/Users/kanghyunlee/.cargo/bin:$PATH"
+export PATH="$HOME:/Users/kanghyunlee/.cargo/bin:$PATH"
+export PATH="$HOME:/Users/kanghyunlee/Library/pnpm/bin:$PATH"
 # perl scripts
 export PATH=~/.dorage-scripts:$PATH
 # JAVA
@@ -182,9 +184,6 @@ alias ls="eza --classify=always --color=always --long --icons=always --tree --le
 # zoxide (better cd)
 eval "$(zoxide init zsh)"
 
-alias cd="z"
-
-# nvim
 export EDITOR="nvim"
 alias v="nvim"
 alias vi="nvim"
