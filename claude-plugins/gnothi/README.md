@@ -55,10 +55,13 @@ claude plugin marketplace add ~/.config/claude-plugins   # 이미 등록돼 있�
 claude plugin install gnothi@dotfiles
 ```
 
-훅은 `hooks/gnothi.ts` 하나이고 [bun](https://bun.sh) 으로 실행돼요. `bun` 이 PATH 에 있어야 해요(`curl -fsSL https://bun.sh/install | bash`). 훅 파일을 고친 뒤에는 `claude plugin update gnothi@dotfiles` 로 캐시를 갱신하고 새 세션을 열어요.
+훅 본체는 `hooks/gnothi.ts` 이고 [bun](https://bun.sh) 으로 실행돼요. 진입점 `hooks/run.sh` 가 bun 을 찾아 실행하고(`~/.bun/bin`, Homebrew 경로도 뒤져요), **bun 이 없으면 세션 시작 때 "bun 을 찾지 못했다, 설치하라"는 컨텍스트를 LLM 에게 줘요.** 그러면 에이전트가 마스터 확인을 받아 `curl -fsSL https://bun.sh/install | bash` 로 설치하고, 다음 세션부터 정상 동작해요. `/gnothi:setup` 커맨드로 같은 점검과 설치를 직접 시킬 수도 있어요.
+
+훅 파일을 고친 뒤에는 `claude plugin update gnothi@dotfiles` 로 캐시를 갱신하고 새 세션을 열어요.
 
 - 끄기: `claude plugin disable gnothi@dotfiles` 또는 환경변수 `GNOTHI_DISABLE=1`
 - 상태 파일 위치 바꾸기: `GNOTHI_STATE_DIR`
+- bun 바이너리 고정: `GNOTHI_BUN=/path/to/bun` (PATH 탐색을 건너뛰어요)
 
 ## 확인
 
@@ -66,7 +69,7 @@ claude plugin install gnothi@dotfiles
 
 ```sh
 echo '{"hook_event_name":"SessionStart","session_id":"test","model":"claude-haiku-4-5"}' \
-  | bun ~/.config/claude-plugins/gnothi/hooks/gnothi.ts | jq -r .hookSpecificOutput.additionalContext
+  | sh ~/.config/claude-plugins/gnothi/hooks/run.sh | jq -r .hookSpecificOutput.additionalContext
 ```
 
 ## 이 플러그인을 쓰는 곳

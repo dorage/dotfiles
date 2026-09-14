@@ -215,7 +215,9 @@ async function main() {
     let ctx = `current session_id: ${sid || "unknown"}\ncurrent model: ${model} (via ${source})`;
     // hook/transcript 는 실제로 답한(답할) 모델이다. 나머지는 추정이라, 시스템 프롬프트의 모델 ID 가 다르면 그쪽이 맞다.
     // 2.1.270 실측: `--model haiku` 로 띄운 세션이 실제로는 claude-opus-5 로 답했다 (argv 만 믿으면 틀린다).
-    if (!VERIFIED_SOURCES.includes(source)) {
+    if (source === "unknown") {
+      ctx += `\n(gnothi: 모델을 판별하지 못했다. 시스템 프롬프트의 모델 ID 를 따른다. 첫 응답 뒤부터는 실제로 답한 모델로 룰을 준다.)`;
+    } else if (!VERIFIED_SOURCES.includes(source)) {
       ctx += `\n(gnothi: 위 model 은 ${source} 에서 읽은 추정값이다. 시스템 프롬프트의 모델 ID 와 다르면 시스템 프롬프트가 맞다. 첫 응답 뒤부터는 실제로 답한 모델로 룰을 다시 준다.)`;
     }
     ctx += renderRules(rules);

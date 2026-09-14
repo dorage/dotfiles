@@ -1,6 +1,6 @@
 {
   "name": "gnothi",
-  "description": "γνῶθι σεαυτόν(네 자신을 알라). SessionStart 훅이 현재 세션의 session_id 와 model 을 컨텍스트에 주입하고, 모델에 맞는 rules/*.md 마크다운 룰을 함께 넣는다. UserPromptSubmit 훅이 트랜스크립트로 실제 응답 모델을 확인해, 모델이 바뀌면 룰을 다시 주입한다.",
+  "description": "γνῶθι σεαυτόν(네 자신을 알라). SessionStart 훅이 현재 세션의 session_id 와 model 을 컨텍스트에 주입하고, 모델에 맞는 rules/*.md 마크다운 룰을 함께 넣는다. UserPromptSubmit 훅이 트랜스크립트로 실제 응답 모델을 확인해, 모델이 바뀌면 룰을 다시 주입한다. 실행기 bun 이 없으면 설치를 요청하는 컨텍스트를 주고, /gnothi:setup 커맨드로 설치를 안내한다.",
   "version": "0.1.0",
   "author": {
     "name": "dorage",
