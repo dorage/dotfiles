@@ -32,7 +32,7 @@ CLAUDE.md 에 강제력 한 줄(발견 시 반드시 이 경로로)을 넣을지
 
 - claude CLI — `--fork-session`, `--background` 플래그를 지원하는 버전
 - `gh` CLI + `gh auth login` 인증
-- `gnothi@dotfiles` 플러그인 (session_id 주입)
+- `gnothi@dotfiles` 플러그인 (session_id 주입) 과 그 훅이 쓰는 `bun`
 
 ## 주의
 

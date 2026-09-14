@@ -36,9 +36,9 @@ gnothi 플러그인이 필요하다. 아래를 순서대로 점검하고, 부족
 - gnothi 플러그인 (session_id 주입)
     - 확인: `claude plugin list` 출력에 `gnothi@dotfiles` 가 있고 활성 상태인지
     - 실패 시: `claude plugin marketplace add ~/.config/claude-plugins` 후 `claude plugin install gnothi@dotfiles`
-- jq (gnothi 훅이 사용)
-    - 확인: `command -v jq`
-    - 실패 시: macOS `brew install jq` / apt `sudo apt-get install jq` / dnf `sudo dnf install jq`
+- bun (gnothi 훅이 사용)
+    - 확인: `command -v bun`
+    - 실패 시: `curl -fsSL https://bun.sh/install | bash` (macOS 는 `brew install oven-sh/bun/bun` 도 가능)
 
 ## 3. session_id 주입 확인
 
@@ -51,7 +51,7 @@ gnothi 플러그인이 필요하다. 아래를 순서대로 점검하고, 부족
   훅 명령 자체는 다음 pipe-test 로 즉시 검증할 수 있다:
 
   ```bash
-  echo '{"hook_event_name":"SessionStart","session_id":"test"}' | ~/.config/claude-plugins/gnothi/hooks/gnothi.sh | jq -r .hookSpecificOutput.additionalContext
+  echo '{"hook_event_name":"SessionStart","session_id":"test"}' | bun ~/.config/claude-plugins/gnothi/hooks/gnothi.ts | jq -r .hookSpecificOutput.additionalContext
   ```
 
 ## 4. CLAUDE.md 강제력 한 줄 (선택)

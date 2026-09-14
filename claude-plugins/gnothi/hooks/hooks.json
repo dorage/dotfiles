@@ -4,21 +4,21 @@
     "SessionStart": [
       {
         "hooks": [
-          { "type": "command", "command": "\"${CLAUDE_PLUGIN_ROOT}/hooks/gnothi.sh\"" }
+          { "type": "command", "command": "bun \"${CLAUDE_PLUGIN_ROOT}/hooks/gnothi.ts\"" }
         ]
       }
     ],
     "UserPromptSubmit": [
       {
         "hooks": [
-          { "type": "command", "command": "\"${CLAUDE_PLUGIN_ROOT}/hooks/gnothi.sh\"" }
+          { "type": "command", "command": "bun \"${CLAUDE_PLUGIN_ROOT}/hooks/gnothi.ts\"" }
         ]
       }
     ],
     "SessionEnd": [
       {
         "hooks": [
-          { "type": "command", "command": "\"${CLAUDE_PLUGIN_ROOT}/hooks/gnothi.sh\"" }
+          { "type": "command", "command": "bun \"${CLAUDE_PLUGIN_ROOT}/hooks/gnothi.ts\"" }
         ]
       }
     ]

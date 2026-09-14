@@ -55,7 +55,7 @@ claude plugin marketplace add ~/.config/claude-plugins   # 이미 등록돼 있�
 claude plugin install gnothi@dotfiles
 ```
 
-`jq` 가 필요해요. 훅 파일을 고친 뒤에는 `claude plugin update gnothi@dotfiles` 로 캐시를 갱신하고 새 세션을 열어요.
+훅은 `hooks/gnothi.ts` 하나이고 [bun](https://bun.sh) 으로 실행돼요. `bun` 이 PATH 에 있어야 해요(`curl -fsSL https://bun.sh/install | bash`). 훅 파일을 고친 뒤에는 `claude plugin update gnothi@dotfiles` 로 캐시를 갱신하고 새 세션을 열어요.
 
 - 끄기: `claude plugin disable gnothi@dotfiles` 또는 환경변수 `GNOTHI_DISABLE=1`
 - 상태 파일 위치 바꾸기: `GNOTHI_STATE_DIR`
@@ -66,7 +66,7 @@ claude plugin install gnothi@dotfiles
 
 ```sh
 echo '{"hook_event_name":"SessionStart","session_id":"test","model":"claude-haiku-4-5"}' \
-  | ~/.config/claude-plugins/gnothi/hooks/gnothi.sh | jq -r .hookSpecificOutput.additionalContext
+  | bun ~/.config/claude-plugins/gnothi/hooks/gnothi.ts | jq -r .hookSpecificOutput.additionalContext
 ```
 
 ## 이 플러그인을 쓰는 곳
