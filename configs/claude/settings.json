@@ -56,6 +56,7 @@
     "pyright-lsp@claude-plugins-official": true,
     "side-issue@dotfiles": true,
     "aol@dotfiles": true,
+    "gnothi@dotfiles": true,
     "wt@dotfiles": true
   },
   "extraKnownMarketplaces": {
