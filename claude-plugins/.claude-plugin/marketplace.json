@@ -30,6 +30,11 @@
       "name": "socrates",
       "source": "./socrates",
       "description": "소크라테스식 질답으로 앵커를 잡고 답을 찾아가는 socratic-tutor / socratic-record 스킬"
+    },
+    {
+      "name": "wt",
+      "source": "./wt",
+      "description": "작업 출발점(worktree + draft PR) 생성 — /wt:init 은 요청 원문·세션 ID 기록, /wt:plan 은 전수조사 후 자기완결적 계획 PR"
     }
   ]
 }

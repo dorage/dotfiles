@@ -1,0 +1,10 @@
+{
+  "name": "wt",
+  "description": "새 작업의 출발점(worktree + 브랜치 + draft PR)을 깔아주는 플러그인. /wt:init 은 요청 원문과 세션 ID 만 PR 본문에 남기는 가벼운 시작, /wt:plan 은 코드베이스를 전수조사해 완수조건·TODO·착수 방식이 담긴 자기완결적 PR 본문을 만든다. 두 커맨드 모두 코드는 손대지 않는다.",
+  "version": "0.1.0",
+  "author": {
+    "name": "dorage",
+    "email": "baloonflower554@gmail.com"
+  },
+  "keywords": ["worktree", "git", "pull-request", "planning", "workflow"]
+}

@@ -1,0 +1,36 @@
+# wt
+
+새 작업의 **출발점**(worktree + 브랜치 + draft PR)을 한 번에 깔아주는 플러그인이에요. 두 커맨드 모두 코드는 손대지 않고, 산출물은 PR 본문에만 들어가요.
+
+## 커맨드
+
+- `/wt:init {이유}` — 워크트리·빈 커밋·draft PR 을 만들고, **요청 원문(인용)과 세션 ID** 를 PR 본문에 남겨요. 조사는 하지 않아요. "이 작업이 왜 시작됐는지"를 잃지 않게 하는 기록이에요.
+- `/wt:plan {이유}` — 같은 출발점을 만든 뒤 코드베이스를 **전수조사**하고, 완수조건·조사 결과·착수 방식·TODO 가 담긴 **자기완결적 PR 본문**을 써요. 기준은 "아무 컨텍스트 없는 새 세션이 본문만 보고 첫 커밋을 만들 수 있는가"예요.
+
+`{이유}` 자리에 `#123` 처럼 이슈 번호만 넣으면 이슈 본문을 읽어 브랜치명과 PR 본문을 채워요.
+
+예전 `wt` 스킬은 입력 어투로 두 모드를 추측했는데, "계획을 달라"는 요청에 빈 PR 을 올리는 오작동이 잦았어요. 그래서 커맨드를 나눠 사용자가 모드를 고르게 했어요.
+
+## 세션 ID 를 남기는 이유
+
+PR 본문의 세션 ID 로 후속 작업자가 `claude --resume {id}` 나 `/qa {id}, ...` 로 그 세션에 돌아가 "왜 그렇게 정했는지"를 물을 수 있어요. plan 은 조사 컨텍스트를 전부 가진 세션이라 특히 값이 커요. 세션 ID 는 side-issue 플러그인의 SessionStart 훅이 넣어주는 `current session_id` 를 써요. 그 플러그인이 없으면 최신 트랜스크립트 파일명으로 대체하고, 그것도 안 되면 "확인 불가"로 적어요.
+
+## 파일 구성
+
+- `commands/init.md`, `commands/plan.md` — 각 커맨드가 채우는 PR 본문 형식과 예시.
+- `references/common.md` — 두 커맨드가 공유하는 절차(이슈 해석, 브랜치명, 워크트리, 빈 커밋, 세션 ID, PR 생성, 보고). 커맨드가 `${CLAUDE_PLUGIN_ROOT}/references/common.md` 로 읽어요.
+
+## 설치
+
+이 플러그인은 dotfiles 리포의 로컬 마켓플레이스 `dotfiles`(`~/.config/claude-plugins`)에 속해요.
+
+```sh
+claude plugin marketplace add ~/.config/claude-plugins   # 이미 등록돼 있으면 생략
+claude plugin install wt@dotfiles
+```
+
+## 전제 조건
+
+- `gh` CLI 인증 (`gh auth status`)
+- `git` 리포지토리 안에서 실행
+- (권장) side-issue 플러그인 — 세션 ID 주입과 범위 밖 발견 이슈화에 써요.
