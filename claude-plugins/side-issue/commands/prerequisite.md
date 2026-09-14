@@ -4,8 +4,9 @@ description: side-issue 플러그인의 실행 환경을 OS에 맞게 점검하�
 
 # side-issue 환경 점검 (prerequisite)
 
-side-issue 플러그인이 동작하려면 네 가지가 필요하다. 아래를 순서대로 점검하고,
-부족한 항목은 OS에 맞는 설치를 도운 뒤, 마지막에 결과를 표로 요약해 보고한다.
+side-issue 플러그인이 동작하려면 claude CLI, gh, git, 그리고 session_id 를 주입하는
+gnothi 플러그인이 필요하다. 아래를 순서대로 점검하고, 부족한 항목은 OS에 맞는 설치를
+도운 뒤, 마지막에 결과를 항목별로 요약해 보고한다.
 
 ## 1. OS 판별
 
@@ -17,27 +18,40 @@ side-issue 플러그인이 동작하려면 네 가지가 필요하다. 아래를
 각 항목은 "확인 명령 → 실패 시 설치 도움" 순서다. **설치 명령은 어떤 것을 실행할지
 먼저 보여주고 마스터의 확인을 받은 뒤에 실행한다.**
 
-| 항목 | 확인 | 실패 시 |
-| --- | --- | --- |
-| claude CLI | `claude --version` | https://claude.com/claude-code 설치 안내 |
-| 포크 플래그 지원 | `claude --help` 출력에 `--fork-session` 과 `--background` 가 모두 있는지 | `claude update` 제안 |
-| gh CLI | `command -v gh` | macOS: `brew install gh` / apt: `sudo apt-get install gh` / dnf: `sudo dnf install gh` |
-| gh 인증 | `gh auth status` | `gh auth login` 을 마스터가 직접 실행하도록 안내 (대화형이라 대신 실행 불가) |
-| python3 | `command -v python3` | macOS: `xcode-select --install` 또는 `brew install python3` / apt: `sudo apt-get install python3` |
-| git | `command -v git` | OS 패키지 매니저로 설치 안내 |
+- claude CLI
+    - 확인: `claude --version`
+    - 실패 시: https://claude.com/claude-code 설치 안내
+- 포크 플래그 지원
+    - 확인: `claude --help` 출력에 `--fork-session` 과 `--background` 가 모두 있는지
+    - 실패 시: `claude update` 제안
+- gh CLI
+    - 확인: `command -v gh`
+    - 실패 시: macOS `brew install gh` / apt `sudo apt-get install gh` / dnf `sudo dnf install gh`
+- gh 인증
+    - 확인: `gh auth status`
+    - 실패 시: `gh auth login` 을 마스터가 직접 실행하도록 안내 (대화형이라 대신 실행 불가)
+- git
+    - 확인: `command -v git`
+    - 실패 시: OS 패키지 매니저로 설치 안내
+- gnothi 플러그인 (session_id 주입)
+    - 확인: `claude plugin list` 출력에 `gnothi@dotfiles` 가 있고 활성 상태인지
+    - 실패 시: `claude plugin marketplace add ~/.config/claude-plugins` 후 `claude plugin install gnothi@dotfiles`
+- jq (gnothi 훅이 사용)
+    - 확인: `command -v jq`
+    - 실패 시: macOS `brew install jq` / apt `sudo apt-get install jq` / dnf `sudo dnf install jq`
 
-## 3. SessionStart 훅 주입 확인
+## 3. session_id 주입 확인
 
 현재 세션의 컨텍스트에 `current session_id: {uuid}` 가 있는지 본다.
 
-- 있으면: 훅 정상 작동.
-- 없으면: 이 세션이 플러그인 설치(또는 활성화) 전에 시작된 것이다.
+- 있으면: gnothi 훅 정상 작동.
+- 없으면: 이 세션이 gnothi 설치(또는 활성화) 전에 시작된 것이다.
   "환경 점검은 통과했고, 훅 주입은 새 세션부터 적용돼요 — 새 세션에서
   `/prerequisite` 를 한 번 더 돌리면 최종 확인돼요"라고 안내한다.
   훅 명령 자체는 다음 pipe-test 로 즉시 검증할 수 있다:
 
   ```bash
-  echo '{"session_id":"test"}' | python3 -c 'import json,sys; d=json.load(sys.stdin); print(json.dumps({"hookSpecificOutput":{"hookEventName":"SessionStart","additionalContext":"current session_id: "+d["session_id"]}}))'
+  echo '{"hook_event_name":"SessionStart","session_id":"test"}' | ~/.config/claude-plugins/gnothi/hooks/gnothi.sh | jq -r .hookSpecificOutput.additionalContext
   ```
 
 ## 4. CLAUDE.md 강제력 한 줄 (선택)
@@ -60,5 +74,5 @@ side-issue 플러그인이 동작하려면 네 가지가 필요하다. 아래를
 
 ## 5. 결과 요약
 
-항목별 통과/실패/조치 내용을 표로 보고하고, 실패가 남아 있으면
+항목별 통과/실패/조치 내용을 목록으로 보고하고, 실패가 남아 있으면
 "이것이 해결되기 전에는 side-issue 가 {구체적으로 어떤 단계에서} 실패한다"를 명시한다.
