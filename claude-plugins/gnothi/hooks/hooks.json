@@ -1,0 +1,26 @@
+{
+  "description": "gnothi: session_id 와 model 을 컨텍스트에 주입하고, 모델별 rules/*.md 를 함께 넣는다",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          { "type": "command", "command": "\"${CLAUDE_PLUGIN_ROOT}/hooks/gnothi.sh\"" }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          { "type": "command", "command": "\"${CLAUDE_PLUGIN_ROOT}/hooks/gnothi.sh\"" }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          { "type": "command", "command": "\"${CLAUDE_PLUGIN_ROOT}/hooks/gnothi.sh\"" }
+        ]
+      }
+    ]
+  }
+}
