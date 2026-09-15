@@ -1,0 +1,26 @@
+{
+  "description": "gnothi: session_id 와 model 을 컨텍스트에 주입하고, 모델별 rules/*.md 를 함께 넣는다. bun 이 없으면 설치를 요청하는 컨텍스트를 준다",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          { "type": "command", "command": "sh \"${CLAUDE_PLUGIN_ROOT}/hooks/run.sh\"" }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          { "type": "command", "command": "sh \"${CLAUDE_PLUGIN_ROOT}/hooks/run.sh\"" }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          { "type": "command", "command": "sh \"${CLAUDE_PLUGIN_ROOT}/hooks/run.sh\"" }
+        ]
+      }
+    ]
+  }
+}

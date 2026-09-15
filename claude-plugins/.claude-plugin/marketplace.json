@@ -12,6 +12,11 @@
       "description": "응답 마지막 줄의 [aol] 마커와 훅 이벤트를 JSONL로 남겨, 반복 작업을 스킬로 바꿀 후보를 찾는 로그"
     },
     {
+      "name": "gnothi",
+      "source": "./gnothi",
+      "description": "네 자신을 알라 — session_id 와 현재 model 을 컨텍스트에 주입하고, rules/*.md 로 모델별 룰을 넣는 훅"
+    },
+    {
       "name": "notion-po",
       "source": "./notion-po",
       "description": "Notion CLI(ntn) 기반 개발팀 PO 보조 — 스프린트/백로그 DB를 다루는 /po 커맨드와 notion 스킬"
@@ -25,6 +30,11 @@
       "name": "socrates",
       "source": "./socrates",
       "description": "소크라테스식 질답으로 앵커를 잡고 답을 찾아가는 socratic-tutor / socratic-record 스킬"
+    },
+    {
+      "name": "wt",
+      "source": "./wt",
+      "description": "작업 출발점(worktree + draft PR) 생성 — /wt:init 은 요청 원문·세션 ID 기록, /wt:plan 은 전수조사 후 자기완결적 계획 PR"
     }
   ]
 }
