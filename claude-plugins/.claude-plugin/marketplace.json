@@ -35,6 +35,11 @@
       "name": "wt",
       "source": "./wt",
       "description": "작업 출발점(worktree + draft PR) 생성 — /wt:init 은 요청 원문·세션 ID 기록, /wt:plan 은 전수조사 후 자기완결적 계획 PR"
+    },
+    {
+      "name": "scribe",
+      "source": "./scribe",
+      "description": "문서화 게이트 — SessionStart 에 README/docs 갱신 규칙을 주입하고, 코드 변경이 있는 턴의 Stop 에서 문서화 체크리스트로 응답을 한 번 되돌린다"
     }
   ]
 }
