@@ -17,3 +17,4 @@
 
 # 외부주입 값. 실제 값은 configs/claude/env.sh 에 두고, 리포에는 예시(env.example.sh)만 남긴다.
 env.sh
+.DS_Store

@@ -24,6 +24,7 @@ path=(
   $HOME/.local/bin(N-/)                 # uv, claude
   $HOME/.bun/bin(N-/)                   # bun
   $HOME/.cargo/bin(N-/)                 # rust
+  $HOME/Library/pnpm/bin(N-/)           # pnpm (macOS)
   /opt/homebrew/bin(N-/)                # homebrew (macOS)
   /opt/homebrew/sbin(N-/)
   /opt/homebrew/opt/openjdk@21/bin(N-/) # keg-only 라 homebrew/bin 에 링크가 없다
@@ -187,9 +188,6 @@ alias ls="eza --classify=always --color=always --long --icons=always --tree --le
 # zoxide (better cd)
 eval "$(zoxide init zsh)"
 
-alias cd="z"
-
-# nvim
 export EDITOR="nvim"
 alias v="nvim"
 alias vi="nvim"

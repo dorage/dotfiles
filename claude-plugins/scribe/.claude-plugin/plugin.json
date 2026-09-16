@@ -1,0 +1,10 @@
+{
+  "name": "scribe",
+  "description": "문서화 게이트. SessionStart 훅이 README.md / docs/ 갱신 규칙을 컨텍스트에 주입하고, Stop 훅이 이번 세션에서 코드 변경이 있으면 문서화 체크리스트를 프롬프트로 넣어 응답을 한 번 되돌린다. 변경 묶음당 한 번만 되돌리고, 문서 파일만 바뀐 턴은 건너뛴다.",
+  "version": "0.1.0",
+  "author": {
+    "name": "dorage",
+    "email": "baloonflower554@gmail.com"
+  },
+  "keywords": ["docs", "hooks", "readme", "checklist"]
+}
