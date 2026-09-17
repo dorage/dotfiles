@@ -1,22 +1,22 @@
 #!/bin/bash
-# aol - Append-Only Label log
+# aol - Append-Only Log
 #
 # Claude Code 훅 하나로 여러 이벤트를 받아 ~/.claude/aol/{host}-{YYYY-MM}.jsonl 에 한 줄씩 남긴다.
-# 이 로그는 트랜스크립트(~/.claude/projects/**/*.jsonl)에 없는 "라벨"만 담는다. 원문 보존이 목적이 아니다.
-# 트랜스크립트와는 sid(session_id)와 ts로 잇는다.
+# 목적은 하나다: 마스터가 실제로 친 프롬프트 원문을 빠짐없이, 오염 없이 남긴다.
+# 반복되는 요청을 찾는 일은 /aol:report 가 그때그때 원문을 다시 읽어서 한다.
+# 이 훅은 분류하지 않는다. 라벨을 붙이는 순간 나중에 다르게 볼 자유가 사라진다.
 #
 # 공통 필드: v ts sid host repo branch type
 # type 별 추가 필드:
 #   SESSION  SessionStart                       source
-#   Q        UserPromptSubmit                   prompt
-#   SKILL    UserPromptSubmit(/로 시작)         skill args via=prompt
+#   Q        UserPromptSubmit(마스터 발화)      prompt
+#   SYS      UserPromptSubmit(시스템 주입)      kind
+#   SKILL    UserPromptSubmit(슬래시 커맨드)    skill args via=prompt
 #            PreToolUse(Skill)                  skill args via=tool
 #   ASK      PreToolUse(AskUserQuestion)        headers questions
 #   EDIT     PostToolUse(Edit|Write)            tool path
-#   TAG      Stop, 마지막 줄 [aol] 마커         intent object size
-#   CORR     Stop, 마커에 corr= 가 있을 때      what rule
-#   STOP     Stop                               tools turns sec
-#   BLOCK    Stop, 마커가 없거나 틀려 되돌림    reason
+#   CORR     Stop, 응답에 [aol] corr= 가 있음   what rule
+#   STOP     Stop                               turns tools sec
 #   END      SessionEnd                         reason
 #
 # 끄기: AOL_DISABLE=1 (배치 스크립트가 claude -p 를 돌릴 때 자기 로그를 남기지 않도록)
@@ -35,7 +35,6 @@ event=$(jq -r '.hook_event_name // empty' <<<"$input")
 
 AOL_DIR="${AOL_DIR:-$HOME/.claude/aol}"
 RULE_FILE="$(cd "$(dirname "$0")" && pwd)/rule.md"
-INTENTS='^(explore|plan|implement|fix|refactor|test|review|git|docs|config|ops|ask|continue)$'
 
 sid=$(jq -r '.session_id // empty' <<<"$input")
 cwd=$(jq -r '.cwd // empty' <<<"$input")
@@ -66,17 +65,10 @@ append() {
   local type="$1" filter="$2"
   shift 2
   jq -c "$@" --arg ts "$ts" --arg sid "$sid" --arg host "$host" --arg repo "$repo" --arg branch "$branch" --arg type "$type" \
-    '{v:1, ts:$ts, sid:$sid, host:$host,
+    '{v:2, ts:$ts, sid:$sid, host:$host,
       repo:(if $repo=="" then null else $repo end),
       branch:(if $branch=="" then null else $branch end),
       type:$type} + ('"$filter"')' <<<"$input" >>"$file"
-}
-
-# 이 세션에서 가장 최근의 Q / TAG / BLOCK 레코드 type. Q 이면 마커가 있어야 한다.
-last_marker_state() {
-  [ -f "$file" ] || return 0
-  tail -n 3000 "$file" | jq -r --arg sid "$sid" \
-    'select(.sid==$sid and (.type=="Q" or .type=="TAG" or .type=="BLOCK")) | .type' 2>/dev/null | tail -n 1
 }
 
 # 직전 Q 이후의 턴 수, tool 호출 수, 경과 초를 JSON 으로 돌려준다.
@@ -107,53 +99,50 @@ stop_stats() {
   echo "$stats + {sec: $sec}"
 }
 
-block() {
-  local rule=""
-  [ -f "$RULE_FILE" ] && rule=$(cat "$RULE_FILE")
-  jq -n --arg head "$1" --arg rule "$rule" '{decision:"block", reason:($head + "\n\n" + $rule)}'
+# 마스터의 프롬프트를 세 갈래로 가른다.
+#   슬래시 커맨드  -> SKILL
+#   시스템 주입    -> SYS   (<task-notification> 같은 것. 마스터 발화가 아니다)
+#   그 외          -> Q     (원문 그대로)
+#
+# 슬래시 판정은 "/" 하나로 하지 않는다. 마스터가 파일을 끌어다 놓으면 프롬프트가
+# "/Users/..." 로 시작하는데, 예전 판정은 이걸 커맨드로 잘못 읽어 원문을 통째로 날렸다.
+# 커맨드 이름 뒤에 공백이나 줄끝이 와야 커맨드로 본다.
+prompt_handler() {
+  local prompt
+  prompt=$(jq -r '.prompt // ""' <<<"$input")
+
+  if [[ "$prompt" =~ ^/[A-Za-z][A-Za-z0-9:_-]*([[:space:]]|$) ]]; then
+    append SKILL '{skill:(.prompt | ltrimstr("/") | sub("\\s[\\s\\S]*$";"")),
+                   args:(.prompt | ltrimstr("/") | sub("^\\S+\\s*";"")),
+                   via:"prompt"}'
+    return
+  fi
+
+  if [[ "$prompt" == \<* ]]; then
+    append SYS '{kind:(.prompt | try (capture("^<(?<t>[A-Za-z][A-Za-z0-9_-]*)").t) catch null)}'
+    return
+  fi
+
+  append Q '{prompt:(.prompt // "")}'
 }
 
+# 응답 마지막 줄의 [aol] 마커는 정정(corr)일 때만 붙는다.
+# 없는 것이 정상이므로 되돌리지 않는다. 무엇을 왜 틀렸는지는 프롬프트 원문에서
+# 복원할 수 없어서, 이 한 줄만 LLM 에게 맡긴다.
 stop_handler() {
-  local active last line intent object size corr rule state
-  active=$(jq -r '.stop_hook_active // false' <<<"$input")
+  local last line corr rule
   last=$(jq -r '.last_assistant_message // ""' <<<"$input")
   line=$(printf '%s\n' "$last" | grep -E '^\[aol\] ' | tail -n 1)
-  state=$(last_marker_state)
 
   if [ -n "$line" ]; then
-    intent=$(sed -nE 's/.*[[:space:]]intent=([a-z]+).*/\1/p' <<<"$line")
-    object=$(sed -nE 's/.*[[:space:]]object=([A-Za-z0-9._\/-]+).*/\1/p' <<<"$line")
-    size=$(sed -nE 's/.*[[:space:]]size=(5m|1h|3d).*/\1/p' <<<"$line")
     corr=$(sed -nE 's/.*[[:space:]]corr="([^"]*)".*/\1/p' <<<"$line")
     rule=$(sed -nE 's/.*[[:space:]]rule=([^[:space:]]+).*/\1/p' <<<"$line")
-
-    if [[ "$intent" =~ $INTENTS ]] && [ -n "$object" ] && [ -n "$size" ]; then
-      append TAG '{intent:$intent, object:$object, size:$size}' \
-        --arg intent "$intent" --arg object "$object" --arg size "$size"
-      if [ -n "$corr" ]; then
-        append CORR '{what:$what, rule:(if $rule=="" or $rule=="none" then null else $rule end)}' \
-          --arg what "$corr" --arg rule "$rule"
-      fi
-      append STOP "$(stop_stats)"
-      return
+    if [ -n "$corr" ]; then
+      append CORR '{what:$what, rule:(if $rule=="" or $rule=="none" then null else $rule end)}' \
+        --arg what "$corr" --arg rule "$rule"
     fi
-
-    # 마커는 있는데 형식이 틀림
-    if [ "$active" != "true" ]; then
-      append BLOCK '{reason:"marker-invalid", line:$line}' --arg line "$line"
-      block "응답 마지막 줄의 [aol] 마커 형식이 틀렸습니다: ${line}. intent는 정해진 목록 중 하나, object는 kebab-case, size는 5m/1h/3d 여야 합니다. 아래 규칙대로 고쳐서 응답을 마무리하세요."
-      return
-    fi
-    append STOP "$(stop_stats)"
-    return
   fi
 
-  # 마커 없음. 이 세션의 마지막 마스터 프롬프트(Q)에 아직 TAG 가 없으면 되돌린다.
-  if [ "$state" = "Q" ] && [ "$active" != "true" ]; then
-    append BLOCK '{reason:"marker-missing"}'
-    block "응답 마지막 줄에 [aol] 마커가 없습니다. 아래 규칙대로 마커 한 줄을 붙여 응답을 마무리하세요."
-    return
-  fi
   append STOP "$(stop_stats)"
 }
 
@@ -166,11 +155,7 @@ case "$event" in
     fi
     ;;
   UserPromptSubmit)
-    if [[ "$(jq -r '.prompt // ""' <<<"$input")" == /* ]]; then
-      append SKILL '{skill:(.prompt | split(" ")[0] | ltrimstr("/")), args:(.prompt | split(" ")[1:] | join(" ")), via:"prompt"}'
-    else
-      append Q '{prompt:(.prompt // "")}'
-    fi
+    prompt_handler
     ;;
   PreToolUse)
     case "$(jq -r '.tool_name // empty' <<<"$input")" in
