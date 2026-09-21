@@ -57,7 +57,8 @@
     "side-issue@dotfiles": true,
     "aol@dotfiles": true,
     "gnothi@dotfiles": true,
-    "wt@dotfiles": true
+    "wt@dotfiles": true,
+    "i-have-adhd@i-have-adhd": true
   },
   "extraKnownMarketplaces": {
     "dotfiles": {

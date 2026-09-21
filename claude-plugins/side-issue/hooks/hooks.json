@@ -1,0 +1,12 @@
+{
+  "description": "side-issue: 응답이 끝나기 전에 Stop 훅이 한 번 막고, 후속 작업과 무관 문제를 /side-issue 로 이슈화하라는 점검표를 주입한다",
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          { "type": "command", "command": "\"${CLAUDE_PLUGIN_ROOT}/hooks/stop.sh\"", "timeout": 15 }
+        ]
+      }
+    ]
+  }
+}

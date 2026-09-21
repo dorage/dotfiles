@@ -39,6 +39,16 @@ gnothi 플러그인이 필요하다. 아래를 순서대로 점검하고, 부족
 - bun (gnothi 훅이 사용)
     - 확인: `command -v bun || ls ~/.bun/bin/bun`
     - 실패 시: `/gnothi:setup` 을 안내하거나, 마스터 확인 후 `curl -fsSL https://bun.sh/install | bash` (macOS 는 `brew install oven-sh/bun/bun` 도 가능)
+- jq (side-issue Stop 훅이 사용. 없으면 훅이 조용히 통과해 점검표가 뜨지 않는다)
+    - 확인: `command -v jq`
+    - 실패 시: macOS `brew install jq` / apt `sudo apt-get install jq` / dnf `sudo dnf install jq`
+- side-issue Stop 훅 동작
+    - 확인: 아래 pipe-test 의 출력이 `block` 이어야 한다. 비어 있으면 jq 부재나 스크립트 실행 권한 문제다.
+
+      ```bash
+      echo '{"hook_event_name":"Stop","stop_hook_active":false}' | bash ~/.config/claude-plugins/side-issue/hooks/stop.sh | jq -r .decision
+      ```
+    - 실패 시: `chmod +x ~/.config/claude-plugins/side-issue/hooks/stop.sh` 후 재시도. 그래도 비면 jq 항목을 먼저 해결한다.
 
 ## 3. session_id 주입 확인
 
