@@ -68,6 +68,7 @@ keybinds {
 							quick_jump true
         }
 				}
+        bind "d" { Detach; }
         bind "q" { Quit; }
     }
 
