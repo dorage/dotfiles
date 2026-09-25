@@ -58,7 +58,8 @@
     "aol@dotfiles": true,
     "gnothi@dotfiles": true,
     "wt@dotfiles": true,
-    "i-have-adhd@i-have-adhd": true
+    "i-have-adhd@i-have-adhd": true,
+    "humanize-korean@im-not-ai": true
   },
   "extraKnownMarketplaces": {
     "dotfiles": {
@@ -66,6 +67,12 @@
         "source": "directory",
         "path": "$HOME/.config/claude-plugins"
      }
+    },
+    "im-not-ai": {
+      "source": {
+        "source": "github",
+        "repo": "epoko77-ai/im-not-ai"
+      }
     }
   },
   "language": "한국어",
