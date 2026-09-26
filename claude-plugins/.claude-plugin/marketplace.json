@@ -34,7 +34,7 @@
     {
       "name": "wt",
       "source": "./wt",
-      "description": "작업 출발점(worktree + draft PR) 생성 — /wt:init 은 요청 원문·세션 ID 기록, /wt:plan 은 전수조사 후 자기완결적 계획 PR"
+      "description": "작업 출발점(worktree + draft PR) 생성 — /wt:init 은 요청 원문·세션 ID 기록, /wt:plan 은 전수조사 후 결정사항·작업 DAG 를 담은 자기완결적 계획 PR"
     },
     {
       "name": "scribe",
