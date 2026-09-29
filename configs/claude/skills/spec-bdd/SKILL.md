@@ -245,3 +245,21 @@ Feature: <behavior area>
       | <case1> | <result1> |
       | <case2> | <result2> |
 ```
+
+## 로컬라이제이션
+
+| Keyword | Equivalent(s) |
+|---|---|
+| Feature | 기능 |
+| Background | 배경 |
+| Rule | 규칙 |
+| Scenario | 시나리오 |
+| Scenario Outline | 시나리오 개요 |
+| Examples | 예 |
+| Given | `*`, 조건, 먼저 |
+| When | `*`, 만일, 만약 |
+| Then | `*`, 그러면 |
+| And | `*`, 그리고 |
+| But | `*`, 하지만, 단 |
+
+원문에서 붙어 있던 값들(`*조건먼저` 등)은 Gherkin 공식 키워드 목록 기준으로 `*`, `조건`, `먼저`처럼 개별 키워드로 나눴습니다. `*`는 모든 스텝 키워드 대신 쓸 수 있는 범용 스텝 키워드입니다.
