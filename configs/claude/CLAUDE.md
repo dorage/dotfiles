@@ -22,13 +22,13 @@
 
 - 커밋 전, HEAD가 최신 상태 반영중 확인
 - 이슈를 토대로 작업시 PR에 이슈번호 추가
-- 작업이 완료되면, draft PR을 생성
+- 계획이 완료되면, 빈 커밋으로 draft PR 생성 후 작업
 
 ### 브랜치
 
 컨벤션: `<type>/<short-description>`
 
-- `.claude/worktrees` 에 worktree를 만들어서 작업.
+- `.claude/worktrees` 에 worktree 생성
 - `type` 은 conventional commit type 사용
 - `description` 은 영어/숫자/- 만 사용, 50자 이내로 짧고 명확하게 작성
 - 예시
