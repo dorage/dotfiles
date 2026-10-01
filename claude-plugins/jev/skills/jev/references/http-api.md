@@ -111,6 +111,20 @@ Content-Type: application/json
 - 도메인 적응은 요청으로 한다. 독점 내용은 `state` 에, 도메인 규칙과 경계 사례는 `instructions` 와 `criteria` 에
 - 고객 요청·응답으로 학습하지 않는다. 엔터프라이즈는 zero data retention 가능 (https://docs.typesafe.ai/legal)
 
+## HTTP API 문서와 SDK 문서가 다른 점
+
+- `instructions`: API 는 필수. 두 SDK 는 선택 또는 null 허용. 실제로는 항상 쓴다
+- Score 단계 수: API 는 최소 2 권장, 최대 10. Python 은 비어 있지만 않으면 통과, JS 는 타입으로 최소 2 강제. 11단계는 서버 에러
+- Choice 옵션 수: API 만 최대 255 를 적었다. 다른 쿡북은 약 240 까지 안정적이라고 쓴다
+- `legend` / `probabilities` 키: API 는 `"0"` 같은 문자열. Python 은 int 키, JS 는 number 와 숫자 문자열 키로 바꿔 준다
+- `usage`: API 는 정수 필수. Python 은 `int | None`, JS 는 `number`
+- `state`: Python 은 None 불가, JS 는 null 허용. `model` 은 API 필수지만 두 SDK 는 생략 시 `jev-latest`
+- 오류: API 는 401·422·429·529 만 적었다. SDK 에는 400·403·404·5xx 클래스가 있고 529 전용 클래스는 없다 (5xx 로 잡힌다)
+- 헤더: API 페이지에는 없지만 SDK 는 `Retry-After`, `retry-after-ms`, `x-typesafe-request-id` 를 읽는다
+- 시간 단위: Python 은 초 단위에 호출당 재시도 예산 30.0초. JS 는 밀리초 단위, 전체 예산 없이 `maxRetryAfterMs` 60000
+- 로그 레벨: Python 은 `warning` 이고 기본값 없음. JS 는 `warn` 이 기본값
+- 설치 명령: JS 문서는 npm 만 보여 준다. `bun add` 는 이 스킬이 마스터의 도구 규칙에 맞춰 바꿔 적은 것이다
+
 ## 게이트웨이 경유 (Python SDK 문서 기준)
 
 - OpenRouter: `base_url="https://openrouter.ai/api"`, `model="~typesafe/jev-latest"`, OpenRouter 키
