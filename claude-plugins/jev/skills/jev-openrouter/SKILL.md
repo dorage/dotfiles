@@ -68,15 +68,24 @@ OpenRouter 는 Jev 를 자기 API 키로 프록시해 준다. TypeSafe 계정이
 }
 ```
 
-응답 모양:
+실측 응답 (2026-10-01, `typesafe/jev-1.13-20260917`):
 
 ```json
 {
-  "id": "gen-dec-...",
+  "id": "gen-dec-1790830610-1oKFG9W76hN39bzdKdVY",
   "model": "typesafe/jev-1.13-20260917",
   "provider": "TypeSafe",
-  "answers": { "safe_to_run": { "type": "noul", "noul": 0.03 } },
-  "usage": { "input_tokens": 120, "output_tokens": 20, "cost": 0.00000504 }
+  "answers": {
+    "safe_to_run": {
+      "type": "noul",
+      "noul": 0.04
+    }
+  },
+  "usage": {
+    "input_tokens": 384,
+    "output_tokens": 22,
+    "cost": 0.000016128
+  }
 }
 ```
 
@@ -89,7 +98,7 @@ else if (p <= 0.1) refuse();   // 거부, 이유를 로그에
 else askHuman();               // 중간은 사람에게
 ```
 
-- 이 예시는 백업 없이 48,210행을 지우는 호출이라 `noul` 이 0 근처로 나와야 정상이다. 그렇지 않으면 state 에 적은 맥락이 부족한지 먼저 본다
+- 백업 없이 48,210행을 지우는 호출이라 `noul` 0.04 로 "안전하지 않음"이 뚜렷하다. 0.1 이하 차단 규칙에 걸린다. 비슷한 호출에서 값이 중간에 떠 있으면 state 에 적은 맥락(백업 여부, 행 수, 작업 범위)이 부족한지 먼저 본다
 - 실제 가드레일에서는 "안전한가" 하나로 끝내지 말고 쪼갠다. OpenRouter 쿡북은 `customer_asked`, `right_order`, `policy_covers` 처럼 사실 하나씩 Noul 로 묻고 코드가 합친다. "승인해야 하는가"는 코드의 결정이다
 
 ## 예시 2. Choice — 지원 티켓 라우팅
@@ -112,22 +121,34 @@ else askHuman();               // 중간은 사람에게
 }
 ```
 
-응답 모양:
+실측 응답:
 
 ```json
 {
+  "id": "gen-dec-1790830627-rwfZBiYT3Kbpe9lJS8k8",
+  "model": "typesafe/jev-1.13-20260917",
+  "provider": "TypeSafe",
   "answers": {
     "team": {
       "type": "choice",
       "choice": "billing",
-      "confidence": 0.62,
-      "probabilities": { "billing": 0.74, "technical": 0.26, "sales": 0.0 }
+      "probabilities": {
+        "technical": 0,
+        "sales": 0,
+        "billing": 1
+      },
+      "confidence": 0.99
     }
+  },
+  "usage": {
+    "input_tokens": 364,
+    "output_tokens": 38,
+    "cost": 0.000015288
   }
 }
 ```
 
-- payout 실패(billing)와 chat 타임아웃(technical)이 섞인 메시지라 확률이 갈린다. `confidence` 가 바닥값(예: 0.5) 아래면 사람에게, 2위 팀의 확률이 0.25 를 넘으면 그 팀에도 사본을 보내는 식으로 코드가 정한다
+- chat 타임아웃 언급이 있어도 모델은 "payout 실패"를 주 요청으로 읽어 billing 에 확률 1 을 몰았다. 메시지가 두 팀에 걸치면 확률이 갈리고 `confidence` 가 내려간다. `confidence` 가 바닥값(예: 0.5) 아래면 사람에게, 2위 팀의 확률이 0.25 를 넘으면 그 팀에도 사본을 보내는 식으로 코드가 정한다
 - 목록이 모든 메시지를 못 덮으면 `other` 옵션을 넣는다
 - 같은 state 에 `is_urgent`(Noul), `frustration`(Score) 을 함께 실으면 요청 수는 그대로다
 
@@ -152,28 +173,42 @@ else askHuman();               // 중간은 사람에게
 }
 ```
 
-응답 모양:
+실측 응답:
 
 ```json
 {
+  "id": "gen-dec-1790830635-bhjKOwdZXZuBm1gGekcR",
+  "model": "typesafe/jev-1.13-20260917",
+  "provider": "TypeSafe",
   "answers": {
     "buying_intent": {
       "type": "score",
-      "score": 2.9,
-      "confidence": 0.85,
+      "score": 2.97,
       "legend": {
         "0": "Just browsing, no stated need or timeline",
         "1": "Evaluating, comparing options without a deadline",
         "2": "Ready to buy, has budget and a clear need",
         "3": "Urgent, has a hard deadline and is asking to transact"
       },
-      "probabilities": { "0": 0.0, "1": 0.0, "2": 0.1, "3": 0.9 }
+      "probabilities": {
+        "0": 0,
+        "1": 0,
+        "2": 0.03,
+        "3": 0.97
+      },
+      "confidence": 0.97
     }
+  },
+  "usage": {
+    "input_tokens": 413,
+    "output_tokens": 20,
+    "cost": 0.000017346
   }
 }
 ```
 
-- `score` 는 0~3 사이 위치다. 정규화하려면 `score / 3`. 임곗값(예: 2.5 이상이면 영업 담당 즉시 배정)은 코드에
+- `score` 2.97 은 0~3 사이 위치이고 `3 × 0.97 + 2 × 0.03` 이다. 정규화하려면 `score / 3`. 임곗값(예: 2.5 이상이면 영업 담당 즉시 배정)은 코드에
+- 세 요청 모두 입력 364~413 토큰, 비용 $0.000015~0.000017 이었다. `usage.cost` 를 그대로 합산하면 지출 집계가 된다
 - 단계는 "상황"으로 썼기 때문에 동작한다. "낮음/중간/높음" 같은 정도 표현이나 숫자만 쓰면 확률이 흩어진다
 - 리드 점수를 여러 차원(예산, 긴급도, 의사결정권)으로 나눠 Score 여러 개를 같은 요청에 싣고 가중합하는 것이 composite scoring 패턴이다
 
