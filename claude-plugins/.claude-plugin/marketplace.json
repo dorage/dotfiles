@@ -40,6 +40,11 @@
       "name": "scribe",
       "source": "./scribe",
       "description": "문서화 게이트 — SessionStart 에 README/docs 갱신 규칙을 주입하고, 코드 변경이 있는 턴의 Stop 에서 문서화 체크리스트로 응답을 한 번 되돌린다"
+    },
+    {
+      "name": "jev",
+      "source": "./jev",
+      "description": "TypeSafe System One 모델 Jev 사용법 스킬 — 질문 타입(Choice/Score/Noul) 선택, 질문 작성법, confidence 패턴, 쿡북 18편 요약, Python·TypeScript SDK 치트시트"
     }
   ]
 }
