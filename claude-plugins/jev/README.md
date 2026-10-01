@@ -27,8 +27,13 @@ Jev 와 무관한 일반 LLM 작업, 텍스트 생성, 코딩 에이전트의 �
 - HTTP API 원형, 가격, 레이트 리밋, 컨텍스트 한도, 별칭, 게이트웨이
 - 쿡북 18편 요약. 문제 / 질문 설계(실제 질문 문구) / state 구성 / 코드 조합(실제 임곗값) / 비용 / 교훈
 
+## OpenRouter 로 쓰기
+
+`jev-openrouter` 스킬은 TypeSafe 계정 없이 OpenRouter API 키로 Jev 를 부르는 법이에요. 모델 ID 는 `typesafe/jev-1.13`, 엔드포인트는 `POST https://openrouter.ai/api/v1/systemone`(TypeSafe SDK 호환) 또는 `POST https://openrouter.ai/api/alpha/decisions` 예요. 세 가지 JSON 예시(noul 로 에이전트 가드레일, choice 로 지원 라우팅, score 로 리드 자격 판정), curl·TypeScript·Python 호출 코드, OpenRouter 쿡북의 가드레일 설계 규칙을 담았어요. 마스터가 "OpenRouter 로 Jev" 를 말하거나 `OPENROUTER_API_KEY` 와 Jev 를 같이 언급하면 켜져요.
+
 ## 파일 구성
 
+- `skills/jev-openrouter/SKILL.md` — OpenRouter 경유 호출. 엔드포인트, 모델 ID, 응답에 추가되는 `id`·`provider`·`usage.cost`, 오류 코드, JSON 예시 3개, 호출 코드, 가드레일 규칙
 - `skills/jev/SKILL.md` — 진입점. 작업 순서, 질문 타입 결정 기준, 요청·응답 모양, 피할 것, 레퍼런스 색인
 - `skills/jev/references/question-types.md` — 세 타입의 필드와 고르는 기준, 구조화된 instructions/criteria 예시
 - `skills/jev/references/writing-questions.md` — 질문 쪼개기, state 구성, 작성 규칙, 약점과 대안, 체크리스트
@@ -49,7 +54,7 @@ claude plugin install jev@dotfiles
 
 ## 전제 조건
 
-- Jev 를 실제로 호출하려면 https://console.typesafe.ai/keys 에서 만든 키를 `TYPESAFE_API_KEY` 환경변수에 둬요
+- Jev 를 실제로 호출하려면 https://console.typesafe.ai/keys 에서 만든 키를 `TYPESAFE_API_KEY` 환경변수에 둬요. OpenRouter 로 부르면 `OPENROUTER_API_KEY` 만 있으면 돼요
 - 스킬 자체는 키 없이도 동작해요. 코드 설계와 질문 작성만 도와요
 
 ## 문서 갱신

@@ -44,7 +44,7 @@
     {
       "name": "jev",
       "source": "./jev",
-      "description": "TypeSafe System One 모델 Jev 사용법 스킬 — 질문 타입(Choice/Score/Noul) 선택, 질문 작성법, confidence 패턴, 쿡북 18편 요약, Python·TypeScript SDK 치트시트"
+      "description": "TypeSafe System One 모델 Jev 사용법 스킬 — 질문 타입(Choice/Score/Noul) 선택, 질문 작성법, confidence 패턴, 쿡북 18편 요약, Python·TypeScript SDK 치트시트, OpenRouter 경유 호출 스킬"
     }
   ]
 }

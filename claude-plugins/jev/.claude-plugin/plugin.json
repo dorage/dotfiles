@@ -1,7 +1,7 @@
 {
   "name": "jev",
-  "description": "TypeSafe 의 System One 모델 Jev 사용법 스킬. 질문 타입(Choice/Score/Noul) 선택, 질문 작성법, 패턴, 쿡북 요약, Python·TypeScript SDK 사용법을 담는다. Jev 를 쓰거나 쓰자고 요청했을 때만 동작한다.",
-  "version": "0.1.0",
+  "description": "TypeSafe 의 System One 모델 Jev 사용법 스킬. 질문 타입(Choice/Score/Noul) 선택, 질문 작성법, 패턴, 쿡북 요약, Python·TypeScript SDK 사용법, OpenRouter 경유 호출(typesafe/jev-1.13)을 담는다. Jev 를 쓰거나 쓰자고 요청했을 때만 동작한다.",
+  "version": "0.2.0",
   "author": {
     "name": "dorage",
     "email": "baloonflower554@gmail.com"

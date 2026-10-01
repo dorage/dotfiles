@@ -99,6 +99,7 @@ Jev 는 텍스트를 생성하지 않는다. `state`(판단 대상)와 타입 �
 - TypeScript: `references/typescript.md`. `bun add @typesafe-ai/sdk`, `new TypeSafeClient().systemOne({ state, questions })`, 질문 빌더 `noul()` / `choice()` / `score()`, 옵션 리터럴이 결과 타입으로 흐른다
 - 다른 언어나 직접 호출: `references/http-api.md`. `POST https://api.typesafe.ai/v1/systemone`, Bearer 키
 - 환경변수 `TYPESAFE_API_KEY` 는 두 SDK 공통. 웹앱에서는 키를 서버에 둔다
+- TypeSafe 계정 없이 OpenRouter 키로 부르려면 `jev-openrouter` 스킬(`../jev-openrouter/SKILL.md`). 모델 ID 는 `typesafe/jev-1.13`, 엔드포인트는 `https://openrouter.ai/api/v1/systemone`
 
 ## 반드시 피할 것 (jev-1.13 실측 약점)
 
