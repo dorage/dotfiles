@@ -1,17 +1,13 @@
 #!/usr/bin/env bash
 # configs/claude 를 ~/.claude 로 동기화한다.
-# 리포에 있는 항목만 덮어쓰고, ~/.claude 의 나머지(agents, projects, plugins, sessions 등)는 그대로 남긴다.
+# 리포에 있는 파일만 덮어쓴다. 지우는 일은 하지 않는다.
+# ~/.claude 에는 리포 밖 항목(projects, sessions, skills/synced, 로컬에서 만든 스킬 등)이
+# 같은 디렉터리 안에도 섞여 있어서, --delete 를 쓰면 그것들이 함께 지워진다.
+# 리포에서 지운 파일은 ~/.claude 에 남으니, 필요하면 손으로 지운다.
 set -euo pipefail
 
 SRC="$(cd "$(dirname "$0")/.." && pwd)/configs/claude"
 DEST="$HOME/.claude"
-
-# 리포가 관리하지 않는 비밀 파일은 제외해 목적지에 남긴다.
-# 웹훅 주소는 configs/claude/env.sh 로 옮겼다(목록은 configs/claude/env.example.sh).
-# 그 파일은 .gitignore 로 커밋만 막을 뿐 이 SRC 트리 안에 있어서, 다른 파일과 함께
-# 그대로 ~/.claude 로 복사된다. 아래 제외 규칙은 예전 방식으로 이미 파일을 둔
-# 환경을 위한 이행 조치이고, 옮긴 걸 확인하면 걷어낸다.
-EXCLUDES=(--exclude 'discord-webhook-url')
 
 # settings.json 은 ~ 나 상대 경로를 못 읽으므로, 리포에는 $HOME 을 그대로 적어두고
 # 내보낼 때 이 환경의 실제 홈 경로로 풀어서 쓴다.
@@ -34,8 +30,7 @@ needs_expand() {
 for path in "$SRC"/*; do
   name="$(basename "$path")"
   if [ -d "$path" ]; then
-    # 디렉터리는 그 디렉터리 안에서만 --delete 로 리포 상태를 그대로 반영한다.
-    rsync -avh --delete "${EXCLUDES[@]}" "$path/" "$DEST/$name"
+    rsync -avh "$path/" "$DEST/$name"
   elif needs_expand "$name"; then
     sed "s|\$HOME|$HOME|g" "$path" > "$TMP/$name"
     # 임시 파일은 mtime 이 늘 새로우니 -c 로 내용 기준 비교해 헛전송을 막는다.
