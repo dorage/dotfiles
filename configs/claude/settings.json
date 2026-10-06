@@ -54,7 +54,6 @@
   "enabledPlugins": {
     "typescript-lsp@claude-plugins-official": true,
     "pyright-lsp@claude-plugins-official": true,
-    "side-issue@dotfiles": true,
     "gnothi@dotfiles": true,
     "wt@dotfiles": true,
     "humanize-korean@im-not-ai": true
@@ -85,6 +84,7 @@
   "autoCompactEnabled": false,
   "agentPushNotifEnabled": false,
   "skipAutoPermissionPrompt": true,
+  "advisorModel": "fable",
   "autoMode": {
     "environment": [
       "### Org-wide",
