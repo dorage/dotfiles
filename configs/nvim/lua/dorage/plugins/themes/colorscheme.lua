@@ -25,5 +25,5 @@ return {
 		"norcalli/nvim-colorizer.lua", -- high-performance color highlighter
 	},
 	-- color scheme
-	theme_config("moonfly"),
+	theme_config("cyberdream"),
 }

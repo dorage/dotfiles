@@ -5,7 +5,19 @@ return {
 			options = {
 				transparent = true,
 			},
-			palettes = { carbonfox = { comment = "#999999" } },
+			palettes = {
+				carbonfox = {
+					red = "#ee5396",
+					green = "#4BFF36",
+					cyan = "#74FAFC",
+					blue = "#33b1ff",
+					yellow = "#FFEB01",
+					magenta = "#E92EFB",
+					orange = "#FF5C00",
+					white = "#dfdfdf",
+					comment = "#999999",
+				},
+			},
 			groups = {
 				all = {
 					NormalFloat = { fg = "fg1", bg = "NONE" },
