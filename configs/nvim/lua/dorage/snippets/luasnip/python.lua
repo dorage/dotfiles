@@ -149,6 +149,18 @@ local M = {
 			fmtopt
 		)
 	),
+	-- class: constructor
+	s(
+		{ name = "constructor", trig = "loc" },
+		fmt(
+			[[
+			def __init__(self<>):
+				<>
+			]],
+			{ i(1), i(2, "pass") },
+			fmtopt
+		)
+	),
 	-- statements
 	-- statement: if
 	s(
