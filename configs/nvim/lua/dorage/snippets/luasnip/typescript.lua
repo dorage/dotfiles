@@ -53,6 +53,48 @@ local common = {
 	end,
 }
 
+---커서가 함수 매개변수 괄호 안에 있는지 확인
+---@return boolean
+local function in_parameters()
+	local ok, parser = pcall(vim.treesitter.get_parser, 0)
+	if not ok or parser == nil then
+		return false
+	end
+	parser:parse()
+	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+	local node = vim.treesitter.get_node({ pos = { row - 1, math.max(col - 1, 0) } })
+	while node ~= nil do
+		local type = node:type()
+		if type == "formal_parameters" then
+			return true
+		end
+		if type == "statement_block" or type == "class_body" or type == "program" then
+			return false
+		end
+		node = node:parent()
+	end
+	return false
+end
+
+local not_in_parameters = function()
+	return not in_parameters()
+end
+
+---함수 매개변수
+---typescript: name: type, choice 로 name: type = default
+---javascript: name, choice 로 name = default
+local parameter = function()
+	return d(1, function()
+		local typed = vim.bo.filetype == "typescript" or vim.bo.filetype == "typescriptreact"
+		local name_type = typed and { r(1, "name", i(1)), t(": "), r(2, "type", i(1)) } or { r(1, "name", i(1)) }
+		local with_default = vim.list_extend(
+			typed and { r(1, "name"), t(": "), r(2, "type") } or { r(1, "name") },
+			{ t(" = "), i(typed and 3 or 2) }
+		)
+		return sn(nil, { c(1, { sn(nil, name_type), sn(nil, with_default) }) })
+	end)
+end
+
 local language = {
 	-- keywords
 	s({ name = "async keyword", trig = "lka" }, { t("async "), i(1) }),
@@ -84,6 +126,20 @@ local language = {
 	s({ name = "null type", trig = "ltn" }, { t("null") }),
 	s({ name = "undefined type", trig = "ltu" }, { t("undefined") }),
 	-- variables
+	s({ name = "parameter", trig = "lv" }, { parameter() }, { condition = in_parameters }),
+	s({ name = "parameter", trig = "lvl" }, { parameter() }, { condition = in_parameters }),
+	s(
+		{ name = "variable", trig = "lv" },
+		fmt(
+			[[<> = <>]],
+			{ c(1, {
+				sn(1, { t("const "), r(1, "var") }),
+				sn(1, { t("let "), r(1, "var") }),
+			}), i(2) },
+			fmtopt
+		),
+		{ condition = not_in_parameters }
+	),
 	s(
 		{ name = "let variable", trig = "lvl" },
 		fmt(
@@ -93,7 +149,8 @@ local language = {
 				sn(1, { t("const "), r(1, "var") }),
 			}), i(2) },
 			fmtopt
-		)
+		),
+		{ condition = not_in_parameters }
 	),
 	s(
 		{ name = "constant variable", trig = "lvc" },
@@ -139,6 +196,39 @@ local language = {
 		)
 	),
 	s({ name = "arrow function", trig = "lfa" }, common.arrow_function(i(1))),
+	-- class, choice 로 extends
+	s(
+		{ name = "class", trig = "lo" },
+		fmt(
+			[[
+			class <><> {
+				<>
+			}
+			]],
+			{
+				i(1),
+				c(2, {
+					t(""),
+					sn(nil, { t(" extends "), i(1) }),
+				}),
+				i(3),
+			},
+			fmtopt
+		)
+	),
+	-- class: constructor
+	s(
+		{ name = "constructor", trig = "loc" },
+		fmt(
+			[[
+			constructor(<>) {
+				<>
+			}
+			]],
+			{ i(1), i(2) },
+			fmtopt
+		)
+	),
 	-- statements
 	-- statement: if
 	s(
