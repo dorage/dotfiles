@@ -94,6 +94,61 @@ local M = {
 			fmtopt
 		)
 	),
+	-- function: decorator, choice 로 인자를 받는 decorator
+	s(
+		{ name = "decorator function", trig = "lfd" },
+		c(1, {
+			sn(
+				nil,
+				fmt(
+					[[
+					def <>(func):
+						@functools.wraps(func)
+						def wrapper(*args, **kwargs):
+							return func(*args, **kwargs)
+						return wrapper
+					]],
+					{ r(1, "name", i(1)) },
+					fmtopt
+				)
+			),
+			sn(
+				nil,
+				fmt(
+					[[
+					def <>(<>):
+						def decorator(func):
+							@functools.wraps(func)
+							def wrapper(*args, **kwargs):
+								return func(*args, **kwargs)
+							return wrapper
+						return decorator
+					]],
+					{ r(1, "name"), i(2) },
+					fmtopt
+				)
+			),
+		})
+	),
+	-- class
+	s(
+		{ name = "class", trig = "lo" },
+		fmt(
+			[[
+			class <><>:
+				<>
+			]],
+			{
+				i(1),
+				c(2, {
+					t(""),
+					sn(nil, { t("("), i(1), t(")") }),
+				}),
+				i(3, "pass"),
+			},
+			fmtopt
+		)
+	),
 	-- statements
 	-- statement: if
 	s(
