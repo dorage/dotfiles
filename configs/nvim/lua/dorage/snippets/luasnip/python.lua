@@ -43,7 +43,7 @@ local M = {
 	-- types
 	-- variables
 	s({ name = "variable", trig = "lvl" }, fmt([[<> = <>]], { i(1), i(2) }, fmtopt)),
-	s({ name = "variable", trig = "lvc" }, fmt([[<> = <>]], { i(1), i(2) }, fmtopt)),
+	s({ name = "constant variable", trig = "lvc" }, fmt([[<>: Final = <>]], { i(1), i(2) }, fmtopt)),
 	-- functions
 	s(
 		{ name = "function", trig = "lf" },
@@ -62,7 +62,8 @@ local M = {
 		{ name = "if statement", trig = "lsif" },
 		fmt(
 			[[
-	if <>: <>
+	if <>:
+		<>
 	]],
 			{
 				i(1, "True"),
@@ -78,7 +79,8 @@ local M = {
 		},
 		fmt(
 			[[
-	elif(<>): <>
+	elif <>:
+		<>
 	]],
 			{
 				i(1, "True"),
@@ -91,7 +93,8 @@ local M = {
 		{ name = "else statement", trig = "lsife" },
 		fmt(
 			[[
-	else: <>
+	else:
+		<>
 	]],
 			{
 				i(1, "pass"),
@@ -104,7 +107,7 @@ local M = {
 		{ name = "switch statement", trig = "lss" },
 		fmt(
 			[[
-	match(<>):
+	match <>:
 		<>
 	]],
 			{
@@ -184,12 +187,12 @@ local M = {
 			fmtopt
 		)
 	),
-	-- default statement
+	-- statement: try-else
 	s(
 		{ name = "try-else statement", trig = "lste" },
 		fmt(
 			[[
-	else: 
+	else:
 		# 예외가 발생하지 않았을 때 실행할 코드
 		<>
 	]],
@@ -197,12 +200,12 @@ local M = {
 			fmtopt
 		)
 	),
-	-- finally statement
+	-- statement: try-finally
 	s(
 		{ name = "try-finally statement", trig = "lstf" },
 		fmt(
 			[[
-	finally: 
+	finally:
 		# 예외 발생 여부와 상관없이 항상 실행할 코드
 		<>
 	]],
@@ -210,7 +213,7 @@ local M = {
 			fmtopt
 		)
 	),
-	-- statement: return
+	-- statement: with
 	s(
 		{ name = "with statement", trig = "lswi" },
 		fmt(
@@ -249,7 +252,7 @@ local M = {
 		{ name = "import statement", trig = "lsi" },
 		fmt(
 			[[
-	<>;
+	<>
 	]],
 			{
 				c(1, {
@@ -373,7 +376,6 @@ local M = {
 
 	# Then
 	# <>
-
 	]],
 			{
 				i(1),
