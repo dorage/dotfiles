@@ -11,8 +11,10 @@ return {
 		config = function()
 			local ls = require("luasnip")
 			ls.setup({
-				history = true,
-				updateevents = "TextChanged,TextChangedI",
+				-- history = true, -- 끝난 스니펫으로 되돌아가지 않도록
+				update_devents = "TextChanged,TextChangedI",
+				region_check_events = "CursorMoved,CursorMovedI",
+				delete_check_events = "TextChanged,InsertLeave",
 				enable_autosnippets = true,
 			})
 
@@ -23,31 +25,24 @@ return {
 
 			require("dorage.snippets.luasnip")
 
-			-- NOTE: 어떻게 jump/expand할것인가?
-			-- 1. in snippet, if expandable, then expand
-			-- 2. in snippet, if not expandable and jumpable then, jump
-			-- 3. not in snippet, if expandable, then expand
-			-- 4. not in snippet, if not expandable, then add <Tab> char
+			-- expand 혹은 jump
 			vim.keymap.set({ "i", "s" }, "<Tab>", function()
 				if ls.expandable() then
-					print("expandable")
 					ls.expand()
-					return
+				elseif ls.locally_jumpable(1) then -- 커서가 현재 스니펫 영역 안일 때만 이동
+					ls.jump(1)
+				else
+					vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, false, true), "n", false)
 				end
-				vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, false, true), "n", false)
 			end, { silent = true })
-			vim.keymap.set({ "i", "s" }, "<leader><Tab>", function()
+
+			-- 스니펫 영역 안에서 그냥 탭을 치고 싶을 때: 현재 스니펫에서 강제로 나감
+			vim.keymap.set({ "i", "s" }, "<C-e>", function()
 				if ls.in_snippet() then
-					if ls.expandable() then
-						print("expandable in snippet")
-						ls.expand()
-					else
-						print("jumpable in snippet")
-						ls.jump(1)
-					end
-					return
+					ls.unlink_current()
 				end
-			end, { silent = true })
+			end, { desc = "LuaSnip: 스니펫 빠져나오기" })
+			-- 뒤로가기
 			vim.keymap.set({ "i", "s" }, "<S-Tab>", function()
 				if ls.in_snippet() then
 					if ls.jumpable() then
@@ -57,6 +52,7 @@ return {
 				end
 				vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<S-Tab>", true, false, true), "n", false)
 			end, { silent = true })
+			-- choice 이전
 			vim.keymap.set({ "i", "s" }, "<leader>p", function()
 				if ls.choice_active() then
 					ls.change_choice(-1)
@@ -64,6 +60,7 @@ return {
 					print("LuaSnip:No choice active")
 				end
 			end, { desc = "Previous luasnip choice" })
+			-- choice 다음
 			vim.keymap.set({ "i", "s" }, "<leader>n", function()
 				if ls.choice_active() then
 					ls.change_choice(1)
@@ -71,6 +68,7 @@ return {
 					print("LuaSnip:No choice active")
 				end
 			end, { desc = "Next luasnip choice" })
+			-- choice 목록
 			vim.keymap.set(
 				{ "n", "i", "s" },
 				"<leader>fc",
