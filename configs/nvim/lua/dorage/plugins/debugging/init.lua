@@ -153,7 +153,7 @@ return {
 			end, { desc = "Debug:Eval" })
 
 			-- load debugger configs
-			for _, value in ipairs({ "nodejs" }) do
+			for _, value in ipairs({ "nodejs", "python" }) do
 				require("dorage.plugins.debugging.configs." .. value)
 			end
 		end,

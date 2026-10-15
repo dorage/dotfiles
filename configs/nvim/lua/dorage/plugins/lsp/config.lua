@@ -46,6 +46,7 @@ return {
 					"perl-debug-adapter",
 					"stylua",
 					"js-debug-adapter",
+					"debugpy",
 					"tsgo",
 					"mdx-analyzer",
 					"markdown-oxide",
