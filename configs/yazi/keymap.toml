@@ -1,0 +1,6 @@
+#:schema https://yazi-rs.github.io/schemas/keymap.json
+
+[mgr]
+prepend_keymap = [
+	{ on = "<C-s>", run = 'shell "$SHELL" --block', desc = "Open shell here" },
+]
