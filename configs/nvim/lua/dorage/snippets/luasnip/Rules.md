@@ -88,6 +88,14 @@ lang: typescript
 
 ### `v`ariable
 
+```
+lv
+```
+
+lang: python
+
+> python: def 매개변수 괄호 안에서는 `name: type` 으로 펼쳐진다. choice 로 `name: type = default`.
+
 #### `l`et
 
 ```
@@ -96,6 +104,8 @@ lvl
 
 lang: python, typescript
 
+> python: `lv` 와 같다.
+
 #### `c`onst
 
 ```
@@ -103,6 +113,8 @@ lvc
 ```
 
 lang: python, typescript
+
+> python: `NAME: Final = value` (`from typing import Final` 필요)
 
 #### `f`unction variable
 
@@ -145,6 +157,26 @@ lfjp
 ```
 
 lang: typescript
+
+#### `d`ecorator
+
+```
+lfd
+```
+
+lang: python
+
+> choice 로 인자를 받는 decorator. `import functools` 필요.
+
+### `o`bject (class)
+
+```
+lo
+```
+
+lang: python
+
+> choice 로 `class Name(Base):`
 
 ### `s`tatement
 
