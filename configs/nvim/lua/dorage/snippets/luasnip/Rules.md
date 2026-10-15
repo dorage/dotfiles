@@ -92,9 +92,14 @@ lang: typescript
 lv
 ```
 
-lang: python
+lang: python, typescript
 
-> python: def 매개변수 괄호 안에서는 `name: type` 으로 펼쳐진다. choice 로 `name: type = default`.
+> 함수 매개변수 괄호 안에서는 매개변수로 펼쳐진다.
+>
+> - python, typescript: `name: type`, choice 로 `name: type = default`
+> - javascript: `name`, choice 로 `name = default`
+>
+> 괄호 밖에서는 python 은 `x = y`, typescript 는 `const x = y` (choice 로 `let`).
 
 #### `l`et
 
@@ -104,7 +109,7 @@ lvl
 
 lang: python, typescript
 
-> python: `lv` 와 같다.
+> 함수 매개변수 괄호 안에서는 `lv` 와 같다.
 
 #### `c`onst
 
@@ -174,9 +179,19 @@ lang: python
 lo
 ```
 
-lang: python
+lang: python, typescript
 
-> choice 로 `class Name(Base):`
+> choice 로 `class Name(Base):` (python), `class Name extends Base {}` (typescript)
+
+#### `c`onstructor
+
+```
+loc
+```
+
+lang: python, typescript
+
+> python: `def __init__(self):`, typescript: `constructor() {}`
 
 ### `s`tatement
 
