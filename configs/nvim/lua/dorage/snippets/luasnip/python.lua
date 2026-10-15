@@ -77,18 +77,11 @@ local M = {
 	}, {}),
 	-- types
 	-- variables
+	s({ name = "parameter", trig = "lv" }, { parameter() }, { condition = in_parameters }),
 	s({ name = "parameter", trig = "lvl" }, { parameter() }, { condition = in_parameters }),
-	s({ name = "parameter", trig = "lvc" }, { parameter() }, { condition = in_parameters }),
-	s(
-		{ name = "variable", trig = "lvl" },
-		fmt([[<> = <>]], { i(1), i(2) }, fmtopt),
-		{ condition = not_in_parameters }
-	),
-	s(
-		{ name = "constant variable", trig = "lvc" },
-		fmt([[<>: Final = <>]], { i(1), i(2) }, fmtopt),
-		{ condition = not_in_parameters }
-	),
+	s({ name = "variable", trig = "lv" }, fmt([[<> = <>]], { i(1), i(2) }, fmtopt), { condition = not_in_parameters }),
+	s({ name = "variable", trig = "lvl" }, fmt([[<> = <>]], { i(1), i(2) }, fmtopt), { condition = not_in_parameters }),
+	s({ name = "constant variable", trig = "lvc" }, fmt([[<>: Final = <>]], { i(1), i(2) }, fmtopt)),
 	-- functions
 	s(
 		{ name = "function", trig = "lf" },
