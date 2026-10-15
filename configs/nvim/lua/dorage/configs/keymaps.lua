@@ -110,3 +110,7 @@ vim.keymap.set("n", "<leader>cF", function()
 	vim.fn.setreg("+", path)
 	vim.notify("Copied: " .. path)
 end, { desc = "Copy absolute file path to clipboard" })
+
+-- dedent
+vim.keymap.set({ "n" }, "<S-Tab>", "<<", { desc = "Dedent line" })
+vim.keymap.set({ "x" }, "<S-Tab>", "<gv", { desc = "Dedent selection" })

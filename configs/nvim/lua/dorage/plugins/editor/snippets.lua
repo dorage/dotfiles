@@ -42,15 +42,15 @@ return {
 					ls.unlink_current()
 				end
 			end, { desc = "LuaSnip: 스니펫 빠져나오기" })
-			-- 뒤로가기
+			-- 뒤로가기, 스니펫 밖에서는 들여쓰기 풀기
 			vim.keymap.set({ "i", "s" }, "<S-Tab>", function()
-				if ls.in_snippet() then
-					if ls.jumpable() then
-						print("jumpable in snippet")
-						ls.jump(-1)
-					end
+				if ls.locally_jumpable(-1) then
+					ls.jump(-1)
+				elseif vim.fn.mode() == "i" then
+					vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-d>", true, false, true), "ni", false)
+				else
+					vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<S-Tab>", true, false, true), "n", false)
 				end
-				vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<S-Tab>", true, false, true), "n", false)
 			end, { silent = true })
 			-- choice 이전
 			vim.keymap.set({ "i", "s" }, "<leader>p", function()
