@@ -1,7 +1,10 @@
 local dap = require("dap")
 
 -- how to config
--- https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#javascript
+-- https://codeberg.org/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#vscode-js-debug
+
+-- vscode-js-debug 는 mason 이 설치함 (lsp/config.lua ensure_installed 의 js-debug-adapter)
+local js_debug_server = vim.fn.stdpath("data") .. "/mason/packages/js-debug-adapter/js-debug/src/dapDebugServer.js"
 
 local adapter_types = { "pwa-node", "pwa-chrome" }
 
@@ -13,12 +16,7 @@ for _, type in ipairs(adapter_types) do
 		port = "${port}",
 		executable = {
 			command = "node",
-			args = {
-				-- https://github.com/microsoft/vscode-js-debug/releases
-				-- $HOME/, ~/ 은 상대패스를 이용함. vim.env.HOME으로 패스 잡아주기
-				vim.env.HOME .. "/.config/nvim/lua/dorage/plugins/debugging/js-debug/src/dapDebugServer.js",
-				"${port}",
-			},
+			args = { js_debug_server, "${port}" },
 		},
 	}
 end
