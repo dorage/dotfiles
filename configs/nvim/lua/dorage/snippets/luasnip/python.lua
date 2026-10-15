@@ -30,6 +30,41 @@ local ls_utils = require("dorage.snippets.luasnip.common")
 local ls_auto_import = require("dorage.customs.js-auto-import")
 local fp = require("dorage.utils.fp")
 
+---커서가 def 함수 매개변수 괄호 안에 있는지 확인 (lambda 는 타입 표기 불가라 제외)
+---@return boolean
+local function in_parameters()
+	local ok, parser = pcall(vim.treesitter.get_parser, 0, "python")
+	if not ok or parser == nil then
+		return false
+	end
+	parser:parse()
+	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+	local node = vim.treesitter.get_node({ pos = { row - 1, math.max(col - 1, 0) } })
+	while node ~= nil do
+		local type = node:type()
+		if type == "parameters" then
+			return true
+		end
+		if type == "block" or type == "function_definition" then
+			return false
+		end
+		node = node:parent()
+	end
+	return false
+end
+
+local not_in_parameters = function()
+	return not in_parameters()
+end
+
+---함수 매개변수: name: type, choice 로 name: type = default
+local parameter = function()
+	return c(1, {
+		sn(nil, { r(1, "name", i(1)), t(": "), r(2, "type", i(1)) }),
+		sn(nil, { r(1, "name"), t(": "), r(2, "type"), t(" = "), i(3) }),
+	})
+end
+
 local M = {
 	-- keywords
 	s({ name = "async keyword", trig = "lka" }, { t("async "), i(1) }),
@@ -42,8 +77,18 @@ local M = {
 	}, {}),
 	-- types
 	-- variables
-	s({ name = "variable", trig = "lvl" }, fmt([[<> = <>]], { i(1), i(2) }, fmtopt)),
-	s({ name = "constant variable", trig = "lvc" }, fmt([[<>: Final = <>]], { i(1), i(2) }, fmtopt)),
+	s({ name = "parameter", trig = "lvl" }, { parameter() }, { condition = in_parameters }),
+	s({ name = "parameter", trig = "lvc" }, { parameter() }, { condition = in_parameters }),
+	s(
+		{ name = "variable", trig = "lvl" },
+		fmt([[<> = <>]], { i(1), i(2) }, fmtopt),
+		{ condition = not_in_parameters }
+	),
+	s(
+		{ name = "constant variable", trig = "lvc" },
+		fmt([[<>: Final = <>]], { i(1), i(2) }, fmtopt),
+		{ condition = not_in_parameters }
+	),
 	-- functions
 	s(
 		{ name = "function", trig = "lf" },
