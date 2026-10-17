@@ -27,13 +27,6 @@ return {
 						key = "o",
 					},
 					{ desc = "💫 Update", group = "@property", action = "Lazy update", key = "u" },
-					{
-						desc = "📑 Files",
-						icon_hl = "@variable",
-						group = "Label",
-						action = "Telescope find_files",
-						key = "f",
-					},
 				},
 				project = {
 					enable = false,

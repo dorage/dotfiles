@@ -7,17 +7,15 @@ return {
 
 			-- Eslint_d error when .eslint.json doesn't exist.
 			-- https://github.com/mfussenegger/nvim-lint/issues/462
-			lint.linters.eslint_d = {
-				args = {
-					"--no-warn-ignored", -- <-- this is the key argument
-					"--format",
-					"json",
-					"--stdin",
-					"--stdin-filename",
-					function()
-						return vim.api.nvim_buf_get_name(0)
-					end,
-				},
+			lint.linters.eslint_d.args = {
+				"--no-warn-ignored", -- <-- this is the key argument
+				"--format",
+				"json",
+				"--stdin",
+				"--stdin-filename",
+				function()
+					return vim.api.nvim_buf_get_name(0)
+				end,
 			}
 
 			lint.linters_by_ft = {

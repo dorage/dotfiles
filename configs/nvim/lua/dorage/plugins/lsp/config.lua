@@ -50,8 +50,11 @@ return {
 					"tsgo",
 					"mdx-analyzer",
 					"markdown-oxide",
+					"kotlin-lsp",
 				},
 			})
+
+			vim.lsp.config("kotlin_lsp", {})
 
 			vim.lsp.config("ty", {
 				root_markers = { ".git" },
@@ -61,55 +64,39 @@ return {
 				root_markers = { ".git", "pnpm-lock.yaml" },
 			})
 
-			vim.lsp.config("mdx-analyzer", {})
-
-			vim.lsp.config("markdown-oxide", {
+			vim.lsp.config("markdown_oxide", {
 				root_markers = { ".git" },
 				filetypes = { "markdown" },
 			})
 
 			vim.lsp.enable({
-				"markdown-oxide",
+				"markdown_oxide",
 				"tsgo",
-				"mdx-analyzer",
+				"mdx_analyzer",
 				"jdtls",
 				"bashls",
 				"gherkin",
 				"terraformls",
-				-- "eslint",
-				-- "denols",
 				"ty", -- astral.sh
 				-- "pyrefly",
 				-- "basedpyright",
 				-- "pyright",
 				"rust_analyzer",
 				"lua_ls",
-				-- "ts_ls",
 				"astro",
 				"html",
-				-- "jedi_language_server",
-				-- "biome",
 				"cssls",
 				"dartls",
 				"tailwindcss",
 				"nil_ls", -- nix
 				"taplo",
-				"vuels",
 				"yamlls",
 				"sqlls",
 				"perlnavigator",
 				"autotools_ls",
 				"dcmls",
+				"kotlin_lsp",
 			})
 		end,
 	},
-	-- {
-	-- 	"pmizio/typescript-tools.nvim",
-	-- 	dependencies = { "nvim-lua/plenary.nvim" },
-	-- 	config = function()
-	-- 		require("typescript-tools").setup({
-	-- 			filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
-	-- 		})
-	-- 	end,
-	-- },
 }
