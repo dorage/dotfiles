@@ -26,11 +26,6 @@ local conditions = {
 	hide_in_width = function()
 		return vim.fn.winwidth(0) > 80
 	end,
-	check_git_workspace = function()
-		local filepath = vim.fn.expand("%:p:h")
-		local gitdir = vim.fn.finddir(".git", filepath .. ";")
-		return gitdir and #gitdir > 0 and #gitdir < #filepath
-	end,
 }
 
 -- Config
@@ -204,7 +199,7 @@ ins_left({
 	-- Lsp server name .
 	function()
 		local msg = "No Active Lsp"
-		local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
+		local buf_ft = vim.bo.filetype
 		local clients = vim.lsp.get_clients()
 		if next(clients) == nil then
 			return msg

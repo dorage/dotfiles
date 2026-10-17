@@ -18,12 +18,6 @@ local theme_config = function(theme_name)
 end
 
 return {
-	{
-		"tribela/vim-transparent", -- remove background color on vim
-	},
-	{
-		"norcalli/nvim-colorizer.lua", -- high-performance color highlighter
-	},
 	-- color scheme
 	theme_config("cyberdream"),
 }

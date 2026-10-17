@@ -12,16 +12,12 @@ return {
 			local ls = require("luasnip")
 			ls.setup({
 				-- history = true, -- 끝난 스니펫으로 되돌아가지 않도록
-				update_devents = "TextChanged,TextChangedI",
+				update_events = "TextChanged,TextChangedI",
 				region_check_events = "CursorMoved,CursorMovedI",
 				delete_check_events = "TextChanged,InsertLeave",
 				enable_autosnippets = true,
 			})
 
-			print("LuaSnip:loaded!")
-			require("luasnip.loaders.from_vscode").lazy_load({
-				paths = { "~/.config/nvim/lua/dorage/snippets/vscode" },
-			})
 
 			require("dorage.snippets.luasnip")
 

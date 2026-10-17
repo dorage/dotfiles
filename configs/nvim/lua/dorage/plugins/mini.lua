@@ -61,15 +61,6 @@ return {
 				miniFiles.open(vim.api.nvim_buf_get_name(0))
 				vim.cmd("set relativenumber")
 			end, { desc = "files in current file directory" })
-			vim.keymap.set("n", "<leader>fp", function()
-				-- if it is nx project
-				-- show nx projects
-				-- pick files with mini.pick
-				-- get project root
-				-- miniFiles.open(project_root)
-				miniFiles.open(vim.api.nvim_buf_get_name(0))
-				vim.cmd("set relativenumber")
-			end, { desc = "files in current file directory" })
 		end,
 	},
 	-- indent

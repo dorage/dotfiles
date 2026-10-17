@@ -66,10 +66,6 @@ return {
 							["il"] = { query = "@loop.inner", desc = "@loop.inner" },
 						},
 					},
-					move = {
-						enable = true,
-						set_jumps = true,
-					},
 				},
 				sync_install = true,
 				auto_install = true,

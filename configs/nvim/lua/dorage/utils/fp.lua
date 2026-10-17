@@ -99,22 +99,6 @@ M.pipe_curry = function(func, ...)
 	end
 end
 
----comment
----@param ... any
----@return any[]
-local combine = function(...)
-	local tables = { ... }
-	local combined_table = {}
-
-	for _, table in ipairs(tables) do
-		for _, value in ipairs(table) do
-			combined_table[#combined_table + 1] = value
-		end
-	end
-
-	return combined_table
-end
-
 ---------------------------------------------------------------------------------------
 --
 -- table manipulation

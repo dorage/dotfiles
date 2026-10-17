@@ -23,8 +23,6 @@ return {
 				typescript = { "eslint_d" },
 				javascriptreact = { "eslint_d" },
 				typescriptreact = { "eslint_d" },
-				perl = { "perlcritic" },
-				lua = { "luacheck" },
 			}
 
 			local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })

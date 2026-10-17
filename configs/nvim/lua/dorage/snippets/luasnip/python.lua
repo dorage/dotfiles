@@ -27,8 +27,6 @@ local ms = ls.multi_snippet
 local k = require("luasnip.nodes.key_indexer").new_key
 local fmtopt = { delimiters = "<>" }
 local ls_utils = require("dorage.snippets.luasnip.common")
-local ls_auto_import = require("dorage.customs.js-auto-import")
-local fp = require("dorage.utils.fp")
 
 ---커서가 def 함수 매개변수 괄호 안에 있는지 확인 (lambda 는 타입 표기 불가라 제외)
 ---@return boolean

@@ -5,27 +5,15 @@ vim.keymap.set(
 	"<cmd>lua vim.diagnostic.open_float()<cr><esc>",
 	{ desc = "Show diagnostic in a floating window" }
 )
--- vim.keymap.set(
--- 	{ "n" },
--- 	"[d",
--- 	"<cmd>lua vim.diagnostic.goto_prev()<cr><esc>",
--- 	{ desc = "Move to the previous diagnostic in the current buffer" }
--- )
--- vim.keymap.set(
--- 	{ "n" },
--- 	"]d",
--- 	"<cmd>lua vim.diagnostic.goto_next()<cr><esc>",
--- 	{ desc = "Move to the next diagnostic in the current buffer" }
--- )
 
 -- blazing fast save
 vim.keymap.set({ "i", "x", "n", "s" }, "<leader>w", "<cmd>:w<cr>", { desc = "Save file" })
 
 -- yank to clipboard
-vim.keymap.set({ "n", "s" }, "<leader>y", '"+y', { desc = "Copy to clipboard" })
+vim.keymap.set({ "n", "x" }, "<leader>y", '"+y', { desc = "Copy to clipboard" })
 -- paste from clipboard
-vim.keymap.set({ "n", "s" }, "<leader>p", '"+p', { desc = "Paste from clipboard" })
-vim.keymap.set({ "n", "s" }, "<leader>P", '"+P', { desc = "Paste from clipboard" })
+vim.keymap.set({ "n", "x" }, "<leader>p", '"+p', { desc = "Paste from clipboard" })
+vim.keymap.set({ "n", "x" }, "<leader>P", '"+P', { desc = "Paste from clipboard" })
 
 -- better substitute
 -- references: https://www.youtube.com/watch?v=k_PBlhH-DKk&t=13s
@@ -69,7 +57,7 @@ vim.keymap.set({ "n" }, "<leader>hh", function()
 			os.execute("httpyac " .. fpath)
 		end)
 	end
-end, { desc = "Httpyac: reqeust current buffer" })
+end, { desc = "Httpyac: request current buffer" })
 
 -- replace floaterm
 vim.keymap.set({ "n" }, "<leader>ag", function()
@@ -79,7 +67,7 @@ vim.keymap.set({ "n" }, "<leader>ag", function()
 end, { desc = "open lazygit" })
 vim.keymap.set({ "n" }, "<leader>ao", function()
 	vim.fn.jobstart(
-		"zellij run --floating --name lazygit --width 90% --height 90% -x 5% -y 5% --close-on-exit -- lazydocker"
+		"zellij run --floating --name lazydocker --width 90% --height 90% -x 5% -y 5% --close-on-exit -- lazydocker"
 	)
 end, { desc = "open lazydocker" })
 

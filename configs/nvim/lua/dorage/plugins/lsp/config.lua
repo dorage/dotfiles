@@ -11,8 +11,6 @@ return {
 		opts = {
 			library = {
 				{ path = "luvit-meta/library", words = { "vim%.uv" } },
-				{ path = "~/.hammerspoon/Spoons/Annotation/annotations", words = { "hs" } },
-				{ path = "~/.config/lua_ls/defold/api" },
 			},
 		},
 	},
@@ -31,19 +29,12 @@ return {
 			require("mason-tool-installer").setup({
 				ensure_installed = {
 					"tailwindcss-language-server",
-					"typescript-language-server",
 					"prettier",
 					"ty",
-					"pyrefly",
-					"pyright",
-					"basedpyright",
 					"jdtls",
 					"eslint_d",
-					"markdownlint",
-					"isort",
 					"black",
 					"perlnavigator",
-					"perl-debug-adapter",
 					"stylua",
 					"js-debug-adapter",
 					"debugpy",
@@ -52,12 +43,6 @@ return {
 					"markdown-oxide",
 					"kotlin-lsp",
 				},
-			})
-
-			vim.lsp.config("kotlin_lsp", {})
-
-			vim.lsp.config("ty", {
-				root_markers = { ".git" },
 			})
 
 			vim.lsp.config("tsgo", {
@@ -74,27 +59,12 @@ return {
 				"tsgo",
 				"mdx_analyzer",
 				"jdtls",
-				"bashls",
-				"gherkin",
-				"terraformls",
 				"ty", -- astral.sh
-				-- "pyrefly",
-				-- "basedpyright",
-				-- "pyright",
 				"rust_analyzer",
 				"lua_ls",
-				"astro",
-				"html",
-				"cssls",
 				"dartls",
 				"tailwindcss",
-				"nil_ls", -- nix
-				"taplo",
-				"yamlls",
-				"sqlls",
 				"perlnavigator",
-				"autotools_ls",
-				"dcmls",
 				"kotlin_lsp",
 			})
 		end,
