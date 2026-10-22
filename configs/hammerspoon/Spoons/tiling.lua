@@ -12,10 +12,13 @@ local windowChooser = function(active_win_id, callback)
 	end)
 	-- format for chooser
 	win_list = hs.fnutils.map(win_list, function(win)
+		local app = win:application()
+		local app_name = app and app:name() or ""
+		local bundle_id = app and app:bundleID() or ""
 		return {
-			text = win:title() .. " - " .. win:application():name() .. " - " .. win:application():bundleID(),
-			subText = win:application():name(),
-			image = hs.image.imageFromAppBundle(win:application():bundleID()),
+			text = (win:title() or "") .. " - " .. app_name .. " - " .. bundle_id,
+			subText = app_name,
+			image = bundle_id ~= "" and hs.image.imageFromAppBundle(bundle_id) or nil,
 			value = win:id(),
 		}
 	end)
@@ -45,6 +48,10 @@ hs.hotkey.bind({ "cmd", "shift" }, "h", function()
 	active_win:setFrame(active_frame)
 
 	windowChooser(active_win:id(), function(choice)
+		if choice == nil then
+			return
+		end
+
 		local other_frame = {}
 		other_frame.x = active_frame.x + active_frame.w
 		other_frame.y = active_frame.y
@@ -97,6 +104,10 @@ hs.hotkey.bind({ "cmd", "shift" }, "l", function()
 	active_win:setFrame(active_frame)
 
 	windowChooser(active_win:id(), function(choice)
+		if choice == nil then
+			return
+		end
+
 		local other_frame = {}
 		other_frame.x = active_frame.x - active_frame.w
 		other_frame.y = active_frame.y
@@ -116,7 +127,16 @@ end)
 -- find & focus
 hs.hotkey.bind({ "cmd", "shift" }, "f", function()
 	local activeWindow = hs.window.focusedWindow()
-	windowChooser(activeWindow:id(), function(choice)
-		hs.window(choice.value):focus()
+	local active_win_id = activeWindow and activeWindow:id()
+	windowChooser(active_win_id, function(choice)
+		if choice == nil then
+			return
+		end
+
+		local win = hs.window(choice.value)
+		if win == nil then
+			return
+		end
+		win:focus()
 	end)
 end)

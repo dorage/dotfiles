@@ -29,7 +29,7 @@ M.add_widget = function(widget, opts)
 end
 
 M.remove_widget = function(widget_id)
-	if not _widgets[widget_id].timer then
+	if _widgets[widget_id].timer then
 		_widgets[widget_id].timer:stop()
 	end
 	_widgets[widget_id] = nil

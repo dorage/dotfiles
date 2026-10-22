@@ -7,11 +7,13 @@ local function update(window, appName, watcher)
 
 	-- update app_icon item
 	if watcher == "windowFocused" then
-		hs.execute(
-			"sketchybar --set app_icon background.drawing=on background.image=app."
-				.. activeWindow:application():bundleID(),
-			true
-		)
+		local app = window and window:application()
+		local bundle_id = app and app:bundleID()
+		if bundle_id == nil then
+			return
+		end
+
+		hs.execute("sketchybar --set app_icon background.drawing=on background.image=app." .. bundle_id, true)
 	elseif watcher == "windowUnfocused" then
 		if activeWindow == nil then
 			hs.execute("sketchybar --set app_icon background.drawing=off", true)
