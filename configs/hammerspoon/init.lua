@@ -2,7 +2,6 @@ require("hs.ipc")
 
 -- reload config
 hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "R", function()
-	require("Spoons.Annotation").init()
 	hs.reload()
 end)
 
