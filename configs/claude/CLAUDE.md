@@ -9,8 +9,8 @@
 ## 도구 사용
 
 - python3 pip 대신 uv, uvx 사용
-- nodejs 대신 bun 사용
-- shell script 작성시 명시적 지시 없다면 bun 사용
+- bun 대신 nodejs 사용
+- shell script 작성시 명시적 지시 없다면 tsx 사용
 
 ## 형상관리
 
