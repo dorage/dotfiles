@@ -5,11 +5,16 @@ local function create_hot_key_window(app_name, command_key, key)
 		local app = hs.application.find(app_name)
 
 		if app == nil then
-			hs.application.launchOrFocus(app_name)
+			hs.application.launchOrFocusByBundleID(app_name)
 		elseif app:isFrontmost() then
 			app:hide()
 		else
 			local win = app:mainWindow()
+			-- running without window: let the app reopen its window
+			if win == nil then
+				hs.application.launchOrFocusByBundleID(app_name)
+				return
+			end
 
 			spaces.moveWindowToSpace(win:id(), spaces.activeSpaceOnScreen())
 			win:focus()
