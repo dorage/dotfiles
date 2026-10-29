@@ -36,6 +36,9 @@ This guidance assumes **Cucumber-compatible Gherkin** (the "Queen's Gherkin"). R
 - **MUST** use kebab-case file names.
 - **SHOULD** keep all feature files under one main directory unless the project dictates otherwise.
 - **MAY** use sub-directories; **SHOULD** organize by functional behavior area.
+- **MUST** group a domain (for example, 주문) with a directory, not with a single `Feature`.
+- **MUST** name files `<actor>-<flow>.feature` (for example, `customer-requests-refund.feature`).
+  Permission features use `<domain>-<action>-permission.feature`.
 
 ---
 
@@ -69,13 +72,51 @@ This guidance assumes **Cucumber-compatible Gherkin** (the "Queen's Gherkin"). R
 
 ## Feature blocks
 
-- **MUST** name `Feature:` after the behavior area it covers.
+- **MUST** name `Feature:` after one actor and one flow, or one permission. See "Feature 분할 기준".
 - **SHOULD** align the file name with the `Feature:` title.
 - **MUST** keep the `Feature:` title to a single line.
 - **SHOULD** include a short user story directly under the `Feature:` title using three lines:
   - `As a <role>`
   - `I want <goal>`
   - `So that <reason>`
+
+---
+
+## Feature 분할 기준
+
+- **MUST** 하나의 Feature 는 아래 단위 중 하나로만 묶어요.
+  - 주체 × 플로우 (기본)
+    - 한 주체가 한 흐름을 겪는 것
+    - 예: 고객의 주문 결제, 셀러의 주문 접수, 고객의 환불 요청
+  - 권한 (예외)
+    - "누가 이 행동을 할 수 있고 누가 못 하는가"만 다뤄요
+    - 여러 주체가 함께 나와도 돼요. 대신 흐름의 상세(금액, 상태 변화)는 쓰지 않아요
+    - 주체만 다르고 같은 행동이면 `Scenario Outline` 과 주체 열로 써요
+- **MUST** 사람이 아닌 시스템(배치, 스케줄러, 외부 연동)이 움직이는 흐름은 "시스템"을 주체 하나로 봐요.
+  - 예: `system-settles-monthly.feature`
+- **MUST** 다른 주체의 행동이 전제로 필요하면 `Given` 에 이미 일어난 상태로 써요.
+  - 예: `조건 셀러 "세척공방"이 주문을 접수했다`
+  - 그 행동 자체의 흐름은 그 주체의 Feature 에서 다뤄요
+- **MUST NOT** `Rule` 키워드로 여러 플로우를 한 Feature 에 몰아넣지 않아요.
+  `Rule` 은 한 플로우 안의 비즈니스 규칙을 묶을 때만 써요.
+- 쪼개야 한다는 신호예요.
+  - user story 의 `As a <role>` 에 주체가 둘 이상 필요해요
+  - 시나리오마다 `When` 의 행동 주체가 바뀌어요
+  - 같은 도메인 객체라도 상황(결제, 환불, 반품)이 바뀌어요
+  - `Background` 가 일부 시나리오에만 맞아요
+
+```
+features/
+  order/
+    customer-places-order.feature
+    customer-pays-order.feature
+    customer-requests-refund.feature
+    customer-requests-return.feature
+    seller-accepts-order.feature
+    seller-processes-refund.feature
+    system-settles-monthly.feature
+    order-cancel-permission.feature
+```
 
 ---
 
@@ -191,6 +232,7 @@ This guidance assumes **Cucumber-compatible Gherkin** (the "Queen's Gherkin"). R
 ## Quick checklist (for humans and LLMs)
 
 Before finalizing a scenario, verify:
+- [ ] Feature 하나에 주체 하나 × 플로우 하나 (권한 Feature 제외); 다른 주체의 행동은 `Given` 에 있음
 - [ ] One behavior only; can run independently
 - [ ] No unrelated concerns bundled (split functional vs performance, a11y, etc. when separate)
 - [ ] Stable vocabulary (no synonym swapping)
@@ -298,9 +340,10 @@ Feature: <behavior area>
     그리고 주문 총액은 114,000원이다
 
   @초안
-  시나리오: 주문 뒤에 상품을 고쳐도 주문에 남은 상품 정보는 그대로다
+  시나리오: 주문 뒤에 상품이 고쳐져도 주문에 남은 상품 정보는 그대로다
     조건 고객사 "카페 봄날"이 상품 "한식 세트"를 2개 주문했다
-    만약 공급사 "세척공방"이 상품 이름을 "한식 세트 A"로, 밥그릇 개당 가격을 350원으로 고친다
+    그리고 공급사 "세척공방"이 상품 이름을 "한식 세트 A"로, 밥그릇 개당 가격을 350원으로 고쳤다
+    만약 고객사 "카페 봄날"이 그 주문을 조회한다
     그러면 그 주문의 상품 이름은 "한식 세트"이다
     그리고 그 주문의 "한식 세트" 1개 금액은 33,000원이다
     그리고 그 주문의 구성은 밥그릇 60개 300원, 국그릇 60개 250원이다
