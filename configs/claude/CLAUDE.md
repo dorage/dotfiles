@@ -14,10 +14,14 @@
 
 ## 형상관리
 
+### 기본
+
 - **MUST** git 리포지토리에 적용한다.
 - **MUST**: 조사/작업 전 `git fetch` 후 HEAD가 origin/main 기준 뒤처졌는지 확인하고, `git pull`로 갱신
 - **MUST** 조사/작업 환경을 격리하기 위해 항시 worktree 사용
 - **MUST** 컨벤션·wiki 문서·스펙은 `origin/main` 에서 읽기
+
+### PR
 - **MUST** 이슈를 토대로 작업시 PR에 이슈번호 추가
 - **MUST** 계획이 완료되면, 빈 커밋으로 draft PR 생성 후 작업
 - **MUST** PR title은 작업을 설명하는 간결한 한국어로 작성
