@@ -10,7 +10,7 @@ description: sdd:draft 가 쓴 요구사항 문서(requirements.md)를 받아, �
 먼저 `${CLAUDE_PLUGIN_ROOT}/references/spec-format.md` 를 읽는다. 「한 번만 쓴다」「필요한 결정」「마커」「답 반영」은 그 문서를 따른다. 이 스킬은 설계 문서의 절 구성과, 포맷 문서에 없는 결정 표기(볼드·이탤릭·`->`)만 정한다.
 
 - `sdd:draft`: 같은 기능의 요구사항 문서(무엇을). 이 스킬의 입력이다
-- `sdd:brief`: 같은 기능의 비개발자용 기획 문서
+- `sdd:brief-dev`·`sdd:brief-nondev`: 같은 요구사항 문서를 마커 없이 옮긴 개발자용·비개발자용 기획 문서
 - `sdd:quick`: 요구사항 문서 없이 작은 작업의 스펙과 설계를 채팅 답 하나로 쓴다. 요구사항 문서가 이미 있으면 작아도 이 스킬로 짧은 `design.md` 를 쓴다
 - `spec-build`: 이미 있는 PR·브랜치를 검토한다. 이 스킬은 코드가 없을 때 쓴다
 - `spec-bdd`: Gherkin 시나리오를 쓴다. 이 스킬의 테스트 전략은 시나리오를 다시 쓰지 않는다

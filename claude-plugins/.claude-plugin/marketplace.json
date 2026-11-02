@@ -49,7 +49,7 @@
     {
       "name": "sdd",
       "source": "./sdd",
-      "description": "스펙 주도 개발 스킬 묶음 — /sdd:draft 요구사항, /sdd:design 설계, /sdd:brief 비개발자용 기획, /sdd:quick 채팅 스펙, /sdd:bdd Gherkin 시나리오"
+      "description": "스펙 주도 개발 스킬 묶음 — /sdd:draft 요구사항, /sdd:design 설계, /sdd:brief-dev 개발자용 기획 문서, /sdd:brief-nondev 비개발자용 기획 문서 (requirements.md 에서 만듦), /sdd:task 구현 계획, /sdd:quick 채팅 스펙, /sdd:bdd Gherkin 시나리오"
     }
   ]
 }
