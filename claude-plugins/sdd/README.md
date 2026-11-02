@@ -7,8 +7,9 @@
 - `/sdd:brief` — 비개발자도 읽는 기획 문서(brief.md)
 - `/sdd:quick` — 작은 작업의 스펙과 설계를 채팅 답 하나로
 - `/sdd:bdd` — Gherkin 테스트 시나리오
+- `/sdd:setup` — `~/.sdd/{리포지토리 이름}/` 보관 폴더 준비
 
-다섯 스킬이 함께 따르는 포맷은 `references/spec-format.md` 한 곳에 있다.
+문서를 쓰는 다섯 스킬이 함께 따르는 포맷은 `references/spec-format.md` 한 곳에 있다.
 
 ## 고친 뒤 반영하기
 
