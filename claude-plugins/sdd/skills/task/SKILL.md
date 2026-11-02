@@ -36,6 +36,7 @@ description: sdd:draft 의 요구사항 문서(requirements.md)와 sdd:design �
 - 입력 폴더의 `tasks.md` (예: `~/.sdd/dotfiles/20261102143005_제휴카페-임직원-할인/tasks.md`). 나머지는 spec-format 「저장 위치」를 따른다
 - 이미 있는 `tasks.md` 를 고쳐 쓸 때는 이미 `done` 인 작업과 체크박스를 그대로 둔다
 - 마스터가 요청하기 전에는 커밋하지 않는다
+- 다 쓰면 spec-format 「윤문」을 거친다
 
 ## 조사
 

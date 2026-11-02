@@ -14,9 +14,12 @@ sdd 명령이 남기는 결과물과, 결과물끼리 무엇을 읽는지 정리
   brief-dev.md
   brief-nondev.md
   features/{도메인}/<actor>-<flow>.feature
+  _humanize/{run_id}/        # 윤문 작업 파일. 01_input.txt 가 윤문 전 원문
 ```
 
 `/sdd:quick` 은 채팅 답이라 파일을 남기지 않는다.
+
+features/ 를 뺀 마크다운 결과물은 다 쓴 뒤 `humanize-korean` 윤문을 거친다. 언제·어떻게 거치는지는 `references/spec-format.md` 「윤문」 한 곳에 있다.
 
 ## 의존관계
 

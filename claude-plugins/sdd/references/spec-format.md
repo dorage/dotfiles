@@ -1,6 +1,6 @@
 # 스펙 포맷
 
-문서를 쓰는 모든 단계(`sdd:draft`·`sdd:design`·`sdd:task`·`sdd:brief-dev`·`sdd:brief-nondev`·`sdd:quick`·`sdd:bdd`)가 함께 따르는 공용 포맷이다. 결정·마커·답 반영·저장 위치의 모양은 이 문서 한 곳에 있다.
+문서를 쓰는 모든 단계(`sdd:draft`·`sdd:design`·`sdd:task`·`sdd:brief-dev`·`sdd:brief-nondev`·`sdd:quick`·`sdd:bdd`)가 함께 따르는 공용 포맷이다. 결정·마커·답 반영·저장 위치·윤문의 모양은 이 문서 한 곳에 있다.
 
 단계마다 결과물 모양(절 구성, 템플릿, 단계 전용 표기, 완성 조건)은 `references/{스킬 이름}.md` 에 있다. 두 brief 스킬은 `references/brief-format.md` 를 함께 쓴다. 단계 문서가 이 문서의 일부를 따르지 않으면, 단계 문서 맨 위에 예외를 적는다.
 
@@ -106,3 +106,49 @@
         - 폴더가 하나도 없으면 쓰지 않고 "`/sdd:draft` 를 먼저 실행하세요" 한 줄을 남긴다
 - 쓰기 전에 채팅에 "{경로}에 씁니다" 한 줄을 남긴다. 경로가 정해지기 전에는 파일을 쓰지 않는다
 - 같은 파일이 이미 있으면 덮어쓰기 전에 읽고, 갱신인지 새 파일인지 한 번 묻는다
+
+## 윤문
+
+문서를 다 쓴 뒤 `humanize-korean@im-not-ai` 플러그인으로 문장을 사람이 쓴 글처럼 다듬는다. 플러그인 설치는 `sdd:setup` 이 맡는다. 다듬는 것은 문장뿐이고, 내용과 구조는 그대로 둔다.
+
+### 대상과 때
+
+- 대상: `requirements.md`·`design.md`·`tasks.md`·`brief-dev.md`·`brief-nondev.md`
+- 거치지 않는 것: `features/*.feature`(Gherkin 키워드와 단계 문장이 깨진다), `sdd:quick`(파일이 없는 채팅 답), 공유 문서 경로(로컬 파일이 아니다)
+- 때: 스킬이 파일을 다 쓰고 자기 검증(`(작성 중)` 검색, 마커·구조 검증)을 마친 직후. 「답 반영」으로 고친 뒤에도 다시 거친다
+- 플러그인이 없으면(`claude plugin list` 에 `humanize-korean@im-not-ai` 가 없으면) 건너뛰고, 끝맺음에 "윤문을 건너뛰었습니다. `/sdd:setup` 을 실행하세요" 한 줄을 붙인다. 문서 작성은 막지 않는다
+
+### 부르는 법
+
+- `cp {파일} {스펙 폴더}/.{파일 이름}.before` 로 원본을 남긴다
+- `Skill(skill="humanize-korean:humanize-korean")` 를 부르고, args 에 아래를 넘긴다
+    - 입력 파일 경로
+    - 강도 "가볍게". 스펙은 고칠 곳이 적은 글이라 과윤문을 막는 가벼운 경로가 맞다
+    - 장르 `report`
+    - 건드리지 않을 것: 헤딩 줄, `@` 마커와 괄호 속 출처, 결정 ID(`A1`·`D2`)와 요구사항 번호, EARS 키워드(`THE System`·`SHALL`·`WHEN`·`WHILE`·`IF`·`THEN`), 표의 행과 열, 코드 블록과 mermaid, 백틱 안 글자, 경로, 숫자와 날짜, 체크박스
+- 결과 `final.md` 에서 요약 블록과 끝의 빈 줄을 지운다. 이 명령으로 `final.md` 자체를 고친다
+    - `perl -0pi -e 's/\n*<!-- HUMANIZE-SUMMARY.*?-->\s*/\n/s' _workspace/{run_id}/final.md`
+
+### 덮어쓰기 전 검사
+
+윤문본이 지켜야 할 것을 원본과 윤문본에서 뽑아 비교한다. 같을 때만 덮어쓴다.
+
+```bash
+keep() {
+  grep -E '^#' "$1"
+  awk '/^```/{f=!f; print; next} f' "$1"
+  grep -c '^|' "$1"
+  grep -oE '@(결정|해석|초안|미정|사실|가정|확정)|[A-Z][0-9]+|[0-9][0-9,.:+-]*|`[^`]+`|THE System|SHALL|WHEN|WHILE|IF|THEN' "$1" | sort
+}
+diff <(keep {원본}) <(keep {윤문본}) && echo SAME || echo DIFF
+```
+
+- `SAME`: 윤문본으로 원래 파일을 덮어쓰고 `.{파일 이름}.before` 를 지운다
+- `DIFF`: 원래 파일을 그대로 두고, 끝맺음에 "윤문이 {diff 첫 줄}을 바꿔서 원본을 유지했습니다" 한 줄을 붙인다
+
+### 작업 폴더 치우기
+
+humanize-korean 은 지금 폴더 아래 `_workspace/{run_id}/` 에 작업 파일을 남긴다. 리포를 더럽히지 않도록 끝나면 옮긴다.
+
+- `mv _workspace/{run_id} {스펙 폴더}/_humanize/{run_id}` 로 옮긴다. `01_input.txt` 가 윤문 전 원문으로 남는다
+- `_workspace/` 가 비었으면 `rmdir _workspace` 로 지운다. 다른 run 이 남아 있으면 그대로 둔다
