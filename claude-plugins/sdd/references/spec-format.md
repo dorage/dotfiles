@@ -126,7 +126,8 @@
     - 강도 "가볍게". 스펙은 고칠 곳이 적은 글이라 과윤문을 막는 가벼운 경로가 맞다
     - 장르 `report`
     - 건드리지 않을 것: 헤딩 줄, `@` 마커와 괄호 속 출처, 결정 ID(`A1`·`D2`)와 요구사항 번호, EARS 키워드(`THE System`·`SHALL`·`WHEN`·`WHILE`·`IF`·`THEN`), 표의 행과 열, 코드 블록과 mermaid, 백틱 안 글자, 경로, 숫자와 날짜, 체크박스
-- 결과 `final.md` 에서 `<!-- HUMANIZE-SUMMARY` 부터 `-->` 까지를 지운다
+- 결과 `final.md` 에서 요약 블록과 끝의 빈 줄을 지운다. 이 명령으로 `final.md` 자체를 고친다
+    - `perl -0pi -e 's/\n*<!-- HUMANIZE-SUMMARY.*?-->\s*/\n/s' _workspace/{run_id}/final.md`
 
 ### 덮어쓰기 전 검사
 
