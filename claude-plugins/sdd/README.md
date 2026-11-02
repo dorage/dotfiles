@@ -4,12 +4,13 @@
 
 - `/sdd:draft` — 구현 전 요구사항 문서(requirements.md)
 - `/sdd:design` — requirements.md 를 받아 설계 문서(design.md)
+- `/sdd:task` — requirements.md 와 design.md 를 받아 구현 계획 문서(tasks.md)
 - `/sdd:brief` — 비개발자도 읽는 기획 문서(brief.md)
 - `/sdd:quick` — 작은 작업의 스펙과 설계를 채팅 답 하나로
 - `/sdd:bdd` — Gherkin 테스트 시나리오
 - `/sdd:setup` — `~/.sdd/{리포지토리 이름}/` 보관 폴더 준비
 
-문서를 쓰는 다섯 스킬이 함께 따르는 포맷은 `references/spec-format.md` 한 곳에 있다.
+문서를 쓰는 여섯 스킬이 함께 따르는 포맷은 `references/spec-format.md` 한 곳에 있다.
 
 ## 고친 뒤 반영하기
 
