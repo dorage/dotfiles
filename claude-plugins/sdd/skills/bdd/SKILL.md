@@ -1,6 +1,6 @@
 ---
-name: sdd-bdd
-description: 마스터가 계획, 스펙 작성 혹은 동작이 변경이 예상되는 코드 생성/수정을 계획단계없이 요청했을 때, 테스트케이스 구성을 위해 이 스킬을 사용해요. Gherkin 문법을 이용해 BDD 테스트 시나리오 가드라인을 작성해요. 트리거 - /sdd-bdd {요청}, '계획 작성', '~ 부분 수정해줘'
+name: bdd
+description: 마스터가 계획, 스펙 작성 혹은 동작이 변경이 예상되는 코드 생성/수정을 계획단계없이 요청했을 때, 테스트케이스 구성을 위해 이 스킬을 사용해요. Gherkin 문법을 이용해 BDD 테스트 시나리오 가드라인을 작성해요. 트리거 - /sdd:bdd {요청}, '계획 작성', '~ 부분 수정해줘'
 metadata:
   author: AutomationPanda
   source: https://github.com/AutomationPanda/gherkin-guidelines-for-ai
@@ -308,7 +308,7 @@ Feature: <behavior area>
 
 ## 태그
 
-시나리오 위에 붙이는 태그는 `~/.claude/skills/sdd-draft/references/spec-format.md` 의 `## 마커` 절과 `## 답 반영` 절을 따릅니다. 정의를 이 파일에 따로 적지 않습니다.
+시나리오 위에 붙이는 태그는 `${CLAUDE_PLUGIN_ROOT}/references/spec-format.md` 의 `## 마커` 절과 `## 답 반영` 절을 따릅니다. 정의를 이 파일에 따로 적지 않습니다.
 
 ``` gherkin
 # language: ko
