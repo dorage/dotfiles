@@ -10,7 +10,7 @@
 - `/sdd:bdd` — Gherkin 테스트 시나리오
 - `/sdd:setup` — `~/.sdd/{리포지토리 이름}/` 보관 폴더 준비
 
-문서를 쓰는 여섯 스킬이 함께 따르는 포맷은 `references/spec-format.md` 한 곳에 있다.
+문서를 쓰는 여섯 스킬이 함께 따르는 공용 포맷(결정·마커·답 반영·저장 위치)은 `references/spec-format.md` 한 곳에 있다. 단계마다 결과물 모양(절 구성·템플릿·완성 조건)은 `references/{스킬 이름}.md` (`draft`·`design`·`task`·`brief`·`quick`·`bdd`)에 있고, SKILL.md 에는 쓰는 과정만 둔다.
 
 ## 고친 뒤 반영하기
 
