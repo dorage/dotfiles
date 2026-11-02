@@ -56,6 +56,7 @@
     "pyright-lsp@claude-plugins-official": true,
     "gnothi@dotfiles": true,
     "wt@dotfiles": true,
+    "sdd@dotfiles": true,
     "humanize-korean@im-not-ai": true
   },
   "extraKnownMarketplaces": {
