@@ -38,7 +38,7 @@
 - **MUST** conventional commit 사용 (`<type>:<message>` (일반) `<type>(<package_name>):<message>` (모노레포))
 - **SHOULD** 원자적(하나의 논리적 변경)으로 커밋. 단, 복잡한 변경의 커밋 분할은 허용
 - **MUST** 커밋 메시지는 작업 이유를 작성
-- **MUST** `message` 은 영어/숫자/- 만 사용, 50자 이내로 명확하게 작성
+- **MUST** `message` 은 한국어/숫자/- 만 사용, 50자 이내로 명확하게 작성
 
 ## 작업 방식
 
