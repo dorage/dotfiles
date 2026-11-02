@@ -1,7 +1,7 @@
 {
   "name": "sdd",
-  "description": "스펙 주도 개발(SDD) 스킬 묶음. /sdd:draft 는 요구사항 문서, /sdd:design 은 설계 문서, /sdd:task 는 작업 DAG 가 있는 구현 계획 문서, /sdd:brief-dev 는 requirements.md 에서 마커를 걷어 낸 개발자용 기획 문서, /sdd:brief-nondev 는 requirements.md 를 쉬운 말로 바꾼 비개발자용 기획 문서, /sdd:quick 은 채팅 답으로 쓰는 작은 스펙, /sdd:bdd 는 Gherkin 테스트 시나리오를 쓰고, /sdd:setup 은 ~/.sdd/{리포지토리 이름}/ 보관 폴더를 준비한다. 결정·요구사항·마커 모양은 references/spec-format.md 하나를 함께 따른다.",
-  "version": "0.4.0",
+  "description": "스펙 주도 개발(SDD) 스킬 묶음. /sdd:draft 는 요구사항 문서, /sdd:design 은 설계 문서, /sdd:task 는 작업 DAG 가 있는 구현 계획 문서, /sdd:brief-dev 는 requirements.md 에서 마커를 걷어 낸 개발자용 기획 문서, /sdd:brief-nondev 는 requirements.md 를 쉬운 말로 바꾼 비개발자용 기획 문서, /sdd:quick 은 채팅 답으로 쓰는 작은 스펙, /sdd:bdd 는 Gherkin 테스트 시나리오를 쓰고, /sdd:setup 은 ~/.sdd/{리포지토리 이름}/ 보관 폴더를 준비한다. 결정·마커 모양은 references/spec-format.md 를 함께 따르고, 단계별 결과물 모양은 references/{스킬 이름}.md 와 references/brief-format.md 에 있다.",
+  "version": "0.4.1",
   "author": {
     "name": "dorage",
     "email": "baloonflower554@gmail.com"
