@@ -308,7 +308,7 @@ Feature: <behavior area>
 
 ## 태그
 
-시나리오 위에 붙이는 태그는 전역 CLAUDE.md 의 `### 마커` 절과 `#### 확정 흐름` 절을 따릅니다. 정의를 이 파일에 따로 적지 않습니다.
+시나리오 위에 붙이는 태그는 `~/.claude/skills/sdd-draft/SKILL.md` 의 `## 마커` 절과 `## 답 반영` 절을 따릅니다. 정의를 이 파일에 따로 적지 않습니다.
 
 ``` gherkin
 # language: ko
