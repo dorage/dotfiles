@@ -32,6 +32,7 @@ description: sdd:draft 가 쓴 요구사항 문서(requirements.md)를 받아, �
     - 구조: `grep '^#' requirements.md` 와 `grep '^#' brief-nondev.md` 가 같다
     - 번호: `grep -c '^[0-9]\+\. '` 가 입력과 같다
 - 「쉬운 말 점검」을 한다
+- spec-format 「윤문」을 거친다
 
 ## 쉬운 말 점검
 

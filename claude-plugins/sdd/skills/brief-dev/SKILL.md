@@ -29,6 +29,7 @@ description: sdd:draft 가 쓴 요구사항 문서(requirements.md)를 받아, �
     - 표기 열: `grep -n '표기 |' brief-dev.md` 결과가 없다
     - 구조: `grep '^#' requirements.md` 와 `grep '^#' brief-dev.md` 가 같다
     - 번호: `grep -c '^[0-9]\+\. '` 가 입력과 같다
+- spec-format 「윤문」을 거친다
 
 ## 공유 문서 경로
 
