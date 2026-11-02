@@ -6,7 +6,7 @@
 
 - **MUST** save Gherkin in `*.feature` files.
 - **MUST** use kebab-case file names.
-- **SHOULD** keep all feature files under one main directory unless the project dictates otherwise.
+- **MUST** save feature files under `features/` in the spec folder (`references/spec-format.md` 「저장 위치」), next to `requirements.md` and `design.md`.
 - **MAY** use sub-directories; **SHOULD** organize by functional behavior area.
 - **MUST** group a domain (for example, 주문) with a directory, not with a single `Feature`.
 - **MUST** name files `<actor>-<flow>.feature` (for example, `customer-requests-refund.feature`).
