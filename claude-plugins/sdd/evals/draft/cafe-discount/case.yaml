@@ -57,6 +57,11 @@ graders:
     pattern: '@(초안 [a-z]\s*안\s*[—–-]|미정\s*[—–-])'
     match: contains
   - type: regex
+    name: regex-no-code-path
+    target: {source: file, path: out/requirements.md}
+    pattern: '`[^`\n]*(/|\.(ts|tsx|js|py|sql|go|kt))[^`\n]*`'
+    match: not_contains
+  - type: regex
     name: regex-decision-log
     target: {source: file, path: out/requirements.md}
     pattern: '^## 결정 기록'
