@@ -6,16 +6,17 @@ context:
   scaffold_script: scaffold.sh
 execution:
   prompt: |
-    /sdd:draft 저장 경로는 out/requirements.md 다. 제휴 카페 임직원 할인 기능을 만들고 싶다. 제휴 카페에서 임직원이 음료를 사면 1,500원까지 할인해 준다. 회사 이메일 인증을 마친 임직원만 할인받는다. 할인 비용은 회사와 카페가 나눠 낸다. 정산은 매달 한다. 도메인 언어: "임직원"은 제휴 회사에 다니고 회사 이메일 인증을 마친 직원이다.
+    /sdd:draft 저장 경로는 out/requirements.md 다. 제휴 카페 임직원 할인 기능을 만들고 싶다. 제휴 카페에서 임직원이 음료를 사면 1,500원까지 할인해 준다. 회사 이메일 인증을 마친 임직원만 할인받는다. 할인 비용은 회사와 카페가 나눠 낸다. 정산은 매달 한다. 참여자: 임직원, 제휴 카페 사장님, 제휴 회사, 운영자, 키오스크로 주문하는 일반 고객. 도메인 언어: "임직원"은 제휴 회사에 다니고 회사 이메일 인증을 마친 직원이다.
 
     평가용 실행이라 아래를 지킨다.
     - 이 폴더에는 코드가 없다. git fetch 와 origin/main 조사는 하지 않고, 코드 근거가 필요한 자리는 "확인하지 않았다" 로 쓴다.
     - 나에게 묻지 않는다. 열린 결정은 열린 채로 추천안을 적어 두고 끝까지 쓴다.
     - 윤문(humanize-korean) 단계는 건너뛴다.
     - 같은 이름의 파일이 이미 있으면 묻지 말고 새로 쓴다.
-  max_turns: 40
-  timeout_seconds: 900
-  allowed_tools: [Read, Write, Edit, Glob, Grep, Bash, Skill]
+    - 참여자별 검토(sdd:persona-review)는 건너뛰지 않는다.
+  max_turns: 80
+  timeout_seconds: 1800
+  allowed_tools: [Read, Write, Edit, Glob, Grep, Bash, Skill, Agent]
 runs: 3
 graders:
   - type: file_exists
@@ -65,6 +66,12 @@ graders:
     name: regex-flow-diagram
     target: {source: file, path: out/requirements.md}
     pattern: '```mermaid\s*\n\s*flowchart LR'
+    match: contains
+  - type: regex
+    name: regex-persona-review-called
+    target: {source: file, path: out/requirements.md}
+    pattern: '^## 참여자별 검토 기록'
+    flags: m
     match: contains
   - type: llm
     name: llm-write-once

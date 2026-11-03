@@ -14,6 +14,7 @@ flowchart LR
     start([설명 한 덩어리]) --> size{작은 작업인가}
     size -- 예 --> quick["/sdd:quick<br/>채팅 답"]
     size -- 아니오 --> draft["/sdd:draft"]
+    draft -. 참여자 확정 시 자동 .-> review["/sdd:persona-review"]
     quick -. 규모 초과 .-> draft
     draft --> design["/sdd:design"]
     draft --> bdev["/sdd:brief-dev"]
@@ -27,6 +28,7 @@ flowchart LR
 ## 기본 흐름
 
 - `/sdd:draft {설명}`: 무엇을 만드는지 요구사항 문서로 쓴다. 이 흐름의 시작점이고, 요청 하나에 보관 폴더 하나를 만든다
+    - 설명에 참여자를 나열하면 draft 가 문서를 다 쓴 뒤 `sdd:persona-review` 를 불러 참여자별로 빠진 과정을 채운다. 나열하지 않으면 참여자 목록 결정에 답한 뒤 부른다
 - `/sdd:design {폴더}`: 어떻게 만드는지 설계 문서로 쓴다. 요구사항 문서에 열린 결정이 남아 있어도 쓸 수 있다
 - 설계 문서가 「완성」 이 될 때까지 결정에 답한다 (아래 「결정에 답하기」)
 - `/sdd:task {폴더}`: 어떤 순서로 만드는지 작업 DAG 로 쓴다
@@ -39,6 +41,7 @@ flowchart LR
     - 개발자에게 → `/sdd:brief-dev {폴더}`
     - 운영·영업·디자인·경영 직원에게 → `/sdd:brief-nondev {폴더}`
 - 공유 문서로 만들 때: 설명에 "artifact" 또는 "아티팩트" 를 넣는다. draft·brief 가 로컬 마크다운 대신 공유 문서로 쓴다
+- 이미 있는 요구사항 문서를 참여자별로 다시 검토할 때: `/sdd:persona-review {폴더}`. 「참여자별 검토 기록」에 없는 참여자만 검토한다
 - `/sdd:setup`: 보관 폴더(`~/.sdd/{리포 이름}/`)만 미리 만든다. draft 가 없으면 만들기 때문에 따로 부르지 않아도 된다
 
 ## 결정에 답하기

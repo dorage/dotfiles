@@ -8,7 +8,7 @@ sdd 명령이 남기는 결과물과, 결과물끼리 무엇을 읽는지 정리
 
 ```text
 ~/.sdd/{리포 폴더}/{YYYYmmddHHMMSS}_{요청내용}/
-  requirements.md
+  requirements.md          # 맨 끝 「참여자별 검토 기록」은 /sdd:persona-review 가 쓴다
   design.md
   tasks.md
   brief-dev.md
@@ -26,11 +26,13 @@ features/ 를 뺀 마크다운 결과물은 다 쓴 뒤 `humanize-korean` 윤문
 ```mermaid
 flowchart LR
     req["requirements.md<br/>/sdd:draft"]
+    rev["/sdd:persona-review<br/>같은 문서를 보강"]
     des["design.md<br/>/sdd:design"]
     tsk["tasks.md<br/>/sdd:task"]
     fea["features/*.feature<br/>/sdd:bdd"]
     bdev["brief-dev.md<br/>/sdd:brief-dev"]
     bnon["brief-nondev.md<br/>/sdd:brief-nondev"]
+    req <--> rev
     req --> des
     req --> tsk
     req --> fea
@@ -47,6 +49,7 @@ flowchart LR
 그림에 없는 동작만 적는다.
 
 - requirements.md: 앞 문서가 없다. 모든 흐름의 시작점이다
+- persona-review: requirements.md 가 없으면 고치지 않고 `/sdd:draft` 를 안내한다. 새 파일을 만들지 않는다
 - design.md: requirements.md 가 없으면 쓰지 않고 `/sdd:draft` 를 안내한다. requirements.md 에 열린 결정이 남아 있어도 쓴다
 - tasks.md, features/: 둘 중 하나라도 없으면 쓰지 않고 빠진 문서를 만드는 명령을 안내한다. design.md 가 「완성」 이 아니면 남은 결정을 알려 준다
 - brief-dev.md, brief-nondev.md: requirements.md 가 없으면 쓰지 않고 `/sdd:draft` 를 안내한다
