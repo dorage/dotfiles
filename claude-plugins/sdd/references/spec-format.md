@@ -126,6 +126,7 @@
     - 강도 "가볍게". 스펙은 고칠 곳이 적은 글이라 과윤문을 막는 가벼운 경로가 맞다
     - 장르 `report`
     - 건드리지 않을 것: 헤딩 줄, `@` 마커와 괄호 속 출처, 결정 ID(`A1`·`D2`)와 요구사항 번호, EARS 키워드(`THE System`·`SHALL`·`WHEN`·`WHILE`·`IF`·`THEN`), 표의 행과 열, 코드 블록과 mermaid, 백틱 안 글자, 경로, 숫자와 날짜, 체크박스
+- humanize-korean 이 `Agent` 로 부르는 에이전트(`humanize-korean:humanize-monolith`·`humanize-diagnostician`·`humanize-finalizer`)는 모두 `model: "sonnet"`, `effort: "low"` 를 넘겨 부른다. 에이전트 정의의 모델 대신 이 값을 쓴다. 문장만 다듬는 가벼운 일이라 sonnet low 로 충분하고, haiku 는 이 계정에서 꺼 두었다
 - 결과 `final.md` 에서 요약 블록과 끝의 빈 줄을 지운다. 이 명령으로 `final.md` 자체를 고친다
     - `perl -0pi -e 's/\n*<!-- HUMANIZE-SUMMARY.*?-->\s*/\n/s' _workspace/{run_id}/final.md`
 
