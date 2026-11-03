@@ -150,9 +150,9 @@ test("골든 design.md 가 design regex 규칙을 통과한다", () => {
 test("design 규칙이 -> 없는 결정 제목과 6번째 결정을 잡는다", () => {
   const gs = graderSet("design");
   const arrow = gs.find((g) => g.name === "regex-decision-has-arrow")!;
-  assert.ok(!check(arrow, "- **D1. 테이블을 나눌지**\n"));
+  assert.ok(!check(arrow, "- **S1. 테이블을 나눌지**\n"));
   const max = gs.find((g) => g.name === "regex-group-max-5")!;
-  assert.ok(!check(max, "- *D6. 캐시를 쓴다* ->"));
+  assert.ok(!check(max, "- *S6. 캐시를 쓴다* ->"));
 });
 
 test("brief 의 줄 수 규칙이 골든 요구사항 문서의 번호 줄·헤딩 수와 같다", () => {
