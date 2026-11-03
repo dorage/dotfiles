@@ -1,0 +1,92 @@
+schema_version: "1"
+name: brief-nondev-cafe-discount
+description: sdd:brief-nondev 가 골든 요구사항 문서를 비개발자용 기획 문서로 brief-format 규칙대로 바꿔 쓰는지 본다.
+tags: [sdd, brief-nondev]
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: |
+    /sdd:brief-nondev out/requirements.md 결과는 같은 폴더의 out/brief-nondev.md 에 쓴다.
+
+    평가용 실행이라 아래를 지킨다.
+    - 이 폴더에는 코드가 없다. 조사는 하지 않는다.
+    - 나에게 묻지 않는다. 열린 결정은 열린 채로 추천안을 적어 두고 끝까지 쓴다.
+    - 윤문(humanize-korean) 단계는 건너뛴다.
+    - 같은 이름의 파일이 이미 있으면 묻지 말고 새로 쓴다.
+  max_turns: 60
+  timeout_seconds: 1200
+  allowed_tools: [Read, Write, Edit, Glob, Grep, Bash, Skill, Agent]
+runs: 3
+graders:
+  - type: file_exists
+    name: file-output
+    path: out/brief-nondev.md
+  - type: tool_used
+    name: ask-none
+    tool: AskUserQuestion
+    min: 0
+    max: 0
+    arm: both
+  - type: regex
+    name: regex-no-markers
+    target: {source: file, path: out/brief-nondev.md}
+    pattern: '@(결정|해석|초안|미정|사실|가정|확정)'
+    match: not_contains
+  - type: regex
+    name: regex-no-marker-column
+    target: {source: file, path: out/brief-nondev.md}
+    pattern: '표기 \|'
+    match: not_contains
+  - type: regex
+    name: regex-no-ears
+    target: {source: file, path: out/brief-nondev.md}
+    pattern: 'THE System|SHALL'
+    match: not_contains
+  - type: regex
+    name: regex-no-code-path
+    target: {source: file, path: out/brief-nondev.md}
+    pattern: 'src/'
+    match: not_contains
+  - type: regex
+    name: regex-no-inline-code
+    target: {source: file, path: out/brief-nondev.md}
+    pattern: '`[^`\n]+`'
+    match: not_contains
+  - type: regex
+    name: regex-numbered-count-same
+    target: {source: file, path: out/brief-nondev.md}
+    pattern: '^\d+\. '
+    flags: m
+    match: count:5
+  - type: regex
+    name: regex-heading-count-same
+    target: {source: file, path: out/brief-nondev.md}
+    pattern: '^#{1,6} '
+    flags: m
+    match: count:10
+  - type: regex
+    name: regex-master-answer-kept
+    target: {source: file, path: out/brief-nondev.md}
+    pattern: '"회사 70, 카페 30"'
+    match: contains
+  - type: regex
+    name: regex-domain-term-kept
+    target: {source: file, path: out/brief-nondev.md}
+    pattern: '할인 한도'
+    match: contains
+  - type: llm
+    name: llm-write-once
+    focus: {source: file, path: out/brief-nondev.md}
+    criteria: |
+      입력 요구사항 문서에 없던 내용(새 결정, 새 절, 새 예시, 이야기, 요약)을 더하지 않았고, 같은 내용이 두 곳에 반복되지 않는다. 핵심 흐름과 업무 규칙의 실제 숫자(5,900원, 8,800원, 2,100원, 1,501원 같은)가 그대로 남아 있다. 모두 맞으면 PASS.
+  - type: llm
+    name: llm-plain-words
+    focus: {source: file, path: out/brief-nondev.md}
+    criteria: |
+      인수 조건은 "~하면, ~된다" 같은 쉬운 한국어 문장이고 입력과 같은 줄 수다. 코드 경로, 테이블·함수 이름, "지금 코드에서 확인한 것" 같은 코드 근거가 없다. 도메인 언어(제휴 카페, 임직원, 할인 한도, 할인 분담)와 정산 같은 업무 용어, 마스터 답 원문("a", "회사 70, 카페 30", "버림")은 바뀌지 않았다. 모두 맞으면 PASS.
+  - type: baseline
+    name: baseline
+    baseline_file: ../../baseline/current/traces/brief-nondev.jsonl
+    criteria: |
+      묻지 않고 끝까지 진행해 out/brief-nondev.md 를 썼고, 마커 제거·개발 언어 순화·쉬운 말 점검을 기준 실행만큼 지켰다.
+expected_outcome: out/brief-nondev.md 에 마커, EARS 키워드, 코드 경로가 없고 구조는 요구사항 문서와 같은 문서가 생긴다.

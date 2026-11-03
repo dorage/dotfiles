@@ -22,3 +22,7 @@
     - 문장만 고쳤으면 셋째 자리 (0.1.0 → 0.1.1)
     - 스킬을 더하거나 빼거나 이름을 바꿨으면 둘째 자리 (0.1.1 → 0.2.0)
 - `/plugin update sdd@dotfiles` 를 실행하고 새 세션을 연다
+
+## 평가
+
+스킬을 고치거나 버전을 올렸으면 `npx tsx claude-plugins/sdd/evals/run.ts` 로 스킬마다 결과물이 포맷 규칙을 지키는지 재고, 이전 버전보다 나빠졌는지 확인한다. 돌리는 법과 판정 규칙은 [evals/README.md](evals/README.md) 에 있다.

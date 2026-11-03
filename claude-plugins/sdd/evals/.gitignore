@@ -1,0 +1,2 @@
+# 평가를 돌릴 때마다 생기는 결과. 기준으로 남길 것은 run.ts --save-baseline 이 baseline/ 에 옮긴다
+results/
