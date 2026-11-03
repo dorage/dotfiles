@@ -89,7 +89,9 @@ for (const info of cases) {
     }
     assert.ok(graders.some((g) => g.type === "tool_used" && g.tool === "AskUserQuestion" && g.arm === "both"));
     assert.equal(graders.filter((g) => g.type === "llm").length, 2);
-    assert.equal(graders.filter((g) => g.type === "baseline").length, 1);
+    // 기준 trace 가 아직 없는 새 스킬 case 는 baseline 채점기를 두지 않는다. --save-baseline 뒤에 더한다
+    const hasTrace = existsSync(join(evalsDir, "baseline", "current", "traces", `${info.skill}.jsonl`));
+    assert.equal(graders.filter((g) => g.type === "baseline").length, hasTrace ? 1 : 0);
   });
 }
 
@@ -113,6 +115,31 @@ test("EARS 마커 규칙이 마커 없는 인수 조건을 잡는다", () => {
   assert.ok(check(g, "1. WHEN 결제하면, THE System SHALL 할인한다. @초안 (A1)"));
 });
 
+test("골든 requirements.md 가 persona-review regex 규칙을 통과한다", () => {
+  const text = golden("requirements.md");
+  for (const g of graderSet("persona-review").filter((g) => g.type === "regex")) {
+    assert.ok(check(g, text), g.name);
+  }
+});
+
+test("persona-review 규칙이 검토 기록이 없거나 맨 끝이 아닌 문서를 잡는다", () => {
+  const gs = graderSet("persona-review");
+  const log = gs.find((g) => g.name === "regex-review-log")!;
+  const last = gs.find((g) => g.name === "regex-review-log-last")!;
+  const text = golden("requirements.md");
+  // scaffold.sh 가 지우는 것과 같은 모양: 검토 기록 절을 뺀 입력
+  const staged = text.replace(/\n+## 참여자별 검토 기록\n[\s\S]*$/, "\n");
+  assert.ok(!check(log, staged), "검토 기록이 없는 입력을 통과시켰습니다");
+  assert.ok(!check(last, text + "\n## 덧붙인 절\n"), "검토 기록 뒤의 절을 놓쳤습니다");
+});
+
+test("draft 규칙이 persona-review 를 부르지 않은 문서를 잡는다", () => {
+  const g = graderSet("draft").find((g) => g.name === "regex-persona-review-called")!;
+  const text = golden("requirements.md");
+  assert.ok(check(g, text));
+  assert.ok(!check(g, text.replace(/## 참여자별 검토 기록/, "## 다른 절")));
+});
+
 test("골든 design.md 가 design regex 규칙을 통과한다", () => {
   const text = golden("design.md");
   for (const g of graderSet("design").filter((g) => g.type === "regex")) {
@@ -129,7 +156,8 @@ test("design 규칙이 -> 없는 결정 제목과 6번째 결정을 잡는다", 
 });
 
 test("brief 의 줄 수 규칙이 골든 요구사항 문서의 번호 줄·헤딩 수와 같다", () => {
-  const text = golden("requirements.md");
+  // brief 는 「참여자별 검토 기록」 절을 옮기지 않는다 (references/brief-format.md 「변환 원칙」)
+  const text = golden("requirements.md").replace(/\n+## 참여자별 검토 기록\n[\s\S]*$/, "\n");
   for (const skill of ["brief-dev", "brief-nondev"]) {
     for (const g of graderSet(skill).filter((g) => g.match?.startsWith("count:"))) {
       assert.ok(check(g, text), `${skill} ${g.name}: 골든 문서와 수가 다릅니다`);
