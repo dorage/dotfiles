@@ -41,13 +41,13 @@ graders:
   - type: regex
     name: regex-decision-has-arrow
     target: {source: file, path: out/design.md}
-    pattern: '^\s*- (\*\*|\*)D\d+\.(?!.*(->|@확정)).*$'
+    pattern: '^\s*- (\*\*|\*)[S-Z]\d+\.(?!.*(->|@확정)).*$'
     flags: m
     match: not_contains
   - type: regex
     name: regex-no-requirement-groups
     target: {source: file, path: out/design.md}
-    pattern: '^\s*- (\*\*|\*)[A-C]\d+\.'
+    pattern: '^\s*- (\*\*|\*)[A-H]\d+\.'
     flags: m
     match: not_contains
   - type: regex

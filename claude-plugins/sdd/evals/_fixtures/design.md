@@ -8,16 +8,16 @@
 
 ### 열린 결정
 
-#### D 계산
+#### S 계산
 
-- *D1. 할인 계산을 서비스 함수로 둔다* ->
+- *S1. 할인 계산을 서비스 함수로 둔다* ->
     - 적용한 안: a. 서비스 함수 — 상태가 없어 테스트가 쉽다
     - 대안: b. 클래스 — 상태가 필요해지면 바꾼다
     - 걸린 곳: 컴포넌트 설계 `calcPartnerDiscount`
 
 ### 정해진 결정
 
-- D2. 분담금을 별도 테이블에 저장한다 — 답: @확정 (2026-11-02 "b") — 반영한 곳: 데이터 흐름, 컴포넌트 설계 `SettlementJob`
+- S2. 분담금을 별도 테이블에 저장한다 — 답: @확정 (2026-11-02 "b") — 반영한 곳: 데이터 흐름, 컴포넌트 설계 `SettlementJob`
 
 ## 시스템 아키텍처
 
@@ -40,9 +40,9 @@ flowchart LR
 
 | 컴포넌트 | 책임 | 인터페이스 | 의존 | 추적 | 표기 |
 |---|---|---|---|---|---|
-| `calcPartnerDiscount` (새) | 한 잔의 할인액을 계산한다 | `calcPartnerDiscount(price: Won): Won` | — | 요구사항 1 인수 조건 1, 3 | @초안 (D1) |
+| `calcPartnerDiscount` (새) | 한 잔의 할인액을 계산한다 | `calcPartnerDiscount(price: Won): Won` | — | 요구사항 1 인수 조건 1, 3 | @초안 (S1) |
 | `CheckoutService` (기존) | 결제 금액을 계산한다 | `checkout(order: Order): Payment` | `calcPartnerDiscount` | 요구사항 1 인수 조건 1, 2 | @사실 (`src/order/checkout.ts`) |
-| `SettlementJob` (새) | 지난달 분담금을 카페별로 계산한다 | `run(month: YearMonth): void` | `partner_shares` | 요구사항 2 인수 조건 1, 2 | @확정 (D2, 2026-11-02) |
+| `SettlementJob` (새) | 지난달 분담금을 카페별로 계산한다 | `run(month: YearMonth): void` | `partner_shares` | 요구사항 2 인수 조건 1, 2 | @확정 (S2, 2026-11-02) |
 
 ## 시퀀스 다이어그램
 
@@ -85,6 +85,13 @@ erDiagram
 |---|---|---|---|---|---|---|---|
 | E1 | `CheckoutService` 인증 확인 | 인증 플래그 없음 | 인증 안내 | 정가 결제 | 덜 줌 | 요구사항 1 인수 조건 2 | @초안 |
 | E2 | `SettlementJob` 계산 | 예외 발생 | 없음 | 운영자 알림, 멱등 키 `cafe_id + year_month` 로 다시 실행 | 시끄러움 | 요구사항 2 인수 조건 2 | @초안 |
+
+## 안전망
+
+- 즉시 되돌림
+    - 장치: 제휴 할인 기능 스위치. 끄면 정가 결제로 돌아간다 @초안
+    - 걸린 컴포넌트: `CheckoutService`
+    - 쓰는 때: 할인액이 틀리게 계산될 때
 
 ## 테스트 전략
 

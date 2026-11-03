@@ -150,9 +150,9 @@ test("골든 design.md 가 design regex 규칙을 통과한다", () => {
 test("design 규칙이 -> 없는 결정 제목과 6번째 결정을 잡는다", () => {
   const gs = graderSet("design");
   const arrow = gs.find((g) => g.name === "regex-decision-has-arrow")!;
-  assert.ok(!check(arrow, "- **D1. 테이블을 나눌지**\n"));
+  assert.ok(!check(arrow, "- **S1. 테이블을 나눌지**\n"));
   const max = gs.find((g) => g.name === "regex-group-max-5")!;
-  assert.ok(!check(max, "- *D6. 캐시를 쓴다* ->"));
+  assert.ok(!check(max, "- *S6. 캐시를 쓴다* ->"));
 });
 
 test("brief 의 줄 수 규칙이 골든 요구사항 문서의 번호 줄·헤딩 수와 같다", () => {
@@ -171,8 +171,13 @@ test("brief 규칙은 골든 요구사항 문서(마커가 있는 원본)를 떨
   assert.ok(!check(dev.find((g) => g.name === "regex-no-markers")!, text));
   assert.ok(!check(dev.find((g) => g.name === "regex-no-marker-column")!, text));
   const nondev = graderSet("brief-nondev");
-  assert.ok(!check(nondev.find((g) => g.name === "regex-no-code-path")!, text));
-  assert.ok(!check(nondev.find((g) => g.name === "regex-no-inline-code")!, text));
+  // 요구사항 문서는 경로를 적지 않는다 (references/draft.md 「이 문서의 수준」). 경로가 섞인 글로 규칙을 확인한다
+  const path = nondev.find((g) => g.name === "regex-no-code-path")!;
+  assert.ok(check(path, text), "골든 요구사항 문서에 코드 경로가 남아 있습니다");
+  assert.ok(!check(path, text + "\n- 결제는 `src/order/checkout.ts` 에서 계산한다\n"));
+  const inline = nondev.find((g) => g.name === "regex-no-inline-code")!;
+  assert.ok(check(inline, text), "골든 요구사항 문서에 코드 조각이 남아 있습니다");
+  assert.ok(!check(inline, text + "\n- 결제는 `checkout()` 에서 계산한다\n"));
   assert.ok(check(nondev.find((g) => g.name === "regex-no-inline-code")!, "```mermaid\nflowchart LR\n```\n"));
 });
 
@@ -198,4 +203,12 @@ test("bdd 규칙이 올바른 feature 를 통과시키고 태그 없는 시나�
   const names = graderSet("bdd").find((g) => g.name === "regex-kebab-file-names")!;
   assert.ok(check(names, "out/features/order/customer-pays-order.feature\nout/features-all.txt"));
   assert.ok(!check(names, "out/features/Customer_Pays.feature"));
+});
+
+test("draft 규칙이 요구사항 문서의 코드 경로를 잡는다", () => {
+  const g = graderSet("draft").find((g) => g.name === "regex-no-code-path")!;
+  const text = golden("requirements.md");
+  assert.ok(check(g, text));
+  assert.ok(!check(g, text + "\n- 결제는 `src/order/checkout.ts` 에서 계산한다\n"));
+  assert.ok(!check(g, text + "\n- `in_house_service.py` 가 인증한다\n"));
 });
