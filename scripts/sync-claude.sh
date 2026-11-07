@@ -39,3 +39,27 @@ for path in "$SRC"/*; do
     rsync -avh "$path" "$DEST/$name"
   fi
 done
+
+# ~/.config/claude-plugins 를 리포 claude-plugins 를 가리키는 링크로 둔다.
+# 복사본을 따로 두면 리포와 설치본이 어긋나기 때문이다.
+# 워크트리에서 실행해도 메인 체크아웃을 가리키도록 git 공용 디렉터리에서 리포 루트를 찾는다.
+REPO_MAIN="$(dirname "$(git -C "$SRC" rev-parse --path-format=absolute --git-common-dir)")"
+PLUGINS_SRC="$REPO_MAIN/claude-plugins"
+PLUGINS_DEST="$HOME/.config/claude-plugins"
+
+mkdir -p "$(dirname "$PLUGINS_DEST")"
+if [ -L "$PLUGINS_DEST" ]; then
+  if [ "$(readlink "$PLUGINS_DEST")" != "$PLUGINS_SRC" ]; then
+    ln -sfn "$PLUGINS_SRC" "$PLUGINS_DEST"
+    echo "링크 갱신: $PLUGINS_DEST -> $PLUGINS_SRC"
+  fi
+else
+  if [ -e "$PLUGINS_DEST" ]; then
+    # 지우지 않고 옮겨 둔다. 리포에 없는 수정이 있으면 여기서 되찾는다.
+    BACKUP="$PLUGINS_DEST.bak-$(date +%Y%m%d%H%M%S)"
+    mv "$PLUGINS_DEST" "$BACKUP"
+    echo "기존 디렉터리를 옮겨 둠: $BACKUP"
+  fi
+  ln -s "$PLUGINS_SRC" "$PLUGINS_DEST"
+  echo "링크 생성: $PLUGINS_DEST -> $PLUGINS_SRC"
+fi

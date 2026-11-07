@@ -1,0 +1,96 @@
+schema_version: "1"
+name: draft-cafe-discount
+description: sdd:draft 가 설명 한 덩어리로 요구사항 문서를 spec-format·draft 규칙대로 쓰는지 본다.
+tags: [sdd, draft]
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: |
+    /sdd:draft 저장 경로는 out/requirements.md 다. 제휴 카페 임직원 할인 기능을 만들고 싶다. 제휴 카페에서 임직원이 음료를 사면 1,500원까지 할인해 준다. 회사 이메일 인증을 마친 임직원만 할인받는다. 할인 비용은 회사와 카페가 나눠 낸다. 정산은 매달 한다. 참여자: 임직원, 제휴 카페 사장님, 제휴 회사, 운영자, 키오스크로 주문하는 일반 고객. 도메인 언어: "임직원"은 제휴 회사에 다니고 회사 이메일 인증을 마친 직원이다.
+
+    평가용 실행이라 아래를 지킨다.
+    - 이 폴더에는 코드가 없다. git fetch 와 origin/main 조사는 하지 않고, 코드 근거가 필요한 자리는 "확인하지 않았다" 로 쓴다.
+    - 나에게 묻지 않는다. 열린 결정은 열린 채로 추천안을 적어 두고 끝까지 쓴다.
+    - 윤문(humanize-korean) 단계는 건너뛴다.
+    - 같은 이름의 파일이 이미 있으면 묻지 말고 새로 쓴다.
+    - 참여자별 검토(sdd:persona-review)는 건너뛰지 않는다.
+  max_turns: 80
+  timeout_seconds: 1800
+  allowed_tools: [Read, Write, Edit, Glob, Grep, Bash, Skill, Agent]
+runs: 3
+graders:
+  - type: file_exists
+    name: file-output
+    path: out/requirements.md
+  - type: tool_used
+    name: ask-none
+    tool: AskUserQuestion
+    min: 0
+    max: 0
+    arm: both
+  - type: regex
+    name: regex-ears-has-marker
+    target: {source: file, path: out/requirements.md}
+    pattern: '^\d+\. (WHEN|IF|WHILE|WHERE|THE)(?!.*@(결정|해석|초안|미정|사실|가정|확정)).*$'
+    flags: m
+    match: not_contains
+  - type: regex
+    name: regex-numbered-only-ears
+    target: {source: file, path: out/requirements.md}
+    pattern: '^\d+\. (?!WHEN|IF|WHILE|WHERE|THE)'
+    flags: m
+    match: not_contains
+  - type: regex
+    name: regex-no-summary-heading
+    target: {source: file, path: out/requirements.md}
+    pattern: '^#+ .*(요약|결론)'
+    flags: m
+    match: not_contains
+  - type: regex
+    name: regex-group-max-5
+    target: {source: file, path: out/requirements.md}
+    pattern: '\*\*[A-Z]6\.'
+    match: not_contains
+  - type: regex
+    name: regex-recommendation-shape
+    target: {source: file, path: out/requirements.md}
+    pattern: '@(초안 [a-z]\s*안\s*[—–-]|미정\s*[—–-])'
+    match: contains
+  - type: regex
+    name: regex-no-code-path
+    target: {source: file, path: out/requirements.md}
+    pattern: '`[^`\n]*(/|\.(ts|tsx|js|py|sql|go|kt))[^`\n]*`'
+    match: not_contains
+  - type: regex
+    name: regex-decision-log
+    target: {source: file, path: out/requirements.md}
+    pattern: '^## 결정 기록'
+    flags: m
+    match: contains
+  - type: regex
+    name: regex-flow-diagram
+    target: {source: file, path: out/requirements.md}
+    pattern: '```mermaid\s*\n\s*flowchart LR'
+    match: contains
+  - type: regex
+    name: regex-persona-review-called
+    target: {source: file, path: out/requirements.md}
+    pattern: '^## 참여자별 검토 기록'
+    flags: m
+    match: contains
+  - type: llm
+    name: llm-write-once
+    focus: {source: file, path: out/requirements.md}
+    criteria: |
+      같은 내용(규칙, 수치, 결정의 답)이 문서 두 곳에 반복되지 않고, 다른 곳에서는 결정 ID 나 요구사항 번호로 가리킨다. 결정 예시와 핵심 흐름 예시에는 "일정 금액" 같은 말 대신 실제 숫자(예: 1,500원, 라떼 2잔)가 있다. 둘 다 맞으면 PASS.
+  - type: llm
+    name: llm-master-sentence-kept
+    focus: {source: file, path: out/requirements.md}
+    criteria: |
+      입력 설명의 마스터 문장 "회사 이메일 인증을 마친 임직원만 할인받는다", "할인 비용은 회사와 카페가 나눠 낸다", 그리고 "임직원" 정의가 뜻을 바꾸지 않은 채 문서에 옮겨져 있고 @결정 표기가 붙어 있다. 나눠 내는 비율처럼 마스터가 정하지 않은 빈 곳은 @결정 이 아니라 @초안 이나 @미정 이다. 맞으면 PASS.
+  - type: baseline
+    name: baseline
+    baseline_file: ../../baseline/current/traces/draft.jsonl
+    criteria: |
+      묻지 않고 끝까지 진행해 out/requirements.md 를 썼고, 절 구성·마커·결정 모양을 기준 실행만큼 지켰다.
+expected_outcome: out/requirements.md 에 열린 결정(@초안 추천안, @미정)과 EARS 인수 조건이 있는 요구사항 문서가 생긴다.

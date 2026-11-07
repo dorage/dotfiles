@@ -1,0 +1,89 @@
+schema_version: "1"
+name: brief-dev-cafe-discount
+description: sdd:brief-dev 가 골든 요구사항 문서에서 마커만 걷어 낸 개발자용 기획 문서를 brief-format 규칙대로 쓰는지 본다.
+tags: [sdd, brief-dev]
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: |
+    /sdd:brief-dev out/requirements.md 결과는 같은 폴더의 out/brief-dev.md 에 쓴다.
+
+    평가용 실행이라 아래를 지킨다.
+    - 이 폴더에는 코드가 없다. 조사는 하지 않는다.
+    - 나에게 묻지 않는다. 열린 결정은 열린 채로 추천안을 적어 두고 끝까지 쓴다.
+    - 윤문(humanize-korean) 단계는 건너뛴다.
+    - 같은 이름의 파일이 이미 있으면 묻지 말고 새로 쓴다.
+  max_turns: 40
+  timeout_seconds: 900
+  allowed_tools: [Read, Write, Edit, Glob, Grep, Bash, Skill]
+runs: 3
+graders:
+  - type: file_exists
+    name: file-output
+    path: out/brief-dev.md
+  - type: tool_used
+    name: ask-none
+    tool: AskUserQuestion
+    min: 0
+    max: 0
+    arm: both
+  - type: regex
+    name: regex-no-markers
+    target: {source: file, path: out/brief-dev.md}
+    pattern: '@(결정|해석|초안|미정|사실|가정|확정)'
+    match: not_contains
+  - type: regex
+    name: regex-no-marker-column
+    target: {source: file, path: out/brief-dev.md}
+    pattern: '표기 \|'
+    match: not_contains
+  - type: regex
+    name: regex-ears-kept
+    target: {source: file, path: out/brief-dev.md}
+    pattern: '^\d+\. (WHEN|IF|WHILE|WHERE|THE)'
+    flags: m
+    match: contains
+  - type: regex
+    name: regex-numbered-only-ears
+    target: {source: file, path: out/brief-dev.md}
+    pattern: '^\d+\. (?!WHEN|IF|WHILE|WHERE|THE)'
+    flags: m
+    match: not_contains
+  - type: regex
+    name: regex-numbered-count-same
+    target: {source: file, path: out/brief-dev.md}
+    pattern: '^\d+\. '
+    flags: m
+    match: count:5
+  - type: regex
+    name: regex-heading-count-same
+    target: {source: file, path: out/brief-dev.md}
+    pattern: '^#{1,6} '
+    flags: m
+    match: count:10
+  - type: regex
+    name: regex-code-path-kept
+    target: {source: file, path: out/brief-dev.md}
+    pattern: 'src/order/checkout\.ts'
+    match: contains
+  - type: regex
+    name: regex-master-answer-kept
+    target: {source: file, path: out/brief-dev.md}
+    pattern: '"회사 70, 카페 30"'
+    match: contains
+  - type: llm
+    name: llm-write-once
+    focus: {source: file, path: out/brief-dev.md}
+    criteria: |
+      입력 요구사항 문서에 없던 내용(새 결정, 새 절, 새 예시, 새 그림, 요약)을 더하지 않았고, 같은 내용이 두 곳에 반복되지 않는다. 핵심 흐름과 업무 규칙의 실제 숫자(5,900원, 8,800원, 2,100원, 1,501원 같은)가 그대로 남아 있다. 모두 맞으면 PASS.
+  - type: llm
+    name: llm-content-unchanged
+    focus: {source: file, path: out/brief-dev.md}
+    criteria: |
+      마커 낱말과 표기 열만 사라졌고, EARS 인수 조건 문장, 결정 ID(A1~A3), 코드 경로, 마스터 답 원문("a", "회사 70, 카페 30", "버림")은 바뀌지 않았다. 정해진 결정의 답은 '2026-11-02 답 "a"' 같은 모양이다. 모두 맞으면 PASS.
+  - type: baseline
+    name: baseline
+    baseline_file: ../../baseline/current/traces/brief-dev.jsonl
+    criteria: |
+      묻지 않고 끝까지 진행해 out/brief-dev.md 를 썼고, 마커 제거와 구조 보존을 기준 실행만큼 지켰다.
+expected_outcome: out/brief-dev.md 에 마커와 표기 열이 없고, 나머지는 요구사항 문서와 같은 문서가 생긴다.

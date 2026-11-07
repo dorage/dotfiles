@@ -45,6 +45,11 @@
       "name": "jev",
       "source": "./jev",
       "description": "TypeSafe System One 모델 Jev 사용법 스킬 — 질문 타입(Choice/Score/Noul) 선택, 질문 작성법, confidence 패턴, 쿡북 18편 요약, Python·TypeScript SDK 치트시트, OpenRouter 경유 호출 스킬"
+    },
+    {
+      "name": "sdd",
+      "source": "./sdd",
+      "description": "스펙 주도 개발 스킬 묶음 — /sdd:draft 요구사항, /sdd:design 설계, /sdd:brief-dev 개발자용 기획 문서, /sdd:brief-nondev 비개발자용 기획 문서 (requirements.md 에서 만듦), /sdd:task 구현 계획, /sdd:quick 채팅 스펙, /sdd:bdd Gherkin 시나리오"
     }
   ]
 }

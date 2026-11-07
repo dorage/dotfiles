@@ -1,0 +1,853 @@
+{
+  "schemaVersion": "1.1",
+  "claudeVersion": "2.1.316",
+  "startedAt": "2026-11-03T00:00:00Z",
+  "durationSeconds": 1,
+  "costUsd": 0,
+  "partial": false,
+  "suite": {
+    "root": "evals",
+    "ablation": "none",
+    "threshold": 1,
+    "plugins": [
+      {
+        "name": "sdd",
+        "version": "0.5.0",
+        "path": "/x"
+      }
+    ]
+  },
+  "cases": [
+    {
+      "name": "same",
+      "dir": "evals/x/same",
+      "promptMarkdown": "/sdd:draft ...",
+      "graders": [
+        {
+          "name": "file-output",
+          "type": "file_exists",
+          "weight": 1,
+          "config": {}
+        },
+        {
+          "name": "regex-rule",
+          "type": "regex",
+          "weight": 1,
+          "config": {}
+        },
+        {
+          "name": "llm-quality",
+          "type": "llm",
+          "weight": 1,
+          "config": {}
+        },
+        {
+          "name": "baseline",
+          "type": "baseline",
+          "weight": 1,
+          "config": {}
+        }
+      ],
+      "arms": {
+        "with": [
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 12,
+            "error": null,
+            "tracePath": "/tmp/e-abc123/out/trace.jsonl",
+            "unknownFieldIgnored": true,
+            "graders": [
+              {
+                "name": "file-output",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              },
+              {
+                "name": "regex-rule",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              },
+              {
+                "name": "llm-quality",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              },
+              {
+                "name": "baseline",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              }
+            ]
+          },
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 12,
+            "error": null,
+            "tracePath": "/tmp/e-abc123/out/trace.jsonl",
+            "unknownFieldIgnored": true,
+            "graders": [
+              {
+                "name": "file-output",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              },
+              {
+                "name": "regex-rule",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              },
+              {
+                "name": "llm-quality",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              },
+              {
+                "name": "baseline",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              }
+            ]
+          },
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 12,
+            "error": null,
+            "tracePath": "/tmp/e-abc123/out/trace.jsonl",
+            "unknownFieldIgnored": true,
+            "graders": [
+              {
+                "name": "file-output",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              },
+              {
+                "name": "regex-rule",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              },
+              {
+                "name": "llm-quality",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              },
+              {
+                "name": "baseline",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              }
+            ]
+          }
+        ]
+      },
+      "aggregates": {
+        "score": 0,
+        "passRate": 0
+      }
+    },
+    {
+      "name": "warn",
+      "dir": "evals/x/warn",
+      "promptMarkdown": "/sdd:draft ...",
+      "graders": [
+        {
+          "name": "file-output",
+          "type": "file_exists",
+          "weight": 1,
+          "config": {}
+        },
+        {
+          "name": "regex-rule",
+          "type": "regex",
+          "weight": 1,
+          "config": {}
+        },
+        {
+          "name": "llm-quality",
+          "type": "llm",
+          "weight": 1,
+          "config": {}
+        },
+        {
+          "name": "baseline",
+          "type": "baseline",
+          "weight": 1,
+          "config": {}
+        }
+      ],
+      "arms": {
+        "with": [
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 12,
+            "error": null,
+            "tracePath": "/tmp/e-abc123/out/trace.jsonl",
+            "unknownFieldIgnored": true,
+            "graders": [
+              {
+                "name": "file-output",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              },
+              {
+                "name": "regex-rule",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              },
+              {
+                "name": "llm-quality",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              },
+              {
+                "name": "baseline",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              }
+            ]
+          },
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 12,
+            "error": null,
+            "tracePath": "/tmp/e-abc123/out/trace.jsonl",
+            "unknownFieldIgnored": true,
+            "graders": [
+              {
+                "name": "file-output",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              },
+              {
+                "name": "regex-rule",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              },
+              {
+                "name": "llm-quality",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              },
+              {
+                "name": "baseline",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              }
+            ]
+          },
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 12,
+            "error": null,
+            "tracePath": "/tmp/e-abc123/out/trace.jsonl",
+            "unknownFieldIgnored": true,
+            "graders": [
+              {
+                "name": "file-output",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              },
+              {
+                "name": "regex-rule",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              },
+              {
+                "name": "llm-quality",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              },
+              {
+                "name": "baseline",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              }
+            ]
+          }
+        ]
+      },
+      "aggregates": {
+        "score": 0,
+        "passRate": 0
+      }
+    },
+    {
+      "name": "regress",
+      "dir": "evals/x/regress",
+      "promptMarkdown": "/sdd:draft ...",
+      "graders": [
+        {
+          "name": "file-output",
+          "type": "file_exists",
+          "weight": 1,
+          "config": {}
+        },
+        {
+          "name": "regex-rule",
+          "type": "regex",
+          "weight": 1,
+          "config": {}
+        },
+        {
+          "name": "llm-quality",
+          "type": "llm",
+          "weight": 1,
+          "config": {}
+        },
+        {
+          "name": "baseline",
+          "type": "baseline",
+          "weight": 1,
+          "config": {}
+        }
+      ],
+      "arms": {
+        "with": [
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 12,
+            "error": null,
+            "tracePath": "/tmp/e-abc123/out/trace.jsonl",
+            "unknownFieldIgnored": true,
+            "graders": [
+              {
+                "name": "file-output",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              },
+              {
+                "name": "regex-rule",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              },
+              {
+                "name": "llm-quality",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              },
+              {
+                "name": "baseline",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              }
+            ]
+          },
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 12,
+            "error": null,
+            "tracePath": "/tmp/e-abc123/out/trace.jsonl",
+            "unknownFieldIgnored": true,
+            "graders": [
+              {
+                "name": "file-output",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              },
+              {
+                "name": "regex-rule",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              },
+              {
+                "name": "llm-quality",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              },
+              {
+                "name": "baseline",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              }
+            ]
+          },
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 12,
+            "error": null,
+            "tracePath": "/tmp/e-abc123/out/trace.jsonl",
+            "unknownFieldIgnored": true,
+            "graders": [
+              {
+                "name": "file-output",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              },
+              {
+                "name": "regex-rule",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              },
+              {
+                "name": "llm-quality",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              },
+              {
+                "name": "baseline",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              }
+            ]
+          }
+        ]
+      },
+      "aggregates": {
+        "score": 0,
+        "passRate": 0
+      }
+    },
+    {
+      "name": "hard",
+      "dir": "evals/x/hard",
+      "promptMarkdown": "/sdd:draft ...",
+      "graders": [
+        {
+          "name": "file-output",
+          "type": "file_exists",
+          "weight": 1,
+          "config": {}
+        },
+        {
+          "name": "regex-rule",
+          "type": "regex",
+          "weight": 1,
+          "config": {}
+        },
+        {
+          "name": "llm-quality",
+          "type": "llm",
+          "weight": 1,
+          "config": {}
+        },
+        {
+          "name": "baseline",
+          "type": "baseline",
+          "weight": 1,
+          "config": {}
+        }
+      ],
+      "arms": {
+        "with": [
+          {
+            "score": 0.5,
+            "passed": false,
+            "turns": 12,
+            "error": null,
+            "tracePath": "/tmp/e-abc123/out/trace.jsonl",
+            "unknownFieldIgnored": true,
+            "graders": [
+              {
+                "name": "file-output",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              },
+              {
+                "name": "regex-rule",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              },
+              {
+                "name": "llm-quality",
+                "passed": false,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              },
+              {
+                "name": "baseline",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              }
+            ]
+          },
+          {
+            "score": 0.5,
+            "passed": false,
+            "turns": 12,
+            "error": null,
+            "tracePath": "/tmp/e-abc123/out/trace.jsonl",
+            "unknownFieldIgnored": true,
+            "graders": [
+              {
+                "name": "file-output",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              },
+              {
+                "name": "regex-rule",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              },
+              {
+                "name": "llm-quality",
+                "passed": false,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              },
+              {
+                "name": "baseline",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              }
+            ]
+          },
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 12,
+            "error": null,
+            "tracePath": "/tmp/e-abc123/out/trace.jsonl",
+            "unknownFieldIgnored": true,
+            "graders": [
+              {
+                "name": "file-output",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              },
+              {
+                "name": "regex-rule",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              },
+              {
+                "name": "llm-quality",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              },
+              {
+                "name": "baseline",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              }
+            ]
+          }
+        ]
+      },
+      "aggregates": {
+        "score": 0,
+        "passRate": 0
+      }
+    },
+    {
+      "name": "better",
+      "dir": "evals/x/better",
+      "promptMarkdown": "/sdd:draft ...",
+      "graders": [
+        {
+          "name": "file-output",
+          "type": "file_exists",
+          "weight": 1,
+          "config": {}
+        },
+        {
+          "name": "regex-rule",
+          "type": "regex",
+          "weight": 1,
+          "config": {}
+        },
+        {
+          "name": "llm-quality",
+          "type": "llm",
+          "weight": 1,
+          "config": {}
+        },
+        {
+          "name": "baseline",
+          "type": "baseline",
+          "weight": 1,
+          "config": {}
+        }
+      ],
+      "arms": {
+        "with": [
+          {
+            "score": 0.5,
+            "passed": false,
+            "turns": 12,
+            "error": null,
+            "tracePath": "/tmp/e-abc123/out/trace.jsonl",
+            "unknownFieldIgnored": true,
+            "graders": [
+              {
+                "name": "file-output",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              },
+              {
+                "name": "regex-rule",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              },
+              {
+                "name": "llm-quality",
+                "passed": false,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              },
+              {
+                "name": "baseline",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              }
+            ]
+          },
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 12,
+            "error": null,
+            "tracePath": "/tmp/e-abc123/out/trace.jsonl",
+            "unknownFieldIgnored": true,
+            "graders": [
+              {
+                "name": "file-output",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              },
+              {
+                "name": "regex-rule",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              },
+              {
+                "name": "llm-quality",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              },
+              {
+                "name": "baseline",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              }
+            ]
+          },
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 12,
+            "error": null,
+            "tracePath": "/tmp/e-abc123/out/trace.jsonl",
+            "unknownFieldIgnored": true,
+            "graders": [
+              {
+                "name": "file-output",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              },
+              {
+                "name": "regex-rule",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              },
+              {
+                "name": "llm-quality",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              },
+              {
+                "name": "baseline",
+                "passed": true,
+                "weight": 1,
+                "scored": true,
+                "withOnly": false,
+                "explanation": "fixture"
+              }
+            ]
+          }
+        ]
+      },
+      "aggregates": {
+        "score": 0,
+        "passRate": 0
+      }
+    }
+  ],
+  "aggregates": {
+    "casesTotal": 5,
+    "casesPassed": 0,
+    "overallScore": 0,
+    "overallPassRate": 0
+  }
+}

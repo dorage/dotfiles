@@ -1,0 +1,74 @@
+schema_version: "1"
+name: persona-review-cafe-discount
+description: sdd:persona-review 가 골든 요구사항 문서의 참여자마다 에이전트를 띄워 빠진 과정을 찾고, 같은 문서에 반영하고 「참여자별 검토 기록」을 남기는지 본다.
+tags: [sdd, persona-review]
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: |
+    /sdd:persona-review out/requirements.md 같은 파일을 고친다.
+
+    평가용 실행이라 아래를 지킨다.
+    - 이 폴더에는 코드가 없다. git fetch 와 origin/main 조사는 하지 않는다.
+    - 나에게 묻지 않는다. 참여자 목록은 문서의 「참여자」 표 그대로 확정으로 보고, 새 결정은 열린 채로 추천안을 적어 둔다.
+    - 윤문(humanize-korean) 단계는 건너뛴다.
+  max_turns: 60
+  timeout_seconds: 1800
+  allowed_tools: [Read, Write, Edit, Glob, Grep, Bash, Skill, Agent]
+runs: 3
+graders:
+  - type: file_exists
+    name: file-output
+    path: out/requirements.md
+  - type: tool_used
+    name: ask-none
+    tool: AskUserQuestion
+    min: 0
+    max: 0
+    arm: both
+  - type: tool_used
+    name: agent-per-persona
+    tool: Agent
+    min: 4
+    arm: both
+  - type: regex
+    name: regex-review-log
+    target: {source: file, path: out/requirements.md}
+    pattern: '^## 참여자별 검토 기록\n\nLLM 이 검토를 다시 돌릴 때 쓰는 기록입니다\.'
+    flags: m
+    match: contains
+  - type: regex
+    name: regex-review-log-last
+    target: {source: file, path: out/requirements.md}
+    pattern: '^## 참여자별 검토 기록[\s\S]*\n## '
+    flags: m
+    match: not_contains
+  - type: regex
+    name: regex-ears-has-marker
+    target: {source: file, path: out/requirements.md}
+    pattern: '^\d+\. (WHEN|IF|WHILE|WHERE|THE)(?!.*@(결정|해석|초안|미정|사실|가정|확정)).*$'
+    flags: m
+    match: not_contains
+  - type: regex
+    name: regex-numbered-only-ears
+    target: {source: file, path: out/requirements.md}
+    pattern: '^\d+\. (?!WHEN|IF|WHILE|WHERE|THE)'
+    flags: m
+    match: not_contains
+  - type: llm
+    name: llm-gaps-found
+    focus: {source: file, path: out/requirements.md}
+    criteria: |
+      문서가 아래 다섯 빈 곳 중 네 개 이상을 새 인수 조건, 열린 결정, @미정 결정, 별개 작업 중 하나로 다룬다. 원래 문서에 없던 내용이어야 한다.
+      - 퇴사하거나 인증이 끊긴 임직원의 할인을 멈추는 것
+      - 회사가 분담금을 안 내거나 늦게 낼 때 카페가 받을 돈
+      - 이미 분담금을 계산한 달의 주문을 취소할 때
+      - 임직원별 사용 내역을 회사에 주는 것과 그 동의
+      - 카페가 받을 분담금을 미리 보는 곳
+      네 개 이상이면 PASS.
+  - type: llm
+    name: llm-review-log-shape
+    focus: {source: file, path: out/requirements.md}
+    criteria: |
+      「참여자」 표의 참여자(임직원, 제휴 카페, 회사, 운영자)가 모두 「참여자별 검토 기록」에 불릿으로 있다. 기록의 하위 불릿은 "{과정} → {반영한 곳}" 모양이고, 반영한 곳은 요구사항·인수 조건 번호, 결정 ID, 별개 작업, 범위 밖 중 하나다. 기록에 규칙 내용이나 숫자를 다시 쓰지 않았고, 기록이 가리키는 결정 ID 와 인수 조건이 문서에 실제로 있다. 모두 맞으면 PASS.
+expected_outcome: out/requirements.md 에 참여자별로 찾은 빈 곳이 인수 조건(@초안)·열린 결정·별개 작업으로 들어가고, 문서 맨 끝에 「참여자별 검토 기록」이 생긴다.
