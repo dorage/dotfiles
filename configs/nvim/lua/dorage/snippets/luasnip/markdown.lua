@@ -214,6 +214,7 @@ description: <>
 		i(3, "response"),
 		t("."),
 	}),
+}
 
 ls.add_snippets("mdx", markdown)
 ls.add_snippets("markdown", markdown)
