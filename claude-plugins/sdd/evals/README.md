@@ -9,7 +9,7 @@ npx tsx claude-plugins/sdd/evals/run.ts
 
 ## 무엇을 보는가
 
-문서를 쓰는 여덟 스킬마다 case 하나를 둔다. 모두 같은 작은 도메인(제휴 카페 임직원 할인)을 쓴다.
+문서를 쓰는 아홉 스킬마다 case 하나를 둔다. 모두 같은 작은 도메인(제휴 카페 임직원 할인)을 쓴다.
 
 | case | 스킬 | 결과물 | 미리 깔아 두는 입력 |
 | --- | --- | --- | --- |
@@ -17,6 +17,7 @@ npx tsx claude-plugins/sdd/evals/run.ts
 | `draft/cafe-discount` | draft | `out/requirements.md` | 없음 |
 | `persona-review/cafe-discount` | persona-review | `out/requirements.md` (같은 파일을 고침) | 골든 `requirements.md` 에서 「참여자별 검토 기록」을 지운 것 |
 | `design/cafe-discount` | design | `out/design.md` | 골든 `requirements.md` |
+| `flow/cafe-discount` | flow | `out/flow.md` | 골든 `requirements.md` |
 | `task/cafe-discount` | task | `out/tasks.md` | 골든 `requirements.md`, `design.md` |
 | `bdd/cafe-discount` | bdd | `out/features/**/*.feature` | 골든 `requirements.md`, `design.md` |
 | `brief-dev/cafe-discount` | brief-dev | `out/brief-dev.md` | 골든 `requirements.md` |
@@ -24,7 +25,7 @@ npx tsx claude-plugins/sdd/evals/run.ts
 
 - 골든 입력은 `_fixtures/` 에 한 번만 있다. 결정이 모두 닫힌 「완성」 상태라 task·bdd 가 멈추지 않는다. 각 case 의 `scaffold.sh` 가 `_fixtures/stage.sh` 를 불러 필요한 것만 `out/` 에 복사하고, `.eval-case` 에 case 이름을 적고, 빈 git 저장소를 만든다
     - 골든 `requirements.md` 는 검토까지 끝난 문서라 맨 끝에 「참여자별 검토 기록」이 있다. persona-review case 의 `scaffold.sh` 는 깔아 둔 뒤 이 절을 지운다. 기록이 있으면 검토할 참여자가 없기 때문이다
-- 기준 trace 가 아직 없는 새 스킬의 case(지금은 persona-review)는 `baseline` 채점기를 두지 않는다. `--save-baseline` 으로 `baseline/current/traces/{스킬}.jsonl` 이 생긴 뒤 더한다
+- 기준 trace 가 아직 없는 새 스킬의 case(지금은 persona-review, flow)는 `baseline` 채점기를 두지 않는다. `--save-baseline` 으로 `baseline/current/traces/{스킬}.jsonl` 이 생긴 뒤 더한다
 - 프롬프트는 `/sdd:{스킬}` 로 부르고, 결과 경로를 적어 폴더를 묻지 않게 하고, 묻지 말고 열린 결정은 열린 채 추천안을 적어 두라고 한다
 - case 마다 채점기
     - `file-output`: 결과 파일이 생겼다 (quick 은 대신 `write-none`: 파일을 만들지 않았다)

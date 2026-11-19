@@ -1,6 +1,6 @@
 # 스펙 포맷
 
-문서를 쓰는 모든 단계(`sdd:draft`·`sdd:persona-review`·`sdd:design`·`sdd:task`·`sdd:brief-dev`·`sdd:brief-nondev`·`sdd:quick`·`sdd:bdd`)가 함께 따르는 공용 포맷이다. 결정·마커·답 반영·저장 위치·윤문의 모양은 이 문서 한 곳에 있다.
+문서를 쓰는 모든 단계(`sdd:draft`·`sdd:persona-review`·`sdd:design`·`sdd:flow`·`sdd:task`·`sdd:brief-dev`·`sdd:brief-nondev`·`sdd:quick`·`sdd:bdd`)가 함께 따르는 공용 포맷이다. 결정·마커·답 반영·저장 위치·윤문의 모양은 이 문서 한 곳에 있다.
 
 단계마다 결과물 모양(절 구성, 템플릿, 단계 전용 표기, 완성 조건)은 `references/{스킬 이름}.md` 에 있다. 두 brief 스킬은 `references/brief-format.md` 를 함께 쓴다. 단계 문서가 이 문서의 일부를 따르지 않으면, 단계 문서 맨 위에 예외를 적는다.
 
@@ -24,6 +24,7 @@
 - 그룹 문자로 묶는다 (예: A 할인 규칙, B 가입·인증, C 정산). 그룹마다 5개 이하
 - 그룹 문자는 문서마다 쓰는 범위가 다르다. 한 기능의 결정 ID 가 두 문서에서 겹치지 않게 하기 위해서다
     - 요구사항(`sdd:draft`, `sdd:quick` 의 요구사항): `A`~`H`
+    - 화면흐름(`sdd:flow`): `M`~`R`
     - 설계(`sdd:design`, `sdd:quick` 의 설계 절): `S`~`Z`
 - 범위 안의 글자가 모자라면 글자를 더 쓰지 않는다. 기능을 더 작게 나누자고 마스터에게 권한다. 나눌 경계(요구사항 번호 묶음)를 함께 적는다. 결정이 이만큼 많으면 한 문서로 다루기에 기능이 크다는 뜻이기 때문이다
 - 결정마다
@@ -88,11 +89,11 @@
 
 ## 저장 위치
 
-`sdd:draft`·`sdd:design`·`sdd:brief-dev`·`sdd:brief-nondev`·`sdd:task`·`sdd:bdd` 가 문서를 쓰는 자리다. 스펙을 리포 밖에 두는 것은 리포를 더럽히지 않고, 워크트리를 지워도 스펙이 남게 하려는 것이다.
+`sdd:draft`·`sdd:design`·`sdd:flow`·`sdd:brief-dev`·`sdd:brief-nondev`·`sdd:task`·`sdd:bdd` 가 문서를 쓰는 자리다. 스펙을 리포 밖에 두는 것은 리포를 더럽히지 않고, 워크트리를 지워도 스펙이 남게 하려는 것이다.
 
 ### 경로
 
-- `~/.sdd/{리포 폴더}/{YYYYmmddHHMMSS}_{요청내용}/` 한 폴더에 한 요청의 `requirements.md`·`design.md`·`brief-dev.md`·`brief-nondev.md`·`tasks.md`·`features/` 를 모은다
+- `~/.sdd/{리포 폴더}/{YYYYmmddHHMMSS}_{요청내용}/` 한 폴더에 한 요청의 `requirements.md`·`design.md`·`flow.md`·`brief-dev.md`·`brief-nondev.md`·`tasks.md`·`scenarios.md`·`features/` 를 모은다
     - 예: `~/.sdd/dotfiles/20261102143005_제휴카페-임직원-할인/requirements.md`
 - `{리포 폴더}`: `sdd:setup` 「이름 정하기」의 이름. `~/.sdd/{리포 폴더}/` 는 그 스킬의 「실행」 명령을 그대로 돌려 얻는다. 없으면 그 명령이 만든다
 - `{YYYYmmddHHMMSS}`: 폴더를 만드는 순간의 로컬 시각. 같은 이름의 폴더가 이미 있으면 1초 뒤 시각으로 다시 만든다
@@ -106,7 +107,7 @@
 - 설명에 경로가 있다 → 그 경로. 폴더면 그 안의 각 스킬 파일
 - 없으면
     - `sdd:draft` → 새 폴더를 만든다
-    - `sdd:persona-review`·`sdd:design`·`sdd:brief-dev`·`sdd:brief-nondev`·`sdd:task`·`sdd:bdd` → `~/.sdd/{리포 폴더}/` 의 폴더를 최신순 최대 4개로 `AskUserQuestion` 한 번에 보여 주고 고르게 한다. 첫 옵션이 가장 최근 폴더다
+    - `sdd:persona-review`·`sdd:design`·`sdd:flow`·`sdd:brief-dev`·`sdd:brief-nondev`·`sdd:task`·`sdd:bdd` → `~/.sdd/{리포 폴더}/` 의 폴더를 최신순 최대 4개로 `AskUserQuestion` 한 번에 보여 주고 고르게 한다. 첫 옵션이 가장 최근 폴더다
         - 폴더가 하나도 없으면 쓰지 않고 "`/sdd:draft` 를 먼저 실행하세요" 한 줄을 남긴다
 - 쓰기 전에 채팅에 "{경로}에 씁니다" 한 줄을 남긴다. 경로가 정해지기 전에는 파일을 쓰지 않는다
 - 같은 파일이 이미 있으면 덮어쓰기 전에 읽고, 갱신인지 새 파일인지 한 번 묻는다
@@ -117,8 +118,8 @@
 
 ### 대상과 때
 
-- 대상: `requirements.md`·`design.md`·`tasks.md`·`brief-dev.md`·`brief-nondev.md`
-- 거치지 않는 것: `features/*.feature`(Gherkin 키워드와 단계 문장이 깨진다), `sdd:quick`(파일이 없는 채팅 답), 공유 문서 경로(로컬 파일이 아니다)
+- 대상: `requirements.md`·`design.md`·`flow.md`·`tasks.md`·`brief-dev.md`·`brief-nondev.md`
+- 거치지 않는 것: `features/*.feature`·`scenarios.md`(Gherkin 키워드와 단계 문장이 깨진다), `sdd:quick`(파일이 없는 채팅 답), 공유 문서 경로(로컬 파일이 아니다)
 - 때: 스킬이 파일을 다 쓰고 자기 검증(`(작성 중)` 검색, 마커·구조 검증)을 마친 직후. 「답 반영」으로 고친 뒤와 `sdd:persona-review` 가 고친 뒤에도 다시 거친다
 - 플러그인이 없으면(`claude plugin list` 에 `humanize-korean@im-not-ai` 가 없으면) 건너뛰고, 끝맺음에 "윤문을 건너뛰었습니다. `/sdd:setup` 을 실행하세요" 한 줄을 붙인다. 문서 작성은 막지 않는다
 

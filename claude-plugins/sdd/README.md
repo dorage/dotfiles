@@ -5,14 +5,15 @@
 - `/sdd:draft` — 구현 전 요구사항 문서(requirements.md)
 - `/sdd:persona-review` — requirements.md 의 참여자마다 에이전트를 띄워 빠진 과정을 찾아 같은 문서에 보강. 참여자가 확정되면 draft 가 부른다
 - `/sdd:design` — requirements.md 를 받아 설계 문서(design.md)
+- `/sdd:flow` — requirements.md 를 받아 pug-frame 와이어프레임 전에 확인할 화면흐름 문서(flow.md). 흐름별 mermaid 흐름도와 화면별 변경 표
 - `/sdd:task` — requirements.md 와 design.md 를 받아 구현 계획 문서(tasks.md)
 - `/sdd:brief-dev` — requirements.md 에서 마커를 걷어 낸 개발자용 기획 문서(brief-dev.md)
 - `/sdd:brief-nondev` — requirements.md 를 비개발자도 읽게 바꾼 기획 문서(brief-nondev.md)
 - `/sdd:quick` — 작은 작업의 스펙과 설계를 채팅 답 하나로
-- `/sdd:bdd` — requirements.md 와 「완성」 design.md 를 받아 Gherkin 시나리오(features/*.feature)
+- `/sdd:bdd` — requirements.md 경로를 주거나 requirements.md 만 있으면 정해진 인수 조건을 scenarios.md 의 gherkin 코드 블록으로(미결은 「미결 사항」에), 「완성」 design.md 도 있으면 E2E·통합 인수 조건을 Gherkin 시나리오(features/*.feature)
 - `/sdd:setup` — `~/.sdd/{리포지토리 이름}/` 보관 폴더와 윤문 플러그인(`humanize-korean@im-not-ai`) 준비
 
-문서를 쓰는 여덟 스킬이 함께 따르는 공용 포맷(결정·마커·답 반영·저장 위치·윤문)은 `references/spec-format.md` 한 곳에 있다. 단계마다 결과물 모양(절 구성·템플릿·완성 조건)은 `references/{스킬 이름}.md` (`draft`·`persona-review`·`design`·`task`·`quick`·`bdd`)에 있고, 두 brief 스킬의 변환 규칙은 `references/brief-format.md` 에 있다. SKILL.md 에는 쓰는 과정만 둔다.
+문서를 쓰는 아홉 스킬이 함께 따르는 공용 포맷(결정·마커·답 반영·저장 위치·윤문)은 `references/spec-format.md` 한 곳에 있다. 단계마다 결과물 모양(절 구성·템플릿·완성 조건)은 `references/{스킬 이름}.md` (`draft`·`persona-review`·`design`·`flow`·`task`·`quick`·`bdd`)에 있고, 두 brief 스킬의 변환 규칙은 `references/brief-format.md` 에 있다. SKILL.md 에는 쓰는 과정만 둔다.
 
 - 어떤 명령을 어떤 순서로 쓰는지: [WORKFLOW.md](WORKFLOW.md)
 - 결과물이 어디에 남고 서로 무엇을 읽는지: [OUTPUT.md](OUTPUT.md)

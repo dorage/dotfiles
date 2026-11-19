@@ -59,10 +59,10 @@ test("옵션을 읽고 eval 인자로 넘긴다", () => {
   assert.throws(() => parseArgs(["--nope"]));
 });
 
-test("case 여덟 개를 스킬 이름과 함께 찾는다", () => {
+test("case 아홉 개를 스킬 이름과 함께 찾는다", () => {
   const cases = listCases(dirname(fileURLToPath(import.meta.url)));
   assert.deepEqual(
     [...cases.values()].map((c) => c.skill).sort(),
-    ["bdd", "brief-dev", "brief-nondev", "design", "draft", "persona-review", "quick", "task"],
+    ["bdd", "brief-dev", "brief-nondev", "design", "draft", "flow", "persona-review", "quick", "task"],
   );
 });

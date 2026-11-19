@@ -1,10 +1,10 @@
 {
   "name": "sdd",
-  "description": "스펙 주도 개발(SDD) 스킬 묶음. /sdd:draft 는 요구사항 문서, /sdd:persona-review 는 요구사항 문서의 참여자마다 에이전트를 띄워 빠진 과정을 찾아 같은 문서에 보강하고(draft 가 참여자가 확정되면 부른다), /sdd:design 은 설계 문서, /sdd:task 는 작업 DAG 가 있는 구현 계획 문서, /sdd:brief-dev 는 requirements.md 에서 마커를 걷어 낸 개발자용 기획 문서, /sdd:brief-nondev 는 requirements.md 를 쉬운 말로 바꾼 비개발자용 기획 문서, /sdd:quick 은 채팅 답으로 쓰는 작은 스펙, /sdd:bdd 는 완성된 설계를 받아 Gherkin 테스트 시나리오를 쓰고, /sdd:setup 은 ~/.sdd/{리포지토리 이름}/ 보관 폴더와 humanize-korean 윤문 플러그인을 준비한다. 마크다운 결과물은 다 쓴 뒤 humanize-korean 윤문을 거친다. 결정·마커 모양은 references/spec-format.md 를 함께 따르고, 단계별 결과물 모양은 references/{스킬 이름}.md 와 references/brief-format.md 에 있다.",
-  "version": "0.6.0",
+  "description": "스펙 주도 개발(SDD) 스킬 묶음. /sdd:draft 는 요구사항 문서, /sdd:persona-review 는 요구사항 문서의 참여자마다 에이전트를 띄워 빠진 과정을 찾아 같은 문서에 보강하고(draft 가 참여자가 확정되면 부른다), /sdd:design 은 설계 문서, /sdd:flow 는 pug-frame 와이어프레임 전에 확인할 화면흐름 문서(흐름별 mermaid 흐름도에 AS-IS·TO-BE 색, 화면별 변경 표, 사용자가 보는 화면만), /sdd:task 는 작업 DAG 가 있는 구현 계획 문서, /sdd:brief-dev 는 requirements.md 에서 마커를 걷어 낸 개발자용 기획 문서, /sdd:brief-nondev 는 requirements.md 를 쉬운 말로 바꾼 비개발자용 기획 문서(두 brief 는 바깥 용어 뜻과 다른 문서의 요구사항·결정을 안에 묶어 한 장으로 읽힌다),/sdd:quick 은 채팅 답으로 쓰는 작은 스펙, /sdd:bdd 는 requirements.md 경로를 주거나 요구사항만 있으면 정해진 인수 조건을 scenarios.md 의 gherkin 코드 블록으로(미결은 미결 사항 표로), 완성된 설계가 있으면 Gherkin 테스트 시나리오(features/*.feature)로 쓰고, /sdd:setup 은 ~/.sdd/{리포지토리 이름}/ 보관 폴더와 humanize-korean 윤문 플러그인을 준비한다. 마크다운 결과물은 다 쓴 뒤 humanize-korean 윤문을 거친다. 결정·마커 모양은 references/spec-format.md 를 함께 따르고, 단계별 결과물 모양은 references/{스킬 이름}.md 와 references/brief-format.md 에 있다.",
+  "version": "0.9.1",
   "author": {
     "name": "dorage",
     "email": "baloonflower554@gmail.com"
   },
-  "keywords": ["spec", "requirements", "design", "tasks", "bdd", "planning", "persona-review"]
+  "keywords": ["spec", "requirements", "design", "tasks", "bdd", "planning", "persona-review", "flow"]
 }

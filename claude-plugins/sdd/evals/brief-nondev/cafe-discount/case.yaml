@@ -59,6 +59,12 @@ graders:
     flags: m
     match: count:5
   - type: regex
+    name: regex-section-order
+    target: {source: file, path: out/brief-nondev.md}
+    pattern: '^## 도메인 언어$[\s\S]*^## 요구사항$[\s\S]*^---$[\s\S]*^## 필요한 결정$[\s\S]*^## 제휴카페 임직원 할인이란$[\s\S]*^## 핵심 흐름$[\s\S]*^## 결정 기록[\s\S]*^## 기존 시스템과 맞닿는 곳$'
+    flags: m
+    match: contains
+  - type: regex
     name: regex-heading-count-same
     target: {source: file, path: out/brief-nondev.md}
     pattern: '^#{1,6} '
@@ -89,4 +95,4 @@ graders:
     baseline_file: ../../baseline/current/traces/brief-nondev.jsonl
     criteria: |
       묻지 않고 끝까지 진행해 out/brief-nondev.md 를 썼고, 마커 제거·개발 언어 순화·쉬운 말 점검을 기준 실행만큼 지켰다.
-expected_outcome: out/brief-nondev.md 에 마커, EARS 키워드, 코드 경로가 없고 구조는 요구사항 문서와 같은 문서가 생긴다.
+expected_outcome: out/brief-nondev.md 에 마커, EARS 키워드, 코드 경로가 없고, 헤딩과 번호는 요구사항 문서와 같되 도메인 언어 → 요구사항 → --- → 나머지 절 순서로 놓인 문서가 생긴다.

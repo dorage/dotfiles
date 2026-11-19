@@ -56,6 +56,12 @@ graders:
     flags: m
     match: count:5
   - type: regex
+    name: regex-section-order
+    target: {source: file, path: out/brief-dev.md}
+    pattern: '^## 도메인 언어$[\s\S]*^## 요구사항$[\s\S]*^---$[\s\S]*^## 필요한 결정$[\s\S]*^## 제휴카페 임직원 할인이란$[\s\S]*^## 핵심 흐름$[\s\S]*^## 결정 기록[\s\S]*^## 기존 시스템과 맞닿는 곳$'
+    flags: m
+    match: contains
+  - type: regex
     name: regex-heading-count-same
     target: {source: file, path: out/brief-dev.md}
     pattern: '^#{1,6} '
@@ -80,10 +86,10 @@ graders:
     name: llm-content-unchanged
     focus: {source: file, path: out/brief-dev.md}
     criteria: |
-      마커 낱말과 표기 열만 사라졌고, EARS 인수 조건 문장, 결정 ID(A1~A3), 코드 경로, 마스터 답 원문("a", "회사 70, 카페 30", "버림")은 바뀌지 않았다. 정해진 결정의 답은 '2026-11-02 답 "a"' 같은 모양이다. 모두 맞으면 PASS.
+      마커 낱말, 표기 열, 괄호 안의 날짜(예: "(A2, 2026-11-02)" 의 날짜)만 사라졌고, 절은 도메인 언어 → 요구사항 → --- → 나머지 절 순서로 옮겨졌다. EARS 인수 조건 문장, 결정 ID(A1~A3), 코드 경로, 마스터 답 원문("a", "회사 70, 카페 30", "버림"), 헤딩의 날짜("결정 기록 (2026-11-02)")와 기준 날짜 줄은 바뀌지 않았다. 모두 맞으면 PASS.
   - type: baseline
     name: baseline
     baseline_file: ../../baseline/current/traces/brief-dev.jsonl
     criteria: |
-      묻지 않고 끝까지 진행해 out/brief-dev.md 를 썼고, 마커 제거와 구조 보존을 기준 실행만큼 지켰다.
-expected_outcome: out/brief-dev.md 에 마커와 표기 열이 없고, 나머지는 요구사항 문서와 같은 문서가 생긴다.
+      묻지 않고 끝까지 진행해 out/brief-dev.md 를 썼고, 마커 제거와 헤딩·번호 보존을 기준 실행만큼 지켰다.
+expected_outcome: out/brief-dev.md 에 마커와 표기 열이 없고, 도메인 언어 → 요구사항 → --- → 나머지 절 순서로 놓인 것 말고는 요구사항 문서와 같은 문서가 생긴다.

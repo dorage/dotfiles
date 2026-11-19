@@ -1,6 +1,6 @@
-# Gherkin 시나리오 (*.feature)
+# Gherkin 시나리오 (*.feature, scenarios.md)
 
-`sdd:bdd` 가 쓰는 Gherkin 시나리오의 모양이다. 마커 태그는 `references/spec-format.md` 를 따른다. 영어 본문은 AutomationPanda 의 gherkin-guidelines-for-ai (https://github.com/AutomationPanda/gherkin-guidelines-for-ai) 를 옮겨 고친 것이다.
+`sdd:bdd` 가 쓰는 Gherkin 시나리오의 모양이다. 설계 경로는 `*.feature` 파일로, 기획 경로는 마크다운 문서(`scenarios.md`)의 코드 블록으로 쓴다. 두 경로를 고르는 법은 `skills/bdd/SKILL.md` 「입력 찾기」에 있다. 「Files and organization」은 설계 경로에만, 「마크다운 문서 (기획 경로)」는 기획 경로에만 쓰고, 나머지 절은 두 경로에 함께 쓴다. 마커 태그는 `references/spec-format.md` 를 따른다. 영어 본문은 AutomationPanda 의 gherkin-guidelines-for-ai (https://github.com/AutomationPanda/gherkin-guidelines-for-ai) 를 옮겨 고친 것이다.
 
 ## Files and organization
 
@@ -16,7 +16,7 @@
 
 ## Formatting rules (make diffs and parsing reliable)
 
-- **MUST** use one `Feature` per file.
+- **MUST** use one `Feature` per file (기획 경로는 코드 블록 하나에 `Feature` 하나).
 - **MAY** have multiple `Scenario` / `Scenario Outline` blocks under a single `Feature`.
 - **MUST** indent the body of these sections by **2 spaces**:
   - `Feature`
@@ -24,6 +24,10 @@
   - `Scenario`
   - `Scenario Outline`
   - `Examples`
+- **MUST** 같은 단계를 잇는 `And`·`But`(`그리고`·`하지만`) 스텝은 그 단계를 연 `Given`·`When`·`Then`(`조건`·`만약`·`그러면`) 스텝보다 4칸 더 들여쓴다. 어느 줄까지가 한 단계인지 눈으로 바로 보이게 하기 위해서다
+  - `Background`(`배경:`) 안의 스텝도 같다
+  - 그 스텝에 딸린 데이터 표도 함께 4칸 더 민다
+  - `Given`·`When`·`Then` 줄은 위 2칸 들여쓰기를 그대로 따른다
 - **SHOULD** keep lines under **120 characters**.
 - **Vertical whitespace** (keep these together when editing a file):
   - **SHOULD** separate major sections with **one blank line**.
@@ -235,11 +239,11 @@ Feature: <behavior area>
 
   Scenario: <single behavior>
     Given <context>
-    And <additional context>
+        And <additional context>
     When <action>
-    And <continued action>
+        And <continued action>
     Then <observable outcome>
-    And <additional observable outcome>
+        And <additional observable outcome>
 
   Scenario: <single behavior using a step data table>
     Given the following <domain entities> exist:
@@ -297,11 +301,11 @@ Feature: <behavior area>
 
   배경:
     조건 요청자는 관리자 "본사 운영팀"이다
-    그리고 다음 예약이 있다:
-      | 예약 | 지점   | 고객     | 상태     | 예약-시각           |
-      | A    | 강남점 | 김민지   | 예약취소 | 2026-10-20 09:00:00 |
-      | B    | 강남점 | 박서준   | 예약확인 | 2026-10-21 10:00:00 |
-      | C    | 판교점 | 김민지   | 방문완료 | 2026-10-22 10:00:00 |
+        그리고 다음 예약이 있다:
+          | 예약 | 지점   | 고객     | 상태     | 예약-시각           |
+          | A    | 강남점 | 김민지   | 예약취소 | 2026-10-20 09:00:00 |
+          | B    | 강남점 | 박서준   | 예약확인 | 2026-10-21 10:00:00 |
+          | C    | 판교점 | 김민지   | 방문완료 | 2026-10-22 10:00:00 |
 
   @결정
   시나리오: 관리자의 예약 목록에는 여러 지점과 고객의 예약이 함께 보인다
@@ -312,19 +316,71 @@ Feature: <behavior area>
   시나리오: 관리자가 취소된 예약을 강제로 되돌리면 이력 사유에 관리자 강제 변경과 사유가 남는다
     만약 관리자가 사유 "고객 요청 복구"로 예약 A를 "예약대기"로 강제 변경한다
     그러면 응답의 상태는 "예약대기"이다
-    그리고 조회한 예약 A의 마지막 이력 사유는 "관리자 강제 변경: 고객 요청 복구"이다
+        그리고 조회한 예약 A의 마지막 이력 사유는 "관리자 강제 변경: 고객 요청 복구"이다
 
   @초안
   시나리오: 관리자가 공백뿐인 사유로 강제 변경하면 사유 오류로 거절된다
     만약 관리자가 사유 "   "로 예약 A를 "예약대기"로 강제 변경한다
     그러면 응답 상태는 409이다
-    그리고 거절 사유는 "RESERVATION_FORCE_REASON_INVALID"이다
-    그리고 조회한 예약 A는 예약취소 그대로다
+        그리고 거절 사유는 "RESERVATION_FORCE_REASON_INVALID"이다
+        그리고 조회한 예약 A는 예약취소 그대로다
 
   @결정
   시나리오: 관리자가 예약 시각을 고치면 예약 시각만 바뀌고 방문 희망일은 그대로다
     조건 예약 B의 방문 희망일은 2026-10-24이다
     만약 관리자가 사유 "전화 예약 시각 반영"으로 예약 B의 예약 시각을 2026-10-20 17:30:00으로 고친다
     그러면 응답의 예약 시각은 2026-10-20 17:30:00이다
-    그리고 조회한 예약 B의 방문 희망일은 2026-10-24이다
+        그리고 조회한 예약 B의 방문 희망일은 2026-10-24이다
 ```
+
+## 마크다운 문서 (기획 경로)
+
+기획 경로는 `*.feature` 파일 대신 스펙 폴더의 `scenarios.md` 한 장에 시나리오를 모은다. Feature 분할, 시나리오·스텝·표 규칙, 태그는 위 절을 그대로 따르고, 파일 단위 규칙과 헤딩만 아래로 바꾼다.
+
+- **MUST** 설계 경로의 `<actor>-<flow>.feature` 파일 하나를 `### <기능 이름>` 헤딩과 그 아래 ` ```gherkin ` 코드 블록 하나로 바꾼다
+    - 헤딩은 영어 `<actor>-<flow>` 가 아니라 코드 블록의 `기능:` 이름과 같은 한국어로 쓴다 (예: `### 임직원의 주문 결제`). 문서를 읽는 사람이 기획자라서 한국어 제목으로 찾기 때문이다
+    - 「미결 사항」 표나 다른 문장에서 시나리오 묶음을 가리킬 때도 이 한국어 제목을 쓴다
+- **MUST** 도메인 디렉터리는 `## <도메인>` 헤딩으로 바꾼다 (예: `## 주문`)
+- **MUST** 코드 블록마다 첫 줄에 `# language: ko` 를 쓴다. 블록 하나를 그대로 `.feature` 파일로 옮길 수 있게 하기 위해서다
+- **MUST** 문서 맨 위에 한 줄로 근거 문서(`requirements.md`)와 "테스트 층을 나누지 않았고, 정해진 인수 조건만 시나리오로 썼다"를 적는다
+- **MUST** 미결 인수 조건(`skills/bdd/SKILL.md` 「기획 경로」)이 있으면 문서 맨 끝에 `## 미결 사항` 표를 둔다. 없으면 절을 뺀다
+    - 열: `인수 조건` (요구사항 번호와 인수 조건 번호), `마커`, `걸린 결정` (열린 결정 ID, 없으면 `-`), `무엇이 정해지면 쓰나` (한 줄)
+    - 결정의 질문·옵션·추천안은 옮겨 적지 않는다. 결정 ID 로 요구사항 문서를 가리킨다
+    - 표 아래 한 줄: "요구사항 문서에서 답한 뒤 `/sdd:bdd {requirements.md 경로}` 을 다시 부르면 시나리오가 생긴다"
+- **MUST NOT** 응답 상태, 거절 사유 코드, 화면 요소 같은 설계 단계의 모양을 스텝에 쓰지 않는다. 위 「예시」의 `api-` 예외는 이 경로에 쓰지 않는다
+- **MUST NOT** 코드 블록 밖에 시나리오를 다시 풀어 쓰지 않는다. 헤딩과 코드 블록 사이에는 아무것도 두지 않는다
+
+````markdown
+# 제휴카페 임직원 할인 시나리오
+
+`requirements.md` 의 인수 조건과 업무 규칙으로 쓴 시나리오다. 설계 전이라 테스트 층을 나누지 않았다.
+
+## 주문
+
+### 임직원의 주문 결제
+
+```gherkin
+# language: ko
+기능: 임직원의 주문 결제
+  임직원으로서
+  제휴 카페에서 라떼를 할인받아 사길 바란다
+  그래서 회사 복지를 바로 누린다
+
+  @결정
+  시나리오: 인증된 임직원이 라떼 2잔을 사면 잔마다 할인된다
+    조건 임직원 "김민지"가 회사 인증을 마쳤다
+        그리고 김민지의 장바구니에 5,900원 라떼 2잔이 있다
+    만약 김민지가 장바구니를 결제한다
+    그러면 결제 금액은 8,800원이다
+        그리고 잔마다 1,500원이 할인된다
+```
+
+## 미결 사항
+
+| 인수 조건 | 마커 | 걸린 결정 | 무엇이 정해지면 쓰나 |
+|---|---|---|---|
+| 요구사항 2 인수 조건 3 | @초안 | A4 | 정산일에 휴일이 걸릴 때 앞당길지 미룰지 |
+| 요구사항 2 인수 조건 4 | @미정 | - | 카페가 분담금을 받을 계좌 확인 절차 |
+
+요구사항 문서에서 답한 뒤 `/sdd:bdd {requirements.md 경로}` 을 다시 부르면 시나리오가 생긴다.
+````
