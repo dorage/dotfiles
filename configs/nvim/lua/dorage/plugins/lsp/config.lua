@@ -45,6 +45,10 @@ return {
 				},
 			})
 
+			vim.lsp.config("ty", {
+				root_markers = { ".git", ".venv" },
+			})
+
 			vim.lsp.config("tsgo", {
 				root_markers = { ".git", "pnpm-lock.yaml" },
 			})
