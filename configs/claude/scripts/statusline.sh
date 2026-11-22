@@ -1,24 +1,11 @@
 #!/bin/bash
 # Claude Code statusLine script.
 #
-# Approximates the user's Powerlevel10k prompt (~/.p10k.zsh):
-#   left prompt  : dir, vcs (git)
-#   right prompt : (time segment replaced by Claude Code context usage)
-# plus the Claude Code model name and context token usage (not part of p10k,
-# added per request).
+# Segments: dir, git branch/status, Claude Code model name, context usage.
 #
-# Colors below reuse the same xterm-256 color numbers p10k assigns to each
-# segment (e.g. POWERLEVEL9K_DIR_FOREGROUND=31), applied via ANSI 256-color
-# escapes so they render the same way in a 256-color terminal.
-#
-# Segments intentionally NOT reproduced (right-prompt tool/env indicators that
-# only ever show conditionally and need a live shell, not just JSON input):
-# status, command_execution_time, background_jobs, direnv, asdf and all
-# language/version-manager segments (pyenv, nvm, rbenv, ...), kubecontext,
-# terraform, aws/gcloud/azure, context (user@host), nordvpn, the file-manager
-# shell indicators (ranger/yazi/nnn/lf/xplr/midnight_commander), nix_shell,
-# chezmoi_shell, vi_mode, todo/timewarrior/taskwarrior, per_directory_history,
-# os_icon, prompt_char.
+# Colors are fixed xterm-256 numbers applied via ANSI 256-color escapes.
+# They were originally taken from a Powerlevel10k config that has since been
+# removed; this script does not read or depend on any shell prompt config.
 
 input=$(cat)
 
@@ -28,15 +15,15 @@ cwd=$(echo "$input" | jq -r '.workspace.current_dir // empty')
 ctx_used=$(echo "$input" | jq -r '.context_window.total_input_tokens // 0')
 ctx_size=$(echo "$input" | jq -r '.context_window.context_window_size // 0')
 
-# ---- colors (256-color codes matching ~/.p10k.zsh) ----
+# ---- colors (xterm-256 codes) ----
 c_reset="\033[0m"
-c_dir="\033[38;5;31m"            # POWERLEVEL9K_DIR_FOREGROUND
-c_dir_anchor="\033[1;38;5;39m"   # POWERLEVEL9K_DIR_ANCHOR_FOREGROUND (bold)
-c_git_clean="\033[38;5;76m"      # vcs formatter: clean branch color
-c_git_modified="\033[38;5;178m" # vcs formatter: staged/unstaged color
-c_git_untracked="\033[38;5;39m" # vcs formatter: untracked color
-c_meta="\033[38;5;244m"          # vcs formatter meta / time segment color
-c_model="\033[38;5;250m"         # neutral color, no p10k equivalent
+c_dir="\033[38;5;31m"            # parent directories
+c_dir_anchor="\033[1;38;5;39m"   # current directory (bold)
+c_git_clean="\033[38;5;76m"      # clean branch
+c_git_modified="\033[38;5;178m" # staged/unstaged changes
+c_git_untracked="\033[38;5;39m" # untracked files
+c_meta="\033[38;5;244m"          # separators and labels
+c_model="\033[38;5;250m"         # model name and token counts
 
 # ---- dir segment ----
 display_cwd=$(echo "$cwd" | sed "s|^$HOME|~|")
@@ -70,7 +57,7 @@ if git -C "$cwd" --no-optional-locks rev-parse --is-inside-work-tree >/dev/null 
   [ "$untracked" != "0" ] && git_display="${git_display} ${c_git_untracked}?${untracked}${c_reset}"
 fi
 
-# ---- context usage segment (replaces p10k time segment) ----
+# ---- context usage segment ----
 # Compact token counts, e.g. "72.3k/1.0M". Falls back to a plain count when the
 # context window size is unknown (older CLI versions omit context_window).
 fmt_tokens() {
