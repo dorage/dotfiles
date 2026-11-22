@@ -27,7 +27,8 @@ $docker_context\
 [](fg:#33b1ff bg:#333333)\
 $time\
 [ ](fg:#333333)\
-"""
+$line_break\
+$character"""
 
 # Disable the blank line at the start of the prompt
 # add_newline = false
@@ -149,3 +150,8 @@ disabled = false
 time_format = "%R" # Hour:Minute Format
 style = "fg:#dfdfdf bg:#333333"
 format = '[ ♥ $time ]($style)'
+
+# 입력줄 기호. 직전 명령 성공은 초록, 실패는 분홍
+[character]
+success_symbol = "[❯](bold #4BFF36)"
+error_symbol = "[❯](bold #ee5396)"
