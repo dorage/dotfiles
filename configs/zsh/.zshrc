@@ -130,7 +130,12 @@ if [[ $OSTYPE == "linux-gnu" ]] then
 	[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 else
 	export NVM_DIR="$HOME/.nvm"
-	[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+	# nvm 이 기본 버전을 고르는 데 1.7초가 걸린다. 기본 node 를 PATH 에 바로 넣고
+	# nvm 은 --no-use 로 읽기만 한다. 기본 버전은 `nvm alias default <버전>` 으로 바꾼다.
+	_nvm_default=( "$NVM_DIR"/versions/node/v$(cat "$NVM_DIR/alias/default" 2>/dev/null)*(N[-1]) )
+	[ -n "$_nvm_default" ] && export PATH="$_nvm_default/bin:$PATH"
+	unset _nvm_default
+	[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh" --no-use  # This loads nvm
 	[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 fi
 
