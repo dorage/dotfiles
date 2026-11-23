@@ -11,29 +11,32 @@ function cld() {
 }
 
 function clb() {
-	prompt=$(gum write --placeholder "에이전트에게 시킬 프롬프트")
-	if [ -z "$prompt" ]; then
+	local text model
+	text=$(gum write --placeholder "에이전트에게 시킬 프롬프트")
+	if [ -z "$text" ]; then
 		return 
 	fi
 	model=$(gum choose --header "모델을 골라라" "opus" "fable" )
 	if [ -z "$model" ]; then
 		return 
 	fi
-	claude --model "$model" --bg "$prompt"
+	claude --model "$model" --bg "$text"
 }
 
 function clbf() {
-	prompt=$(gum write --placeholder "에이전트에게 시킬 프롬프트")
-	if [ -z "$prompt" ]; then
+	local text
+	text=$(gum write --placeholder "에이전트에게 시킬 프롬프트")
+	if [ -z "$text" ]; then
 		return 
 	fi
-	claude --model fable --bg "$prompt"
+	claude --model fable --bg "$text"
 }
 
 function clbo() {
-	prompt=$(gum write --placeholder "에이전트에게 시킬 프롬프트")
-	if [ -z "$prompt" ]; then
+	local text
+	text=$(gum write --placeholder "에이전트에게 시킬 프롬프트")
+	if [ -z "$text" ]; then
 		return 
 	fi
-	claude --model opus --bg "$prompt"
+	claude --model opus --bg "$text"
 }
