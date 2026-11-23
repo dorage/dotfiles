@@ -13,7 +13,7 @@
 | kitty |  |
 | neovim |  |
 | sketchybar | https://zellij.dev |
-| starship | https://starship.rs |
+| oh-my-posh | https://ohmyposh.dev |
 | zellij | https://zellij.dev |
 | hammerspoon | https://www.hammerspoon.org |
 
@@ -30,7 +30,7 @@
 |   +-- nvim
 |   +-- ranger
 |   +-- sketchybar
-|   +-- starship
+|   +-- oh-my-posh
 |   +-- zellij
 |   +-- zsh
 +-- deps
