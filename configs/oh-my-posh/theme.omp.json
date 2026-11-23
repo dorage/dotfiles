@@ -5,13 +5,19 @@
       "alignment": "left",
       "segments": [
         {
+          "foreground": "#b6b8bb",
+          "style": "plain",
+          "template": "╭─",
+          "type": "text"
+        },
+        {
           "background": "#4BFF36",
           "foreground": "#333333",
-          "leading_powerline_symbol": "",
+          "leading_powerline_symbol": "",
           "options": {
             "style": "folder"
           },
-          "powerline_symbol": "",
+          "powerline_symbol": "",
           "style": "powerline",
           "template": "  {{ .Path }} ",
           "type": "path"
@@ -29,7 +35,7 @@
             "branch_icon": " ",
             "branch_template": "{{ trunc 25 .Branch }}"
           },
-          "powerline_symbol": "",
+          "powerline_symbol": "",
           "style": "powerline",
           "template": " {{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }}  {{ .StashCount }}{{ end }} ",
           "type": "git"
@@ -37,7 +43,7 @@
         {
           "background": "#FFEB01",
           "foreground": "#333333",
-          "powerline_symbol": "",
+          "powerline_symbol": "",
           "style": "powerline",
           "template": "  {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }} ",
           "type": "python"
@@ -45,7 +51,7 @@
         {
           "background": "#33b1ff",
           "foreground": "#333333",
-          "powerline_symbol": "",
+          "powerline_symbol": "",
           "style": "powerline",
           "template": "  {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} ",
           "type": "go"
@@ -53,7 +59,7 @@
         {
           "background": "#4BFF36",
           "foreground": "#333333",
-          "powerline_symbol": "",
+          "powerline_symbol": "",
           "style": "powerline",
           "template": "  {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }} ",
           "type": "node"
@@ -61,7 +67,7 @@
         {
           "background": "#ee5396",
           "foreground": "#333333",
-          "powerline_symbol": "",
+          "powerline_symbol": "",
           "style": "powerline",
           "template": "  {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} ",
           "type": "ruby"
@@ -69,7 +75,7 @@
         {
           "background": "#ee5396",
           "foreground": "#333333",
-          "powerline_symbol": "",
+          "powerline_symbol": "",
           "style": "powerline",
           "template": "  {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} ",
           "type": "java"
@@ -77,7 +83,7 @@
         {
           "background": "#E92EFB",
           "foreground": "#333333",
-          "powerline_symbol": "",
+          "powerline_symbol": "",
           "style": "powerline",
           "template": "  {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} ",
           "type": "julia"
@@ -85,7 +91,7 @@
         {
           "background": "#33b1ff",
           "foreground": "#333333",
-          "powerline_symbol": "",
+          "powerline_symbol": "",
           "style": "powerline",
           "template": "  {{ .Full }} ",
           "type": "php"
@@ -103,7 +109,7 @@
             "charging_icon": "⇡ ",
             "discharging_icon": "⇣ "
           },
-          "powerline_symbol": "",
+          "powerline_symbol": "",
           "style": "powerline",
           "template": " {{ if not .Error }}{{ .Icon }}{{ .Percentage }}{{ end }}{{ .Error }} ",
           "type": "battery"
@@ -115,7 +121,7 @@
             "style": "austin",
             "threshold": 150
           },
-          "powerline_symbol": "",
+          "powerline_symbol": "",
           "style": "powerline",
           "template": " {{ .FormattedMs }} ",
           "type": "executiontime"
@@ -128,12 +134,18 @@
       "newline": true,
       "segments": [
         {
+          "foreground": "#b6b8bb",
+          "style": "plain",
+          "template": "╰─",
+          "type": "text"
+        },
+        {
           "background": "#ee5396",
           "foreground": "#333333",
-          "leading_diamond": "",
+          "leading_diamond": "",
           "style": "diamond",
           "template": " {{ .UserName }} ❯ ",
-          "trailing_diamond": "",
+          "trailing_diamond": "",
           "type": "text"
         }
       ],
