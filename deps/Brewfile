@@ -2,6 +2,7 @@ tap "asmvik/formulae", "https://github.com/asmvik/homebrew-formulae.git"
 tap "dart-lang/dart"
 tap "felixkratz/formulae"
 tap "hashicorp/tap"
+tap "jandedobbeleer/oh-my-posh"
 tap "jstkdng/programs"
 tap "localstack/tap"
 tap "nats-io/nats-tools"
@@ -163,8 +164,6 @@ brew "redis"
 brew "rust-analyzer"
 # Secure Reliable Transport
 brew "srt"
-# Cross-shell prompt for astronauts
-brew "starship"
 # Opinionated Lua code formatter
 brew "stylua"
 # CI-Friendly tool to document a database
@@ -199,6 +198,8 @@ brew "yazi"
 brew "zellij"
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
+# Prompt theme engine for any shell
+brew "jandedobbeleer/oh-my-posh/oh-my-posh"
 # Memory training application
 cask "anki"
 # Open source IDE for exploring and testing APIs
