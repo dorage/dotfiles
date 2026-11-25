@@ -13,7 +13,7 @@
 | kitty |  |
 | neovim |  |
 | sketchybar | https://zellij.dev |
-| oh-my-posh | https://ohmyposh.dev |
+| powerlevel10k | https://github.com/romkatv/powerlevel10k |
 | zellij | https://zellij.dev |
 | hammerspoon | https://www.hammerspoon.org |
 
@@ -30,7 +30,6 @@
 |   +-- nvim
 |   +-- ranger
 |   +-- sketchybar
-|   +-- oh-my-posh
 |   +-- zellij
 |   +-- zsh
 +-- deps

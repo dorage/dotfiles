@@ -1,6 +1,13 @@
 # ignore ctrl+D
 set -o ignoreeof
 
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # 외부에서 주입하는 값들(웹훅 주소, API 토큰 등). 리포에 커밋하지 않는다.
 # configs/claude/env.sh 에 두면 sync-claude.sh 가 ~/.claude 로 함께 옮긴다.
 # 채울 항목의 목록은 dotfiles 리포의 configs/claude/env.example.sh 에 있다.
@@ -27,8 +34,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-# 프롬프트는 oh-my-posh 가 그리므로 oh-my-zsh 테마는 비워 둔다.
-ZSH_THEME=""
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -120,8 +126,9 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# oh-my-posh (prompt)
-eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/theme.omp.json)"
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
 if [[ $OSTYPE == "linux-gnu" ]] then
 	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"

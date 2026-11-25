@@ -2,7 +2,6 @@ tap "asmvik/formulae", "https://github.com/asmvik/homebrew-formulae.git"
 tap "dart-lang/dart"
 tap "felixkratz/formulae"
 tap "hashicorp/tap"
-tap "jandedobbeleer/oh-my-posh"
 tap "jstkdng/programs"
 tap "localstack/tap"
 tap "nats-io/nats-tools"
@@ -198,8 +197,6 @@ brew "yazi"
 brew "zellij"
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
-# Prompt theme engine for any shell
-brew "jandedobbeleer/oh-my-posh/oh-my-posh"
 # Memory training application
 cask "anki"
 # Open source IDE for exploring and testing APIs
