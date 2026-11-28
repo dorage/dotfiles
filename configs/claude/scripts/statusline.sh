@@ -7,9 +7,9 @@
 # plus the Claude Code model name and context token usage (not part of p10k,
 # added per request).
 #
-# Colors below reuse the same xterm-256 color numbers p10k assigns to each
-# segment (e.g. POWERLEVEL9K_DIR_FOREGROUND=31), applied via ANSI 256-color
-# escapes so they render the same way in a 256-color terminal.
+# Colors below reuse the same zellij "neon" theme hex colors p10k assigns to
+# each segment (e.g. POWERLEVEL9K_DIR_FOREGROUND='#33b1ff'), applied via ANSI
+# 24-bit (truecolor) escapes.
 #
 # Segments intentionally NOT reproduced (right-prompt tool/env indicators that
 # only ever show conditionally and need a live shell, not just JSON input):
@@ -28,15 +28,15 @@ cwd=$(echo "$input" | jq -r '.workspace.current_dir // empty')
 ctx_used=$(echo "$input" | jq -r '.context_window.total_input_tokens // 0')
 ctx_size=$(echo "$input" | jq -r '.context_window.context_window_size // 0')
 
-# ---- colors (256-color codes matching ~/.p10k.zsh) ----
+# ---- colors (zellij "neon" theme hex colors, same as ~/.p10k.zsh) ----
 c_reset="\033[0m"
-c_dir="\033[38;5;31m"            # POWERLEVEL9K_DIR_FOREGROUND
-c_dir_anchor="\033[1;38;5;39m"   # POWERLEVEL9K_DIR_ANCHOR_FOREGROUND (bold)
-c_git_clean="\033[38;5;76m"      # vcs formatter: clean branch color
-c_git_modified="\033[38;5;178m" # vcs formatter: staged/unstaged color
-c_git_untracked="\033[38;5;39m" # vcs formatter: untracked color
-c_meta="\033[38;5;244m"          # vcs formatter meta / time segment color
-c_model="\033[38;5;250m"         # neutral color, no p10k equivalent
+c_dir="\033[38;2;51;177;255m"         # #33b1ff  POWERLEVEL9K_DIR_FOREGROUND
+c_dir_anchor="\033[1;38;2;116;250;252m" # #74FAFC POWERLEVEL9K_DIR_ANCHOR_FOREGROUND (bold)
+c_git_clean="\033[38;2;75;255;54m"    # #4BFF36  vcs formatter: clean branch color
+c_git_modified="\033[38;2;255;235;1m" # #FFEB01  vcs formatter: staged/unstaged color
+c_git_untracked="\033[38;2;51;177;255m" # #33b1ff vcs formatter: untracked color
+c_meta="\033[38;2;182;184;187m"       # #b6b8bb  vcs formatter meta color
+c_model="\033[38;2;223;223;223m"      # #dfdfdf  neon fg, no p10k equivalent
 
 # ---- dir segment ----
 display_cwd=$(echo "$cwd" | sed "s|^$HOME|~|")
